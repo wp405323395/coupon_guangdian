@@ -137,7 +137,6 @@ export default {
       }
       input{
         margin-right: 80px;
-
       }
       .margin{
         margin-right: 20px;
