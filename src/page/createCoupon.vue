@@ -42,9 +42,10 @@
     </section>
     <section>
       <div class="title">
-        <label>添加评论:</label>
-        <input class="date_picker" type="date" />
+        <label>截至时间:</label>
+        <input class="date_picker"  value="2017-09-24" type="date" />
         <input class="date_picker" type="time" value="13:59"/>
+
       </div>
     </section>
   </div>
@@ -155,6 +156,7 @@ export default {
     .date_picker{
       border: 1px solid black;
       margin-right: 20px;
+      padding: 3px 5px;
     }
 
 }

@@ -6,10 +6,10 @@
        <h1>绩效考核后台管理系统</h1>
        <div class="line"></div>
        <div class="account input_style">
-         <input type="text" name="" placeholder="账号" value="">
+         <input type="text" name="" placeholder="账号" v-model="account">
        </div>
        <div class="password input_style">
-         <input type="password" name="" placeholder="密码" value="">
+         <input type="password" name="" placeholder="密码" v-model="password">
        </div>
        <button @click="login" class="login_btn" type="button" name="button">登陆</button>
     </div>
@@ -19,17 +19,35 @@
 
 <script>
 import router from '../router'
+import loginEngin from '../netApi/requestEngine'
+import urls from '../config.js'
 export default {
   name: 'login',
   data () {
     return {
-
+      account: '',
+      password: ''
     }
   },
 
   methods: {
-    login: function () {
-      router.replace({ path: 'main' })
+    login () {
+      new Promise((resolve, reject) => {
+        // url, data, requestSuccess, requestFail, requestComplete
+        new loginEngin().request(urls.loginUrl,{loginName: this.account ,password:this.password },
+          successValue=>{
+            resolve(successValue);
+          }, failValue=>{
+            reject(failValue);
+          }, completeValue=>{
+
+          })
+      }).then(value => {
+        router.replace({ path: 'main' })
+      }).catch(err => {
+
+      })
+
     }
   }
 }
