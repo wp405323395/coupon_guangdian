@@ -40,6 +40,13 @@
         <input  type="radio" name="sex" value="female" />否
       </div>
     </section>
+    <section>
+      <div class="title">
+        <label>添加评论:</label>
+        <input class="date_picker" type="date" />
+        <input class="date_picker" type="time" value="13:59"/>
+      </div>
+    </section>
   </div>
 
 </template>
@@ -144,6 +151,10 @@ export default {
     }
     .addPerson{
       margin-left: 210px;
+    }
+    .date_picker{
+      border: 1px solid black;
+      margin-right: 20px;
     }
 
 }
