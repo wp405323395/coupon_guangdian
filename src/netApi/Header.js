@@ -6,7 +6,9 @@ class Header {
   getHeader () {
     let ua = this._getUa();
     return {
-      'userAgent': ua
+      'Content-Type': 'application/json',
+      "Access-Token": "kkkk",
+       "UserAgent": ua
     }
   }
 

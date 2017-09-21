@@ -24,14 +24,18 @@ import urls from '../config.js'
 export default {
   name: 'login',
   data () {
+    let storage = window.localStorage;
     return {
-      account: '',
-      password: ''
+      account: storage.account,
+      password: storage.password
     }
   },
 
   methods: {
     login () {
+      var storage = window.localStorage;
+      storage.account = this.account;
+      storage.password = this.password;
       new Promise((resolve, reject) => {
         // url, data, requestSuccess, requestFail, requestComplete
         new loginEngin().request(urls.loginUrl,{loginName: this.account ,password:this.password },
