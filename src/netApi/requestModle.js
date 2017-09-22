@@ -26,9 +26,7 @@ request (url, data, requestSuccess, requestFail, requestComplete, interceptors) 
 	{
     // console.log('readyState = ', xmlhttp.readyState);
     // console.log('status = ' , xmlhttp.status);
-    let cooke = xmlhttp.getResponseHeader('Set-Cookie');
-    console.log(xmlhttp.getAllResponseHeaders());
-    console.log(cooke);
+
 		if (xmlhttp.readyState==4 && xmlhttp.status==200)
 		{
       let responseData;

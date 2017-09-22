@@ -1,5 +1,5 @@
 
-var host = "192.168.1.131:8080"
+var host = "192.168.1.161:8080"
 //var host = 'www.maywidehb.com';
 var isHttps = false;
 var isDebug = true;
@@ -11,6 +11,8 @@ var config = {
     srcUrl: `${schema}://${host}/`,
     // 登录地址，用于建立会话
     loginUrl: `${schema}://${host}/wappweb/vot/vot-manager!doLogin`,
+    listProject: `${schema}://${host}/wappweb/vot/vot-manager!listProject`
+
 
 };
 

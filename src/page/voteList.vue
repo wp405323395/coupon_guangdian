@@ -2,7 +2,7 @@
     <section class="content">
       <alert-tip v-if="showAlert" :showHide="showAlert" @closeTip="closeTip" :alertText="alertText"></alert-tip>
       <div class="add_vote">
-        <router-link :to="{ name: 'createCoupon'}">
+        <router-link :to="{ name: 'createVote'}">
           <span class="pointer">创建新项目</span>
         </router-link>
       </div>
@@ -41,7 +41,9 @@
 
 <script>
   import alertTip from '../components/alertTip'
+  import requestEngine from '../netApi/requestEngine'
   import router from '../router'
+  import urls from '../config.js'
   export default {
     data () {
       return {
@@ -74,7 +76,24 @@
     components: {
       alertTip
     },
+    mounted: function () {
+      this.listProject();
+    },
     methods: {
+      listProject () {
+        new Promise((resolve, reject)=>{
+          new requestEngine().request(urls.listProject,{},
+            successValue=>{
+              resolve(successValue);
+            }, failValue=>{
+              reject(failValue);
+            }, completeValue=>{
+
+            })
+        }).then(value=>{
+
+        }).catch(err=>{});
+      },
       deleteVote () {
         this.showAlert = true
         this.alertText = '您输入的手机号尚未绑定'

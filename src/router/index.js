@@ -3,9 +3,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import login from '@/page/login'
 import main from '@/page/homeMain'
-import createCoupon from '@/page/createCoupon'
-import couponList from '@/page/couponList'
-import couponDetail from '@/page/couponDetail'
+import createVote from '@/page/createVote'
+import voteList from '@/page/voteList'
+import voteDetail from '@/page/voteDetail'
 // import Hello from '@/components/Hello'
 
 Vue.use(Router)
@@ -31,18 +31,18 @@ export default new Router({
           children: [
             {
               path: '/',
-              component: couponList,
+              component: voteList,
               name: 'homeMain'
             },
             {
-              path: '/main/createCoupon',
-              component: createCoupon,
-              name: 'createCoupon'
+              path: '/main/createVote',
+              component: createVote,
+              name: 'createVote'
             },
             {
-              path: '/main/couponDetail',
-              component: couponDetail,
-              name: 'couponDetail'
+              path: '/main/voteDetail',
+              component: voteDetail,
+              name: 'voteDetail'
             }
           ]
         }
