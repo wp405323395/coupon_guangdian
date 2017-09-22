@@ -45,7 +45,7 @@ request (url, data, requestSuccess, requestFail, requestComplete, interceptors) 
           for (let interceptor of interceptors) {
             interceptor.onResponse(url, header, responseData);
           }
-          requestSuccess(xmlhttp.responseText);
+          requestSuccess(responseData.retData);
         case '101':
           for (let interceptor of interceptors) {
             interceptor.onAutherErrorResponse(url, header, responseData);

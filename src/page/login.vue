@@ -19,7 +19,7 @@
 
 <script>
 import router from '../router'
-import loginEngin from '../netApi/requestEngine'
+import requestEngine from '../netApi/requestEngine'
 import urls from '../config.js'
 export default {
   name: 'login',
@@ -38,7 +38,7 @@ export default {
       storage.password = this.password;
       new Promise((resolve, reject) => {
         // url, data, requestSuccess, requestFail, requestComplete
-        new loginEngin().request(urls.loginUrl,{loginName: this.account ,password:this.password },
+        new requestEngine().request(urls.loginUrl,{loginName: this.account ,password:this.password },
           successValue=>{
             resolve(successValue);
           }, failValue=>{

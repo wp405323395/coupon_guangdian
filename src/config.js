@@ -11,7 +11,8 @@ var config = {
     srcUrl: `${schema}://${host}/`,
     // 登录地址，用于建立会话
     loginUrl: `${schema}://${host}/wappweb/vot/vot-manager!doLogin`,
-    listProject: `${schema}://${host}/wappweb/vot/vot-manager!listProject`
+    listProject: `${schema}://${host}/wappweb/vot/vot-manager!listProject`,
+    deleteProject: `${schema}://${host}/wappweb/vot/vot-manager!deleteProject`,
 
 
 };

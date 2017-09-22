@@ -6,7 +6,11 @@
                <span></span>
            </div> -->
            <p class="tip_text">{{alertText}}</p>
-           <div class="confrim" @click="closeTip">确认</div>
+           <section class="bottom_btn">
+             <div class="confrim" @click="sureTip">确认</div>
+             <div class="cancle" @click="cancleTip">取消</div>
+           </section>
+
        </section>
    </div>
 </template>
@@ -25,8 +29,11 @@
      },
      props: ['alertText'],
      methods: {
-       closeTip () {
-         this.$emit('closeTip')
+       sureTip () {
+         this.$emit('sureTip')
+       },
+       cancleTip () {
+        this.$emit('cancleTip')
        }
      }
    }
@@ -65,6 +72,32 @@
        flex-direction: column;
        border: 1px;
        border-radius: 10px;
+       .bottom_btn{
+         width: 100%;
+         display: flex;
+         padding-top: 20px;
+         .cancle{
+           width: 100%;
+           background-color: blue;
+           cursor: pointer;
+           color: white;
+           height: 100%;
+           height: 70px;
+           line-height: 70px;
+           border-bottom-right-radius: 10px;
+         }
+         .confrim{
+             background-color: #4cd964;
+             width: 100%;
+             height: 100%;
+             border-bottom-left-radius: 10px;
+             font-size: 25px;
+             cursor: pointer;
+             color: white;
+             height: 70px;
+             line-height: 70px;
+         }
+       }
        .tip_icon{
            width: 100px;
            height: 100px;
@@ -93,20 +126,7 @@
            margin-top: 30px;
            font-size: 25px;
        }
-       .confrim{
-           @include sc(.8rem, #fff);
-           font-weight: bold;
-           margin-top: .8rem;
-           background-color: #4cd964;
-           width: 100%;
-           text-align: center;
-           line-height: 60px;
-           border: 1px;
-           border-bottom-left-radius: 10px;
-           border-bottom-right-radius: 10px;
-           font-size: 25px;
-           cursor: pointer;
-       }
+
    }
 
 </style>

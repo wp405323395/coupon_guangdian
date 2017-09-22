@@ -1,6 +1,6 @@
 <template lang="html">
     <section class="content">
-      <alert-tip v-if="showAlert" :showHide="showAlert" @closeTip="closeTip" :alertText="alertText"></alert-tip>
+      <alert-tip v-if="showAlert" :showHide="showAlert" @cancleTip="cancleTip" @sureTip="sureTip" :alertText="alertText"></alert-tip>
       <div class="add_vote">
         <router-link :to="{ name: 'createVote'}">
           <span class="pointer">创建新项目</span>
@@ -17,16 +17,16 @@
       </div>
       <div class="data_list">
         <ul>
-          <li v-for="item of votes">
+          <li v-for="(item, index) of votpList">
             <div class="vote_item">
               <ul>
                 <li class="cell0">{{item.title}}</li>
-                <li class="cell1">{{item.createTime}}</li>
-                <li class="cell2">{{item.endTime}}</li>
-                <li class="cell3">{{item.voteNum}}</li>
+                <li class="cell1">{{item.createDate}}</li>
+                <li class="cell2">{{item.endDate}}</li>
+                <li class="cell3">{{item.votNum}}</li>
                 <li class="cell4">
                   <span class="pointer" @click="goToDetail(item.id)">详情</span>
-                  <span class="pointer" @click="deleteVote(item.id)">删除</span>
+                  <span class="pointer" @click="deleteVote(item.id, index)">删除</span>
                 </li>
               </ul>
               <div class="line"></div>
@@ -44,33 +44,13 @@
   import requestEngine from '../netApi/requestEngine'
   import router from '../router'
   import urls from '../config.js'
+  let deleteId;
+  let deleteIndex;
   export default {
     data () {
       return {
         showAlert: false,
-        votes: [
-          {
-            id: 1,
-            title: '2017年三季度绩效考核',
-            createTime: '2017-09-11',
-            endTime: '2017-10-22',
-            voteNum: 88
-          },
-          {
-            id: 2,
-            title: '2017年三季度绩效考核',
-            createTime: '2017-09-11',
-            endTime: '2017-10-22',
-            voteNum: 88
-          },
-          {
-            id: 2,
-            title: '2017年三季度绩效考核',
-            createTime: '2017-09-11',
-            endTime: '2017-10-22',
-            voteNum: 88
-          }
-        ]
+        votpList: []
       }
     },
     components: {
@@ -91,14 +71,34 @@
 
             })
         }).then(value=>{
-
+          console.log(value);
+          this.votpList = value.votpList;
         }).catch(err=>{});
       },
-      deleteVote () {
+      deleteVote (id, index) {
+        deleteId = id;
+        deleteIndex = index;
         this.showAlert = true
-        this.alertText = '您输入的手机号尚未绑定'
+        this.alertText = '确认要删除吗？'
       },
-      closeTip () {
+      sureTip () {
+        this.showAlert = false;
+        new Promise((resolve, reject)=>{
+          new requestEngine().request(urls.deleteProject,{id: deleteId},
+            successValue=>{
+              resolve(successValue);
+            }, failValue=>{
+              reject(failValue);
+            }, completeValue=>{
+
+            })
+        }).then(value=>{
+          if(value.code === '0') {
+            this.votpList.splice(deleteIndex,1);
+          }
+        }).catch(err=>{})
+      },
+      cancleTip(){
         this.showAlert = false
       },
       goToDetail () {
