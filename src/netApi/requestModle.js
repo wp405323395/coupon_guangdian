@@ -75,6 +75,7 @@ request (url, data, requestSuccess, requestFail, requestComplete, interceptors) 
   for (var key of Object.keys(header)) {
     xmlhttp.setRequestHeader(key, header[key]);
   }
+  xmlhttp.withCredentials = true;
   let param = JSON.stringify(data);
 	xmlhttp.send(param);
 }
