@@ -93,10 +93,10 @@
 
             })
         }).then(value=>{
-          if(value.code === '0') {
-            this.votpList.splice(deleteIndex,1);
-          }
-        }).catch(err=>{})
+          this.votpList.splice(deleteIndex,1);
+        }).catch(err=>{
+          console.log(err);
+        })
       },
       cancleTip(){
         this.showAlert = false

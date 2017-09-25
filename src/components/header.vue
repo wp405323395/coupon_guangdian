@@ -5,20 +5,39 @@
       <div class="logout">
         <span class="head_text">用户 {{account}}</span>
         <span class="head_text space">|</span>
-        <span class="head_text pointer">退出</span>
+        <span @click="logoutClick" class="head_text pointer">退出</span>
       </div>
     </div>
   </header>
 </template>
 
 <script>
+import requestEngine from '../netApi/requestEngine'
+import router from '../router'
+import urls from '../config.js'
 export default {
   data () {
     return {
       account: '198982'
     }
   },
-  props: []
+  props: [],
+  methods: {
+    logoutClick () {
+      new Promise((resolve, reject)=>{
+        new requestEngine().request(urls.doLogout,{},
+          successValue=>{
+            resolve(successValue);
+          }, failValue=>{
+            reject(failValue);
+          }, completeValue=>{
+
+          })
+      }).then(value=>{
+        router.replace({ name: 'App' })
+      }).catch(err=>{})
+    }
+  }
 }
 </script>
 

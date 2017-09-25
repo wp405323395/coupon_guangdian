@@ -1,5 +1,5 @@
 
-var host = "192.168.1.161:8080"
+var host = "192.168.1.188:8080"
 //var host = 'www.maywidehb.com';
 var isHttps = false;
 var isDebug = true;
@@ -13,8 +13,8 @@ var config = {
     loginUrl: `${schema}://${host}/wappweb/vot/vot-manager!doLogin`,
     listProject: `${schema}://${host}/wappweb/vot/vot-manager!listProject`,
     deleteProject: `${schema}://${host}/wappweb/vot/vot-manager!deleteProject`,
-
-
+    doLogout:  `${schema}://${host}/wappweb/vot/vot-manager!doLogout`,
+    createVotProject:  `${schema}://${host}/wappweb/vot/vot-manager!createVotProject`,
 };
 
 

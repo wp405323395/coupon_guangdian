@@ -2,33 +2,33 @@
   <div class="content">
     <section class="title">
       <label for="title">项目主题:</label>
-      <input class="input_style" id="title" placeholder="请输入新项目主题说明（2-12字）" type="text" name="" value="">
+      <input class="input_style" id="title" placeholder="请输入新项目主题说明（2-12字）" type="text" name="" :value="voteProject.title">
     </section>
     <hr class="parting_line"/>
     <section>
-      <div v-for="(person, index) in persons" class="addPersonList">
+      <div v-for="(person, index) in voteProject.candidateList" class="addPersonList">
         <div class="cell">
           <span for="">被考核人姓名:</span>
           <input class="input_style" type="text" name="" :value="person.name">
         </div>
         <div class="cell">
           <span for="" class="margin">所属部门:</span>
-          <input class="input_style" type="text" name="" :value="person.depart">
+          <input class="input_style" type="text" name="" :value="person.deptname">
         </div>
       </div>
       <span @click="addPerson" class="addPerson add_style">添加考核人</span>
     </section>
 
-    <section class="" v-for="(item, index) in items" >
+    <section class="" v-for="(item, index) in voteProject.topicList" >
       <div class="title">
         <label :for="index">被考核内容:</label>
-        <input class="input_style" :id="index" placeholder="请输入考核内容" type="text" name="" :value="item.title">
+        <input class="input_style" :id="index" placeholder="请输入考核内容" type="text" name="" :value="item.topicTitle">
       </div>
       <div class="title style2">
         <label for="title1">投票选项:</label>
         <div class="input_wrap">
-          <input v-for="(li, index2) in item.options" class="input_style divice" :id="index2" :placeholder="'选项'+(index2+1)" type="text" name="" :value="li">
-          <span v-if="index+1 == items.length" @click="addOptionsWrap" class="add_style">添加考核内容</span>
+          <input v-for="(li, index2) in item.optionList" class="input_style divice" :id="index2" :placeholder="'选项'+(index2+1)" type="text" name="" :value="li.optionText">
+          <span v-if="index+1 == item.optionList.length" @click="addOptionsWrap" class="add_style">添加考核内容</span>
         </div>
       </div>
     </section>
@@ -43,30 +43,90 @@
     <section>
       <div class="title">
         <label>截至时间:</label>
-        <input class="date_picker"  value="2017-09-24" type="date" />
-        <input class="date_picker" type="time" value="13:59"/>
+        <input class="date_picker"  :value="voteProject.endtime" type="date" />
+        <input class="date_picker" type="time" value="00:00"/>
 
       </div>
+    </section>
+    <section>
+      <button class="submit" @click='submit' type="button">提&nbsp;&nbsp;交</button>
     </section>
   </div>
 
 </template>
 
 <script>
-
+import requestEngine from '../netApi/requestEngine'
+import router from '../router'
+import urls from '../config.js'
 export default {
   data () {
     return {
-      items: [{title: '', options: ['', '', '', '']}],
-      persons: [{name: '张三', depart: '信息部'}]
+      voteProject: {
+        title: '',
+        isComment: '',
+        endtime: this.getNowFormatDate(),
+        candidateList: [
+          {
+            name:'',
+            deptname: ''
+          }
+        ],
+        topicList: [{
+          topicTitle: '',
+          optionList: [
+            {optionText: ''},
+            {optionText: ''},
+            {optionText: ''},
+            {optionText: ''}
+          ]
+        }]
+      }
     }
   },
+
   methods: {
+    getNowFormatDate () {
+    var date = new Date();
+    var seperator1 = "-";
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate;
+    return  currentdate;
+  },
+    getNowFormatClock () {
+      var date = new Date();
+      var seperator2 = ":";
+      var currentdate = date.getHours() + seperator2 + date.getMinutes()
+            + seperator2 + date.getSeconds();
+      return currentdate;
+    },
     addOptionsWrap () {
-      this.items.push({title: '', options: ['', '', '', '']})
+      this.voteProject.topicList.push({title: '', options: [{optionText: ''}, {optionText: ''}, {optionText: ''}, {optionText: ''}]})
     },
     addPerson () {
-      this.persons.push({name: '', depart: ''})
+      this.voteProject.candidateList.push({name: '', deptname: ''})
+    },
+    submit () {
+      let that = this;
+      new Promise((resolve, reject)=>{
+        new requestEngine().request(urls.createVotProject,{VotProjectParam: that.voteProject},
+          successValue=>{
+            resolve(successValue);
+          }, failValue=>{
+            reject(failValue);
+          }, completeValue=>{
+
+          })
+      }).then(value=>{
+        console.log(value);
+      }).catch(err=>{});
     }
   }
 }
@@ -157,6 +217,13 @@ export default {
       border: 1px solid black;
       margin-right: 20px;
       padding: 3px 5px;
+    }
+    .submit{
+      width: 180px;
+      height: 44px;
+      margin-left: 210px;
+      background-color: #d6dee2;
+      cursor: pointer;
     }
 
 }

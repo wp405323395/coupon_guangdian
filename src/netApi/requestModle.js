@@ -46,6 +46,7 @@ request (url, data, requestSuccess, requestFail, requestComplete, interceptors) 
             interceptor.onResponse(url, header, responseData);
           }
           requestSuccess(responseData.retData);
+          break;
         case '101':
           for (let interceptor of interceptors) {
             interceptor.onAutherErrorResponse(url, header, responseData);
@@ -56,8 +57,10 @@ request (url, data, requestSuccess, requestFail, requestComplete, interceptors) 
             interceptor.onFaildResponse(url, header, responseData);
           }
           requestFail(responseData.retMsg);
-         }
-
+      }
+      if (requestComplete != undefined) {
+        requestComplete(xmlhttp.responseText);
+      }
 
 		} else if (xmlhttp.readyState==4) {
       for (let interceptor of interceptors) {
@@ -65,9 +68,7 @@ request (url, data, requestSuccess, requestFail, requestComplete, interceptors) 
       }
       requestFail("网络请求失败");
     }
-    if (requestComplete != undefined) {
-      requestComplete(xmlhttp.responseText);
-    }
+
 
 	}
 
