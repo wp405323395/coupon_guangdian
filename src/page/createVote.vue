@@ -1,19 +1,20 @@
 <template lang="html">
   <div class="content">
+    <progress-bar v-if="isShowProgress"></progress-bar>
     <section class="title">
       <label for="title">项目主题:</label>
-      <input class="input_style" id="title" placeholder="请输入新项目主题说明（2-12字）" type="text" name="" :value="voteProject.title">
+      <input class="input_style" id="title" placeholder="请输入新项目主题说明（2-12字）" type="text" name="" v-model="voteProject.title">
     </section>
     <hr class="parting_line"/>
     <section>
       <div v-for="(person, index) in voteProject.candidateList" class="addPersonList">
         <div class="cell">
           <span for="">被考核人姓名:</span>
-          <input class="input_style" type="text" name="" :value="person.name">
+          <input class="input_style" type="text" name="" v-model="person.name">
         </div>
         <div class="cell">
           <span for="" class="margin">所属部门:</span>
-          <input class="input_style" type="text" name="" :value="person.deptname">
+          <input class="input_style" type="text" name="" v-model="person.deptname">
         </div>
       </div>
       <span @click="addPerson" class="addPerson add_style">添加考核人</span>
@@ -22,13 +23,13 @@
     <section class="" v-for="(item, index) in voteProject.topicList" >
       <div class="title">
         <label :for="index">被考核内容:</label>
-        <input class="input_style" :id="index" placeholder="请输入考核内容" type="text" name="" :value="item.topicTitle">
+        <input class="input_style" :id="index" placeholder="请输入考核内容" type="text" name="" v-model="item.topicTitle">
       </div>
       <div class="title style2">
         <label for="title1">投票选项:</label>
         <div class="input_wrap">
-          <input v-for="(li, index2) in item.optionList" class="input_style divice" :id="index2" :placeholder="'选项'+(index2+1)" type="text" name="" :value="li.optionText">
-          <span v-if="index+1 == item.optionList.length" @click="addOptionsWrap" class="add_style">添加考核内容</span>
+          <input v-for="(li, index2) in item.optionList" class="input_style divice" :id="index2" :placeholder="'选项'+(index2+1)" type="text" name="" v-model="li.optionText">
+          <span v-if="index+1 == voteProject.topicList.length" @click="addOptionsWrap" class="add_style">添加考核内容</span>
         </div>
       </div>
     </section>
@@ -36,14 +37,14 @@
     <section>
       <div class="title">
         <label>添加评论:</label>
-        <input  type="radio" name="sex" value="male" />是&nbsp;&nbsp;&nbsp;
-        <input  type="radio" name="sex" value="female" />否
+        <input  type="radio" name="sex" value="1" v-model="voteProject.isComment" checked/>是&nbsp;&nbsp;&nbsp;
+        <input  type="radio" name="sex" value="0" v-model="voteProject.isComment"/>否
       </div>
     </section>
     <section>
       <div class="title">
         <label>截至时间:</label>
-        <input class="date_picker"  :value="voteProject.endtime" type="date" />
+        <input class="date_picker"  v-model="voteProject.endtime" type="date" />
         <input class="date_picker" type="time" value="00:00"/>
 
       </div>
@@ -57,14 +58,16 @@
 
 <script>
 import requestEngine from '../netApi/requestEngine'
+import progressBar from '../components/progressBar'
 import router from '../router'
 import urls from '../config.js'
 export default {
   data () {
     return {
+      isShowProgress:false,
       voteProject: {
         title: '',
-        isComment: '',
+        isComment: '1',
         endtime: this.getNowFormatDate(),
         candidateList: [
           {
@@ -84,7 +87,9 @@ export default {
       }
     }
   },
-
+  components: {
+    progressBar
+  },
   methods: {
     getNowFormatDate () {
     var date = new Date();
@@ -108,7 +113,7 @@ export default {
       return currentdate;
     },
     addOptionsWrap () {
-      this.voteProject.topicList.push({title: '', options: [{optionText: ''}, {optionText: ''}, {optionText: ''}, {optionText: ''}]})
+      this.voteProject.topicList.push({topicTitle: '', optionList: [{optionText: ''}, {optionText: ''}, {optionText: ''}, {optionText: ''}]})
     },
     addPerson () {
       this.voteProject.candidateList.push({name: '', deptname: ''})
@@ -116,7 +121,8 @@ export default {
     submit () {
       let that = this;
       new Promise((resolve, reject)=>{
-        new requestEngine().request(urls.createVotProject,{VotProjectParam: that.voteProject},
+        this.isShowProgress = true;
+        new requestEngine().request(urls.createVotProject,that.voteProject,
           successValue=>{
             resolve(successValue);
           }, failValue=>{
@@ -125,8 +131,11 @@ export default {
 
           })
       }).then(value=>{
+        this.isShowProgress = false;
         console.log(value);
-      }).catch(err=>{});
+      }).catch(err=>{
+        this.isShowProgress = false;
+      });
     }
   }
 }

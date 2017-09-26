@@ -10,5 +10,5 @@ Vue.config.productionTip = false
 
 new Vue({
   el: '#app',           /* 最后效果将会替换页面中id为app的div元素。 */
-  router             /* 使用路由。 */
+  router,             /* 使用路由。 */
 })

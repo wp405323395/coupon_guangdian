@@ -1,5 +1,6 @@
 <template lang="html">
     <section class="content">
+      <progress-bar v-if="isShowProgress"></progress-bar>
       <alert-tip v-if="showAlert" :showHide="showAlert" @cancleTip="cancleTip" @sureTip="sureTip" :alertText="alertText"></alert-tip>
       <div class="add_vote">
         <router-link :to="{ name: 'createVote'}">
@@ -25,7 +26,7 @@
                 <li class="cell2">{{item.endDate}}</li>
                 <li class="cell3">{{item.votNum}}</li>
                 <li class="cell4">
-                  <span class="pointer" @click="goToDetail(item.id)">详情</span>
+                  <span class="pointer" @click="goToDetail(item.id, item.title)">详情</span>
                   <span class="pointer" @click="deleteVote(item.id, index)">删除</span>
                 </li>
               </ul>
@@ -42,6 +43,7 @@
 <script>
   import alertTip from '../components/alertTip'
   import requestEngine from '../netApi/requestEngine'
+  import progressBar from '../components/progressBar'
   import router from '../router'
   import urls from '../config.js'
   let deleteId;
@@ -50,17 +52,20 @@
     data () {
       return {
         showAlert: false,
-        votpList: []
+        votpList: [],
+        isShowProgress:false
       }
     },
     components: {
-      alertTip
+      alertTip,
+      progressBar
     },
     mounted: function () {
       this.listProject();
     },
     methods: {
       listProject () {
+        this.isShowProgress = true;
         new Promise((resolve, reject)=>{
           new requestEngine().request(urls.listProject,{},
             successValue=>{
@@ -71,9 +76,11 @@
 
             })
         }).then(value=>{
-          console.log(value);
+          this.isShowProgress = false;
           this.votpList = value.votpList;
-        }).catch(err=>{});
+        }).catch(err=>{
+          this.isShowProgress = false;
+        });
       },
       deleteVote (id, index) {
         deleteId = id;
@@ -84,6 +91,7 @@
       sureTip () {
         this.showAlert = false;
         new Promise((resolve, reject)=>{
+          this.isShowProgress = true;
           new requestEngine().request(urls.deleteProject,{id: deleteId},
             successValue=>{
               resolve(successValue);
@@ -93,16 +101,19 @@
 
             })
         }).then(value=>{
+          this.isShowProgress = false;
           this.votpList.splice(deleteIndex,1);
         }).catch(err=>{
+          this.isShowProgress = false;
           console.log(err);
         })
       },
       cancleTip(){
         this.showAlert = false
       },
-      goToDetail () {
-        router.push({ name: 'couponDetail' })
+      goToDetail (id, title) {
+        console.log('选中的id ', id);
+        router.push({ name: 'voteDetail' , params: { id: id ,title: title}})
       }
     }
   }

@@ -20,6 +20,7 @@
 <script>
   import headTop from '../components/header'
   import navigationBar from '../components/navigationBar'
+
   export default {
     data () {
       return {
@@ -27,8 +28,9 @@
     },
     components: {
       headTop,
-      navigationBar
-    }
+      navigationBar,
+
+    },
   }
 </script>
 <style lang="scss"  scoped>
@@ -48,5 +50,8 @@
   width: 916px;
   background-color: white;
   margin: auto;
+}
+.content{
+  margin-bottom: 50px;
 }
 </style>

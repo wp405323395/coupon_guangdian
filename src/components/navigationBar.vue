@@ -30,10 +30,10 @@ export default {
           case 'main':
             routerName.push('主页')
             break
-          case 'createCoupon':
+          case 'createVote':
             routerName.push('创建新项目')
             break
-          case 'couponDetail':
+          case 'voteDetail':
             routerName.push('详情')
             break
           default:
