@@ -154,7 +154,7 @@ export default {
       this.isShowProgress = false;
       this.voteDetail = value;
       this.total = value.commentedCount;
-  }).catch(err=>{
+    }).catch(err=>{
       this.isShowProgress = false;
     })
   }

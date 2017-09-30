@@ -47,11 +47,18 @@ request (url, data, requestSuccess, requestFail, requestComplete, interceptors) 
           }
           requestSuccess(responseData.retData);
           break;
-        case '101':
+        case '102':
           for (let interceptor of interceptors) {
             interceptor.onAutherErrorResponse(url, header, responseData);
           }
+          requestFail('登录身份验证不通过');
           break;
+          case '101':
+            for (let interceptor of interceptors) {
+              interceptor.onFaildResponse(url, header, responseData);
+            }
+            requestFail(responseData.retMsg);
+            break;
         default :
           for (let interceptor of interceptors) {
             interceptor.onFaildResponse(url, header, responseData);
@@ -79,6 +86,14 @@ request (url, data, requestSuccess, requestFail, requestComplete, interceptors) 
   xmlhttp.withCredentials = true;
   let param = JSON.stringify(data);
 	xmlhttp.send(param);
+
+  setTimeout(connectFail, 10000);
+  function connectFail() {
+    if (xmlhttp) {
+      xmlhttp.abort();
+    }
+  }
+
 }
 
 

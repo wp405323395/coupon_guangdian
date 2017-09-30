@@ -1,4 +1,4 @@
-var host = "192.168.1.125:8080"
+var host = "192.168.43.136:8080"
 //var host = 'www.maywidehb.com';
 var isHttps = false;
 var isDebug = true;
@@ -16,6 +16,7 @@ var config = {
     createVotProject:  `${schema}://${host}/wappweb/vot/vot-manager!createVotProject`,
     listCandidate:   `${schema}://${host}/wappweb/vot/vot-manager!listCandidate`,
     queryDetailByPidAndCid: `${schema}://${host}/wappweb/vot/vot-manager!queryDetailByPidAndCid`,
+    createVotQRcode:  `${schema}://${host}/wappweb/vot/vot-manager!createVotQRcode`,
 };
 
 

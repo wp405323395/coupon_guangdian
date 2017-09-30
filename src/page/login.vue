@@ -1,5 +1,6 @@
 <template>
   <div class="content">
+    <progress-bar v-if="isShowProgress"></progress-bar>
     <img class="logo" src="../../static/img/guangdian_logo.png" alt="">
 
     <div class="login">
@@ -20,6 +21,7 @@
 <script>
 import router from '../router'
 import requestEngine from '../netApi/requestEngine'
+import progressBar from '../components/progressBar'
 import urls from '../config.js'
 export default {
   name: 'login',
@@ -27,12 +29,16 @@ export default {
     let storage = window.localStorage;
     return {
       account: storage.account,
-      password: storage.password
+      password: storage.password,
+      isShowProgress:false
     }
   },
-
+  components: {
+    progressBar
+  },
   methods: {
     login () {
+      this.isShowProgress = true;
       var storage = window.localStorage;
       storage.account = this.account;
       storage.password = this.password;
@@ -47,9 +53,10 @@ export default {
 
           })
       }).then(value => {
+        this.isShowProgress = false;
         router.replace({ path: 'main' })
       }).catch(err => {
-
+        this.isShowProgress = false;
       })
 
     }

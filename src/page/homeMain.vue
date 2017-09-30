@@ -1,6 +1,6 @@
 <template>
 <div class="content">
-  <head-top>
+  <head-top class="header_top">
   </head-top>
   <navigation-bar class="navgation"></navigation-bar>
   <div class="content2">
@@ -37,7 +37,7 @@
 .navgation{
   width: 916px;
   margin: auto;
-  margin-top: 20px;
+  margin-top: 70px;
 }
 @import '../style/common';
 .router-fade-enter-active, .router-fade-leave-active {
@@ -53,5 +53,10 @@
 }
 .content{
   margin-bottom: 50px;
+  overflow: hidden;
+}
+.header_top{
+  position: fixed;
+  z-index: 20;
 }
 </style>

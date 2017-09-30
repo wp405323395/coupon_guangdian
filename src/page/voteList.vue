@@ -1,5 +1,8 @@
 <template lang="html">
     <section class="content">
+      <section v-if="showQr" class="alet_container">
+        <img :src="qrUrl" @click="closeQr()" class="qrImage">
+      </section>
       <progress-bar v-if="isShowProgress"></progress-bar>
       <alert-tip v-if="showAlert" :showHide="showAlert" @cancleTip="cancleTip" @sureTip="sureTip" :alertText="alertText"></alert-tip>
       <div class="add_vote">
@@ -28,6 +31,7 @@
                 <li class="cell4">
                   <span class="pointer" @click="goToDetail(item.id, item.title)">详情</span>
                   <span class="pointer" @click="deleteVote(item.id, index)">删除</span>
+                  <span class="pointer" @click="doVote(item.id, index)">生成二维码</span>
                 </li>
               </ul>
               <div class="line"></div>
@@ -51,6 +55,8 @@
   export default {
     data () {
       return {
+        showQr:false,
+        qrUrl:'',
         showAlert: false,
         votpList: [],
         isShowProgress:false
@@ -87,6 +93,23 @@
         deleteIndex = index;
         this.showAlert = true
         this.alertText = '确认要删除吗？'
+      },
+      doVote (id, index) {
+        let that = this;
+        this.isShowProgress = true;
+        new requestEngine().request(urls.createVotQRcode,{id: id},
+          successValue=>{
+            that.showQr = true;
+            that.qrUrl = successValue.wxcodeurl;
+
+          }, failValue=>{
+              this.isShowProgress = false;
+          }, completeValue=>{
+            this.isShowProgress = false;
+          })
+      },
+      closeQr:function() {
+        this.showQr = false;
       },
       sureTip () {
         this.showAlert = false;
@@ -130,6 +153,22 @@
     flex-direction: column;
     font-size: 16px;
     text-align: center;
+    .alet_container{
+      position: fixed;
+      background:rgba(0, 0, 0, 0.5);
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .qrImage{
+          width: 300px;
+          height: 300px;
+      }
+    }
     .add_vote{
       height: 60px;
       width: 100%;
@@ -159,7 +198,7 @@
           margin: 10px auto;
         }
         .cell0{
-          width: 30%;
+          width: 20%;
         }
         .cell1{
           width: 20%;
@@ -171,7 +210,7 @@
           width: 10%;
         }
         .cell4{
-          width: 20%;
+          width: 30%;
         }
       }
     }
@@ -197,7 +236,7 @@
               }
             }
             .cell0{
-              width: 30%;
+              width: 20%;
             }
             .cell1{
               width: 20%;
@@ -209,7 +248,7 @@
               width: 10%;
             }
             .cell4{
-              width: 20%;
+              width: 30%;
             }
           }
           .line{
