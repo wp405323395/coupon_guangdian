@@ -3,7 +3,7 @@
     <div class="headContent">
       <img class="logo_img" src="../../static/img/head_logo.png" alt="">
       <div class="logout">
-        <span class="head_text">用户 {{account}}</span>
+        <span class="head_text">用户 <span>{{account}}</span> </span>
         <span class="head_text space">|</span>
         <span @click="logoutClick" class="head_text pointer">退出</span>
       </div>
@@ -17,8 +17,10 @@ import router from '../router'
 import urls from '../config.js'
 export default {
   data () {
+    var storage = window.localStorage;
+
     return {
-      account: '198982'
+      account: storage.account
     }
   },
   props: [],
@@ -66,7 +68,7 @@ export default {
         display: flex;
         .head_text{
           font-size: 16px;
-          color: #333333;
+          color: #999999;
         }
         .space{
           margin-left: 6px;

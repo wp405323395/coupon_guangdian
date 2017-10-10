@@ -37,7 +37,7 @@
 .navgation{
   width: 916px;
   margin: auto;
-  margin-top: 70px;
+  margin-top: 100px;
 }
 @import '../style/common';
 .router-fade-enter-active, .router-fade-leave-active {

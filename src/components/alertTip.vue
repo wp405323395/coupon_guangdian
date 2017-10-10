@@ -58,9 +58,9 @@
    }
    .tip_text_container{
        position: absolute;
-       top: 150px;
-       right: 35%;
-       width: 400px;
+       top: 300px;
+       right: 41%;
+       width: 300px;
        font-size: 25px;
        animation: tipMove .4s ;
        background-color: rgba(255,255,255,1);
@@ -75,27 +75,26 @@
        .bottom_btn{
          width: 100%;
          display: flex;
-         padding-top: 20px;
+         font-size: 20px;
+         border-top:  1px solid #d4d4d4;
          .cancle{
            width: 100%;
-           background-color: blue;
            cursor: pointer;
-           color: white;
+           color: #666666;
            height: 100%;
-           height: 70px;
-           line-height: 70px;
+           height: 50px;
+           line-height: 50px;
            border-bottom-right-radius: 10px;
          }
          .confrim{
-             background-color: #4cd964;
              width: 100%;
              height: 100%;
              border-bottom-left-radius: 10px;
-             font-size: 25px;
              cursor: pointer;
-             color: white;
-             height: 70px;
-             line-height: 70px;
+             color: red;
+             height: 50px;
+             line-height: 50px;
+             border-right: 1px solid #d4d4d4;
          }
        }
        .tip_icon{
@@ -121,10 +120,11 @@
        }
        .tip_text{
            @include sc(.7rem, #333);
-           line-height: 50px;
+           line-height: 30px;
            text-align: center;
-           margin-top: 30px;
-           font-size: 25px;
+           margin-top: 10px;
+           margin-bottom: 40px;
+           font-size: 20px;
        }
 
    }

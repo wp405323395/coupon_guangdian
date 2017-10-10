@@ -3,9 +3,14 @@
     <progress-bar v-if="isShowProgress"></progress-bar>
     <section class="head">
       <span>{{title}}</span>
-      <select class="person_select" v-model="selected">
-        <option selected v-for="(item ,index) in votEmployees" :value="index">{{item.name}}</option>
-      </select>
+      <section>
+        <select class="person_select" v-model="selected">
+          <option selected v-for="(item ,index) in votEmployees" :value="index">{{item.name}}</option>
+        </select>
+        <span class="space_betw">|</span>
+        <span class="excel" @click="export2Excel">导出excel</span>
+      </section>
+
     </section>
     <hr class="parting_line"/>
     <section class="content_detail">
@@ -72,6 +77,21 @@ export default {
     }
   },
   methods:  {
+    export2Excel() {
+　　　　require.ensure([], () => {
+　　　　　　const { export_json_to_excel } = require('../vendor/Export2Excel');
+　　　　　　const tHeader = ['序号', 'IMSI', 'MSISDN', '证件号码', '姓名'];
+　　　　　　const filterVal = ['ID', 'imsi', 'msisdn', 'address', 'name'];
+　　　　　　const list = [{ID:10001,imsi:'fffff',msisdn:'333333333',address:'fffffffffff',name:'asdf',mmmm:3333},
+                         {ID:10001,imsi:'fffff',msisdn:'333333333',address:'fffffffffff',name:'asdf'},
+                         {ID:10001,imsi:'fffff',msisdn:'333333333',address:'fffffffffff',name:'asdf'},];
+　　　　　　const data = this.formatJson(filterVal, list);
+　　　　　　export_json_to_excel(tHeader, data, '列表excel');
+　　　　})
+　　},
+　　formatJson(filterVal, jsonData) {
+　　　　return jsonData.map(v => filterVal.map(j => v[j]))
+　　},
     setCurrent (idx) {
       this.isShowProgress = true;
       this.current = idx;
@@ -164,12 +184,23 @@ export default {
 <style lang="scss"  scoped>
 
 .head{
-  padding:20px 70px;
+  padding:20px 40px;
   display: flex;
   justify-content: space-between;
   .person_select{
-    border:1px solid black;
+    font-size: 16px;
   }
+}
+.excel{
+  cursor: pointer;
+  font-size: 16px;
+  color: #017bc8;
+}
+.space_betw{
+  margin-left: 7px;
+  margin-right: 7px;
+  font-size: 15px;
+  color: #d6dee2;
 }
 .parting_line{
   padding: 0;

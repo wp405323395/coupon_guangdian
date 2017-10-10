@@ -1,4 +1,5 @@
 import Header from './Header.js'
+import router from '../router'
 export default {
 request (url, data, requestSuccess, requestFail, requestComplete, interceptors) {
   let header = new Header('application/json').getHeader();
@@ -52,13 +53,14 @@ request (url, data, requestSuccess, requestFail, requestComplete, interceptors) 
             interceptor.onAutherErrorResponse(url, header, responseData);
           }
           requestFail('登录身份验证不通过');
+          router.replace({ path: 'login' })
           break;
-          case '101':
-            for (let interceptor of interceptors) {
-              interceptor.onFaildResponse(url, header, responseData);
-            }
-            requestFail(responseData.retMsg);
-            break;
+        case '101':
+          for (let interceptor of interceptors) {
+            interceptor.onFaildResponse(url, header, responseData);
+          }
+          requestFail(responseData.retMsg);
+          break;
         default :
           for (let interceptor of interceptors) {
             interceptor.onFaildResponse(url, header, responseData);

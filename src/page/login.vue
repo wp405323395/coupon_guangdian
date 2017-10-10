@@ -107,13 +107,20 @@ export default {
     .input_style{
       height: 50px;
       border: 1px solid gray;
-      border-radius: 5px;
-      width:340px;height:45px;
+      width:340px;height:50px;
       margin: auto;
     }
     input{
       float:left;
-      border:none;background:none;height:45px;line-height:45px;width:100%; text-indent:50px;
+      border:none;
+      height:45px;
+      line-height:45px;
+      width:70%;
+      margin-left: 50px;
+    }
+    input:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0px 1000px white inset;
+
     }
     .account{
       margin-top: 20px;

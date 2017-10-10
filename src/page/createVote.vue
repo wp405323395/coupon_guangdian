@@ -45,7 +45,6 @@
       <div class="title">
         <label>截至时间:</label>
         <input class="date_picker"  v-model="voteProject.endtime" type="date" />
-        <input class="date_picker" type="time" value="00:00"/>
 
       </div>
     </section>
@@ -132,6 +131,7 @@ export default {
           })
       }).then(value=>{
         this.isShowProgress = false;
+        router.go(-1);
         console.log(value);
       }).catch(err=>{
         this.isShowProgress = false;
@@ -228,10 +228,11 @@ export default {
       padding: 3px 5px;
     }
     .submit{
+      color: white;
       width: 180px;
       height: 44px;
       margin-left: 210px;
-      background-color: #d6dee2;
+      background-color: #017bc8;
       cursor: pointer;
     }
 

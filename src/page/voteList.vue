@@ -1,7 +1,11 @@
 <template lang="html">
     <section class="content">
       <section v-if="showQr" class="alet_container">
-        <img :src="qrUrl" @click="closeQr()" class="qrImage">
+
+        <img :src="qrUrl" class="qrImage">
+        </br>
+        <span style="color: #d4d4d4">微信扫码转发到群组发起投票</span>
+        <i @click="closeQr()" class="closeQr"></i>
       </section>
       <progress-bar v-if="isShowProgress"></progress-bar>
       <alert-tip v-if="showAlert" :showHide="showAlert" @cancleTip="cancleTip" @sureTip="sureTip" :alertText="alertText"></alert-tip>
@@ -164,13 +168,21 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      display: flex;
+      flex-direction: column;
       .qrImage{
           width: 300px;
           height: 300px;
       }
+      .closeQr{
+        background-image: url('../../static/svg/delete_qr.svg');
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+      }
     }
     .add_vote{
-      height: 60px;
+      height: 40px;
       width: 100%;
       background-color: white;
       display: flex;
@@ -178,7 +190,7 @@
       justify-content: flex-end;
       span{
         color: black;
-        margin-right: 30px;
+        margin-right: 20px;
         color: #017bc8;
       }
       span::before{
@@ -198,7 +210,7 @@
           margin: 10px auto;
         }
         .cell0{
-          width: 20%;
+          width: 25%;
         }
         .cell1{
           width: 20%;
@@ -210,7 +222,7 @@
           width: 10%;
         }
         .cell4{
-          width: 30%;
+          width: 25%;
         }
       }
     }
@@ -236,7 +248,7 @@
               }
             }
             .cell0{
-              width: 20%;
+              width: 25%;
             }
             .cell1{
               width: 20%;
@@ -248,7 +260,7 @@
               width: 10%;
             }
             .cell4{
-              width: 30%;
+              width: 25%;
             }
           }
           .line{
@@ -261,6 +273,10 @@
           .vote_item{
             display: flex;
             flex-direction: column;
+            .cell0 {
+              text-align: left;
+              padding-left: 20px;
+            }
           }
         }
       }

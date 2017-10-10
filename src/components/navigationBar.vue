@@ -51,14 +51,14 @@ export default {
   .header_wrap{
     background-color: #017bc8;
     width: 916px;
-    height: 50px;
+    height: 40px;
     ul{
-      margin-left: 70px;
+      margin-left: 20px;
       li{
-        font-size: 20px;
+        font-size: 18px;
         float: left;
         color: white;
-        line-height: 50px;
+        line-height: 40px;
         padding-right: 10px;
         cursor: pointer;
       }
