@@ -17,6 +17,7 @@ var config = {
     listCandidate:   `${schema}://${host}/wappweb/vot/vot-manager!listCandidate`,
     queryDetailByPidAndCid: `${schema}://${host}/wappweb/vot/vot-manager!queryDetailByPidAndCid`,
     createVotQRcode:  `${schema}://${host}/wappweb/vot/vot-manager!createVotQRcode`,
+    exportVotDetail:   `${schema}://${host}/wappweb/vot/vot-manager!exportVotDetail`,
 };
 
 

@@ -7,13 +7,15 @@
        <h1>绩效考核后台管理系统</h1>
        <div class="line"></div>
        <div class="account input_style">
-         <input type="text" name="" placeholder="账号" v-model="account">
+         <input class="input_st" type="text" name="" placeholder="账号" v-model="account">
        </div>
        <div class="password input_style">
-         <input type="password" name="" placeholder="密码" v-model="password">
+         <input class="input_st" type="password" name="" placeholder="密码" v-model="password">
        </div>
        <button @click="login" class="login_btn" type="button" name="button">登陆</button>
+
     </div>
+    <img src="../../static/img/logo_vote_web.png" class="logo_bottom">
   </div>
 
 </template>
@@ -71,8 +73,12 @@ export default {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    height: 700px;
-
+    height: 768px;
+    .logo_bottom{
+      float: right;
+      margin-top: 150px;
+      margin-right: 30px;
+    }
   }
 
   .logo{
@@ -85,7 +91,6 @@ export default {
     width: 400px;
     margin: auto;
     height: 370px;
-    margin-top: 0px;
     overflow: hidden;
     border-radius: 10px;
     opacity: 0.9;
@@ -106,9 +111,14 @@ export default {
     }
     .input_style{
       height: 50px;
-      border: 1px solid gray;
+      border: 1px solid #d4d4d4;
+      border-radius: 5px;
       width:340px;height:50px;
       margin: auto;
+      .input_st{
+        border-style: none;
+        outline:none;
+      }
     }
     input{
       float:left;
@@ -145,9 +155,11 @@ export default {
       border-radius: 5px;
       margin: auto;
       margin-top: 40px;
+
     }
     .login_btn:hover{
-      background-color:blue;
+      background-color:#12669b;
+
     }
     .login_btn:active{
       position:relative;

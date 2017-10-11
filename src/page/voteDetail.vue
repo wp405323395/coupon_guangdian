@@ -31,8 +31,7 @@
     </section>
 
     <section class="common">
-      <span>{{voteDetail.commentedCount}}条评论</span>
-      <i v-if="voteDetail.commentedCount >0" class="has_more"></i>
+      <span class="note_count">{{voteDetail.commentedCount}}条评论</span>
       <section v-if="voteDetail.commentedCount>0" class="common_wrap">
         <div class="commom_itme" v-for="common in voteDetail.commentedList">
           <span>用户: {{common.name}}</span>
@@ -78,16 +77,36 @@ export default {
   },
   methods:  {
     export2Excel() {
-　　　　require.ensure([], () => {
-　　　　　　const { export_json_to_excel } = require('../vendor/Export2Excel');
-　　　　　　const tHeader = ['序号', 'IMSI', 'MSISDN', '证件号码', '姓名'];
-　　　　　　const filterVal = ['ID', 'imsi', 'msisdn', 'address', 'name'];
-　　　　　　const list = [{ID:10001,imsi:'fffff',msisdn:'333333333',address:'fffffffffff',name:'asdf',mmmm:3333},
-                         {ID:10001,imsi:'fffff',msisdn:'333333333',address:'fffffffffff',name:'asdf'},
-                         {ID:10001,imsi:'fffff',msisdn:'333333333',address:'fffffffffff',name:'asdf'},];
-　　　　　　const data = this.formatJson(filterVal, list);
-　　　　　　export_json_to_excel(tHeader, data, '列表excel');
-　　　　})
+      new Promise((resolve, reject)=>{
+        this.isShowProgress = true;
+        new requestEngine().request(urls.exportVotDetail,{id: id },
+          successValue=>{
+            resolve(successValue);
+          }, failValue=>{
+            reject(failValue);
+          }, completeValue=>{
+          })
+      }).then(value=>{
+        require.ensure([], () => {
+        　　　　　　const { export_json_to_excel } = require('../vendor/Export2Excel');
+        　　　　　　const tHeader = ['部门', '姓名', ...value.title];
+        　　　　　　const filterVal = ['department', 'name', ...value.title];
+                   const list = [];
+                   for(let personScore of value.personScore) {
+                     let data = {department:personScore.department, name:personScore.name};
+                     for(let [index, title] of value.title.entries()) {
+                       data[title] = personScore.score[index];
+                     }
+                     list.push(data);
+                   }
+        　　　　　　const data = this.formatJson(filterVal, list);
+        　　　　　　export_json_to_excel(tHeader, data, this.title+'的投票结果');
+        　　　　})
+        this.isShowProgress = false;
+      }).catch(err=>{
+        this.isShowProgress = false;
+      })
+　　　　
 　　},
 　　formatJson(filterVal, jsonData) {
 　　　　return jsonData.map(v => filterVal.map(j => v[j]))
@@ -266,18 +285,15 @@ export default {
   padding-left: 70px;
   padding-right: 70px;
   padding-bottom: 100px;
-  .has_more::after{
-      content: '\2601';
-      cursor: pointer;
-  }
+  font-size: 16px;
+
   span{
     color: #a5b7c0;
-    font-size: 16px;
-
+    font-size: 14px;
   }
   .common_wrap{
     padding: 20px;
-    border: 1px solid #a5b7c0;
+    border: 1px solid #d4d4d4;
     border-radius: 5px;
     margin-top: 10px;
     .commom_itme{

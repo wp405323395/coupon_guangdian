@@ -1,11 +1,11 @@
 <template lang="html">
   <nav>
 		<ul class="pagination">
-			<li :class="{'disabled': current == 1}"><a href="javascript:;" @click="setCurrent(1)"> 首页 </a></li>
+			<li :class="[{'disabled': current == 1},'head_space']"><a href="javascript:;" @click="setCurrent(1)"> 首页 </a></li>
 			<!-- <li :class="{'disabled': current == 1}"><a href="javascript:;" @click="setCurrent(current - 1)"> 上一页 </a></li> -->
 			<li v-for="p in grouplist" :class="{'active': current == p.val}"><a href="javascript:;" @click="setCurrent(p.val)"> {{ p.text }} </a></li>
-			<li :class="{'disabled': current == page}"><a href="javascript:;" @click="setCurrent(current + 1)"> 下一页</a></li>
-			<li :class="{'disabled': current == page}"><a href="javascript:;" @click="setCurrent(page)"> 尾页 </a></li>
+			<li :class="[{'disabled': current == page},'head_space']"><a href="javascript:;" @click="setCurrent(current + 1)"> 下一页</a></li>
+			<li :class="[{'disabled': current == page},'head_space']"><a href="javascript:;" @click="setCurrent(page)"> 尾页 </a></li>
 		</ul>
 		<!-- <ul class="pagination pull-right">
 			<li><span> 共 {{ total }}  条数据 </span></li>
@@ -81,16 +81,27 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="scss"  scoped>
   .pagination{
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
+    font-size: 10px;
+    padding-top: 10px;
+    .head_space{
+      margin-left:10px;
+      margin-right: 10px;
+    }
+    .active{
+      font-size: 14px;
+      margin-left: 3px;
+      margin-right: 3px;
+      padding-top: 2px;
+      a{
+        color: #017bc8;
+      }
+    }
   }
-  .active{
-    font-size: 22px;
-    margin-left: 3px;
-    margin-right: 3px;
-    padding-top: 2px;
-  }
+
+
 </style>

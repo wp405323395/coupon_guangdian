@@ -15,7 +15,9 @@
         <div class="cell">
           <span for="" class="margin">所属部门:</span>
           <input class="input_style" type="text" name="" v-model="person.deptname">
+          <i @click="deletePersonListItem(index)" class="delete_icon" v-if="index != 0"></i>
         </div>
+
       </div>
       <span @click="addPerson" class="addPerson add_style">添加考核人</span>
     </section>
@@ -24,6 +26,7 @@
       <div class="title">
         <label :for="index">被考核内容:</label>
         <input class="input_style" :id="index" placeholder="请输入考核内容" type="text" name="" v-model="item.topicTitle">
+        <i @click="deletetopicListItem(index)" class="delete_icon" v-if="index != 0"></i>
       </div>
       <div class="title style2">
         <label for="title1">投票选项:</label>
@@ -90,19 +93,25 @@ export default {
     progressBar
   },
   methods: {
+    deletePersonListItem (index) {
+      this.voteProject.candidateList.splice(index, 1);
+    },
+    deletetopicListItem (index) {
+      this.voteProject.topicList.splice(index, 1);
+    },
     getNowFormatDate () {
-    var date = new Date();
-    var seperator1 = "-";
-    var month = date.getMonth() + 1;
-    var strDate = date.getDate();
-    if (month >= 1 && month <= 9) {
-        month = "0" + month;
-    }
-    if (strDate >= 0 && strDate <= 9) {
-        strDate = "0" + strDate;
-    }
-    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate;
-    return  currentdate;
+      var date = new Date();
+      var seperator1 = "-";
+      var month = date.getMonth() + 1;
+      var strDate = date.getDate();
+      if (month >= 1 && month <= 9) {
+          month = "0" + month;
+      }
+      if (strDate >= 0 && strDate <= 9) {
+          strDate = "0" + strDate;
+      }
+      var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate;
+      return  currentdate;
   },
     getNowFormatClock () {
       var date = new Date();
@@ -151,6 +160,12 @@ export default {
     ::-webkit-input-placeholder {
       color: #999999;
     }
+    .delete_icon{
+      width: 30px;
+      height: 30px;
+      background-image: url('../../static/svg/delete_qr.svg');
+      cursor: pointer;
+    }
     .parting_line{
       padding: 0;
       margin: 0;
@@ -172,6 +187,28 @@ export default {
       display: flex;
       padding: 10px 70px;
       align-items: center;
+      .cell{
+        display: flex;
+        align-items: center;
+        span{
+           white-space:nowrap;
+           flex-shrink:0;
+           margin-right: 60px;
+        }
+        input{
+          width: 200px;
+          margin-right: 80px;
+        }
+        .margin{
+          margin-right: 20px;
+        }
+      }
+      .cell:last-child{
+        input{
+          margin-right: 20px;
+        }
+      }
+
     }
     .addPersonList:first-child{
       margin-top: 10px;
@@ -187,8 +224,12 @@ export default {
       height: 40px;
       padding-left: 20px;
       font-size: 13px;
+      width: 560px;
+      margin-right: 20px;
     }
     .add_style{
+      display: inline-block;
+      margin-bottom: 20px;
       color: #017bc8;
       font-size: 13px;
       cursor: pointer;
@@ -204,26 +245,12 @@ export default {
     .input_wrap{
       width: 100%;
     }
-    .cell{
-      display: flex;
-      align-items: center;
-      span{
-         white-space:nowrap;
-         flex-shrink:0;
-         margin-right: 60px;
-      }
-      input{
-        margin-right: 80px;
-      }
-      .margin{
-        margin-right: 20px;
-      }
-    }
+
     .addPerson{
       margin-left: 210px;
     }
     .date_picker{
-      border: 1px solid black;
+      border: 1px solid #d4d4d4;
       margin-right: 20px;
       padding: 3px 5px;
     }
@@ -233,6 +260,7 @@ export default {
       height: 44px;
       margin-left: 210px;
       background-color: #017bc8;
+      margin-top: 30px;
       cursor: pointer;
     }
 
