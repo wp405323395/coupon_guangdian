@@ -53,6 +53,7 @@
     </section>
     <section>
       <button class="submit" @click='submit' type="button">提&nbsp;&nbsp;交</button>
+      <span class="warning_text" v-if="isWarning">{{noteText}}</span>
     </section>
   </div>
 
@@ -63,9 +64,12 @@ import requestEngine from '../netApi/requestEngine'
 import progressBar from '../components/progressBar'
 import router from '../router'
 import urls from '../config.js'
+import utils from '../utils/util.js'
 export default {
   data () {
     return {
+      isWarning:false,
+      noteText:'',
       isShowProgress:false,
       voteProject: {
         title: '',
@@ -127,6 +131,33 @@ export default {
       this.voteProject.candidateList.push({name: '', deptname: ''})
     },
     submit () {
+      setTimeout(()=>{
+        this.isWarning = false;
+      },2000);
+
+      if(utils.textIsNull(this.voteProject.title)) {
+        this.isWarning = true;
+        this.noteText = '未填写项目主题';
+        return;
+      }
+      for(let candidate of this.voteProject.candidateList) {
+        if(utils.textIsNull(candidate.name) || utils.textIsNull(candidate.deptname)) {
+          this.isWarning = true;
+          this.noteText = '未输入被考核人姓名或部门';
+          return;
+        }
+      }
+      for(let topic of this.voteProject.topicList) {
+        if(utils.textIsNull(topic.topicTitle)) {
+          this.isWarning = true;
+          this.noteText = '未输入考核内容';
+          return ;
+        } else if(utils.textIsNull(topic.optionList[0]) && utils.textIsNull(topic.optionList[1]) && utils.textIsNull(topic.optionList[2]) && utils.textIsNull(topic.optionList[3])) {
+          this.isWarning = true;
+          this.noteText = '必须填写至少一个选项';
+          return ;
+        }
+      }
       let that = this;
       new Promise((resolve, reject)=>{
         this.isShowProgress = true;
@@ -262,6 +293,11 @@ export default {
       background-color: #017bc8;
       margin-top: 30px;
       cursor: pointer;
+    }
+    .warning_text{
+      margin-left: 50px;
+      font-size: 16px;
+      color: red;
     }
 
 }

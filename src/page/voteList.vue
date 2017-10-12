@@ -276,6 +276,7 @@
             .cell0 {
               text-align: left;
               padding-left: 20px;
+              word-break: break-all;
             }
           }
         }
