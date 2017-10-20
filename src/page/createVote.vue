@@ -134,7 +134,11 @@ export default {
       setTimeout(()=>{
         this.isWarning = false;
       },2000);
-
+      if(this.voteProject.endtime < this.getNowFormatDate()) {
+        this.isWarning = true;
+        this.noteText = '您填写的日期有误';
+        return;
+      }
       if(utils.textIsNull(this.voteProject.title)) {
         this.isWarning = true;
         this.noteText = '未填写项目主题';
@@ -158,6 +162,7 @@ export default {
           return ;
         }
       }
+
       let that = this;
       new Promise((resolve, reject)=>{
         this.isShowProgress = true;
