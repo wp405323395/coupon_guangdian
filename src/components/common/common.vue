@@ -72,7 +72,7 @@
     <div v-for="(item, index) in commentList">
         <div class="container">
             <section class="icon">
-                <img src="../../../static/img/person_icon.png" alt="">
+                <img :src="item.avatarurl" alt="">
             </section>
             <section class="cont">
                 <span class="common_title">{{item.nickname}}</span>
