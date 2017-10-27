@@ -1,11 +1,12 @@
 import App from '../App'
 import Vue from 'vue'
 import Router from 'vue-router'
-import login from '@/page/login'
 import main from '@/page/homeMain'
 import createVote from '@/page/createVote'
 import voteList from '@/page/voteList'
 import voteDetail from '@/page/voteDetail'
+import index from '@/page/index'
+import tvProgram from '@/page/tvProgram'
 // import Hello from '@/components/Hello'
 
 Vue.use(Router)
@@ -14,16 +15,23 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'App',
+      name: '',
       component: App,
       children: [
         {
           path: '',
-          redirect: '/login'
+          redirect: '/index',
+          name:'往期回顾'
         },
         {
-          path: '/login',
-          component: login
+          path: '/index',
+          component: index,
+          name:'往期回顾'
+        },
+        {
+          path: '/tvProgram',
+          component: tvProgram,
+          name:'电视节目'
         },
         {
           path: '/main/',
