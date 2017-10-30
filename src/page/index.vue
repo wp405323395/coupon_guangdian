@@ -167,7 +167,8 @@ export default {
         }, completeValue=>{
         })
     }).then(value=>{
-      new Promise((resolve,reject)=>{
+      console.log('fffffffffffffffffffffffff');
+      return new Promise((resolve,reject)=>{
         new requestEngine().requestGet('https://api.weixin.qq.com/sns/userinfo?access_token='+value.access_token+'&openid='+value.openid+'&lang=zh_CN',
           successValue=>{
             resolve(successValue);
@@ -181,6 +182,8 @@ export default {
           })
       });
 
+    }).then(value=>{
+      console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
     }).catch(err=>{
 
     });
