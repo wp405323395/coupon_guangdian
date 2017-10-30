@@ -166,6 +166,7 @@ export default {
           console.log('faild-',failValue);
         }, completeValue=>{
         })
+
     }).then(value=>{
       console.log('fffffffffffffffffffffffff');
       return new Promise((resolve,reject)=>{
