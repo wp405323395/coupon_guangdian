@@ -1,6 +1,6 @@
 var host = "192.168.1.169:8080"
   //var host = 'www.maywidehb.com';
-var isHttps = false;
+var isHttps = true;
 var isDebug = true;
 var schema = isHttps ? 'https' : 'http';
 var config = {
