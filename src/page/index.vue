@@ -150,41 +150,44 @@ export default {
     }
   },
   mounted: function() {
-  //   document.title = this.$route.name;
-  //   let href = window.location.href;
-  //   //let href = "https://www.maywidehb.com/webapp/index.html?code=081UhLaK1Ylsz70aUt9K1yvEaK1UhLas&state=123";
-  //   let param = href.split("?")[1];
-  //   let wxcodemap = param.split("&")[0];
-  //   let wxcode = wxcodemap.split("=")[1];
-  //   new Promise((resolve,reject) => {
-  //     new requestEngine().request(urls.loginUrl,{loginCode: wxcode},
-  //       successValue=>{
-  //         resolve(successValue);
-  //         console.log('success-',successValue);
-  //       }, failValue=>{
-  //         reject(failValue);
-  //         console.log('faild-',failValue);
-  //       }, completeValue=>{
-  //       })
-  //   }).then(value=>{
-  //     new requestEngine().requestGet('https://api.weixin.qq.com/sns/userinfo?access_token='+value.access_token+'&openid='+value.openid+'&lang=zh_CN',
-  //       successValue=>{
-  //         resolve(successValue);
-  //         console.log('success-',successValue);
-  //         document.title = 'success'
-  //       }, failValue=>{
-  //         document.title = 'failValue'
-  //         reject(failValue);
-  //         console.log('faild-',failValue);
-  //       }, completeValue=>{
-  //       })
-  //   }).catch(err=>{
-  //
-  //   });
-  //
-  //   console.log(wxcode);
-  //
-   }
+    document.title = this.$route.name;
+    let href = window.location.href;
+    //let href = "https://www.maywidehb.com/webapp/index.html?code=081UhLaK1Ylsz70aUt9K1yvEaK1UhLas&state=123";
+    let param = href.split("?")[1];
+    let wxcodemap = param.split("&")[0];
+    let wxcode = wxcodemap.split("=")[1];
+    new Promise((resolve,reject) => {
+      new requestEngine().request(urls.loginUrl,{loginCode: wxcode},
+        successValue=>{
+          resolve(successValue);
+          console.log('success-',successValue);
+        }, failValue=>{
+          reject(failValue);
+          console.log('faild-',failValue);
+        }, completeValue=>{
+        })
+    }).then(value=>{
+      new Promise((resolve,reject)=>{
+        new requestEngine().requestGet('https://api.weixin.qq.com/sns/userinfo?access_token='+value.access_token+'&openid='+value.openid+'&lang=zh_CN',
+          successValue=>{
+            resolve(successValue);
+            console.log('success-',successValue);
+            document.title = 'success'
+          }, failValue=>{
+            document.title = 'failValue'
+            reject(failValue);
+            console.log('faild-',failValue);
+          }, completeValue=>{
+          })
+      });
+
+    }).catch(err=>{
+
+    });
+
+    console.log(wxcode);
+
+  }
 }
 </script>
 
