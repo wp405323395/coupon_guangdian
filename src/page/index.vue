@@ -160,25 +160,23 @@ export default {
       new requestEngine().request(urls.loginUrl,{loginCode: wxcode},
         successValue=>{
           resolve(successValue);
-          console.log('success-',successValue);
+          console.log('success');
         }, failValue=>{
           reject(failValue);
-          console.log('faild-',failValue);
+          console.log('faild');
         }, completeValue=>{
         })
 
     }).then(value=>{
-      console.log('fffffffffffffffffffffffff');
+      console.log(value);
       return new Promise((resolve,reject)=>{
         new requestEngine().requestGet('https://api.weixin.qq.com/sns/userinfo?access_token='+value.access_token+'&openid='+value.openid+'&lang=zh_CN',
           successValue=>{
             resolve(successValue);
-            console.log('success-',successValue);
-            document.title = 'success'
+            console.log('success用戶信息-',successValue);
           }, failValue=>{
-            document.title = 'failValue'
             reject(failValue);
-            console.log('faild-',failValue);
+            console.log('faild用戶信息-',failValue);
           }, completeValue=>{
           })
       });
@@ -186,7 +184,7 @@ export default {
     }).then(value=>{
       console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
     }).catch(err=>{
-
+      console.log(err);
     });
 
     console.log(wxcode);
