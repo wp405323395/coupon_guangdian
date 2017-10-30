@@ -158,15 +158,30 @@ export default {
     let param = href.split("?")[1];
     let wxcodemap = param.split("&")[0];
     let wxcode = wxcodemap.split("=")[1];
-    new requestEngine().request(urls.loginUrl,{loginCode: wxcode},
-      successValue=>{
-        //resolve(successValue);
-        console.log('success-',successValue);
-      }, failValue=>{
-        //reject(failValue);
-        console.log('faild-',failValue);
-      }, completeValue=>{
-      })
+    new Promise((resolve,reject) => {
+      new requestEngine().request(urls.loginUrl,{loginCode: wxcode},
+        successValue=>{
+          resolve(successValue);
+          console.log('success-',successValue);
+        }, failValue=>{
+          reject(failValue);
+          console.log('faild-',failValue);
+        }, completeValue=>{
+        })
+    }).then(value=>{
+      new requestEngine().request('https://api.weixin.qq.com/sns/userinfo?access_token='+value.access_token+'&openid='+value.openid+'&lang=zh_CN',null,
+        successValue=>{
+          resolve(successValue);
+          console.log('success-',successValue);
+        }, failValue=>{
+          reject(failValue);
+          console.log('faild-',failValue);
+        }, completeValue=>{
+        })
+    }).catch(err=>{
+
+    });
+
     console.log(wxcode);
 
   }
