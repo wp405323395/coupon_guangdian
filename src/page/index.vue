@@ -151,8 +151,6 @@ export default {
   },
   mounted: function() {
     document.title = this.$route.name;
-    console.log(this.$route.name);
-    // console.log("mount之后")
     let href = window.location.href;
     //let href = "https://www.maywidehb.com/webapp/index.html?code=081UhLaK1Ylsz70aUt9K1yvEaK1UhLas&state=123";
     let param = href.split("?")[1];
