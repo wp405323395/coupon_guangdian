@@ -106,10 +106,6 @@ export default {
       interceptors) {
       let header = new Header('application/json').getHeader();
 
-      for (let interceptor of interceptors) {
-        interceptor.onRequest(url, header, data);
-      }
-
       //---------------------------------------------------------------
       let xmlhttp;
       if (window.XMLHttpRequest) {
