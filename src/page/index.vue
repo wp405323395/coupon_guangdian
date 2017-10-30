@@ -167,7 +167,7 @@ export default {
         }, completeValue=>{
         })
     }).then(value=>{
-      new requestEngine().request('https://api.weixin.qq.com/sns/userinfo?access_token='+value.access_token+'&openid='+value.openid+'&lang=zh_CN',null,
+      new requestEngine().requestGet('https://api.weixin.qq.com/sns/userinfo?access_token='+value.access_token+'&openid='+value.openid+'&lang=zh_CN',
         successValue=>{
           resolve(successValue);
           console.log('success-',successValue);
