@@ -160,9 +160,11 @@ export default {
     let wxcode = wxcodemap.split("=")[1];
     new requestEngine().request(urls.loginUrl,{loginCode: wxcode},
       successValue=>{
-        resolve(successValue);
+        //resolve(successValue);
+        console.log('success-',successValue);
       }, failValue=>{
-        reject(failValue);
+        //reject(failValue);
+        console.log('faild-',failValue);
       }, completeValue=>{
       })
     console.log(wxcode);
