@@ -1,4 +1,4 @@
-var host = "192.168.1.169"
+var host = "192.168.1.169:8080"
   //var host = 'www.maywidehb.com';
 var isHttps = false;
 var isDebug = true;
