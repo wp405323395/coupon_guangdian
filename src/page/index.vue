@@ -171,9 +171,9 @@ export default {
         successValue=>{
           resolve(successValue);
           console.log('success-',successValue);
-          alert('success');
+          document.title = 'success'
         }, failValue=>{
-          alert('failValue');
+          document.title = 'failValue'
           reject(failValue);
           console.log('faild-',failValue);
         }, completeValue=>{
