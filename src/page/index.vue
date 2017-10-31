@@ -153,8 +153,8 @@ export default {
     let that = this;
     new RequestEngine().request(urls.queTvThemeList, {tvId: 1},
       successValue => {
-        that.subjectBoList = successValue.subjectBoList;
-        console.log(JSON.stringify(successValue));
+        that.subjectBoList = successValue[0].subjectBoList;
+        console.log(JSON.stringify(that.subjectBoList));
       }, failValue => {
         console.log('faild');
       }, completeValue => {})
