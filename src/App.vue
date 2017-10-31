@@ -19,7 +19,8 @@ export default {
 		document.title = this.$route.name;
 		 login({
 			 success: function(successValue) {
-				 console.log(successValue);
+				 this.$router.redirect({ path: '/index'});
+				 console.log(----------------fddf---------------);
 			 },
 			 faild: function(faildValue) {
 				 console.log(faildValue);
