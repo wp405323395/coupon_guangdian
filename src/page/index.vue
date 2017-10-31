@@ -13,7 +13,41 @@ import urls from '../config.js'
 export default {
   name: 'index',
   data () {
+    return {
+      subjectBoList:[
+        {
 
+            id:'1',
+            title:'如懿传第一季',
+            pollTotal:567,
+            votObjectList:[
+              {
+                imgurl:require('../../static/img/tv_dianshiju.png'),
+                percent:0.05,
+                isWin:true,
+                context:'义正言辞的吴伟文',
+                choose: true
+              },
+              {
+                imgurl:require('../../static/img/tv_dianshiju.png'),
+                percent:0.35,
+                isWin:true,
+                context:'义正言辞的吴伟文',
+                choose: true
+              },
+              {
+                imgurl:require('../../static/img/tv_dianshiju.png'),
+                percent:0.85,
+                isWin:true,
+                context:'义正言辞的吴伟文',
+                choose: true
+              }
+            ]
+
+
+        }
+      ]
+    }
   },
   components: {
     tvVoteItem
