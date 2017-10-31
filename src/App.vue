@@ -13,7 +13,13 @@
 </template>
 
 <script>
+import login from './netApi/login.js'
+mounted: function() {
+	document.title = this.$route.name;
+	 login();
 
+
+}
 </script>
 
 <style lang="scss">

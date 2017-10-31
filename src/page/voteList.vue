@@ -50,7 +50,7 @@
 
 <script>
   import alertTip from '../components/alertTip'
-  import requestEngine from '../netApi/requestEngine'
+  import RequestEngine from '../netApi/RequestEngine'
   import progressBar from '../components/progressBar'
   import router from '../router'
   import urls from '../config.js'
@@ -77,7 +77,7 @@
       listProject () {
         this.isShowProgress = true;
         new Promise((resolve, reject)=>{
-          new requestEngine().request(urls.listProject,{},
+          new RequestEngine().request(urls.listProject,{},
             successValue=>{
               resolve(successValue);
             }, failValue=>{
@@ -101,7 +101,7 @@
       doVote (id, index) {
         let that = this;
         this.isShowProgress = true;
-        new requestEngine().request(urls.createVotQRcode,{id: id},
+        new RequestEngine().request(urls.createVotQRcode,{id: id},
           successValue=>{
             that.showQr = true;
             that.qrUrl = successValue.wxcodeurl;
@@ -119,7 +119,7 @@
         this.showAlert = false;
         new Promise((resolve, reject)=>{
           this.isShowProgress = true;
-          new requestEngine().request(urls.deleteProject,{id: deleteId},
+          new RequestEngine().request(urls.deleteProject,{id: deleteId},
             successValue=>{
               resolve(successValue);
             }, failValue=>{

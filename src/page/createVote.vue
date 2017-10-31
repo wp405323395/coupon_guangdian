@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import requestEngine from '../netApi/requestEngine'
+import RequestEngine from '../netApi/RequestEngine'
 import progressBar from '../components/progressBar'
 import router from '../router'
 import urls from '../config.js'
@@ -166,7 +166,7 @@ export default {
       let that = this;
       new Promise((resolve, reject)=>{
         this.isShowProgress = true;
-        new requestEngine().request(urls.createVotProject,that.voteProject,
+        new RequestEngine().request(urls.createVotProject,that.voteProject,
           successValue=>{
             resolve(successValue);
           }, failValue=>{

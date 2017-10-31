@@ -48,7 +48,7 @@
 
 <script>
 import alertTip from '../components/alertTip'
-import requestEngine from '../netApi/requestEngine'
+import RequestEngine from '../netApi/RequestEngine'
 import router from '../router'
 import urls from '../config.js'
 import pagination from '../components/pagination'
@@ -79,7 +79,7 @@ export default {
     export2Excel() {
       new Promise((resolve, reject)=>{
         this.isShowProgress = true;
-        new requestEngine().request(urls.exportVotDetail,{id: id },
+        new RequestEngine().request(urls.exportVotDetail,{id: id },
           successValue=>{
             resolve(successValue);
           }, failValue=>{
@@ -115,7 +115,7 @@ export default {
       this.isShowProgress = true;
       this.current = idx;
       new Promise((resolve, reject)=>{
-        new requestEngine().request(urls.queryDetailByPidAndCid,{projectId: id, candidateId:this.votEmployees[0].id,pageSize:'5', pageNo:this.current },
+        new RequestEngine().request(urls.queryDetailByPidAndCid,{projectId: id, candidateId:this.votEmployees[0].id,pageSize:'5', pageNo:this.current },
           successValue=>{
             resolve(successValue);
           }, failValue=>{
@@ -134,7 +134,7 @@ export default {
       this.current = 1;
       new Promise((resolve,reject)=>{
         this.isShowProgress = true;
-        new requestEngine().request(urls.queryDetailByPidAndCid,{projectId: id, candidateId:this.votEmployees[selected].id,pageSize:'5', pageNo:this.current },
+        new RequestEngine().request(urls.queryDetailByPidAndCid,{projectId: id, candidateId:this.votEmployees[selected].id,pageSize:'5', pageNo:this.current },
           successValue=>{
             resolve(successValue);
           }, failValue=>{
@@ -168,7 +168,7 @@ export default {
     this.title = title;
     new Promise((resolve, reject)=>{
       this.isShowProgress = true;
-      new requestEngine().request(urls.listCandidate,{id: id},
+      new RequestEngine().request(urls.listCandidate,{id: id},
         successValue=>{
           resolve(successValue);
         }, failValue=>{
@@ -181,7 +181,7 @@ export default {
       this.votEmployees = value.votEmployees;
       return new Promise((resolve,reject)=>{
         this.isShowProgress = true;
-        new requestEngine().request(urls.queryDetailByPidAndCid,{projectId: id, candidateId:this.votEmployees[0].id,pageSize:'5', pageNo:this.current },
+        new RequestEngine().request(urls.queryDetailByPidAndCid,{projectId: id, candidateId:this.votEmployees[0].id,pageSize:'5', pageNo:this.current },
           successValue=>{
             resolve(successValue);
           }, failValue=>{

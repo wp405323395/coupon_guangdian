@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import requestEngine from '../netApi/requestEngine'
+import RequestEngine from '../netApi/RequestEngine'
 import router from '../router'
 import urls from '../config.js'
 export default {
@@ -27,7 +27,7 @@ export default {
   methods: {
     logoutClick () {
       new Promise((resolve, reject)=>{
-        new requestEngine().request(urls.doLogout,{},
+        new RequestEngine().request(urls.doLogout,{},
           successValue=>{
             resolve(successValue);
           }, failValue=>{

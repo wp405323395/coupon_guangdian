@@ -7,10 +7,10 @@
 </template>
 
 <script>
-import requestEngine from '../netApi/requestEngine'
+import RequestEngine from '../netApi/RequestEngine'
 import tvVoteItem from '../components/tvVoteItem'
 import urls from '../config.js'
-import login from '../netApi/login'
+
 export default {
   name: 'index',
   data () {
@@ -152,9 +152,6 @@ export default {
   },
   mounted: function() {
     document.title = this.$route.name;
-    login.login();
-
-
   }
 }
 </script>
