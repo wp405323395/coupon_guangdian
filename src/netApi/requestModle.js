@@ -100,8 +100,6 @@ export default {
 
     },
 
-
-
     requestGet(url, requestSuccess, requestFail, requestComplete,
       interceptors) {
       let header = new Header('application/json').getHeader();

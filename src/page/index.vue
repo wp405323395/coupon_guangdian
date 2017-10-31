@@ -168,21 +168,7 @@ export default {
         })
 
     }).then(value=>{
-      console.log(value);
-      return new Promise((resolve,reject)=>{
-        new requestEngine().requestGet('https://api.weixin.qq.com/sns/userinfo?access_token='+value.access_token+'&openid='+value.openid+'&lang=zh_CN',
-          successValue=>{
-            resolve(successValue);
-            console.log('success用戶信息-',successValue);
-          }, failValue=>{
-            reject(failValue);
-            console.log('faild用戶信息-',failValue);
-          }, completeValue=>{
-          })
-      });
 
-    }).then(value=>{
-      console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
     }).catch(err=>{
       console.log(err);
     });
