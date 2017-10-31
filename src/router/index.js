@@ -20,11 +20,11 @@ export default new Router({
     children: [{
       path: '',
       redirect: '/welcome',
-      name: '往期回顾'
+      name: 'welcome'
     }, {
       path: '/welcome',
       component: welcome,
-      name: '往期回顾'
+      name: 'welcome'
     }, {
       path: '/tvProgram',
       component: tvProgram,

@@ -14,17 +14,18 @@
 
 <script>
 import login from './netApi/login.js'
+import router from './router'
 export default {
+
 	mounted: function() {
 		document.title = this.$route.name;
-		let that = this;
+		console.log(router);
 		 login({
 			 success: function(successValue) {
-				 console.log('----------------fddf---------------');
-				 that.$router.redirect({ path: '/index'});
+				 router.replace({ path: 'index' })
 			 },
 			 faild: function(faildValue) {
-				 console.log(faildValue);
+				 router.replace({ path: 'index' })
 			 }
 		 });
 	}
