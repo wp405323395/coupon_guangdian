@@ -13,6 +13,8 @@
        loginCode: wxcode
      },
      successValue => {
+       console.log('ffffffffffeeeeeeeeeeeeeeffffffffffff');
+       console.log(loginCallBack);
        loginCallBack.success(successValue);
      }, failValue => {
        loginCallBack.faild(failValue);
