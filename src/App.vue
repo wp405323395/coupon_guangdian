@@ -20,7 +20,7 @@ export default {
 		 login({
 			 success: function(successValue) {
 				 this.$router.redirect({ path: '/index'});
-				 console.log(----------------fddf---------------);
+				 console.log('----------------fddf---------------');
 			 },
 			 faild: function(faildValue) {
 				 console.log(faildValue);
