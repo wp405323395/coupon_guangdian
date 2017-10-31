@@ -1,9 +1,7 @@
 <template lang="html">
   <div id="tv_vots" class="background_col" >
-    <tv-vote-item @goinDetail="goinDetail" :key="item.id" v-for="(item, index) in tvs" :index='index' :isShowProgress="false" :tvjiemu="item.tvjiemu"></tv-vote-item>
+    <tv-vote-item @goinDetail="goinDetail" :key="item.id" v-for="(item, index) in subjectBoList" :index='index' :isShowProgress="false" :tvjiemu="item"></tv-vote-item>
   </div>
-
-
 </template>
 
 <script>
@@ -15,126 +13,126 @@ export default {
   name: 'index',
   data () {
     return {
-      tvs:[
+      subjectBoList:[
         {
-          tvjiemu: {
+
             id:'1',
-            topicTitle:'如懿传第一季',
-            personCount:567,
-            items:[
+            title:'如懿传第一季',
+            pollTotal:567,
+            votObjectList:[
               {
-                imgUrl:require('../../static/img/tv_dianshiju.png'),
+                imgurl:require('../../static/img/tv_dianshiju.png'),
                 percent:0.05,
                 isWin:true,
-                textDetail:'义正言辞的吴伟文',
-                isChecked: true
+                context:'义正言辞的吴伟文',
+                choose: true
               },
               {
-                imgUrl:require('../../static/img/tv_dianshiju.png'),
+                imgurl:require('../../static/img/tv_dianshiju.png'),
                 percent:0.35,
                 isWin:true,
-                textDetail:'义正言辞的吴伟文',
-                isChecked: true
+                context:'义正言辞的吴伟文',
+                choose: true
               },
               {
-                imgUrl:require('../../static/img/tv_dianshiju.png'),
+                imgurl:require('../../static/img/tv_dianshiju.png'),
                 percent:0.85,
                 isWin:true,
-                textDetail:'义正言辞的吴伟文',
-                isChecked: true
+                context:'义正言辞的吴伟文',
+                choose: true
               }
             ]
-          }
+
         },
         {
-          tvjiemu: {
+
             id:'1',
-            topicTitle:'如懿传第一季',
-            personCount:567,
-            items:[
+            title:'如懿传第一季',
+            pollTotal:567,
+            votObjectList:[
               {
-                imgUrl:require('../../static/img/tv_dianshiju.png'),
+                imgurl:require('../../static/img/tv_dianshiju.png'),
                 percent:0.05,
                 isWin:true,
-                textDetail:'义正言辞的吴伟文',
-                isChecked: true
+                context:'义正言辞的吴伟文',
+                choose: true
               },
               {
-                imgUrl:require('../../static/img/tv_dianshiju.png'),
+                imgurl:require('../../static/img/tv_dianshiju.png'),
                 percent:0.35,
                 isWin:true,
-                textDetail:'义正言辞的吴伟文',
-                isChecked: true
+                context:'义正言辞的吴伟文',
+                choose: true
               },
               {
-                imgUrl:require('../../static/img/tv_dianshiju.png'),
+                imgurl:require('../../static/img/tv_dianshiju.png'),
                 percent:0.85,
                 isWin:true,
-                textDetail:'义正言辞的吴伟文',
-                isChecked: true
+                context:'义正言辞的吴伟文',
+                choose: true
               }
             ]
-          }
+
         },
         {
-          tvjiemu: {
+
             id:'1',
-            topicTitle:'如懿传第一季',
-            personCount:567,
-            items:[
+            title:'如懿传第一季',
+            pollTotal:567,
+            votObjectList:[
               {
-                imgUrl:require('../../static/img/tv_dianshiju.png'),
+                imgurl:require('../../static/img/tv_dianshiju.png'),
                 percent:0.05,
                 isWin:true,
-                textDetail:'义正言辞的吴伟文',
-                isChecked: true
+                context:'义正言辞的吴伟文',
+                choose: true
               },
               {
-                imgUrl:require('../../static/img/tv_dianshiju.png'),
+                imgurl:require('../../static/img/tv_dianshiju.png'),
                 percent:0.35,
                 isWin:true,
-                textDetail:'义正言辞的吴伟文',
-                isChecked: true
+                context:'义正言辞的吴伟文',
+                choose: true
               },
               {
-                imgUrl:require('../../static/img/tv_dianshiju.png'),
+                imgurl:require('../../static/img/tv_dianshiju.png'),
                 percent:0.85,
                 isWin:true,
-                textDetail:'义正言辞的吴伟文',
-                isChecked: true
+                context:'义正言辞的吴伟文',
+                choose: true
               }
             ]
-          }
+
         },
         {
-          tvjiemu: {
+
             id:'1',
-            topicTitle:'如懿传第一季',
-            personCount:567,
-            items:[
+            title:'如懿传第一季',
+            pollTotal:567,
+            votObjectList:[
               {
-                imgUrl:require('../../static/img/tv_dianshiju.png'),
+                imgurl:require('../../static/img/tv_dianshiju.png'),
                 percent:0.05,
                 isWin:true,
-                textDetail:'义正言辞的吴伟文',
-                isChecked: true
+                context:'义正言辞的吴伟文',
+                choose: true
               },
               {
-                imgUrl:require('../../static/img/tv_dianshiju.png'),
+                imgurl:require('../../static/img/tv_dianshiju.png'),
                 percent:0.35,
                 isWin:true,
-                textDetail:'义正言辞的吴伟文',
-                isChecked: true
+                context:'义正言辞的吴伟文',
+                choose: true
               },
               {
-                imgUrl:require('../../static/img/tv_dianshiju.png'),
+                imgurl:require('../../static/img/tv_dianshiju.png'),
                 percent:0.85,
                 isWin:true,
-                textDetail:'义正言辞的吴伟文',
-                isChecked: true
+                context:'义正言辞的吴伟文',
+                choose: true
               }
             ]
-          }
+
         },
       ]
     }
@@ -152,8 +150,10 @@ export default {
   },
   mounted: function() {
     document.title = this.$route.name;
+    let that = this;
     new RequestEngine().request(urls.queTvThemeList, {tvId: 1},
       successValue => {
+        that.subjectBoList = successValue;
         console.log(successValue);
       }, failValue => {
         console.log('faild');

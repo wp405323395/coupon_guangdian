@@ -5,10 +5,10 @@
       <img class="go_right" src="../../static/img/go_right.png" alt="">
     </div>
     <div class="vote_num">
-      <span>当前参与人数: {{tvjiemu.personCount}}人</span>
+      <span>当前参与人数: {{tvjiemu.pollTotal}}人</span>
     </div>
     <div class="pics">
-      <section v-for="(item, index) in tvjiemu.items">
+      <section v-for="(item, index) in tvjiemu.votObjectList">
         <div class="vote_content">
           <div class="mengceng"/>
           <img class="queen" src="../../static/img/queen.png" alt="">
@@ -17,8 +17,8 @@
           <div class="progress_percent_background" v-if="isShowProgress"/>
           <div class="progress_percent" :style="'width: '+item.percent*100+'%;'" v-if="isShowProgress"/>
         </div>
-        <img class="tv_solue" :src="item.imgUrl" alt="">
-        <span class="text_detail">{{item.textDetail}}</span>
+        <img class="tv_solue" :src="item.imgurl" alt="">
+        <span class="text_detail">{{item.context}}</span>
       </section>
     </div>
     <button type="button" class="submit" name="button">提 交</button>
@@ -29,33 +29,6 @@
 export default {
   data () {
     return {
-      // tvjiemu: {
-      //   topicTitle:'如懿传第一季',
-      //   personCount:567,
-      //   items:[
-      //     {
-      //       imgUrl:require('../../static/img/tv_dianshiju.png'),
-      //       percent:0.05,
-      //       isWin:true,
-      //       textDetail:'义正言辞的吴伟文',
-      //       isChecked: true
-      //     },
-      //     {
-      //       imgUrl:require('../../static/img/tv_dianshiju.png'),
-      //       percent:0.35,
-      //       isWin:true,
-      //       textDetail:'义正言辞的吴伟文',
-      //       isChecked: true
-      //     },
-      //     {
-      //       imgUrl:require('../../static/img/tv_dianshiju.png'),
-      //       percent:0.85,
-      //       isWin:true,
-      //       textDetail:'义正言辞的吴伟文',
-      //       isChecked: true
-      //     }
-      //   ]
-      // }
 
     }
   },
