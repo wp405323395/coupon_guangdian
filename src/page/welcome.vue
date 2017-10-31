@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import login from './netApi/login.js'
-import router from './router'
+import login from '../netApi/login.js'
+import router from '../router'
 export default {
 
 	mounted: function() {
