@@ -154,7 +154,7 @@ export default {
     new RequestEngine().request(urls.queTvThemeList, {tvId: 1},
       successValue => {
         that.subjectBoList = successValue;
-        console.log(successValue);
+        console.log(JSON.stringify(successValue));
       }, failValue => {
         console.log('faild');
       }, completeValue => {})
