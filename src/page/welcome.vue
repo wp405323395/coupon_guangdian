@@ -11,7 +11,6 @@ export default {
 
 	mounted: function() {
 		document.title = this.$route.name;
-		console.log(router);
 		 login({
 			 success: function(successValue) {
 				 router.replace({ path: 'index' })
