@@ -1,5 +1,6 @@
 <template lang="html">
   <div id="tv_vots" class="background_col" >
+    index页面
     <tv-vote-item @goinDetail="goinDetail" :key="item.id" v-for="(item, index) in subjectBoList" :index='index' :isShowProgress="false" :tvjiemu="item"></tv-vote-item>
   </div>
 </template>
@@ -147,7 +148,7 @@ export default {
     }
   },
   mounted: function() {
-    
+    console.log('mounted');
     document.title = this.$route.name;
     let that = this;
     new RequestEngine().request(urls.queTvThemeList, {tvId: 1},
