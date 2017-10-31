@@ -152,6 +152,12 @@ export default {
   },
   mounted: function() {
     document.title = this.$route.name;
+    new RequestEngine().request(urls.queTvThemeList, {tvId: 1},
+      successValue => {
+        console.log(successValue);
+      }, failValue => {
+        console.log('faild');
+      }, completeValue => {})
   }
 }
 </script>

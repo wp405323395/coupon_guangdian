@@ -10,6 +10,8 @@ var config = {
   srcUrl: `${schema}://${host}/`,
     // 登录地址，用于建立会话
     loginUrl: `${schema}://${host}/wappweb/tvinteract/tv-interact!login`,
+    queTvThemeList:
+    `${schema}://${host}/wappweb/tvinteract/tv-interact!queTvThemeList`
 
 };
 
