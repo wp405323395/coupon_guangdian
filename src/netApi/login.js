@@ -1,7 +1,7 @@
  var urls = require('../config.js');
  import RequestEngine from './RequestEngine'
 
- function login() {
+ function login(loginCallBack) {
    let href = window.location.href;
    //  let href =
    //    "https://www.maywidehb.com/webapp/index.html?code=081UhLaK1Ylsz70aUt9K1yvEaK1UhLas&state=123";
@@ -13,9 +13,9 @@
        loginCode: wxcode
      },
      successValue => {
-       console.log('success');
+       loginCallBack.success(successValue);
      }, failValue => {
-       console.log('faild');
+       loginCallBack.faild(failValue);
      }, completeValue => {})
 
  }

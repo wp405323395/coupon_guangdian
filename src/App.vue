@@ -17,7 +17,14 @@ import login from './netApi/login.js'
 export default {
 	mounted: function() {
 		document.title = this.$route.name;
-		 login();
+		 login({
+			 success: function(successValue) {
+				 console.log(successValue);
+			 },
+			 faild: function(faildValue) {
+				 console.log(faildValue);
+			 }
+		 });
 	}
 }
 
