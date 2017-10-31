@@ -147,6 +147,7 @@ export default {
     }
   },
   mounted: function() {
+    
     document.title = this.$route.name;
     let that = this;
     new RequestEngine().request(urls.queTvThemeList, {tvId: 1},

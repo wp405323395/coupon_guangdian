@@ -13,7 +13,8 @@ export default {
 		document.title = this.$route.name;
 		 login({
 			 success: function(successValue) {
-				 router.replace({ path: 'index' })
+				 //router.replace({ path: 'index' })
+         router.push({ path: 'index'});
 			 },
 			 faild: function(faildValue) {
 
