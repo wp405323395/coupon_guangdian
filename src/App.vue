@@ -17,10 +17,11 @@ import login from './netApi/login.js'
 export default {
 	mounted: function() {
 		document.title = this.$route.name;
+		let that = this;
 		 login({
 			 success: function(successValue) {
-				 this.$router.redirect({ path: '/index'});
 				 console.log('----------------fddf---------------');
+				 that.$router.redirect({ path: '/index'});
 			 },
 			 faild: function(faildValue) {
 				 console.log(faildValue);
