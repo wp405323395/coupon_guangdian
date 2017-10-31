@@ -14,7 +14,6 @@ export default {
   name: 'index',
   data () {
 
-    }
   },
   components: {
     tvVoteItem
