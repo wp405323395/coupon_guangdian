@@ -143,8 +143,7 @@ export default {
     goinDetail(item) {
       this.$router.push({ path: '/tvProgram' , params: { id: item[0].id}});
       document.getElementById('tv_vots').children[item[1]].style.setProperty('background-color','#999999');
-      console.log(item[0]);
-      console.log(item[1]);
+
     }
   },
   mounted: function() {

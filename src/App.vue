@@ -13,24 +13,6 @@
 </template>
 
 <script>
-import login from './netApi/login.js'
-import router from './router'
-export default {
-
-	mounted: function() {
-		document.title = this.$route.name;
-		console.log(router);
-		 login({
-			 success: function(successValue) {
-				 router.replace({ path: 'index' })
-			 },
-			 faild: function(faildValue) {
-				 router.replace({ path: 'index' })
-			 }
-		 });
-	}
-}
-
 </script>
 
 <style lang="scss">

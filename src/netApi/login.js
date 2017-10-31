@@ -8,13 +8,10 @@
    let param = href.split("?")[1];
    let wxcodemap = param.split("&")[0];
    let wxcode = wxcodemap.split("=")[1];
-
    new RequestEngine().request(urls.loginUrl, {
        loginCode: wxcode
      },
      successValue => {
-       console.log('ffffffffffeeeeeeeeeeeeeeffffffffffff');
-       console.log(loginCallBack);
        loginCallBack.success(successValue);
      }, failValue => {
        loginCallBack.faild(failValue);

@@ -17,7 +17,7 @@ export default {
 				 router.replace({ path: 'index' })
 			 },
 			 faild: function(faildValue) {
-				 router.replace({ path: 'index' })
+
 			 }
 		 });
 	}
