@@ -1,6 +1,6 @@
-var host = "www.maywidehb.com"
-  //var host = 'www.maywidehb.com';
-var isHttps = true;
+//var host = "www.maywidehb.com"
+var host = '192.168.1.139:8080';
+var isHttps = false;
 var isDebug = true;
 var schema = isHttps ? 'https' : 'http';
 var config = {
@@ -11,7 +11,11 @@ var config = {
     // 登录地址，用于建立会话
     loginUrl: `${schema}://${host}/wappweb/tvinteract/tv-interact!login`,
     queTvThemeList:
-    `${schema}://${host}/wappweb/tvinteract/tv-interact!queTvThemeList`
+    `${schema}://${host}/wappweb/tvinteract/tv-interact!queTvThemeList`,
+    queryVotTvList:
+    `${schema}://${host}/wappweb/tvinteract/tv-interact!queryVotTvList`,
+    listComment:
+    `${schema}://${host}/wappweb/tvinteract/tv-interact!listComment`,
 
 };
 

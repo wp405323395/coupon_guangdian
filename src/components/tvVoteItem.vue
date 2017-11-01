@@ -87,6 +87,7 @@ $margin-left:.20rem;
    display: flex;
    padding-left: $margin-left;
    padding-right: $margin-left;
+   padding-bottom: .4rem;
    section{
      margin-right: .1rem;
      .tv_solue{
@@ -186,7 +187,7 @@ $margin-left:.20rem;
    margin-right: $margin-left;
    color: white;
    font-size: .32rem;
-   margin-top: .4rem;
+
    margin-bottom: .3rem;
  }
  .submit:active {

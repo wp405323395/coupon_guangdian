@@ -79,7 +79,7 @@
                 <span class="common_content">{{item.commentText}}</span>
                 <br>
                 <span class="common_small">{{item.commentTime}}</span>
-                <span @click="zanClick(item)" :class="{zan_light: item.isPraise}" class="common_small zan">({{item.praise}})</span>
+                <span @click="zanClick(item)" :class="{zan_light: item.isPraise == '1'}" class="common_small zan">({{item.praise}})</span>
             </section>
 
         </div>

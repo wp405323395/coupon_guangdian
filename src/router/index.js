@@ -28,7 +28,7 @@ export default new Router({
     }, {
       path: '/tvProgram',
       component: tvProgram,
-      name: '评论'
+      name: 'tvProgram'
     }, {
       path: '/index',
       component: index,

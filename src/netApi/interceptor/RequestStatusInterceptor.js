@@ -1,23 +1,23 @@
 import Interceptor from './Interceptor.js'
 
 class RequestStatusInterceptor extends Interceptor {
-  constructor () {
+  constructor() {
     super()
   }
-  onRequest (url, header, data) {
-
+  onRequest(url, header, data) {
+    window.eventHub.$emit('progress', true);
   }
-  onResponse (url, header, data) {
-
+  onResponse(url, header, data) {
+    window.eventHub.$emit('progress', false);
   }
-  onServiceError (url, header, data) {
-
+  onServiceError(url, header, data) {
+    window.eventHub.$emit('progress', false);
   }
-  onAutherErrorResponse (url, header, data) {
-
+  onAutherErrorResponse(url, header, data) {
+    window.eventHub.$emit('progress', false);
   }
-  onFaildResponse (url, header, data) {
-
+  onFaildResponse(url, header, data) {
+    window.eventHub.$emit('progress', false);
   }
 }
 export default RequestStatusInterceptor
