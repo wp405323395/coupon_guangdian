@@ -41,7 +41,7 @@ export default {
 		},
 		isRequestFaild(newData) {
 			this.requestFaild = newData[0];
-			this.alertText = newData[1].retMsg;
+			this.alertText = '请求失败：' + newData[1].retMsg;
 		},
 		sureTip() {
 			this.requestFaild = false;
