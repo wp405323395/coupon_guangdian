@@ -59,14 +59,16 @@
 
     </section>
     <section class="input_area">
-        <input placeholder="来了就写点什么吧" type="text" name="" value="">
-        <button type="button" name="button">发 表</button>
+        <input placeholder="来了就写点什么吧" maxlength="100" type="text" name="" v-model="commonValue">
+        <button @click='commonClick' type="button" name="button">发 表</button>
     </section>
+    <faild-alert @sureTip='sureTip' v-if="show" :alertText="alertText"></faild-alert>
 </div>
 
 </template>
 
 <script>
+import faildAlert from '../components/faildAlert'
 import RequestEngine from '../netApi/RequestEngine'
 import tvVoteItem from '../components/tvVoteItem'
 import urls from '../config.js'
@@ -76,12 +78,16 @@ export default {
             return {
                 "retData": {},
                 subjectBoList:[],
-                params:{}
+                params:{},
+                commonValue:'',
+                show:false,
+                alertText:''
             }
         },
         components: {
             common,
-            tvVoteItem
+            tvVoteItem,
+            faildAlert
         },
         mounted : function(){
           //params: { relaId: item[0].relationId, type: item[0].type}}
@@ -105,8 +111,6 @@ export default {
           goinDetail(item) {
           },
           zanClick(item) {
-            console.log('变态的值---',item);
-
             new RequestEngine().request(urls.praiseOrTread, {relaId: item.id,type:'1'},
                 successValue => {
                   if(item.isPraise=='1') {
@@ -118,8 +122,21 @@ export default {
 
                 }, failValue => {
                 }, completeValue => {});
+          },
+          commonClick(){
+            let that = this;
+            new RequestEngine().request(urls.doComment, {relaId: this.params.mvpId, type:this.params.type, commentText:this.commonValue},
+                successValue => {
+                  that.alertText = '发表评论成功';
+                  that.show = true;
+                }, failValue => {
+                }, completeValue => {});
+          },
+          sureTip(){
+            this.show = false;
           }
         }
+
 }
 
 </script>

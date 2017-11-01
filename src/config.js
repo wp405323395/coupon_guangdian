@@ -18,6 +18,8 @@ var config = {
     `${schema}://${host}/wappweb/tvinteract/tv-interact!listComment`,
     praiseOrTread:
     `${schema}://${host}/wappweb/tvinteract/tv-interact!praiseOrTread`,
+    doComment:
+    `${schema}://${host}/wappweb/tvinteract/tv-interact!doComment`,
 
 };
 
