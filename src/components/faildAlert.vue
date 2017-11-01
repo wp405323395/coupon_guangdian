@@ -52,7 +52,7 @@
    .tip_text_container{
        position: absolute;
        top: 5rem;
-       right: 1rem;
+       right: .6rem;
        width: 300px;
        font-size: .25rem;
        animation: tipMove .4s ;
