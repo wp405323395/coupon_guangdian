@@ -95,34 +95,13 @@
 export default {
     data() {
         return {
-            // "commentList": [{
-            //         "avatarurl": "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKBEhsV3ibRKGqk6WCeiate542G0VXaLCykMwY7ISASbsuGm67N8xnDwcVlFus6RHucSV6FPe3wnOtQ/0",
-            //         "commentText": "这是一条评论",
-            //         "commentTime": "10月27号",
-            //         "id": 44,
-            //         "nickname": "祝远",
-            //         "praise": 12,
-            //         "isPraise": false,
-            //     },
-            //
-            //     {
-            //         "avatarurl": "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKBEhsV3ibRKGqk6WCeiate542G0VXaLCykMwY7ISASbsuGm67N8xnDwcVlFus6RHucSV6FPe3wnOtQ/0",
-            //         "commentText": "这是一条评论",
-            //         "commentTime": "10月27号",
-            //         "id": 36,
-            //         "nickname": "祝远",
-            //         "praise": 12,
-            //         "isPraise": true,
-            //
-            //     },
-            //
-            // ]
+
 
         }
     },
     methods: {
       zanClick(item) {
-        item.isPraise = !item.isPraise;
+        this.$emit('zanClick',item);
       }
     },
     props:['commentList']

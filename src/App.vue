@@ -9,11 +9,13 @@
 			<router-view v-if="!$route.meta.keepAlive"></router-view>
 		</transition>
 		<progress-bar v-if="isShowProgress"></progress-bar>
+		<faild-alert @sureTip='sureTip' v-if="requestFaild" :alertText="alertText"></faild-alert>
   </div>
 </template>
 
 <script>
 import Vue from 'Vue'
+import faildAlert from './components/faildAlert'
 import progressBar from './components/progressBar'
 window.eventHub = new Vue();
 export default {
@@ -21,18 +23,28 @@ export default {
 	data () {
 		return {
 			isShowProgress:false,
+			requestFaild:false,
+			alertText:''
 		}
 	},
 	components: {
+		faildAlert,
 		progressBar
 	},
 	created: function(){
 		window.eventHub.$on('progress',this.progress);
+		window.eventHub.$on('isrequestfaild',this.isRequestFaild);
 	},
 	methods: {
 		progress (newData) {
-			console.log('神奇的时间');
 			this.isShowProgress = newData;
+		},
+		isRequestFaild(newData) {
+			this.requestFaild = newData[0];
+			this.alertText = newData[1].retMsg;
+		},
+		sureTip() {
+			this.requestFaild = false;
 		}
 	}
 }

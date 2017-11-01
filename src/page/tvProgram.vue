@@ -51,10 +51,10 @@
 <tv-vote-item @goinDetail="goinDetail" :key="item.id" v-for="(item, index) in subjectBoList" :isShowCheckbox='true' :index='index' :isShowProgress="true" :tvjiemu="item"></tv-vote-item>
     <section class="content">
         <span class="note_num">热门评论 ({{retData.hotCommentCount}})</span>
-        <common :commentList="retData.hotList">
+        <common @zanClick="zanClick" :commentList="retData.hotList">
         </common>
         <span class="note_num">评论 ({{retData.commentCount}})</span>
-        <common :commentList="retData.commentList">
+        <common @zanClick="zanClick" :commentList="retData.commentList">
         </common>
 
     </section>
@@ -75,7 +75,8 @@ export default {
     data() {
             return {
                 "retData": {},
-                subjectBoList:[]
+                subjectBoList:[],
+                params:{}
             }
         },
         components: {
@@ -84,15 +85,15 @@ export default {
         },
         mounted : function(){
           //params: { relaId: item[0].relationId, type: item[0].type}}
-          let params = this.$route.params;
+          this.params = this.$route.params;
           document.title = this.$route.name;
           let that = this;
-          new RequestEngine().request(urls.queryVotTvList, {tvId: params.tvId,mvpId:params.mvpId},
+          new RequestEngine().request(urls.queryVotTvList, {tvId: this.params.tvId,mvpId:this.params.mvpId},
             successValue => {
               that.subjectBoList = successValue.subjectBoList;
             }, failValue => {
             }, completeValue => {});
-          new RequestEngine().request(urls.listComment, {relaId: params.mvpId,type:params.type},
+          new RequestEngine().request(urls.listComment, {relaId: this.params.mvpId,type:this.params.type},
               successValue => {
                 that.retData = successValue;
               }, failValue => {
@@ -100,7 +101,23 @@ export default {
 
         },
         methods: {
+          //废弃申明事件
           goinDetail(item) {
+          },
+          zanClick(item) {
+            console.log('变态的值---',item);
+
+            new RequestEngine().request(urls.praiseOrTread, {relaId: item.id,type:'1'},
+                successValue => {
+                  if(item.isPraise=='1') {
+                    item.praise--;
+                  } else {
+                    item.praise++;
+                  }
+                  item.isPraise = (item.isPraise=='1'?'0':'1');
+
+                }, failValue => {
+                }, completeValue => {});
           }
         }
 }

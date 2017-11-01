@@ -16,6 +16,8 @@ var config = {
     `${schema}://${host}/wappweb/tvinteract/tv-interact!queryVotTvList`,
     listComment:
     `${schema}://${host}/wappweb/tvinteract/tv-interact!listComment`,
+    praiseOrTread:
+    `${schema}://${host}/wappweb/tvinteract/tv-interact!praiseOrTread`,
 
 };
 

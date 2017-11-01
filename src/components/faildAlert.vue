@@ -1,10 +1,9 @@
 <template>
    <div class="alet_container">
      <section class="tip_text_container">
-           <p class="tip_text">{{alertText}}</p>
+           <p class="tip_text">服务器错误:{{alertText}}</p>
            <section class="bottom_btn">
              <div class="confrim" @click="sureTip">确认</div>
-             <div class="cancle" @click="cancleTip">取消</div>
            </section>
 
        </section>
@@ -27,9 +26,6 @@
      methods: {
        sureTip () {
          this.$emit('sureTip')
-       },
-       cancleTip () {
-        this.$emit('cancleTip')
        }
      }
    }
@@ -51,13 +47,14 @@
      right: 0;
      bottom: 0;
      z-index: 200;
+
    }
    .tip_text_container{
        position: absolute;
-       top: 300px;
-       right: 41%;
+       top: 5rem;
+       right: 1rem;
        width: 300px;
-       font-size: 25px;
+       font-size: .25rem;
        animation: tipMove .4s ;
        background-color: rgba(255,255,255,1);
        border: 1px;
@@ -73,24 +70,19 @@
          display: flex;
          font-size: 20px;
          border-top:  1px solid #d4d4d4;
-         .cancle{
-           width: 100%;
-           cursor: pointer;
-           color: #666666;
-           height: 100%;
-           height: 50px;
-           line-height: 50px;
-           border-bottom-right-radius: 10px;
-         }
+
          .confrim{
              width: 100%;
              height: 100%;
              border-bottom-left-radius: 10px;
-             cursor: pointer;
-             color: red;
+             border-bottom-right-radius: 10px;
+             background-color: blue;
+             color: white;
+             font-size: .32rem;
+             text-align: center;
              height: 50px;
              line-height: 50px;
-             border-right: 1px solid #d4d4d4;
+
          }
        }
        .tip_icon{
@@ -115,12 +107,13 @@
            }
        }
        .tip_text{
-           @include sc(.7rem, #333);
+           color: red;
            line-height: 30px;
            text-align: center;
            margin-top: 10px;
            margin-bottom: 40px;
-           font-size: 20px;
+           font-size: .3rem;
+
        }
 
    }

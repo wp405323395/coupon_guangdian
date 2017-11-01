@@ -12,12 +12,15 @@ class RequestStatusInterceptor extends Interceptor {
   }
   onServiceError(url, header, data) {
     window.eventHub.$emit('progress', false);
+    window.eventHub.$emit('isrequestfaild', [true, data]);
   }
   onAutherErrorResponse(url, header, data) {
     window.eventHub.$emit('progress', false);
+    window.eventHub.$emit('isrequestfaild', [true, data]);
   }
   onFaildResponse(url, header, data) {
     window.eventHub.$emit('progress', false);
+    window.eventHub.$emit('isrequestfaild', [true, data]);
   }
 }
 export default RequestStatusInterceptor
