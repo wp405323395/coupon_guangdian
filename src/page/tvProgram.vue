@@ -47,6 +47,7 @@
 
 <template lang="html">
 <div>
+  评论
   <section class="content">
       <span class="note_num">热门评论 ({{retData.hotCommentCount}})</span>
       <common :commentList="retData.hotList">

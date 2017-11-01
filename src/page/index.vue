@@ -21,7 +21,6 @@ export default {
   },
   methods: {
     goinDetail(item) {
-      console.log('fffffffffffffffffffffffffffffffffffffffffff',item);
       this.$router.push({ path: '/tvProgram' , params: { id: item[0].id}});
       document.getElementById('tv_vots').children[item[1]].style.setProperty('background-color','#999999');
 
