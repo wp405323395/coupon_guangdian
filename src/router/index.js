@@ -26,6 +26,10 @@ export default new Router({
       component: welcome,
       name: 'welcome'
     }, {
+      path: '/tvProgram',
+      component: tvProgram,
+      name: '评论'
+    }, {
       path: '/index',
       component: index,
       name: '往期回顾'
