@@ -48,7 +48,7 @@
 <template lang="html">
 
 <div>
-<tv-vote-item @goinDetail="goinDetail" :key="item.id" v-for="(item, index) in subjectBoList" :isShowCheckbox='true' :index='index' :isShowProgress="true" :tvjiemu="item"></tv-vote-item>
+<tv-vote-item @voteItem='voteItem' :key="item.id" v-for="(item, index) in subjectBoList" :isShowCheckbox='true' :index='index' :isShowProgress="isShowProgress" :tvjiemu="item"></tv-vote-item>
     <section class="content">
         <span class="note_num">热门评论 ({{retData.hotCommentCount}})</span>
         <common @zanClick="zanClick" :commentList="retData.hotList">
@@ -81,7 +81,8 @@ export default {
                 params:{},
                 commonValue:'',
                 show:false,
-                alertText:''
+                alertText:'',
+                isShowProgress:false
             }
         },
         components: {
@@ -107,9 +108,7 @@ export default {
 
         },
         methods: {
-          //废弃申明事件
-          goinDetail(item) {
-          },
+
           zanClick(item) {
             new RequestEngine().request(urls.praiseOrTread, {relaId: item.id,type:'1'},
                 successValue => {
@@ -129,11 +128,28 @@ export default {
                 successValue => {
                   that.alertText = '发表评论成功';
                   that.show = true;
+                  that.commonValue = '';
+                  new RequestEngine().request(urls.listComment, {relaId: this.params.mvpId,type:this.params.type},
+                      successValue => {
+                        that.retData = successValue;
+                      }, failValue => {
+                      }, completeValue => {});
                 }, failValue => {
                 }, completeValue => {});
           },
           sureTip(){
             this.show = false;
+          },
+          voteItem(tvjiemu){
+            console.log(tvjiemu);
+            let that = this;
+            new RequestEngine().request(urls.doVotTv, {subjectId: tvjiemu.id,answer:'1'},
+                successValue => {
+                  that.alertText = '投票成功';
+                  that.show = true;
+                  that.commonValue = '';
+                }, failValue => {
+                }, completeValue => {});
           }
         }
 

@@ -1,7 +1,7 @@
 <template>
    <div class="alet_container">
      <section class="tip_text_container">
-           <p class="tip_text">服务器错误:{{alertText}}</p>
+           <p class="tip_text">{{alertText}}</p>
            <section class="bottom_btn">
              <div class="confrim" @click="sureTip">确认</div>
            </section>

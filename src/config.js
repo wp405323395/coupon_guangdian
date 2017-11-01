@@ -20,6 +20,8 @@ var config = {
     `${schema}://${host}/wappweb/tvinteract/tv-interact!praiseOrTread`,
     doComment:
     `${schema}://${host}/wappweb/tvinteract/tv-interact!doComment`,
+    doVotTv:
+    `${schema}://${host}/wappweb/tvinteract/tv-interact!doVotTv`,
 
 };
 
