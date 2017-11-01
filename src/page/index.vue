@@ -1,6 +1,6 @@
 <template lang="html">
   <div id="tv_vots" class="background_col" >
-    <tv-vote-item @goinDetail="goinDetail" :key="item.id" v-for="(item, index) in subjectBoList" :index='index' :isShowProgress="false" :tvjiemu="item"></tv-vote-item>
+    <tv-vote-item @goinDetail="goinDetail" :key="item.id" v-for="(item, index) in subjectBoList" :isShowCheckbox='false' :index='index' :isShowProgress="false" :tvjiemu="item"></tv-vote-item>
   </div>
 </template>
 

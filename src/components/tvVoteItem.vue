@@ -13,7 +13,7 @@
           <div class="mengceng"/>
           <img class="queen" src="../../static/img/queen.png" alt="">
           <span class="percent_text" v-if="isShowProgress">{{item.percent*100}}%</span>
-          <input class="checkbox_img" type="checkbox" name="" value="">
+          <input class="checkbox_img" v-if="isShowCheckbox" type="checkbox" name="" value="">
           <div class="progress_percent_background" v-if="isShowProgress"/>
           <div class="progress_percent" :style="'width: '+item.percent*100+'%;'" v-if="isShowProgress"/>
         </div>
@@ -21,7 +21,7 @@
         <span class="text_detail">{{item.context}}</span>
       </section>
     </div>
-    <button type="button" class="submit" name="button">提 交</button>
+    <button type="button" v-if="isShowCheckbox" class="submit" name="button">提 交</button>
   </section>
 </template>
 
@@ -32,7 +32,7 @@ export default {
 
     }
   },
-  props: ['tvjiemu','isShowProgress','index'],
+  props: ['tvjiemu','isShowProgress','index','isShowCheckbox'],
   methods:{
     goinDetail(item,index) {
       this.$emit('goinDetail',[item, index]);
