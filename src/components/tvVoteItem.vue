@@ -13,7 +13,7 @@
           <div class="mengceng"/>
           <img class="queen" src="../../static/img/queen.png" alt="">
           <span class="percent_text" v-if="isShowProgress">{{item.percent*100}}%</span>
-          <input class="checkbox_img" v-model="item.choose" v-if="isShowCheckbox" type="checkbox" name="" value="">
+          <input class="checkbox_img" @click="checkBoxClick(index,tvjiemu)" v-model="item.choose" v-if="isShowCheckbox" type="checkbox" name="" value="">
           <div class="progress_percent_background" v-if="isShowProgress"/>
           <div class="progress_percent" :style="'width: '+item.percent*100+'%;'" v-if="isShowProgress"/>
         </div>
@@ -32,6 +32,7 @@ export default {
 
     }
   },
+
   props: ['tvjiemu','isShowProgress','index','isShowCheckbox'],
   methods:{
     goinDetail(item,index) {
@@ -39,6 +40,15 @@ export default {
     },
     voteItem(tvjiemu) {
       this.$emit('voteItem', tvjiemu);
+    },
+    checkBoxClick(index, tvjiemu){
+      for (var i = 0; i < tvjiemu.votObjectList.length; i++) {
+        if(i == index) {
+          tvjiemu.votObjectList[i].choose = true;
+        } else {
+          tvjiemu.votObjectList[i].choose = false;
+        }
+      }
     }
   }
 }

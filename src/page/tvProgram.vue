@@ -48,7 +48,7 @@
 <template lang="html">
 
 <div>
-<tv-vote-item @voteItem='voteItem' :key="item.id" v-for="(item, index) in subjectBoList" :isShowCheckbox='true' :index='index' :isShowProgress="isShowProgress" :tvjiemu="item"></tv-vote-item>
+<tv-vote-item @voteItem='voteItem' :key="item.id" v-for="(item, index) in subjectBoList" :isShowCheckbox='item.userAnswer == null' :index='index' :isShowProgress="item.userAnswer != null" :tvjiemu="item"></tv-vote-item>
     <section class="content">
         <span class="note_num">热门评论 ({{retData.hotCommentCount}})</span>
         <common @zanClick="zanClick" :commentList="retData.hotList">
@@ -148,6 +148,11 @@ export default {
                   that.alertText = '投票成功';
                   that.show = true;
                   that.commonValue = '';
+                  new RequestEngine().request(urls.queryVotTvList, {tvId: this.params.tvId,mvpId:this.params.mvpId},
+                    successValue => {
+                      that.subjectBoList = successValue.subjectBoList;
+                    }, failValue => {
+                    }, completeValue => {});
                 }, failValue => {
                 }, completeValue => {});
           }
