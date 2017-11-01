@@ -1,6 +1,5 @@
 <template lang="html">
   <div id="tv_vots" class="background_col" >
-    index页面
     <tv-vote-item @goinDetail="goinDetail" :key="item.id" v-for="(item, index) in subjectBoList" :index='index' :isShowProgress="false" :tvjiemu="item"></tv-vote-item>
   </div>
 </template>
@@ -22,6 +21,7 @@ export default {
   },
   methods: {
     goinDetail(item) {
+      console.log('fffffffffffffffffffffffffffffffffffffffffff',item);
       this.$router.push({ path: '/tvProgram' , params: { id: item[0].id}});
       document.getElementById('tv_vots').children[item[1]].style.setProperty('background-color','#999999');
 

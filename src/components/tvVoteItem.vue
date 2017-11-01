@@ -35,7 +35,6 @@ export default {
   props: ['tvjiemu','isShowProgress','index'],
   methods:{
     goinDetail(item,index) {
-      console.log('kdkdkdkskdkdkkf---' , index);
       this.$emit('goinDetail',[item, index]);
     }
   }
