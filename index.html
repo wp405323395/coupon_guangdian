@@ -29,22 +29,17 @@
 <script type="text/javascript">
 
 window.onload=function() {
-  if(window.loadCount == 2) {
-    return ;
-  } else {
-    window.loadCount = 1;
-  }
-
+  let loadcount = sessionStorage.getItem('loadNum');
+  sessionStorage.setItem('loadNum', loadcount++);
   let href = window.location.href;
   if (href.indexOf('welcome') >= 0) {
   } else {
-    if(window.loadCount == 1) {
-      window.loadCount = 2;
+    let startRefreshCount = sessionStorage.getItem('loadNum');
+    if(startRefreshCount<2) {
       let weixinUrl =
         'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe7b477d2ec9d54ec&redirect_uri=https%3a%2f%2fwww.maywidehb.com%2fwebapp%2fdist%2f%23%2fwelcome&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect';
       window.location = weixinUrl;
     }
-
 
   }
 
