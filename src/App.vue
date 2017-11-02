@@ -50,6 +50,7 @@ export default {
 
 	},
 	mounted:function(){
+		window.alertDialog('ffffff------------fffffffff');
 		router.replace({ name: 'welcome' });
 	},
 
