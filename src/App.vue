@@ -50,19 +50,6 @@ export default {
 
 	},
 	mounted:function(){
-		let href = window.location.href;
-		window.alertDialog(href);
-		if (href.indexOf('welcome') >= 0) {
-
-    } else {
-      let weixinUrl =
-        'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe7b477d2ec9d54ec&redirect_uri=https%3a%2f%2fwww.maywidehb.com%2fwebapp%2fdist%2f%23%2fwelcome&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect';
-      window.location.replace(weixinUrl);
-      return;
-    }
-		setTimeout(()=>{
-			router.replace({ name: 'welcome' });
-		},5000)
 
 	},
 
