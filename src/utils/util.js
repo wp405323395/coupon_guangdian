@@ -1,4 +1,4 @@
-function formatTime (date) {
+function formatTime(date) {
   var year = date.getFullYear()
   var month = date.getMonth() + 1
   var day = date.getDate()
@@ -6,9 +6,12 @@ function formatTime (date) {
   var hour = date.getHours()
   var minute = date.getMinutes()
   var second = date.getSeconds()
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute,
+    second
+  ].map(formatNumber).join(':')
 }
-function formatDay (date) {
+
+function formatDay(date) {
   var year = date.getFullYear()
   var month = date.getMonth() + 1
   var day = date.getDate()
@@ -16,12 +19,12 @@ function formatDay (date) {
   return [year, month, day].map(formatNumber).join('-')
 }
 
-function formatNumber (n) {
+function formatNumber(n) {
   n = n.toString()
   return n[1] ? n : '0' + n
 }
 
-function formatLocation (longitude, latitude) {
+function formatLocation(longitude, latitude) {
   if (typeof longitude === 'string' && typeof latitude === 'string') {
     longitude = parseFloat(longitude)
     latitude = parseFloat(latitude)
@@ -36,18 +39,22 @@ function formatLocation (longitude, latitude) {
   }
 }
 
-function textIsNotNull (str) {
+function textIsNotNull(str) {
   if (str === null || str === undefined || str === '' || str === 'undefined') {
     return false
   }
   return true
 }
 
-function textIsNull (str) {
+function textIsNull(str) {
   if (str === null || str === undefined || str === '' || str === 'undefined') {
     return true
   }
   return false
+}
+
+function alert(alertContent) {
+  window.eventHub.$emit('alert', [true, alertContent]);
 }
 
 module.exports = {
@@ -55,5 +62,6 @@ module.exports = {
   formatLocation: formatLocation,
   textIsNotNull: textIsNotNull,
   formatDay: formatDay,
-  textIsNull: textIsNull
+  textIsNull: textIsNull,
+  alert: alert
 }

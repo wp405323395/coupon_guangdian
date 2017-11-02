@@ -8,7 +8,7 @@
 import RequestEngine from '../netApi/RequestEngine'
 import tvVoteItem from '../components/tvVoteItem'
 import urls from '../config.js'
-  import router from '../router'
+import router from '../router'
 export default {
   name: 'index',
   data () {
@@ -23,6 +23,7 @@ export default {
     goinDetail(item) {
       let params = { relaId: item[0].relationId, type: item[0].type, mvpId:item[0].relationId, tvId:item[0].tvId};
       router.push({ name: 'tvProgram', params: params});
+      console.log(router);
       // router.push({ name: 'voteDetail' , params: { id: id ,title: title}})
       document.getElementById('tv_vots').children[item[1]].style.setProperty('background-color','#999999');
     }

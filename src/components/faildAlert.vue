@@ -3,7 +3,7 @@
      <section class="tip_text_container">
            <p class="tip_text">{{alertText}}</p>
            <section class="bottom_btn">
-             <div class="confrim" @click="sureTip">确认</div>
+             <div class="confrim" @click="sureTip">确&nbsp;&nbsp;认</div>
            </section>
 
        </section>
@@ -51,9 +51,9 @@
    }
    .tip_text_container{
        position: absolute;
-       top: 5rem;
-       right: .6rem;
-       width: 300px;
+       top: 4.5rem;
+       right: 1.2rem;
+       width: 5rem;
        font-size: .25rem;
        animation: tipMove .4s ;
        background-color: rgba(255,255,255,1);
@@ -80,8 +80,8 @@
              color: white;
              font-size: .32rem;
              text-align: center;
-             height: 50px;
-             line-height: 50px;
+             height: .80rem;
+             line-height: .80rem;
 
          }
        }
@@ -108,10 +108,10 @@
        }
        .tip_text{
            color: red;
-           line-height: 30px;
+           line-height: 1rem;
            text-align: center;
-           margin-top: 10px;
-           margin-bottom: 40px;
+           margin-top: .1rem;
+           margin-bottom: .4rem;
            font-size: .3rem;
 
        }

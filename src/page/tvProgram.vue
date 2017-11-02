@@ -95,22 +95,40 @@ export default {
           this.params = this.$route.params;
           document.title = this.$route.name;
           let that = this;
-          new RequestEngine().request(urls.queryVotTvList, {tvId: this.params.tvId,mvpId:this.params.mvpId},
-            successValue => {
-              that.subjectBoList = successValue.subjectBoList;
-            }, failValue => {
-            }, completeValue => {});
-          new RequestEngine().request(urls.listComment, {relaId: this.params.mvpId,type:this.params.type},
+          window.showProgress();
+          let votList = new Promise((resolve, reject)=>{
+            new RequestEngine(false).request(urls.queryVotTvList, {tvId: this.params.tvId,mvpId:this.params.mvpId},
               successValue => {
-                that.retData = successValue;
+                that.subjectBoList = successValue.subjectBoList;
+                resolve('success0');
               }, failValue => {
+                reject('faild0');
               }, completeValue => {});
+          });
+          let listCommon = new Promise((resolve,reject)=>{
+            new RequestEngine(false).request(urls.listComment, {relaId: this.params.mvpId,type:this.params.type},
+                successValue => {
+                  that.retData = successValue;
+                  resolve('success1');
+                }, failValue => {
+                  reject('faild1');
+                }, completeValue => {});
+          });
+          let all = Promise.all([votList,listCommon]);
+          all.then(val=>{
+            window.hiddenProgress();
+            console.log(val);
+          }).catch(err=>{
+            window.hiddenProgress();
+          });
+
+
 
         },
         methods: {
 
           zanClick(item) {
-            new RequestEngine().request(urls.praiseOrTread, {relaId: item.id,type:'1'},
+            new RequestEngine(false).request(urls.praiseOrTread, {relaId: item.id,type:'1'},
                 successValue => {
                   if(item.isPraise=='1') {
                     item.praise--;
@@ -129,7 +147,7 @@ export default {
                   that.alertText = '发表评论成功';
                   that.show = true;
                   that.commonValue = '';
-                  new RequestEngine().request(urls.listComment, {relaId: this.params.mvpId,type:this.params.type},
+                  new RequestEngine(false).request(urls.listComment, {relaId: this.params.mvpId,type:this.params.type},
                       successValue => {
                         that.retData = successValue;
                       }, failValue => {
@@ -141,20 +159,37 @@ export default {
             this.show = false;
           },
           voteItem(tvjiemu){
-            console.log(tvjiemu);
+            let answer = '-1';
+            for (var i = 0; i < tvjiemu.votObjectList.length; i++) {
+              if (tvjiemu.votObjectList[i].choose) {
+                answer = i+1;
+              }
+            }
+            if(answer == '-1') {
+              window.alertDialog('请选择一个选项进行投票');
+              return ;
+            }
             let that = this;
-            new RequestEngine().request(urls.doVotTv, {subjectId: tvjiemu.id,answer:'1'},
+            new Promise((resolve,reject)=>{
+              new RequestEngine().request(urls.doVotTv, {subjectId: tvjiemu.id,answer:answer},
+                  successValue => {
+                    resolve(successValue);
+                  }, failValue => {
+                    reject(failValue);
+                  }, completeValue => {});
+            }).then(successValue=>{
+              that.alertText = '投票成功';
+              that.show = true;
+              that.commonValue = '';
+              new RequestEngine(false).request(urls.queryVotTvList, {tvId: this.params.tvId,mvpId:this.params.mvpId},
                 successValue => {
-                  that.alertText = '投票成功';
-                  that.show = true;
-                  that.commonValue = '';
-                  new RequestEngine().request(urls.queryVotTvList, {tvId: this.params.tvId,mvpId:this.params.mvpId},
-                    successValue => {
-                      that.subjectBoList = successValue.subjectBoList;
-                    }, failValue => {
-                    }, completeValue => {});
+                  that.subjectBoList = successValue.subjectBoList;
                 }, failValue => {
                 }, completeValue => {});
+            }).catch(err=>{
+
+            })
+
           }
         }
 

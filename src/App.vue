@@ -18,6 +18,7 @@ import Vue from 'Vue'
 import faildAlert from './components/faildAlert'
 import progressBar from './components/progressBar'
 window.eventHub = new Vue();
+
 export default {
 
 	data () {
@@ -34,7 +35,19 @@ export default {
 	created: function(){
 		window.eventHub.$on('progress',this.progress);
 		window.eventHub.$on('isrequestfaild',this.isRequestFaild);
+		window.eventHub.$on('alert',this.alert);
+		window.alertDialog = alertContent => {
+			this.requestFaild = true;
+			this.alertText = alertContent;
+		}
+		window.showProgress = () => {
+			this.isShowProgress = true;
+		}
+		window.hiddenProgress = () =>{
+			this.isShowProgress = false;
+		}
 	},
+
 	methods: {
 		progress (newData) {
 			this.isShowProgress = newData;
@@ -45,6 +58,10 @@ export default {
 		},
 		sureTip() {
 			this.requestFaild = false;
+		},
+		alert(newData){
+			this.requestFaild = newData[0];
+			this.alertText = newData[1];
 		}
 	}
 }

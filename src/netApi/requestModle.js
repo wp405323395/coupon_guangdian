@@ -143,7 +143,7 @@ export default {
               }
               requestFail('登录身份验证不通过');
               router.replace({
-                path: 'login'
+                path: 'welcome'
               })
               break;
             case '101':
@@ -170,10 +170,7 @@ export default {
           }
           requestFail("网络请求失败");
         }
-
-
       }
-
       xmlhttp.open("GET", url, true);
       for (var key of Object.keys(header)) {
         xmlhttp.setRequestHeader(key, header[key]);
