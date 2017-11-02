@@ -17,6 +17,7 @@
 import Vue from 'Vue'
 import faildAlert from './components/faildAlert'
 import progressBar from './components/progressBar'
+import router from '../router'
 window.eventHub = new Vue();
 
 export default {
@@ -46,14 +47,9 @@ export default {
 		window.hiddenProgress = () =>{
 			this.isShowProgress = false;
 		}
-		login({
-			success: function(successValue) {
-				router.replace({ path: 'index' })
-			},
-			faild: function(faildValue) {
 
-			}
-		});
+		router.replace({ path: 'welcome' });
+
 	},
 
 	methods: {
