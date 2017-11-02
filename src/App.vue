@@ -50,8 +50,11 @@ export default {
 
 	},
 	mounted:function(){
-		window.alertDialog('ffffff------------fffffffff');
-		router.replace({ name: 'welcome' });
+		setTimeout(()=>{
+			window.alertDialog('ffffff------------fffffffff');
+			router.replace({ name: 'welcome' });
+		},5000)
+
 	},
 
 	methods: {
