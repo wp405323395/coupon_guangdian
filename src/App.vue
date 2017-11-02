@@ -47,9 +47,7 @@ export default {
 		window.hiddenProgress = () =>{
 			this.isShowProgress = false;
 		}
-
-		router.replace({ path: 'welcome' });
-
+		router.replace({ name: 'welcome' });
 	},
 
 	methods: {
