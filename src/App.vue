@@ -51,7 +51,6 @@ export default {
 	},
 	mounted:function(){
 		setTimeout(()=>{
-			window.alertDialog('ffffff------------fffffffff');
 			router.replace({ name: 'welcome' });
 		},5000)
 
