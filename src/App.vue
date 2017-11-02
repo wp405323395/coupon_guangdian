@@ -47,6 +47,9 @@ export default {
 		window.hiddenProgress = () =>{
 			this.isShowProgress = false;
 		}
+
+	},
+	mounted:function(){
 		router.replace({ name: 'welcome' });
 	},
 
