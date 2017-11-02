@@ -46,6 +46,14 @@ export default {
 		window.hiddenProgress = () =>{
 			this.isShowProgress = false;
 		}
+		login({
+			success: function(successValue) {
+				router.replace({ path: 'index' })
+			},
+			faild: function(faildValue) {
+
+			}
+		});
 	},
 
 	methods: {
