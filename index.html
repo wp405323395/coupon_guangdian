@@ -27,8 +27,14 @@
   }
 </style>
 <script type="text/javascript">
-window.loadCount = 1;
+
 window.onload=function() {
+  if(window.loadCount == 2) {
+    return ;
+  } else {
+    window.loadCount = 1;
+  }
+
   let href = window.location.href;
   if (href.indexOf('welcome') >= 0) {
   } else {
