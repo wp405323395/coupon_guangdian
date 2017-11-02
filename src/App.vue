@@ -17,7 +17,7 @@
 import Vue from 'Vue'
 import faildAlert from './components/faildAlert'
 import progressBar from './components/progressBar'
-import router from '../router'
+import router from './router'
 window.eventHub = new Vue();
 
 export default {
