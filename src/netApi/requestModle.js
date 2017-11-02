@@ -1,5 +1,6 @@
 import Header from './Header.js'
 import router from '../router'
+import config from '../config.js'
 export default {
   request(url, data, requestSuccess, requestFail, requestComplete, interceptors) {
       let header = new Header('application/json').getHeader();
@@ -90,7 +91,7 @@ export default {
       let param = JSON.stringify(data);
       xmlhttp.send(param);
 
-      setTimeout(connectFail, 10000);
+      setTimeout(connectFail, config.timeOut);
 
       function connectFail() {
         if (xmlhttp) {
@@ -178,7 +179,7 @@ export default {
       xmlhttp.withCredentials = true;
       xmlhttp.send(null);
 
-      setTimeout(connectFail, 10000);
+      setTimeout(connectFail, config.timeOut);
 
       function connectFail() {
         if (xmlhttp) {
