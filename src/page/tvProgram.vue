@@ -93,13 +93,15 @@ export default {
         mounted : function(){
           //params: { relaId: item[0].relationId, type: item[0].type}}
           this.params = this.$route.params;
-          document.title = this.$route.name;
+          //document.title = this.$route.name;
+
           let that = this;
           window.showProgress();
           let votList = new Promise((resolve, reject)=>{
             new RequestEngine(false).request(urls.queryVotTvList, {tvId: this.params.tvId,mvpId:this.params.mvpId},
               successValue => {
                 that.subjectBoList = successValue.subjectBoList;
+                document.title = successValue..subjectBoList[0].tvMVP.name;
                 resolve('success0');
               }, failValue => {
                 reject('faild0');
