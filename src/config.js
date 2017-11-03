@@ -1,7 +1,9 @@
-//var host = "www.maywidehb.com"
-var host = '192.168.1.120:8080';
+var isPublish = process.env.NODE_ENV === 'production';
+var devHost = '192.168.1.120:8080'
+var publishHost = "www.maywidehb.com"
+var host = isPublish ? publishHost : devHost;
 var isHttps = false;
-var isDebug = process.env.NODE_ENV !== 'production';
+var isDebug = !isPublish;
 var schema = isHttps ? 'https' : 'http';
 var timeOut = 10000; //设置请求超时时间
 var config = {
