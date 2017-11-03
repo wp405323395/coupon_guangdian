@@ -34,26 +34,31 @@ export default {
 		progressBar
 	},
 	created: function(){
-		window.eventHub.$on('progress',this.progress);
-		window.eventHub.$on('isrequestfaild',this.isRequestFaild);
-		window.eventHub.$on('alert',this.alert);
-		window.alertDialog = alertContent => {
-			this.requestFaild = true;
-			this.alertText = alertContent;
-		}
-		window.showProgress = () => {
-			this.isShowProgress = true;
-		}
-		window.hiddenProgress = () =>{
-			this.isShowProgress = false;
-		}
-
+		this.registEventBut();
+		this.registWindow();
 	},
 	mounted:function(){
 
 	},
 
 	methods: {
+		registEventBut(){
+			window.eventHub.$on('progress',this.progress);
+			window.eventHub.$on('isrequestfaild',this.isRequestFaild);
+			window.eventHub.$on('alert',this.alert);
+		},
+		registWindow(){
+			window.alertDialog = alertContent => {
+				this.requestFaild = true;
+				this.alertText = alertContent;
+			}
+			window.showProgress = () => {
+				this.isShowProgress = true;
+			}
+			window.hiddenProgress = () =>{
+				this.isShowProgress = false;
+			}
+		},
 		progress (newData) {
 			this.isShowProgress = newData;
 		},

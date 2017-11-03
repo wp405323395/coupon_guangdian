@@ -1,7 +1,7 @@
-var host = "www.maywidehb.com"
-  //var host = '192.168.1.170:8080';
-var isHttps = true;
-var isDebug = true;
+//var host = "www.maywidehb.com"
+var host = '192.168.1.120:8080';
+var isHttps = false;
+var isDebug = process.env.NODE_ENV !== 'production';
 var schema = isHttps ? 'https' : 'http';
 var timeOut = 10000; //设置请求超时时间
 var config = {

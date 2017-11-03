@@ -1,7 +1,7 @@
 <template lang="html">
   <section class="item" @click="goinDetail(tvjiemu,index)">
     <div class="title">
-      <span class="lable_topic">#话题#<span class="topic_title">{{tvjiemu.title}}</span></span>
+      <span class="lable_topic">#{{tvjiemu.MVPName}}#<span class="topic_title">{{tvjiemu.title}}</span></span>
       <img class="go_right" src="../../static/img/go_right.png" alt="">
     </div>
     <div class="vote_num">

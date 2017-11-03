@@ -11,15 +11,18 @@ export default {
 
 	mounted: function() {
 		document.title = this.$route.name;
-		 login({
-			 success: function(successValue) {
-				 router.replace({ path: 'index' })
-			 },
-			 faild: function(faildValue) {
+    if(process.env.NODE_ENV === 'production') {
+      login({
+        success: function(successValue) {
+          router.replace({ path: 'index' })
+        },
+        faild: function(faildValue) {
 
-			 }
-		 });
-    //router.replace({ path: 'index' })
+        }
+      });
+    } else {
+      router.replace({ path: 'index' })
+    }
 	}
 }
 </script>

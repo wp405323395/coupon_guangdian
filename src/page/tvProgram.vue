@@ -128,6 +128,7 @@ export default {
         methods: {
 
           zanClick(item) {
+            this.$store.commit('increment');
             new RequestEngine(false).request(urls.praiseOrTread, {relaId: item.id,type:'1'},
                 successValue => {
                   if(item.isPraise=='1') {
