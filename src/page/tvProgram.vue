@@ -101,7 +101,7 @@ export default {
             new RequestEngine(false).request(urls.queryVotTvList, {tvId: this.params.tvId,mvpId:this.params.mvpId},
               successValue => {
                 that.subjectBoList = successValue.subjectBoList;
-                document.title = successValue.subjectBoList[0].tvMVP.name;
+                document.title = successValue.subjectBoList[0].MVPName;
                 resolve('success0');
               }, failValue => {
                 reject('faild0');
