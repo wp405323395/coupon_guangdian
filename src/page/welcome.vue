@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import login from '../netApi/login.js'
+import login from '../login.js'
 import router from '../router'
 export default {
 
