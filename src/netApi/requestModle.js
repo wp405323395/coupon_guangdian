@@ -1,6 +1,4 @@
 import Header from './Header.js'
-import router from '../router'
-import config from '../config.js'
 export default {
   request(url, data, requestSuccess, requestFail, requestComplete, interceptors) {
       let header = new Header('application/json').getHeader();
@@ -51,9 +49,6 @@ export default {
                 interceptor.onAutherErrorResponse(url, header, responseData);
               }
               requestFail('登录身份验证不通过');
-              router.replace({
-                path: 'login'
-              })
               break;
             case '101':
               for (let interceptor of interceptors) {
@@ -91,7 +86,7 @@ export default {
       let param = JSON.stringify(data);
       xmlhttp.send(param);
 
-      setTimeout(connectFail, config.timeOut);
+      setTimeout(connectFail, 30000);
 
       function connectFail() {
         if (xmlhttp) {
@@ -143,9 +138,6 @@ export default {
                 interceptor.onAutherErrorResponse(url, header, responseData);
               }
               requestFail('登录身份验证不通过');
-              router.replace({
-                path: 'welcome'
-              })
               break;
             case '101':
               for (let interceptor of interceptors) {

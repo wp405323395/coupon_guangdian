@@ -1,5 +1,4 @@
 const requestModle = require('./requestModle.js')
-const config = require('../config.js')
 import Interceptor from './interceptor/Interceptor.js' //引入类
 import LogInterceptor from './interceptor/LogInterceptor.js' //引入类
 import RequestStatusInterceptor from './interceptor/RequestStatusInterceptor.js'
@@ -13,7 +12,7 @@ class RequestEngine {
   }
   request(url, data, requestSuccess, requestFail, requestComplete) {
 
-    if (config.isDebug) {
+    if (process.env.NODE_ENV !== 'production') {
       let logInterceptor = new LogInterceptor()
       this.addInterceptor(logInterceptor)
     }
@@ -27,7 +26,7 @@ class RequestEngine {
   }
   requestGet(url, requestSuccess, requestFail, requestComplete) {
 
-    if (config.isDebug) {
+    if (process.env.NODE_ENV !== 'production') {
       let logInterceptor = new LogInterceptor()
       this.addInterceptor(logInterceptor)
     }
