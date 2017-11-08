@@ -35,7 +35,7 @@ export default new Router({
     children: [{
       path: '',
       redirect: '/welcome',
-      name: 'welcome'
+      name: 'welcome',
       meta: {
         title: 'tvProgram',
         keepAlive: false
@@ -43,7 +43,7 @@ export default new Router({
     }, {
       path: '/welcome',
       component: welcome,
-      name: 'welcome'
+      name: 'welcome',
       meta: {
         title: 'tvProgram',
         keepAlive: false
