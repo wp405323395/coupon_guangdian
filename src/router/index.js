@@ -36,10 +36,18 @@ export default new Router({
       path: '',
       redirect: '/welcome',
       name: 'welcome'
+      meta: {
+        title: 'tvProgram',
+        keepAlive: false
+      }
     }, {
       path: '/welcome',
       component: welcome,
       name: 'welcome'
+      meta: {
+        title: 'tvProgram',
+        keepAlive: false
+      }
     }, {
       path: '/tvProgram',
       component: tvProgram,
