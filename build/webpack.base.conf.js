@@ -43,7 +43,8 @@ module.exports = {
       }, {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [resolve('src'), resolve('test')]
+        include: [resolve('src'), resolve('test'), resolve(
+          'node_modules/_netenginwang@1.0.0@netenginwang')]
       }, {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',

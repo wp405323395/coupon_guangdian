@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import RequestEngine from '../netApi/RequestEngine'
+import RequestEngine from 'netenginwang'
 import tvVoteItem from '../components/tvVoteItem'
 import urls from '../config.js'
 import router from '../router'

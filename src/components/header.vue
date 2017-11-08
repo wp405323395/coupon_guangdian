@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import RequestEngine from '../netApi/RequestEngine'
+import RequestEngine from 'netenginwang'
 import router from '../router'
 import urls from '../config.js'
 export default {

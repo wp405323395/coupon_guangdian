@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import RequestEngine from '../netApi/RequestEngine'
+import RequestEngine from 'netenginwang'
 import progressBar from '../components/progressBar'
 import router from '../router'
 import urls from '../config.js'

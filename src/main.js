@@ -3,7 +3,7 @@
 
 import Vue from 'vue'
 import router from './router' // 引入路由配置 后面根路径默认引入index.js
-import './config/rem'
+var remwang = require("remwang")
 import store from './store/index'
 Vue.config.productionTip = false
 

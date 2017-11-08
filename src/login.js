@@ -1,5 +1,5 @@
  var urls = require('./config.js');
- import RequestEngine from './netApi/RequestEngine'
+ import RequestEngine from 'netenginwang'
 
  function login(loginCallBack) {
    let href = window.location.href;

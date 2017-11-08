@@ -4,7 +4,6 @@ import Router from 'vue-router'
 import main from '@/page/homeMain'
 import createVote from '@/page/createVote'
 import voteList from '@/page/voteList'
-import voteDetail from '@/page/voteDetail'
 import index from '@/page/index'
 import tvProgram from '@/page/tvProgram'
 import welcome from '@/page/welcome'
@@ -74,10 +73,6 @@ export default new Router({
           path: '/main/createVote',
           component: createVote,
           name: 'createVote'
-        }, {
-          path: '/main/voteDetail',
-          component: voteDetail,
-          name: 'voteDetail'
         }]
       }]
     }]

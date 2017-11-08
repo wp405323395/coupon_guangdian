@@ -69,7 +69,7 @@
 
 <script>
 import faildAlert from '../components/faildAlert'
-import RequestEngine from '../netApi/RequestEngine'
+import RequestEngine from 'netenginwang'
 import tvVoteItem from '../components/tvVoteItem'
 import urls from '../config.js'
 import common from '@/components/common/common'
