@@ -35,35 +35,19 @@ export default new Router({
     children: [{
       path: '',
       redirect: '/welcome',
-      name: 'welcome',
-      meta: {
-        title: 'tvProgram',
-        keepAlive: false
-      }
+      name: 'welcome'
     }, {
       path: '/welcome',
       component: welcome,
-      name: 'welcome',
-      meta: {
-        title: 'tvProgram',
-        keepAlive: false
-      }
+      name: 'welcome'
     }, {
       path: '/tvProgram',
       component: tvProgram,
-      name: 'tvProgram',
-      meta: {
-        title: 'tvProgram',
-        keepAlive: false
-      }
+      name: 'tvProgram'
     }, {
       path: '/index',
       component: index,
-      name: '往期回顾',
-      meta: {
-        title: 'index',
-        keepAlive: true
-      }
+      name: '往期回顾'
     }, {
       path: '/main/',
       component: main,
