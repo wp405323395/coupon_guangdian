@@ -8,11 +8,26 @@ import voteDetail from '@/page/voteDetail'
 import index from '@/page/index'
 import tvProgram from '@/page/tvProgram'
 import welcome from '@/page/welcome'
-  // import Hello from '@/components/Hello'
+
+// import Hello from '@/components/Hello'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      if (from.meta.keepAlive) {
+        from.meta.savedPosition = document.body.scrollTop
+      }
+      return {
+        x: 0,
+        y: to.meta.savedPosition || 0
+      }
+    }
+  },
   routes: [{
     path: '/',
     name: '',
@@ -28,11 +43,19 @@ export default new Router({
     }, {
       path: '/tvProgram',
       component: tvProgram,
-      name: 'tvProgram'
+      name: 'tvProgram',
+      meta: {
+        title: 'tvProgram',
+        keepAlive: false
+      }
     }, {
       path: '/index',
       component: index,
-      name: '往期回顾'
+      name: '往期回顾',
+      meta: {
+        title: 'index',
+        keepAlive: true
+      }
     }, {
       path: '/main/',
       component: main,
