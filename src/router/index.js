@@ -1,14 +1,13 @@
 import App from '../App'
 import Vue from 'vue'
 import Router from 'vue-router'
-import main from '@/page/homeMain'
-import createVote from '@/page/createVote'
-import voteList from '@/page/voteList'
-import index from '@/page/index'
-import tvProgram from '@/page/tvProgram'
-import welcome from '@/page/welcome'
 
-// import Hello from '@/components/Hello'
+import index from '@/page/index'
+  //import tvProgram from '@/page/tvProgram'
+  //let tvProgram = require('@/page/tvProgram');
+import welcome from '@/page/welcome'
+const tvProgram = resolve => require(['@/page/tvProgram'], resolve)
+  // import Hello from '@/components/Hello'
 
 Vue.use(Router)
 
@@ -62,18 +61,6 @@ export default new Router({
           title: 'index',
           keepAlive: true
         }
-      }, {
-        path: '/main/',
-        component: main,
-        children: [{
-          path: '/',
-          component: voteList,
-          name: 'homeMain'
-        }, {
-          path: '/main/createVote',
-          component: createVote,
-          name: 'createVote'
-        }]
       }]
     }]
 })
