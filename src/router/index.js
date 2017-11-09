@@ -7,7 +7,6 @@ import index from '@/page/index'
   //let tvProgram = require('@/page/tvProgram');
 import welcome from '@/page/welcome'
 const tvProgram = resolve => require(['@/page/tvProgram'], resolve)
-  // import Hello from '@/components/Hello'
 
 Vue.use(Router)
 
