@@ -33,7 +33,7 @@ export default new Router({
         redirect: '/welcome',
         name: 'welcome',
         meta: {
-          title: 'tvProgram',
+          title: 'welcome',
           keepAlive: false
         }
       }, {
@@ -41,7 +41,7 @@ export default new Router({
         component: welcome,
         name: 'welcome',
         meta: {
-          title: 'tvProgram',
+          title: 'welcome',
           keepAlive: false
         }
       }, {
@@ -55,9 +55,9 @@ export default new Router({
       }, {
         path: '/index',
         component: index,
-        name: '往期回顾',
+        name: index,
         meta: {
-          title: 'index',
+          title: '往期回顾',
           keepAlive: true
         }
       }]

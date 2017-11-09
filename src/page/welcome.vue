@@ -10,7 +10,8 @@ import router from '../router'
 export default {
 
 	mounted: function() {
-		document.title = this.$route.name;
+		document.title = this.$route.meta.title;
+    console.log('route---',this.$route);
     if(process.env.NODE_ENV === 'production') {
       login({
         success: function(successValue) {

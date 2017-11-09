@@ -27,7 +27,7 @@ export default {
     }
   },
   mounted: function() {
-    document.title = this.$route.name;
+    document.title = this.$route.meta.title;
     let that = this;
     new RequestEngine().request(urls.queTvThemeList, {tvId: 1},
       successValue => {
