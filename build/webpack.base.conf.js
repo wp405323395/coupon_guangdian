@@ -58,6 +58,7 @@ module.exports = {
         loader: 'url-loader',
         include: [resolve('src/assets')],
         options: {
+          limit: 1,
           name: utils.assetsPath('img/[name].[hash:7].[ext]')
         }
       }, {
