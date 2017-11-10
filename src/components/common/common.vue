@@ -53,13 +53,13 @@
             display: inline-block;
             width: .27rem;
             height: .27rem;
-            background-image: url('../../../static/img/zan.png');
+            background-image: url('../../assets/zan.png');
             background-size: contain;
             margin-right: .15rem;
             transform: translateY(.02rem);
         }
         .zan_light::before {
-            background-image: url('../../../static/img/zan_light.png');
+            background-image: url('../../assets/zan_light.png');
         }
     }
 }

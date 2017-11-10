@@ -2,7 +2,7 @@
   <section class="item" @click="goinDetail(tvjiemu,index)">
     <div class="title">
       <span class="lable_topic">#{{tvjiemu.MVPName}}#<span class="topic_title">{{tvjiemu.title}}</span></span>
-      <img class="go_right" src="../../static/img/go_right.png" alt="">
+      <img class="go_right" src="../assets/go_right.png" alt="">
     </div>
     <div class="vote_num">
       <span>当前参与人数: {{tvjiemu.pollTotal}}人</span>
@@ -11,7 +11,7 @@
       <section v-for="(item, index) in tvjiemu.votObjectList">
         <div class="vote_content">
           <div class="mengceng"/>
-          <img class="queen" src="../../static/img/queen.png" alt="">
+          <img class="queen" src="../assets/queen.png" alt="">
           <span class="percent_text" v-if="isShowProgress">{{item.percent*100}}%</span>
           <input class="checkbox_img" @click="checkBoxClick(index,tvjiemu)" v-model="item.choose" v-if="isShowCheckbox" type="checkbox" name="" value="">
           <div class="progress_percent_background" v-if="isShowProgress"/>
@@ -183,7 +183,7 @@ $margin-left:.20rem;
             height: .5rem;
             width: .5rem;
             display: block;
-            background: url("../../static/img/unchecked.png") no-repeat;
+            background: url("../assets/unchecked.png") no-repeat;
             background-size: .5rem .5rem;
        }
        .checkbox_img:checked::before {
@@ -194,7 +194,7 @@ $margin-left:.20rem;
             height: .5rem;
             width: .5rem;
             display: block;
-            background: url("../../static/img/checked.png") no-repeat;
+            background: url("../assets/checked.png") no-repeat;
             background-size: .5rem .5rem;
        }
      }

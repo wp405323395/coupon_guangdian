@@ -48,8 +48,16 @@ module.exports = {
       }, {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
+        include: [resolve('static')],
         options: {
           limit: 10000,
+          name: utils.assetsPath('img/[name].[hash:7].[ext]')
+        }
+      }, {
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        loader: 'url-loader',
+        include: [resolve('src/assets')],
+        options: {
           name: utils.assetsPath('img/[name].[hash:7].[ext]')
         }
       }, {
