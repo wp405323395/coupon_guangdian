@@ -10,7 +10,7 @@ import VueLazyload from 'vue-lazyload'
 Vue.use(VueLazyload, {
     preLoad: 1.3,
     error: require('./assets/error.png'),
-    loading: require('./assets/loading.gif'),
+    //loading: require('./assets/loading.gif'),
     attempt: 1
   })
   /* eslint-disable no-new */
