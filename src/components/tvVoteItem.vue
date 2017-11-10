@@ -114,10 +114,7 @@ $margin-left:.20rem;
        margin-top: .3rem;
      }
      img[lazy=error] {
-       width: .8rem;
-       height: .8rem;
-       margin-left: .6rem;
-       margin-top: .3rem;
+
      }
      .text_detail{
        font-size: .18rem;
