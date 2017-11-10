@@ -17,7 +17,7 @@
           <div class="progress_percent_background" v-if="isShowProgress"/>
           <div class="progress_percent" :style="'width: '+item.percent*100+'%;'" v-if="isShowProgress"/>
         </div>
-        <img class="tv_solue" :src="item.imgurl" alt="">
+        <img class="tv_solue" v-lazy="item.imgurl" alt="">
         <span class="text_detail">{{item.context}}</span>
       </section>
     </div>

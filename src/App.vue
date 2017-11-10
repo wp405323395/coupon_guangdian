@@ -19,6 +19,7 @@ import faildAlert from './components/faildAlert'
 import progressBar from './components/progressBar'
 import router from './router'
 import redirect from './redirect'
+
 window.eventHub = new Vue();
 
 export default {
@@ -86,4 +87,5 @@ export default {
 	.router-fade-enter, .router-fade-leave-active {
 	  	opacity: 0;
 	}
+
 </style>

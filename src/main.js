@@ -6,8 +6,14 @@ import router from './router' // 引入路由配置 后面根路径默认引入i
 var remwang = require("remwang")
 import store from './store/index'
 Vue.config.productionTip = false
-
-/* eslint-disable no-new */
+import VueLazyload from 'vue-lazyload'
+Vue.use(VueLazyload, {
+    preLoad: 1.3,
+    error: require('./assets/error.png'),
+    loading: require('./assets/loading.gif'),
+    attempt: 1
+  })
+  /* eslint-disable no-new */
 
 new Vue({
   el: '#app',
