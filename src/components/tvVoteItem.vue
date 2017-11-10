@@ -107,6 +107,18 @@ $margin-left:.20rem;
        width: 2.20rem;
        height: 1.40rem;
      }
+     img[lazy=loading] {
+       width: .8rem;
+       height: .8rem;
+       margin-left: .6rem;
+       margin-top: .3rem;
+     }
+     img[lazy=error] {
+       width: .8rem;
+       height: .8rem;
+       margin-left: .6rem;
+       margin-top: .3rem;
+     }
      .text_detail{
        font-size: .18rem;
        color: black;
