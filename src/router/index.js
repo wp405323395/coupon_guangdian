@@ -6,7 +6,9 @@ import index from '@/page/index'
   //import tvProgram from '@/page/tvProgram'
   //let tvProgram = require('@/page/tvProgram');
 import welcome from '@/page/welcome'
-const tvProgram = resolve => require(['@/page/tvProgram'], resolve)
+const tvProgram = resolve => require(['@/page/tvProgram'], resolve);
+const game = resolve => require(['@/page/gameIndex'], resolve);
+const gameitem = resolve => require(['@/page/gameItem'], resolve);
 
 Vue.use(Router)
 
@@ -29,13 +31,8 @@ export default new Router({
       name: '',
       component: App,
       children: [{
-        path: '',
-        redirect: '/welcome',
-        name: 'welcome',
-        meta: {
-          title: 'welcome',
-          keepAlive: false
-        }
+        path: '/',
+        redirect: 'welcome',
       }, {
         path: '/welcome',
         component: welcome,
@@ -55,10 +52,26 @@ export default new Router({
       }, {
         path: '/index',
         component: index,
-        name: index,
+        name: 'index',
         meta: {
           title: '往期回顾',
           keepAlive: true
+        }
+      }, {
+        path: '/game',
+        component: game,
+        name: 'game',
+        meta: {
+          title: '游戏挑战',
+          keepAlive: false
+        }
+      }, {
+        path: '/gameItem',
+        component: gameitem,
+        name: 'gameitem',
+        meta: {
+          title: '剧情大挑战',
+          keepAlive: false
         }
       }]
     }]
