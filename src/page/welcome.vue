@@ -12,20 +12,35 @@ export default {
 	mounted: function() {
 		document.title = this.$route.meta.title;
     let href = window.location.href;
-    console.log(href);
+    let routeName = this.getQueryString('routepath');
     if(process.env.NODE_ENV === 'production') {
       login({
         success: function(successValue) {
-          router.replace({ path: 'index' })
+          router.replace({ name: routeName })
         },
         faild: function(faildValue) {
 
         }
       });
     } else {
-      router.replace({ path: 'index' })
+      router.replace({ path: routeName })
     }
-	}
+	},
+  methods: {
+   getQueryString(par) {
+     var local_url = document.location.href;
+     var get = local_url.indexOf(par +"=");
+     if(get == -1){
+         return false;
+     }
+     var get_par = local_url.slice(par.length + get + 1);
+     var nextPar = get_par.indexOf("&");
+     if(nextPar != -1){
+         get_par = get_par.slice(0, nextPar);
+     }
+     return get_par;
+}
+  }
 }
 </script>
 
