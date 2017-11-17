@@ -11,9 +11,11 @@
   </div>
 
 </section>
-<section class="final_success" v-if="true">
+<section class="final_success" v-if="answerFinishSuccess">
   <div class="success_wrap">
-
+    <span>恭喜获得称号</span>
+    <img src="../../static/img/title_get.png" alt="">
+    <button type="button" name="button">分享战果</button>
   </div>
 </section>
 <section class="help_section">
@@ -59,7 +61,8 @@ export default {
       params:{},
       show_dark:false,
       answer_faild:false,
-      pageCount:10
+      pageCount:10,
+      answerFinishSuccess:false
     }
   },
   mounted: function() {
@@ -95,7 +98,8 @@ export default {
           }, completeValue => {})
       }).then(value=>{
         if(this.pageNo == this.pageCount) {
-          //xxxxxxxxxxxxxxxx
+          this.answerFinishSuccess = true;
+          this.show_dark = true;
           return ;
         }
         let that = this;
@@ -164,6 +168,26 @@ export default {
       display: flex;
       flex-direction: column;
       align-items:center;
+      span{
+        margin-top: 4.5rem;
+        font-size: .18rem;
+      }
+      img{
+        margin-top: .16rem;
+        width: 2.36rem;
+        height: .94rem;
+      }
+      button{
+        width: 5.8rem;
+        height: .8rem;
+        background-image: url("../../static/img/button_blue.png");
+        color: white;
+        background-size: 5.8rem .8rem;
+        font-size: .36rem;
+      }
+      button:active{
+        transform: translateY(.1rem);
+      }
     }
   }
   .answer_faild{
@@ -270,7 +294,7 @@ export default {
     }
   }
   footer{
-    margin-top: .6rem;
+    margin-top: 2.5rem;
     .text{
       display: inline-block;
       span{

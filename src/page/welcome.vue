@@ -11,6 +11,8 @@ export default {
 
 	mounted: function() {
 		document.title = this.$route.meta.title;
+    let href = window.location.href;
+    console.log(href);
     if(process.env.NODE_ENV === 'production') {
       login({
         success: function(successValue) {
