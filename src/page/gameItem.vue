@@ -15,7 +15,7 @@
   <div class="success_wrap">
     <span>恭喜获得称号</span>
     <img src="../../static/img/title_get.png" alt="">
-    <button type="button" name="button">分享战果</button>
+    <button type="button" name="button">战果</button>
   </div>
 </section>
 <section class="help_section">
@@ -36,7 +36,7 @@
     </div>
     <footer>
         <div class="text">
-          <span>长按二维码，关注公众号</span><br>
+          <span>kkkkkkkkkkkkk</span><br>
           <span>精彩游戏走不丢</span>
         </div>
         <img src="../../static/img/qr.png" alt="">

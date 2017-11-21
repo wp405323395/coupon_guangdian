@@ -14,7 +14,7 @@
       top: .4rem;
       left: .3rem;
       width:2.2rem;
-      z-index: 2000;
+
     }
   }
   .content{
@@ -27,8 +27,8 @@
     .number_lable{
       display: inline-block;
       color: white;
-      font-size: .25rem;
-      transform: translateY(-.18rem);
+      font-size: .2rem;
+      transform: translateY(-.29rem);
       width: 2rem;
     }
     .number{
@@ -54,28 +54,32 @@
           position: relative;
           width: 100%;
           height: 1px;
-          span{
+          img{
             position: absolute;
-            top: .3rem;
-            left: .1rem;
+            top: .06rem;
+            left: .04rem;
             font-size: 10px;
             color: white;
+            width: .7rem;
+            height: .24rem;
+            border:none;
+            border-radius: 0;
           }
         }
         img{
-          width: 1.6rem;
+          width: 1.64rem;
           margin: .33rem;
           margin-bottom: 0rem;
           display: block;
-          border:1px solid white;
+          border:1px solid #817dbd;
           box-sizing: border-box;
           border-radius: 5px;
         }
         .active{
-          border:2px solid red;
+          border:4px solid #f34066;
         }
         span{
-          font-size: .18rem;
+          font-size: .25rem;
           color: #817dbd;
           width: 1.6rem;
           display: block;
@@ -90,7 +94,7 @@
           span{
             border:1px solid transparent;
             position: absolute;
-            top: -.48rem;
+            top: -.6rem;
             border-bottom-left-radius: 5px;
             border-bottom-right-radius: 5px;
             background-color: rgba(0,0,0,0.5);
@@ -100,20 +104,21 @@
             display: block;
             padding-top: .08rem;
             padding-bottom: .08rem;
-            font-size: .18rem;
+            font-size: .28rem;
           }
         }
       }
     }
 
     button{
-      margin-left: .4rem;
-      margin-top: .5rem;
-      width: 6.1rem;
+      margin-left: .35rem;
+      margin-top: .36rem;
+      width: 6.2rem;
       height: .7rem;
       background-color: #f34066;
       color: white;
       letter-spacing: .1rem;
+      font-size: .36rem;
     }
     button:active{
       transform: translateY(5px);
@@ -124,7 +129,7 @@
       height: 50px;
       margin-top: .6rem;
       label{
-        font-size: .26rem;
+        font-size: .22rem;
         color: white;
       }
       ul{
@@ -148,12 +153,12 @@
       <img class="banner_img" src="../../static/img/game_banner.png" alt="">
     </section>
     <section class="content">
-      <span class="number_lable">当前游戏总人数</span>
+      <span class="number_lable">当前参与游戏总人数</span>
       <span class="number">{{personCount}}</span>
       <section class="test_content">
         <div class="test_option" v-for="(level, index) of levelsDetal">
           <div class="haspass">
-            <span v-if="level.isSuccess == '1'">挑战成功</span>
+            <img v-if="level.isSuccess == '1'" src="../../static/img/game_success.png"></img>
           </div>
           <img :class="{ active: (currentLevel == index)}" :src="level.imgurl" alt="">
           <div class="item_lable">
@@ -166,9 +171,9 @@
       <section class="game_introduce">
         <label>游戏说明</label>
         <ul>
-          <li>默认从第一关开始，不可跳跃或选择关卡</li>
-          <li>游戏开始后中途答错则游戏结束，可分享求助或重新开始</li>
-          <li>每个用户每天有三次挑战机会</li>
+          <li>1.默认从第一关开始，不可跳跃或选择关卡</li>
+          <li>2.游戏开始后中途答错则游戏结束，可分享求助或重新开始</li>
+          <li>3.每个用户每天有三次挑战机会</li>
         </ul>
       </section>
     </section>
