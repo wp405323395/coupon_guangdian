@@ -62,7 +62,7 @@ $margin-left:.20rem;
   background: white;
   margin-top: .2rem;
   border-radius: .08rem;
-  box-shadow: .0rem .050rem .14rem .03rem #928585;
+  box-shadow: .0rem .050rem .14rem .03rem #d4d4d4;
 }
 .title{
   display: flex;
@@ -79,7 +79,7 @@ $margin-left:.20rem;
 }
 .lable_topic{
   color: #4436d0;
-  font-size: .32rem;
+  font-size: .38rem;
   font-weight: 500;
   .topic_title{
     color: black;
@@ -90,17 +90,17 @@ $margin-left:.20rem;
  .vote_num{
    span {
      color: #999999;
-     font-size: .18rem;
+     font-size: .24rem;
    }
    padding-bottom: .30rem;
    padding-left: $margin-left;
-   padding-top: .1rem;
+
  }
  .pics{
    display: flex;
    padding-left: $margin-left;
    padding-right: $margin-left;
-   padding-bottom: .4rem;
+   padding-bottom: .3rem;
    section{
      margin-right: .1rem;
      .tv_solue{
@@ -117,7 +117,7 @@ $margin-left:.20rem;
 
      }
      .text_detail{
-       font-size: .18rem;
+       font-size: .24rem;
        color: black;
       display: block;
        margin-top: .1rem;
@@ -136,8 +136,8 @@ $margin-left:.20rem;
          left: .1rem;
          top: .1rem;
          position: absolute;
-         width: .2rem;
-         height: .2rem;
+         width: .36rem;
+         height: .29rem;
        }
        .percent_text{
          position: absolute;
@@ -203,13 +203,12 @@ $margin-left:.20rem;
  }
  .submit{
    width: 6.8rem;
-   height: .64rem;
+   height: .7rem;
    background-color: #4436d0;
    margin-left: $margin-left;
    margin-right: $margin-left;
    color: white;
    font-size: .32rem;
-
    margin-bottom: .3rem;
  }
  .submit:active {

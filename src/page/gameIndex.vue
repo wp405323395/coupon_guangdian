@@ -88,10 +88,11 @@
           margin-top: .1rem;
         }
         .item_lable{
-          width: 1.6rem;
+          width: 1.64rem;
           height: 1px;
           position: relative;
           span{
+            width: 100%;
             border:1px solid transparent;
             position: absolute;
             top: -.6rem;
