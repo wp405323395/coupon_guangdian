@@ -1,7 +1,7 @@
 <style lang="scss" scoped>
 
 .content {
-    margin-bottom: .88rem;
+    padding-bottom: .88rem;
     .note_num {
         margin-left: .3rem;
         font-size: .2rem;
@@ -30,15 +30,18 @@
         flex-grow: 1;
         height: 100%;
         text-indent: .15rem;
+        border-radius: 0;
+        font-size: .28rem;
     }
     button {
         margin-left: .2rem;
-        width: 1.2rem;
-        background-color: #4436d0;
+        width: 1.8rem;
+        background-color: #eb5426;
         color: white;
+        font-size: .32rem;
     }
     button:active {
-        background-color: #33289a;
+        background-color: #be411b;
         color: #d4d4d4;
     }
 }
@@ -48,7 +51,7 @@
 <template lang="html">
 
 <div>
-<tv-vote-item @voteItem='voteItem' :key="item.id" v-for="(item, index) in subjectBoList" :isShowCheckbox='item.userAnswer == null' :index='index' :isShowProgress="item.userAnswer != null" :tvjiemu="item"></tv-vote-item>
+<tv-vote-item @voteItem='voteItem' :key="item.id" v-for="(item, index) in subjectBoList" :showgoright='false' :isShowCheckbox='item.userAnswer == null' :index='index' :isShowProgress="item.userAnswer != null" :tvjiemu="item"></tv-vote-item>
     <section class="content">
         <span class="note_num">热门评论 ({{retData.hotCommentCount}})</span>
         <common @zanClick="zanClick" :commentList="retData.hotList">

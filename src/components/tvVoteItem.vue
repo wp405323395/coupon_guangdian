@@ -2,7 +2,7 @@
   <section class="item" @click="goinDetail(tvjiemu,index)">
     <div class="title">
       <span class="lable_topic">#{{tvjiemu.MVPName}}#<span class="topic_title">{{tvjiemu.title}}</span></span>
-      <img class="go_right" src="../assets/go_right.png" alt="">
+      <img v-if="showgoright" class="go_right" src="../assets/go_right.png" alt="">
     </div>
     <div class="vote_num">
       <span>当前参与人数: {{tvjiemu.pollTotal}}人</span>
@@ -33,7 +33,7 @@ export default {
     }
   },
 
-  props: ['tvjiemu','isShowProgress','index','isShowCheckbox'],
+  props: ['tvjiemu','isShowProgress','index','isShowCheckbox','showgoright'],
   methods:{
     goinDetail(item,index) {
       this.$emit('goinDetail',[item, index]);
@@ -78,7 +78,7 @@ $margin-left:.20rem;
   height: .20rem;
 }
 .lable_topic{
-  color: #4436d0;
+  color: #eb5426;
   font-size: .38rem;
   font-weight: 500;
   .topic_title{
@@ -204,7 +204,7 @@ $margin-left:.20rem;
  .submit{
    width: 6.8rem;
    height: .7rem;
-   background-color: #4436d0;
+   background-color: #eb5426;
    margin-left: $margin-left;
    margin-right: $margin-left;
    color: white;
@@ -212,7 +212,7 @@ $margin-left:.20rem;
    margin-bottom: .3rem;
  }
  .submit:active {
-   background-color: #33289a;
+   background-color: #be411b;
    color: #d4d4d4;
  }
 

@@ -16,8 +16,9 @@
         img {
             margin-left: .3rem;
             margin-top: .2rem;
-            width: .6rem;
-            height: .6rem;
+            width: .8rem;
+            height: .8rem;
+            border-radius: .8rem;
         }
     }
     .cont {
@@ -28,12 +29,13 @@
         width: 100%;
         .common_title {
             font-size: .28rem;
-            color: #333333;
+            color: #666666;
             display: block;
+            margin-top: .13rem;
         }
         .common_content {
-            margin-top: .15rem;
-            font-size: .24rem;
+            margin-top: .2rem;
+            font-size: .32rem;
             color: #333333;
             line-height: .35rem;
             display: inline-block;
@@ -42,11 +44,14 @@
         .common_small {
             font-size: .18rem;
             color: #999999;
+            display: inline-block;
+            margin-top: .2rem;
             float: left;
         }
         .zan {
             float: right;
             display: block;
+            transform: translateY(-.02rem);
         }
         .zan::before {
             content: '';
@@ -57,6 +62,7 @@
             background-size: contain;
             margin-right: .15rem;
             transform: translateY(.02rem);
+            background-repeat: no-repeat;
         }
         .zan_light::before {
             background-image: url('../../assets/zan_light.png');
