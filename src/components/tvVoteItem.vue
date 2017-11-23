@@ -10,8 +10,8 @@
     <div class="pics">
       <section v-for="(item, index) in tvjiemu.votObjectList">
         <div class="vote_content">
-          <div class="mengceng"/>
-          <img class="queen" src="../assets/queen.png" alt="">
+          <div class="mengceng" @click="checkBoxClick(index,tvjiemu)"/>
+          <img v-if="index == tvjiemu.isQueen" class="queen" src="../assets/queen.png" alt="">
           <span class="percent_text" v-if="isShowProgress">{{item.percent*100}}%</span>
           <input class="checkbox_img" @click="checkBoxClick(index,tvjiemu)" v-model="item.choose" v-if="isShowCheckbox" type="checkbox" name="" value="">
           <div class="progress_percent_background" v-if="isShowProgress"/>
@@ -41,7 +41,11 @@ export default {
     voteItem(tvjiemu) {
       this.$emit('voteItem', tvjiemu);
     },
-    checkBoxClick(index, tvjiemu){
+    checkBoxClick(index, tvjiemu,item){
+
+      if(item) {
+        item.choose = !item.choose;
+      }
       for (var i = 0; i < tvjiemu.votObjectList.length; i++) {
         if(i == index) {
           tvjiemu.votObjectList[i].choose = true;
@@ -120,7 +124,7 @@ $margin-left:.20rem;
        font-size: .24rem;
        color: black;
       display: block;
-       margin-top: .1rem;
+       margin-top: .05rem;
      }
      .mengceng{
        width: 2.20rem;
@@ -141,32 +145,36 @@ $margin-left:.20rem;
        }
        .percent_text{
          position: absolute;
-         display: block;
-         top: .55rem;
-         left: 0;
+         display: inline-block;
+         top: .2rem;
+         left: .7rem;
          color: white;
-         width: 100%;
+         width: .9rem;
+         height: .9rem;
+         line-height: .9rem;
          text-align: center;
-         font-size: .23rem;
+         font-size: .32rem;
+         border-radius: .8rem;
+         background-color: rgba(0,0,0,.6);
+         background-size: .8rem .8rem;
+         font-weight: 600;
        }
        .progress_percent_background{
          width: 100%;
          height: .2rem;
          background-color: black;
          position: absolute;
-         top: 1.2rem;
+         top: 1.23rem;
          left: 0;
          opacity: .4;
        }
        .progress_percent{
          width: 0;
          height: .2rem;
-         background-color: #ec3333;
+         background-color: #eb5426;
          position: absolute;
-         top: 1.21rem;
+         top: 1.23rem;
          left: 0;
-        border-top-right-radius: .2rem;
-        border-bottom-right-radius: .2rem;
        }
        .checkbox_img{
          font-size:1em;

@@ -46,14 +46,14 @@
      left: 0;
      right: 0;
      bottom: 0;
-     z-index: 200;
+     z-index: 1000000;
 
    }
    .tip_text_container{
        position: absolute;
-       top: 4.5rem;
-       right: 1.2rem;
-       width: 5rem;
+       top: 3.5rem;
+       right: .75rem;
+       width: 6rem;
        font-size: .25rem;
        animation: tipMove .4s ;
        background-color: rgba(255,255,255,1);
@@ -73,16 +73,18 @@
 
          .confrim{
              width: 100%;
-             height: 100%;
              border-bottom-left-radius: 10px;
              border-bottom-right-radius: 10px;
-             background-color: blue;
-             color: white;
-             font-size: .32rem;
+             background-color: white;
+             color: #eb5426;
+             font-size: .38rem;
              text-align: center;
-             height: .80rem;
-             line-height: .80rem;
+             height: .9rem;
+             line-height: .9rem;
 
+         }
+         .confrim:active{
+           background-color: #eeeeee;
          }
        }
        .tip_icon{
@@ -107,14 +109,14 @@
            }
        }
        .tip_text{
-           color: red;
+           color: #333333;
            line-height: 1rem;
            text-align: center;
            margin-top: .1rem;
            margin-bottom: .4rem;
-           font-size: .3rem;
-
+           font-size: .32rem;
        }
+
 
    }
 

@@ -35,7 +35,7 @@
       display: inline-block;
       width: 3.67rem;
       height: .63rem;
-      margin-top: .1rem;
+      margin-top: .06rem;
       margin-left: .2rem;
       padding-left: .2rem;
       font-size: .45rem;

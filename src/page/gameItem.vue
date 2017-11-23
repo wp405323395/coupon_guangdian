@@ -40,6 +40,14 @@
                 display: inline-block;
                 padding-top: .2rem;
             }
+            .next_game{
+                margin-top: .25rem;
+                font-size: .32rem;
+                text-decoration: underline;
+            }
+            .next_game:active{
+              transform: translateY(.1rem);
+            }
             img {
                 margin-top: .16rem;
                 width: 2.8rem;
@@ -217,6 +225,7 @@
             <span>恭喜获得称号</span>
             <img src="../../static/img/title_get.png" alt="">
             <button @click="share()" type="button" name="button">分享战果</button>
+            <span @click="nextGame" class="next_game" style="color: #f34066">挑战下一关</span>
         </div>
     </section>
     <section class="help_section">
@@ -292,12 +301,16 @@ export default {
         share(){
           this.isShowHelp = true
         },
+        nextGame() {
+          this.$router.go(-1);
+        },
         itemClick(sub) {
                 let that = this;
                 new Promise((resolve, reject) => {
                     new RequestEngine().request(urls.doGameAnswer, {
                             "subjectId": this.subjectId,
-                            answer: sub.option
+                            answer: sub.option,
+                            pageNum:that.pageNo
                         },
                         successValue => {
                             if (successValue) {

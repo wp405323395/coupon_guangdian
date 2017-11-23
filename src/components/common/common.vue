@@ -2,7 +2,7 @@
 
 .devide_line {
     height: 1px;
-    background-color: #d4d4d4;
+    background-color: #eeeeee;
     margin-left: .3rem;
     margin-right: .3rem;
     display: block;
