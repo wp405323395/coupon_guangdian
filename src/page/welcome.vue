@@ -52,8 +52,8 @@ section {
   background-color: #eeeeee;
   height: 100%;
   img{
-    width: 2.154rem;
-    height: 1.932rem;
+    width: 2.872rem;
+    height: 2.576rem;
   }
 }
 </style>
