@@ -44,7 +44,7 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="scss" scoped>
 section {
   display: flex;
   justify-content: center;
@@ -52,8 +52,8 @@ section {
   background-color: #eeeeee;
   height: 100%;
   img{
-    width: 3.59rem;
-    height: 3.22rem;
+    width: 2.154rem;
+    height: 1.932rem;
   }
 }
 </style>
