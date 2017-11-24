@@ -10,14 +10,13 @@
         background-color: black;
         opacity: 0.6;
     }
-    .help_mengceng{
-      width: 100%;
-      height: 100%;
-      background-image: url('../../static/img/need_help.png');
-      background-size: 100% 100%;
-      position: absolute;
-      z-index: 1000;
-
+    .help_mengceng {
+        width: 100%;
+        height: 100%;
+        background-image: url('../../static/img/need_help.png');
+        background-size: 100% 100%;
+        position: absolute;
+        z-index: 1000;
     }
     .final_success {
         position: relative;
@@ -40,13 +39,13 @@
                 display: inline-block;
                 padding-top: .2rem;
             }
-            .next_game{
+            .next_game {
                 margin-top: .25rem;
                 font-size: .32rem;
                 text-decoration: underline;
             }
-            .next_game:active{
-              transform: translateY(.1rem);
+            .next_game:active {
+                transform: translateY(.1rem);
             }
             img {
                 margin-top: .16rem;
@@ -223,7 +222,8 @@
     <section class="final_success" v-if="answerFinishSuccess">
         <div class="success_wrap">
             <span>恭喜获得称号</span>
-            <img src="../../static/img/title_get.png" alt="">
+            <!-- <img src="../../static/img/title_get.png" alt=""> -->
+            <img :src="levelImg" alt="">
             <button @click="share()" type="button" name="button">分享战果</button>
             <span @click="nextGame" class="next_game" style="color: #f34066">挑战下一关</span>
         </div>
@@ -271,11 +271,13 @@ export default {
             answer_faild: false,
             pageCount: 10,
             answerFinishSuccess: false,
-            isShowHelp:false
+            isShowHelp: false,
+            levelnum: 0
         }
     },
     mounted: function() {
         this.params = this.$route.params;
+        this.levelnum = this.params.levelnum;
         console.log(this.params);
         let that = this;
         new RequestEngine().request(urls.queSubjectList, this.params,
@@ -289,28 +291,57 @@ export default {
             }, completeValue => {})
 
     },
+    computed: {
+        levelImg() {
+            let imgUrl = require("../../static/img/title_get.png")
+            switch (this.levelnum) {
+                case '0':
+                    imgUrl = require("../../static/img/title_get.png")
+                    break;
+                case '1':
+                    imgUrl = require("../../static/img/title_get2.png")
+                    break;
+                case '2':
+                    imgUrl = require("../../static/img/title_get3.png")
+                    break;
+                case '3':
+                    imgUrl = require("../../static/img/title_get4.png")
+                    break;
+                case '4':
+                    imgUrl = require("../../static/img/title_get3.png")
+                    break;
+                case '5':
+                    imgUrl = require("../../static/img/title_get2.png")
+                    break;
+                default:
+                  imgUrl = require("../../static/img/title_get.png")
+            }
+            console.log(imgUrl);
+            return imgUrl;
+        }
+    },
     methods: {
         needHelp() {
-          this.isShowHelp = true;
-        },
-        hidden(){
-          if(this.isShowHelp) {
-            this.isShowHelp = false;
-          }
-        },
-        share(){
-          this.isShowHelp = true
-        },
-        nextGame() {
-          this.$router.go(-1);
-        },
-        itemClick(sub) {
+                this.isShowHelp = true;
+            },
+            hidden() {
+                if (this.isShowHelp) {
+                    this.isShowHelp = false;
+                }
+            },
+            share() {
+                this.isShowHelp = true
+            },
+            nextGame() {
+                this.$router.go(-1);
+            },
+            itemClick(sub) {
                 let that = this;
                 new Promise((resolve, reject) => {
                     new RequestEngine().request(urls.doGameAnswer, {
                             "subjectId": this.subjectId,
                             answer: sub.option,
-                            pageNum:that.pageNo
+                            pageNum: that.pageNo
                         },
                         successValue => {
                             if (successValue) {
