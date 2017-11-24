@@ -54,6 +54,7 @@ section {
   img{
     width: 2.872rem;
     height: 2.576rem;
+    transform: translateY(-1.7rem);
   }
 }
 </style>
