@@ -10,7 +10,7 @@ import router from '../router'
 export default {
 
 	mounted: function() {
-		document.title = this.$route.meta.title;
+		document.title = "欢迎进入桔子剧迷之家"
     let href = window.location.href;
     let routeName = this.getQueryString('routepath');
     if(process.env.NODE_ENV === 'production') {
