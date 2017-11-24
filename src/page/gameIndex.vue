@@ -168,7 +168,7 @@
           <span>{{level.abstarct}}</span>
         </div>
       </section>
-      <button @click="beginGame" type="button" name="button">开始挑战</button>
+      <button :disabled="currentLevel == 6" @click="beginGame" type="button" name="button">{{currentLevel == 6?'挑战完成啦':'开始挑战'}}</button>
       <section class="game_introduce">
         <label>游戏说明</label>
         <ul>
