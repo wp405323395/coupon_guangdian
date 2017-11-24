@@ -1,6 +1,6 @@
 <template lang="html">
   <section>
-    欢迎进入橘子剧迷世家
+    <img src="../../static/img/welcome_im.png" alt="">
   </section>
 </template>
 
@@ -45,4 +45,15 @@ export default {
 </script>
 
 <style lang="css">
+section {
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  background-color: #eeeeee;
+  height: 100%;
+  img{
+    width: 3.59rem;
+    height: 3.22rem;
+  }
+}
 </style>
