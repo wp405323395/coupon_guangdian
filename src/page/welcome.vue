@@ -15,23 +15,22 @@ export default {
     let href = window.location.href;
     let routeName = this.getQueryString('routepath');
     let jsonEncode = this.getQueryString('json');
-    let params = null;
+    let params = {};
     if(!util.textIsNull(jsonEncode)) {
         let jsonDeco = decodeURIComponent(jsonEncode);
-         params = JSON.parse(jsonDeco);
+        params = JSON.parse(jsonDeco);
     }
-    console.log('fff---',params);
+
     if(process.env.NODE_ENV === 'production') {
       login({
         success: function(successValue) {
           router.replace({ name: routeName, params: params});
         },
         faild: function(faildValue) {
-
         }
       });
     } else {
-      router.replace({ name: routeName, params: params});
+      router.replace({ name: 'index', params: {tvId:1}});
     }
 	},
   methods: {

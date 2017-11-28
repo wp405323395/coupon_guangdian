@@ -13,7 +13,8 @@ export default {
   name: 'index',
   data () {
     return {
-      subjectBoList:[]
+      subjectBoList:[],
+      tvId:0
     }
   },
   components: {
@@ -28,8 +29,9 @@ export default {
   },
   mounted: function() {
     document.title = this.$route.meta.title;
+    this.tvId = this.$route.params.tvId;
     let that = this;
-    new RequestEngine().request(urls.queTvThemeList, {tvId: 1},
+    new RequestEngine().request(urls.queTvThemeList, {tvId: this.tvId},
       successValue => {
         that.subjectBoList = successValue;
       }, failValue => {
