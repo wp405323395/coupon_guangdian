@@ -7,23 +7,31 @@
 <script>
 import login from '../login.js'
 import router from '../router'
+import util from '../utils/util'
 export default {
 
 	mounted: function() {
 		document.title = "欢迎进入桔子剧迷之家"
     let href = window.location.href;
     let routeName = this.getQueryString('routepath');
+    let jsonEncode = this.getQueryString('json');
+    let params = null;
+    if(!util.textIsNull(jsonEncode)) {
+        let jsonDeco = decodeURIComponent(jsonEncode);
+         params = JSON.parse(jsonDeco);
+    }
+    console.log('fff---',params);
     if(process.env.NODE_ENV === 'production') {
       login({
         success: function(successValue) {
-          router.replace({ name: routeName })
+          router.replace({ name: routeName, params: params});
         },
         faild: function(faildValue) {
 
         }
       });
     } else {
-      router.replace({ path: routeName })
+      router.replace({ name: routeName, params: params});
     }
 	},
   methods: {
