@@ -151,7 +151,7 @@
 <div class="container">
     <section class="banner">
       <img class="title" src="../../static/img/game_title.png" alt="">
-      <img class="banner_img" src="../../static/img/game_banner.png" alt="">
+      <img class="banner_img" :src="tvProgramImg" alt="">
     </section>
     <section class="content">
       <span class="number_lable">当前参与游戏总人数</span>
@@ -207,6 +207,9 @@ export default {
       this.tvId = this.$route.params.tvId;
       sessionStorage.setItem('gameIndex_tvId',this.tvId);
     }
+    if(process.env.NODE_ENV === 'development') {
+      this.tvId = 1;
+    }
 
 
     let that = this;
@@ -216,6 +219,7 @@ export default {
         that.currentLevel = successValue.currentLevel;
         that.personCount = successValue.personCount;
         that.gameId = successValue.gameId;
+        that.tvProgramImg = successValue.tvProgramImg;
       }, failValue => {
 
       }, completeValue => {})
