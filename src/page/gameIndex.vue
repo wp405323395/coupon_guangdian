@@ -200,8 +200,15 @@ export default {
   },
   mounted: function() {
     document.title = this.$route.meta.title;
-    this.params = this.$route.params;
-    this.tvId = this.params.tvId;
+    let cashTvId = sessionStorage.getItem('gameIndex_tvId');
+    if(cashTvId) {
+      this.tvId = cashTvId;
+    } else {
+      this.tvId = this.$route.params.tvId;
+      sessionStorage.setItem('gameIndex_tvId',this.tvId);
+    }
+
+
     let that = this;
     new RequestEngine().request(urls.listFansLevel, {tvId: this.tvId},
       successValue => {
