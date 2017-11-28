@@ -195,11 +195,13 @@ export default {
       currentLevel:'0',
       personCount:'000000',
       gameId:'',
-      tvId:'1'
+      tvId:'0'
     }
   },
   mounted: function() {
     document.title = this.$route.meta.title;
+    this.params = this.$route.params;
+    this.tvId = this.params.tvId;
     let that = this;
     new RequestEngine().request(urls.listFansLevel, {tvId: this.tvId},
       successValue => {
