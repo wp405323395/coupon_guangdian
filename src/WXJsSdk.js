@@ -5,6 +5,7 @@ if (true) {
   let wx = require('./libs/jweixin-1.2.0').wx;
   window.wx = wx;
   let spliteUrl = location.href.split('#')[0];
+  spliteUrl = 'https://www.maywidehb.com/webapp/dist/';
   new Promise((resolve, reject) => {
     new RequestEngine().request(urls.wxJsSDK, {
         "url": spliteUrl
