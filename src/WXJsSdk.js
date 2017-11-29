@@ -1,5 +1,5 @@
 import RequestEngine from 'netenginwang'
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV === 'production') {
   let urls = require("./config")
   let wx = require('./libs/jweixin-1.2.0');
   new Promise((resolve, reject) => {
