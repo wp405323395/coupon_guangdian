@@ -1,5 +1,5 @@
 var isPublish = (process.env.NODE_ENV === 'production');
-var devHost = '192.168.1.193:8015'
+var devHost = '192.168.1.132:8015'
 var publishHost = "www.maywidehb.com"
 var host = isPublish ? publishHost : devHost;
 var schema = isPublish ? 'https' : 'http';
@@ -27,7 +27,8 @@ var config = {
     `${schema}://${host}/wappweb/tvinteract/tv-interact!queSubjectList`,
     doGameAnswer:
     `${schema}://${host}/wappweb/tvinteract/tv-interact!doGameAnswer`,
-
+    wxJsSDK:
+    `${schema}://${host}/wappweb/tvinteract/tv-interact!wxJsSDK`,
 
 };
 

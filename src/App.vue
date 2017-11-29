@@ -18,7 +18,7 @@ import Vue from 'Vue'
 import faildAlert from './components/faildAlert'
 import progressBar from './components/progressBar'
 import router from './router'
-import redirect from './redirect'
+
 
 window.eventHub = new Vue();
 
