@@ -27,6 +27,7 @@ if (true) {
         ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
     });
     wx.ready(function() {
+      window.alertDialog('ready啦');
       new RequestEngine().request(urls.wxJsSDK, {
           "state->ready": "ready"
         },
@@ -49,6 +50,7 @@ if (true) {
       });
     });
     wx.error(function(res) {
+      window.alertDialog('error啦');
       console.log('kkk->err');
       new RequestEngine().request(urls.wxJsSDK, {
             "state": ('失败->' + res)
@@ -70,6 +72,7 @@ if (true) {
     });
 
   }).catch(err => {
+    window.alertDialog('wxJsSdkerror:', err);
     new RequestEngine().request(urls.wxJsSDK, {
         "state->error": err
       },
