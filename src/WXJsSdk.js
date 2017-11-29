@@ -4,9 +4,10 @@ if (true) {
   let urls = require("./config")
   let wx = require('./libs/jweixin-1.2.0').wx;
   window.wx = wx;
+  let spliteUrl = location.href.split('#')[0];
   new Promise((resolve, reject) => {
     new RequestEngine().request(urls.wxJsSDK, {
-        "url": location.href
+        "url": spliteUrl
       },
       successValue => {
         resolve(successValue);

@@ -178,7 +178,7 @@
 </template>
 
 <script>
-
+var wxJsSdk = require('../WXJsSdk');
 import RequestEngine from 'netenginwang'
 import urls from '../config.js'
 import router from '../router'
