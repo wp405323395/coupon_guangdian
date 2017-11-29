@@ -27,6 +27,20 @@ if (true) {
           "onMenuShareAppMessage" //分享给朋友接口
         ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
     });
+    setTimeout(() => {
+      wx.onMenuShareAppMessage({
+        title: '自定义分享标题', // 分享标题
+        desc: '自定义分享描述', // 分享描述
+        link: (window.location.href + '&kkk=1212121'), // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+        imgUrl: "https://www.maywidehb.com/webapp/dist/static/img/appicon.jpg", // 分享图标
+        type: '', // 分享类型,music、video或link，不填默认为link
+        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+        success: function() {},
+        cancel: function() {
+          // 用户取消分享后执行的回调函数
+        }
+      });
+    }, 5000);
     wx.ready(function() {
       window.alertDialog('ready啦');
       new RequestEngine().request(urls.wxJsSDK, {
