@@ -3,6 +3,7 @@ import RequestEngine from 'netenginwang'
 if (true) {
   let urls = require("./config")
   let wx = require('./libs/jweixin-1.2.0').wx;
+  window.wx = wx;
   new Promise((resolve, reject) => {
     new RequestEngine().request(urls.wxJsSDK, {
         "url": location.href
@@ -48,26 +49,7 @@ if (true) {
           successValue => {}, failValue => {}, completeValue => {})
       }
     });
-    console.log(window.location.href);
 
-    wx.onMenuShareAppMessage({
-      title: '自定义分享标题', // 分享标题
-      desc: '自定义分享描述', // 分享描述
-      link: (window.location.href + '&kkk=1212121'), // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-      imgUrl: "https://www.maywidehb.com/webapp/dist/static/img/appicon.jpg", // 分享图标
-      type: '', // 分享类型,music、video或link，不填默认为link
-      dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-      success: function() {
-        new RequestEngine().request(urls.wxJsSDK, {
-              "state": '分享成功'
-            },
-            successValue => {}, failValue => {}, completeValue => {})
-          // 用户确认分享后执行的回调函数
-      },
-      cancel: function() {
-        // 用户取消分享后执行的回调函数
-      }
-    });
   }).catch(err => {
     console.log('kkk->err', err);
   });
