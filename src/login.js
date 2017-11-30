@@ -2,7 +2,7 @@
  import RequestEngine from 'netenginwang'
 
  function login(loginCallBack) {
-   let wxcode = this.getQueryString('code');
+   let wxcode = getQueryString('code');
    new RequestEngine().request(urls.loginUrl, {
        loginCode: wxcode
      },
