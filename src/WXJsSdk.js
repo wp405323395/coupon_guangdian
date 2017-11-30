@@ -1,8 +1,8 @@
 import RequestEngine from 'netenginwang'
+import wx from 'weixin-js-sdk'
   //process.env.NODE_ENV === 'production'
 if (true) {
-  let urls = require("./config")
-  let wx = require('./libs/jweixin-1.2.0').wx;
+  let urls = require("./config");
   window.wx = wx;
   let spliteUrl = location.href;
   new Promise((resolve, reject) => {
