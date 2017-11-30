@@ -21,9 +21,9 @@ export default {
         params = JSON.parse(jsonDeco);
     }
     alert(window.location.href);
-    let href = window.location.href;
+    let hfff = window.location.href;
     if(process.env.NODE_ENV === 'production') {
-      if(href.indexOf('welcome') >= 0 && href.indexOf('routepath') >= 0 && href.indexOf(json) >= 0) {
+      if(hfff.indexOf('welcome') >= 0 && hfff.indexOf('routepath') >= 0 && hfff.indexOf(json) >= 0) {
         router.replace({ name: routeName, params: params});
       } else {
         login({
