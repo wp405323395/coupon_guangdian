@@ -5,6 +5,7 @@ if (true) {
   let urls = require("./config");
   window.wx = wx;
   let spliteUrl = location.href;
+  spliteUrl = spliteUrl.split('#')[0];
   new Promise((resolve, reject) => {
     new RequestEngine().request(urls.wxJsSDK, {
         "url": spliteUrl
