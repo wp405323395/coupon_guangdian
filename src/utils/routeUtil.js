@@ -2,7 +2,7 @@ import wx from 'weixin-js-sdk'
 
 function routeProcess(context, {
   jsonDate,
-    title = '橘子剧迷之家',
+  title = '橘子剧迷之家',
     desc = '橘子剧迷之家',
     imgUrl =
     "https://www.maywidehb.com/webapp/dist/static/img/appicon.jpg",
@@ -16,6 +16,7 @@ function routeProcess(context, {
   console.log('注入转发------>', title);
   console.log('注入转发------>', desc);
   console.log('注入转发------>', imgUrl);
+  console.log('注入转发------>', sharUrl);
   wx.onMenuShareAppMessage({
     title: title, // 分享标题
     desc: desc, // 分享描述

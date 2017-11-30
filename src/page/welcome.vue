@@ -20,7 +20,7 @@ export default {
         let jsonDeco = decodeURIComponent(jsonEncode);
         params = JSON.parse(jsonDeco);
     }
-    //alert(window.location.href);
+    alert(window.location.href);
     let hfff = window.location.href;
     if(process.env.NODE_ENV === 'production') {
       if(hfff.indexOf('welcome') >= 0 && hfff.indexOf('routepath') >= 0 && hfff.indexOf('json') >= 0) {
