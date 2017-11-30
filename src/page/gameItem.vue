@@ -255,7 +255,7 @@
 </template>
 
 <script>
-
+import * as routeUtil from '../utils/routeUtil'
 import RequestEngine from 'netenginwang'
 import urls from '../config.js'
 export default {
@@ -289,7 +289,17 @@ export default {
             }, failValue => {
 
             }, completeValue => {})
-
+        routeUtil.routeProcess(this, {
+            jsonDate: this.params,
+            title: '剧情踩踩踩',
+            desc: '这是一个神奇的游戏，快来玩吧',
+            success: function() {
+                console.log("成功啦");
+            },
+            cancel: function() {
+                console.log("失败啦");
+            }
+        });
     },
     computed: {
         levelImg() {
@@ -314,7 +324,7 @@ export default {
                     imgUrl = require("../../static/img/title_get2.png")
                     break;
                 default:
-                  imgUrl = require("../../static/img/title_get.png")
+                    imgUrl = require("../../static/img/title_get.png")
             }
             console.log(imgUrl);
             return imgUrl;

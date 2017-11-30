@@ -1,8 +1,8 @@
 import wx from 'weixin-js-sdk'
 
 function routeProcess(context, {
-  jsonDate,
-  title = '橘子剧迷之家',
+  jsonDate = context.$route.params,
+    title = '橘子剧迷之家',
     desc = '橘子剧迷之家',
     imgUrl =
     "https://www.maywidehb.com/webapp/dist/static/img/appicon.jpg",

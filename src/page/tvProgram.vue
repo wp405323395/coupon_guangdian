@@ -71,6 +71,7 @@
 </template>
 
 <script>
+import * as routeUtil from '../utils/routeUtil'
 import faildAlert from '../components/faildAlert'
 import RequestEngine from 'netenginwang'
 import tvVoteItem from '../components/tvVoteItem'
@@ -126,7 +127,17 @@ export default {
           }).catch(err=>{
             window.hiddenProgress();
           });
-
+          routeUtil.routeProcess(this, {
+              jsonDate: this.$route.params,
+              title: '剧情投票啦',
+              desc: '这是一个神奇的投票，快来投投投',
+              success: function() {
+                  console.log("成功啦");
+              },
+              cancel: function() {
+                  console.log("失败啦");
+              }
+          });
 
 
         },
