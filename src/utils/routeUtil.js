@@ -11,7 +11,6 @@ function routeProcess({
 }) {
   let sharUrl = window.location.href + "&json=" + encodeURIComponent(JSON.stringify(
     jsonDate)) + "&sharByWx=1";
-  alert(sharUrl);
   console.log('注入转发------>', jsonDate);
   console.log('注入转发------>', title);
   console.log('注入转发------>', desc);
