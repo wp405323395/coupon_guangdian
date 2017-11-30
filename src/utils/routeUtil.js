@@ -11,10 +11,7 @@ function routeProcess(context, {
 }) {
   let encodeCurrentRoutePath = encodeURIComponent(context.$router.currentRoute.path)
   let sharUrl =
-    `${window.location.href}&
-    json=${encodeURIComponent(JSON.stringify(jsonDate))}&
-    sharByWx=1&
-    encodeCurrentRoutePath=${encodeCurrentRoutePath}`;
+    `${window.location.href}&json=${encodeURIComponent(JSON.stringify(jsonDate))}&sharByWx=1&encodeCurrentRoutePath=${encodeCurrentRoutePath}`;
   console.log('注入转发------>', jsonDate);
   console.log('注入转发------>', title);
   console.log('注入转发------>', desc);
