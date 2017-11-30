@@ -63,7 +63,7 @@ export default {
 
             }, completeValue => {})
         routeUtil.routeProcess(this, {
-
+          jsonDate:this.$route.params,
             title: '剧情投票啦',
             desc: '这是一个神奇的投票，快来投投投',
             success: function() {
