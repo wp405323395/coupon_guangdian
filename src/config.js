@@ -1,5 +1,5 @@
 var isPublish = (process.env.NODE_ENV === 'production');
-var devHost = '192.168.1.132:8015'
+var devHost = '192.168.1.166:8015'
 var publishHost = "www.maywidehb.com"
 var host = isPublish ? publishHost : devHost;
 var schema = isPublish ? 'https' : 'http';
