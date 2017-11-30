@@ -13,7 +13,7 @@ if (process.env.NODE_ENV === 'production') {
       "&json=" + json;
     let url =
       'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx5d63c4a1990efe79&redirect_uri=' +
-      decodeURIComponent(redirectUrl) +
+      encodeURIComponent(redirectUrl) +
       '&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect';
     alert('到微信的--' + url);
     window.location.href = url;
