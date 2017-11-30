@@ -6,7 +6,7 @@ if (process.env.NODE_ENV === 'production') {
 
   let href = window.location.href;
   if (href.indexOf('welcome') >= 0) {} else if (href.indexOf('sharByWx')) {
-    alert('来自微信分享-', window.location.href);
+    alert('来自微信分享-' + href);
     // let weixinUrl =
     //   'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx5d63c4a1990efe79&+redirect_uri=' +
     //   'https%3a%2f%2fwww.maywidehb.com%2fwebapp%2fdist%2f%23%2fwelcome%3froutepath%3dgame%26json%3d%257b%2522tvId%2522%253a2%257d&' +
