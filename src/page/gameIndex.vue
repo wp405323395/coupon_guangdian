@@ -181,6 +181,7 @@
 
 import wx from 'weixin-js-sdk'
 import RequestEngine from 'netenginwang'
+import * as routeUtil from '../utils/routeUtil'
 import urls from '../config.js'
 import router from '../router'
 export default {
@@ -222,20 +223,18 @@ export default {
             }, failValue => {
 
             }, completeValue => {})
-        let sharUrl = window.location.href+"&json=" + encodeURIComponent(JSON.stringify({tvId:this.tvId}));
-        window.alertDialog(sharUrl);
-        wx.onMenuShareAppMessage({
-            title: '橘子剧迷之家', // 分享标题
-            desc: '您的好友向你推荐了一款劲爆游戏', // 分享描述
-            link: sharUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-            imgUrl: "https://www.maywidehb.com/webapp/dist/static/img/appicon.jpg", // 分享图标
-            type: '', // 分享类型,music、video或link，不填默认为link
-            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-            success: function() {},
-            cancel: function() {
-                // 用户取消分享后执行的回调函数
-            }
-        });
+        routeUtil.routeProcess({
+            jsonDate:{tvId:this.tvId},
+            title : '剧情踩踩踩',
+              desc : '这是一个神奇的游戏，快来玩吧',
+              success: function(){
+                console.log("成功啦");
+              },
+              cancel: function(){
+                console.log("失败啦");
+              }
+          }
+        );
     },
     methods: {
 
