@@ -6,16 +6,18 @@ if (process.env.NODE_ENV === 'production') {
 
   let href = window.location.href;
   if (href.indexOf('welcome') >= 0) {} else if (href.indexOf('sharByWx') >= 0) {
-    alert('来自微信分享-' + href);
     let routepath = getQueryString("routepath");
     let json = getQueryString('json');
     let redirectUrl =
       "https://www.maywidehb.com/webapp/dist/#/welcome?routepath=" + routepath +
       "&json=" + json;
-    window.location.href =
+    let url =
       'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx5d63c4a1990efe79&redirect_uri=' +
-      redirectUrl +
+      decodeURIComponent(redirectUrl) +
       '&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect';
+    alert('到微信的--' + url);
+    window.location.href = url;
+
   } else {
     let startRefreshCount = sessionStorage.getItem('loadNum');
     if (startRefreshCount < 2) {
