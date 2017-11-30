@@ -178,8 +178,6 @@
 </template>
 
 <script>
-
-import wx from 'weixin-js-sdk'
 import RequestEngine from 'netenginwang'
 import * as routeUtil from '../utils/routeUtil'
 import urls from '../config.js'
