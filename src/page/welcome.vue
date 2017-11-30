@@ -20,7 +20,7 @@ export default {
         let jsonDeco = decodeURIComponent(jsonEncode);
         params = JSON.parse(jsonDeco);
     }
-
+    alert(window.location.href);
     if(process.env.NODE_ENV === 'production') {
       login({
         success: function(successValue) {
