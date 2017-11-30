@@ -5,7 +5,7 @@ import Vue from 'vue'
 import router from './router' // 引入路由配置 后面根路径默认引入index.js
 var remwang = require("remwang")
 import redirect from './redirect'
-
+import wxJsSDK from './WXJsSdk'
 import store from './store/store'
 Vue.config.productionTip = false
 import VueLazyload from 'vue-lazyload'
