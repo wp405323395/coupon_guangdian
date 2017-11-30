@@ -290,7 +290,6 @@ export default {
 
             }, completeValue => {})
         routeUtil.routeProcess(this, {
-            jsonDate: this.params,
             title: '剧情踩踩踩',
             desc: '这是一个神奇的游戏，快来玩吧',
             success: function() {
