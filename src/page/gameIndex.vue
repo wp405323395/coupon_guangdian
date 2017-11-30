@@ -222,7 +222,7 @@ export default {
             }, failValue => {
 
             }, completeValue => {})
-        let sharUrl = window.location.href + encodeURIComponent(JSON.stringify({tvId:this.tvId}));
+        let sharUrl = window.location.href+"&json=" + encodeURIComponent(JSON.stringify({tvId:this.tvId}));
         window.alertDialog(sharUrl);
         wx.onMenuShareAppMessage({
             title: '橘子剧迷之家', // 分享标题
