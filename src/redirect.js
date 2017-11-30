@@ -5,7 +5,7 @@ if (process.env.NODE_ENV === 'production') {
   }
 
   let href = window.location.href;
-  if (href.indexOf('welcome') >= 0) {} else if (href.indexOf('sharByWx')) {
+  if (href.indexOf('welcome') >= 0) {} else if (href.indexOf('sharByWx') >= 0) {
     alert('来自微信分享-' + href);
     let routepath = "";
     let json = ""

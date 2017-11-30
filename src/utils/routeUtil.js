@@ -1,6 +1,6 @@
 import wx from 'weixin-js-sdk'
 
-function routeProcess({
+function routeProcess(context, {
   jsonDate,
   title = '橘子剧迷之家',
     desc = '橘子剧迷之家',
@@ -9,8 +9,12 @@ function routeProcess({
     success,
     cancel
 }) {
-  let sharUrl = window.location.href + "&json=" + encodeURIComponent(JSON.stringify(
-    jsonDate)) + "&sharByWx=1";
+  let encodeCurrentRoutePath = encodeURIComponent(context.$router.currentRoute.path)
+  let sharUrl =
+    `${window.location.href}&
+    json=${encodeURIComponent(JSON.stringify(jsonDate))}&
+    sharByWx=1&
+    encodeCurrentRoutePath=${encodeCurrentRoutePath}`;
   console.log('注入转发------>', jsonDate);
   console.log('注入转发------>', title);
   console.log('注入转发------>', desc);

@@ -221,7 +221,7 @@ export default {
             }, failValue => {
 
             }, completeValue => {})
-        routeUtil.routeProcess({
+        routeUtil.routeProcess(this,{
             jsonDate:{tvId:this.tvId},
             title : '剧情踩踩踩',
               desc : '这是一个神奇的游戏，快来玩吧',
