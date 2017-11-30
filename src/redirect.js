@@ -7,11 +7,15 @@ if (process.env.NODE_ENV === 'production') {
   let href = window.location.href;
   if (href.indexOf('welcome') >= 0) {} else if (href.indexOf('sharByWx') >= 0) {
     alert('来自微信分享-' + href);
-    let routepath = "";
-    let json = ""
+    let routepath = getQueryString("routepath");
+    let json = getQueryString('json');
     let redirectUrl =
       "https://www.maywidehb.com/webapp/dist/#/welcome?routepath=" + routepath +
       "&json=" + json;
+    window.location.href =
+      'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx5d63c4a1990efe79&redirect_uri=' +
+      redirectUrl +
+      '&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect';
   } else {
     let startRefreshCount = sessionStorage.getItem('loadNum');
     if (startRefreshCount < 2) {
@@ -24,4 +28,18 @@ if (process.env.NODE_ENV === 'production') {
     }
 
   }
+}
+
+function getQueryString(par) {
+  var local_url = document.location.href;
+  var get = local_url.indexOf(par + "=");
+  if (get == -1) {
+    return false;
+  }
+  var get_par = local_url.slice(par.length + get + 1);
+  var nextPar = get_par.indexOf("&");
+  if (nextPar != -1) {
+    get_par = get_par.slice(0, nextPar);
+  }
+  return get_par;
 }
