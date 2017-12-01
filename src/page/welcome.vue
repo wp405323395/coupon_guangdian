@@ -24,8 +24,8 @@ export default {
     let hfff = window.location.href;
     alert(hfff);
     if(process.env.NODE_ENV === 'production') {
-      if(hfff.indexOf('welcome') >= 0 && hfff.indexOf('routepath') >= 0 && hfff.indexOf('json') >= 0) {
-        if(hfff.indexOf('sharByWx') >= 0) {
+      if(hfff.indexOf('welcome') >= 0 && hfff.indexOf('routepath') >= 0) {
+        if(hfff.indexOf('sharByWx') >= 0 || hfff.indexOf('wxmenu') >= 0 ) {
           login({
             success: function(successValue) {
               router.replace({ name: routeName, params: params});
