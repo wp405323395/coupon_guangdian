@@ -1,3 +1,4 @@
+import wx from 'weixin-js-sdk'
 window.onload = function() {
   if (process.env.NODE_ENV === 'production') {
     let loadcount = sessionStorage.getItem('loadNum');
@@ -30,7 +31,7 @@ window.onload = function() {
         ////alert('开始goback了');
         if (startRefreshCount == 3) {
           //alert('调用返回历史');
-          window.close();
+          wx.closeWindow();
         }
       }
     } else {

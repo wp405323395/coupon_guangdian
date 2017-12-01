@@ -22,7 +22,6 @@ export default {
     }
     // alert('welcome文件->'+window.location.href);
     let hfff = window.location.href;
-    alert(hfff);
     if(process.env.NODE_ENV === 'production') {
       if(hfff.indexOf('welcome') >= 0 && hfff.indexOf('routepath') >= 0) {
         if(hfff.indexOf('sharByWx') >= 0 || hfff.indexOf('wxmenu') >= 0 ) {
