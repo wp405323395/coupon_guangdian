@@ -22,6 +22,11 @@ export default {
     }
     // alert('welcome文件->'+window.location.href);
     let hfff = window.location.href;
+    /**
+    welcome,routepath 当链接中包含这两个字段时候是多页面之间跳转。
+    welcome,routepath,sharByWx 当链接中出现几个字段表示从转发或者朋友圈分享，
+    welcome,routepath,wxmenu 表示从公众号菜单进来。
+    */
     if(process.env.NODE_ENV === 'production') {
       if(hfff.indexOf('welcome') >= 0 && hfff.indexOf('routepath') >= 0) {
         if(hfff.indexOf('sharByWx') >= 0 || hfff.indexOf('wxmenu') >= 0 ) {
