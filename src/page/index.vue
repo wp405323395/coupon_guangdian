@@ -19,6 +19,7 @@
 </template>
 
 <script>
+
 import * as routeUtil from '../utils/routeUtil'
 import RequestEngine from 'netenginwang'
 import tvVoteItem from '../components/tvVoteItem'
@@ -61,10 +62,12 @@ export default {
                 that.subjectBoList = successValue;
             }, failValue => {
 
-            }, completeValue => {})
+            }, completeValue => {});
         routeUtil.routeProcess(this, {
-          jsonDate:this.$route.params,
-            title: '剧情投票啦',
+            jsonDate: {
+                tvId: this.tvId
+            },
+            title: '剧情大投票',
             desc: '这是一个神奇的投票，快来投投投',
             success: function() {
                 console.log("成功啦");
