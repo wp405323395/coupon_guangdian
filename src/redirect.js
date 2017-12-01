@@ -30,7 +30,7 @@ window.onload = function() {
         alert('开始goback了');
         if (startRefreshCount == 3) {
           alert('调用返回历史');
-          window.history.go(-1);
+          window.close();
         }
       }
     } else {
