@@ -9,27 +9,31 @@ function routeProcess(context, {
     success,
     cancel
 }) {
-  setTimeout(() => {
-    let jsonDateEncode = encodeURIComponent(JSON.stringify(jsonDate));
-    let sharUrl =
-      `${window.location.href}&json=${jsonDateEncode}&sharByWx=1&routepath=${context.$router.currentRoute.name}`;
-    console.log('注入转发------>', jsonDate);
-    console.log('注入转发------>', title);
-    console.log('注入转发------>', desc);
-    console.log('注入转发------>', imgUrl);
-    console.log('注入转发------>', sharUrl);
-    // alert('自定义的分享链接->' + sharUrl);
-    wx.onMenuShareAppMessage({
-      title: title, // 分享标题
-      desc: desc, // 分享描述
-      link: sharUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-      imgUrl: imgUrl, // 分享图标
-      type: '', // 分享类型,music、video或link，不填默认为link
-      dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-      success: success,
-      cancel: cancel
-    });
-  }, 3000);
+  var timerId = setInterval(() => {
+    if (window.wxJsSdkIsReady) {
+      let jsonDateEncode = encodeURIComponent(JSON.stringify(jsonDate));
+      let sharUrl =
+        `${window.location.href}&json=${jsonDateEncode}&sharByWx=1&routepath=${context.$router.currentRoute.name}`;
+      console.log('注入转发------>', jsonDate);
+      console.log('注入转发------>', title);
+      console.log('注入转发------>', desc);
+      console.log('注入转发------>', imgUrl);
+      console.log('注入转发------>', sharUrl);
+      // alert('自定义的分享链接->' + sharUrl);
+      wx.onMenuShareAppMessage({
+        title: title, // 分享标题
+        desc: desc, // 分享描述
+        link: sharUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+        imgUrl: imgUrl, // 分享图标
+        type: '', // 分享类型,music、video或link，不填默认为link
+        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+        success: success,
+        cancel: cancel
+      });
+      window.clearInterval(timerId);
+    }
+
+  }, 500);
 
 }
 
