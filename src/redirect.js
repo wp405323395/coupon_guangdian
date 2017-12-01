@@ -26,11 +26,12 @@ window.onload = function() {
           '&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect';
 
         window.location.replace(url);
-      } else if (hrefff.indexOf('from=singlemessage') >= 0) {
-        let startRefreshCount = sessionStorage.getItem('loadNum');
-        if (startRefreshCount == 3) {
-          window.history.go(-1);
-        }
+      }
+    } else if (hrefff.indexOf('from=singlemessage') >= 0) {
+      let startRefreshCount = sessionStorage.getItem('loadNum');
+      if (startRefreshCount == 3) {
+        alert('调用返回历史');
+        window.history.go(-1);
       }
     } else {
       // let startRefreshCount = sessionStorage.getItem('loadNum');
