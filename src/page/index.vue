@@ -63,22 +63,20 @@ export default {
             }, failValue => {
 
             }, completeValue => {});
-        setTimeout(()=>{
-          routeUtil.routeProcess(this, {
-              jsonDate: {
-                  tvId: this.tvId
-              },
-              title: '剧情大投票',
-              desc: '这是一个神奇的投票，快来投投投',
-              success: function() {
-                  console.log("成功啦");
-              },
-              cancel: function() {
-                  console.log("失败啦");
-              }
-          });
-        },3000);
-
+        
+        routeUtil.routeProcess(this, {
+            jsonDate: {
+                tvId: this.tvId
+            },
+            title: '剧情大投票',
+            desc: '这是一个神奇的投票，快来投投投',
+            success: function() {
+                console.log("成功啦");
+            },
+            cancel: function() {
+                console.log("失败啦");
+            }
+        });
     }
 }
 
