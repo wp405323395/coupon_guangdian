@@ -31,7 +31,13 @@ window.onload = function() {
         ////alert('开始goback了');
         if (startRefreshCount == 3) {
           alert('调用微信关闭浏览器接口');
-          wx.closeWindow();
+          try {
+            wx.closeWindow();
+          } catch (e) {
+            alert(e);
+          } finally {
+
+          }
         }
       }
     } else {
