@@ -18,7 +18,7 @@ function routeProcess(context, {
     console.log('注入转发------>', desc);
     console.log('注入转发------>', imgUrl);
     console.log('注入转发------>', sharUrl);
-    alert('自定义的分享链接->' + sharUrl);
+    // alert('自定义的分享链接->' + sharUrl);
     wx.onMenuShareAppMessage({
       title: title, // 分享标题
       desc: desc, // 分享描述
