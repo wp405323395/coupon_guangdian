@@ -179,7 +179,7 @@
 
 <script>
 import RequestEngine from 'netenginwang'
-import * as routeUtil from '../utils/routeUtil'
+import * as routeUtil from '../wx/routeUtil'
 import urls from '../config.js'
 import router from '../router'
 export default {

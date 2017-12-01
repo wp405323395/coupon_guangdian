@@ -1,7 +1,7 @@
 import RequestEngine from 'netenginwang'
 import wx from 'weixin-js-sdk'
+let urls = require("../config");
 if (process.env.NODE_ENV === 'production') {
-  let urls = require("./config");
   window.wx = wx;
   let spliteUrl = location.href;
   spliteUrl = spliteUrl.split('#')[0];

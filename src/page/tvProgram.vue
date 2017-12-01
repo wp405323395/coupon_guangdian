@@ -71,7 +71,7 @@
 </template>
 
 <script>
-import * as routeUtil from '../utils/routeUtil'
+import * as routeUtil from '../wx/routeUtil'
 import faildAlert from '../components/faildAlert'
 import RequestEngine from 'netenginwang'
 import tvVoteItem from '../components/tvVoteItem'

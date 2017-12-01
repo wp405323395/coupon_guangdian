@@ -20,7 +20,7 @@
 
 <script>
 
-import * as routeUtil from '../utils/routeUtil'
+import * as routeUtil from '../wx/routeUtil'
 import RequestEngine from 'netenginwang'
 import tvVoteItem from '../components/tvVoteItem'
 import urls from '../config.js'
@@ -63,7 +63,7 @@ export default {
             }, failValue => {
 
             }, completeValue => {});
-        
+
         routeUtil.routeProcess(this, {
             jsonDate: {
                 tvId: this.tvId

@@ -255,7 +255,7 @@
 </template>
 
 <script>
-import * as routeUtil from '../utils/routeUtil'
+import * as routeUtil from '../wx/routeUtil'
 import RequestEngine from 'netenginwang'
 import urls from '../config.js'
 export default {
