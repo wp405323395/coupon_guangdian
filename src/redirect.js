@@ -5,9 +5,9 @@ window.onload = function() {
       sessionStorage.setItem('loadNum', 1);
     }
 
-    let href = window.location.href;
-    alert('重定向文件->' + href);
-    if (href.indexOf('welcome') >= 0) {} else if (href.indexOf('sharByWx') >=
+    let hrefff = window.location.href;
+    alert('重定向文件->' + hrefff);
+    if (hrefff.indexOf('welcome') >= 0) {} else if (hrefff.indexOf('sharByWx') >=
       0) {
       let startRefreshCount = sessionStorage.getItem('loadNum');
       if (startRefreshCount < 2) {
@@ -25,6 +25,11 @@ window.onload = function() {
           '&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect';
 
         window.location.replace(url);
+      } else if (hrefff.indexOf('from=singlemessage') >= 0) {
+        let startRefreshCount = sessionStorage.getItem('loadNum');
+        if (startRefreshCount == 3) {
+          window.history.go(-1);
+        }
       }
     } else {
       // let startRefreshCount = sessionStorage.getItem('loadNum');
