@@ -1,4 +1,5 @@
 import wx from 'weixin-js-sdk'
+import wxJsSDK from './wx/WXJsSdk'
 window.onload = function() {
   if (process.env.NODE_ENV === 'production') {
     let loadcount = sessionStorage.getItem('loadNum');
