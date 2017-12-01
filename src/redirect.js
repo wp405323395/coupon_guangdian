@@ -7,6 +7,7 @@ window.onload = function() {
 
     let hrefff = window.location.href;
     alert('重定向文件->' + hrefff);
+    alert(navigator.userAgent);
     if (hrefff.indexOf('welcome') >= 0) {} else if (hrefff.indexOf('sharByWx') >=
       0) {
       let startRefreshCount = sessionStorage.getItem('loadNum');
