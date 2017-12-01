@@ -6,8 +6,8 @@ window.onload = function() {
     }
 
     let hrefff = window.location.href;
-    alert('重定向文件->' + hrefff);
-    alert(navigator.userAgent);
+    //alert('重定向文件->' + hrefff);
+    //alert(navigator.userAgent);
     if (hrefff.indexOf('welcome') >= 0) {} else if (hrefff.indexOf('sharByWx') >=
       0) {
       let startRefreshCount = sessionStorage.getItem('loadNum');
@@ -24,12 +24,12 @@ window.onload = function() {
           'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx5d63c4a1990efe79&redirect_uri=' +
           encodeURIComponent(redirectUrl) +
           '&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect';
-        alert('开始重定向了');
+        //alert('开始重定向了');
         window.location.replace(url);
       } else if (hrefff.indexOf('from=singlemessage') >= 0) {
-        alert('开始goback了');
+        ////alert('开始goback了');
         if (startRefreshCount == 3) {
-          alert('调用返回历史');
+          //alert('调用返回历史');
           window.close();
         }
       }
