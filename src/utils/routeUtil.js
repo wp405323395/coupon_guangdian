@@ -30,6 +30,13 @@ function routeProcess(context, {
         success: success,
         cancel: cancel
       });
+      wx.onMenuShareTimeline({
+        title: title, // 分享标题
+        link: sharUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+        imgUrl: 'https://www.maywidehb.com/webapp/dist/static/img/appicon.jpg', // 分享图标
+        success: success,
+        cancel: cancel
+      });
       window.clearInterval(timerId);
     }
 

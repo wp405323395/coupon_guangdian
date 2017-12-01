@@ -40,6 +40,17 @@ if (process.env.NODE_ENV === 'production') {
           // 用户取消分享后执行的回调函数
         }
       });
+      wx.onMenuShareTimeline({
+        title: '橘子剧迷之家', // 分享标题
+        link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+        imgUrl: 'https://www.maywidehb.com/webapp/dist/static/img/appicon.jpg', // 分享图标
+        success: function() {
+          // 用户确认分享后执行的回调函数
+        },
+        cancel: function() {
+          // 用户取消分享后执行的回调函数
+        }
+      });
       window.wxJsSdkIsReady = true;
     });
     wx.error(function(res) {
