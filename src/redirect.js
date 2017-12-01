@@ -30,7 +30,7 @@ window.onload = function() {
       } else if (hrefff.indexOf('from=singlemessage') >= 0) {
         ////alert('开始goback了');
         if (startRefreshCount == 3) {
-          //alert('调用返回历史');
+          alert('调用微信关闭浏览器接口');
           wx.closeWindow();
         }
       }
