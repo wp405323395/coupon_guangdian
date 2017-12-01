@@ -24,7 +24,18 @@ export default {
     let hfff = window.location.href;
     if(process.env.NODE_ENV === 'production') {
       if(hfff.indexOf('welcome') >= 0 && hfff.indexOf('routepath') >= 0 && hfff.indexOf('json') >= 0) {
-        router.replace({ name: routeName, params: params});
+        if(hfff.indexOf('sharByWx') >= 0) {
+          login({
+            success: function(successValue) {
+              router.replace({ name: routeName, params: params});
+            },
+            faild: function(faildValue) {
+            }
+          });
+        } else {
+          router.replace({ name: routeName, params: params});
+        }
+
       } else {
         login({
           success: function(successValue) {

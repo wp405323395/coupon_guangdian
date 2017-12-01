@@ -17,7 +17,8 @@ window.onload = function() {
         let redirectUrl =
           "https://www.maywidehb.com/webapp/dist/#/welcome?routepath=" +
           routepath +
-          "&json=" + json;
+          "&json=" + json+
+          "&sharByWx=1";
         let url =
           'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx5d63c4a1990efe79&redirect_uri=' +
           encodeURIComponent(redirectUrl) +
