@@ -33,9 +33,10 @@
                 <li class="cell2">{{item.endDate}}</li>
                 <li class="cell3">{{item.votNum}}</li>
                 <li class="cell4">
-                  <span class="pointer" @click="goToDetail(item.id, item.title)">详情</span>
-                  <span class="pointer" @click="deleteVote(item.id, index)">删除</span>
-                  <span class="pointer" @click="doVote(item.id, index)">生成二维码</span>
+                  <span style="color:#5ba6b3;border-bottom: 1px #5ba6b3 solid;" class="pointer" @click="goToDetail(item.id, item.title)">详情</span>
+                  <span :class="{'pointer': true,'greenpointer': true,'enableClick':item.checkEdit == 'true'}" @click="goToEdit(item,item.id, item.title)">修改</span>
+                  <span style="color:red;border-bottom: 1px red solid;" class="pointer" @click="deleteVote(item.id, index)">删除</span>
+                  <span style="color:#333333;border-bottom: 1px #333333 solid;" class="pointer" @click="doVote(item.id, index)">生成二维码</span>
                 </li>
               </ul>
               <div class="line"></div>
@@ -141,6 +142,13 @@
       goToDetail (id, title) {
         console.log('选中的id ', id);
         router.push({ name: 'voteDetail' , params: { id: id ,title: title}})
+      },
+      goToEdit(item,id, title) {
+        console.log(item.checkEdit);
+        if(item.checkEdit == 'true') {
+          router.push({ name: 'createVote' , params: { id: id ,title: title}})
+        }
+
       }
     }
   }
@@ -213,16 +221,16 @@
           width: 25%;
         }
         .cell1{
-          width: 20%;
+          width: 17.5%;
         }
         .cell2{
-          width: 20%;
+          width: 17.5%;
         }
         .cell3{
           width: 10%;
         }
         .cell4{
-          width: 25%;
+          width: 30%;
         }
       }
     }
@@ -246,21 +254,29 @@
                 margin-right: 7px;
                 border-bottom: 1px #017bc8 solid;
               }
+              .greenpointer{
+                color: #d4d4d4;
+                border-bottom: 1px #d4d4d4 solid;
+               }
+              .enableClick{
+                color: rgb(123, 208, 25);
+                border-bottom: 1px rgb(123, 208, 25) solid;
+              }
             }
             .cell0{
               width: 25%;
             }
             .cell1{
-              width: 20%;
+              width: 17.5%;
             }
             .cell2{
-              width: 20%;
+              width: 17.5%;
             }
             .cell3{
               width: 10%;
             }
             .cell4{
-              width: 25%;
+              width: 30%;
             }
           }
           .line{

@@ -1,6 +1,7 @@
 <template lang="html">
   <div class="content">
     <progress-bar v-if="isShowProgress"></progress-bar>
+    <alert-tip v-if="showAlert" :showHide="showAlert" @cancleTip="cancleTip" @sureTip="sureTip" :alertText="alertText"></alert-tip>
     <section class="title">
       <label for="title">项目主题:</label>
       <input class="input_style" id="title" placeholder="请输入新项目主题说明（2-12字）" type="text" name="" v-model="voteProject.title">
@@ -53,13 +54,16 @@
     </section>
     <section>
       <button class="submit" @click='submit' type="button">提&nbsp;&nbsp;交</button>
-      <span class="warning_text" v-if="isWarning">{{noteText}}</span>
+
+      <button v-if="id" @click='abortClick' class="submit" style="margin-left:50px;border:1px solid #d4d4d4; background-color: white; color:#666666;" type="button" name="button">放弃修改</button>
+      <span style="margin-left:210px; margin-top:10px;display:block;" class="warning_text" v-show="isWarning">{{noteText}}</span>
     </section>
   </div>
 
 </template>
 
 <script>
+  import alertTip from '../components/alertTip'
 import requestEngine from '../netApi/requestEngine'
 import progressBar from '../components/progressBar'
 import router from '../router'
@@ -68,6 +72,8 @@ import utils from '../utils/util.js'
 export default {
   data () {
     return {
+      id:undefined,
+      showAlert: false,
       isWarning:false,
       noteText:'',
       isShowProgress:false,
@@ -93,15 +99,61 @@ export default {
       }
     }
   },
+  mounted : function() {
+    this.id = this.$route.params.id;
+    let title = this.$route.params.title;
+    console.log('mfmfmfmfm->',this.id);
+    if (this.id){
+      router.history.current.meta.isFrom = 'modifyVote';
+    } else {
+      router.history.current.meta.isFrom = 'createVote';
+    }
+    if(this.id) {
+      this.isShowProgress = true;
+      new requestEngine().request(urls.queByProjectId,{projectId:this.id},
+        successValue=>{
+          this.isShowProgress = false;
+          this.voteProject = successValue;
+          this.voteProject.endtime = successValue.endtime.split('T')[0];
+        }, failValue=>{
+          this.isShowProgress = false;
+        }, completeValue=>{
+
+        })
+    }
+
+  },
+
   components: {
-    progressBar
+    progressBar,
+    alertTip
   },
   methods: {
+    sureTip() {
+      this.showAlert = false;
+      this.isShowProgress = true;
+      new requestEngine().request(urls.createVotProject,this.voteProject,
+        successValue=>{
+          this.isShowProgress = false;
+          router.go(-1);
+        }, failValue=>{
+          this.noteText = failValue;
+          this.isShowProgress = false;
+        }, completeValue=>{
+
+        })
+    },
+    cancleTip() {
+      this.showAlert = false;
+    },
     deletePersonListItem (index) {
       this.voteProject.candidateList.splice(index, 1);
     },
     deletetopicListItem (index) {
       this.voteProject.topicList.splice(index, 1);
+    },
+    abortClick(){
+      this.$router.back(-1);
     },
     getNowFormatDate () {
       var date = new Date();
@@ -162,25 +214,32 @@ export default {
           return ;
         }
       }
+      if(this.id) {
+        this.voteProject.id = this.id;
+        this.showAlert = true
+        this.alertText = '确认要修改吗？'
+      } else {
+        let that = this;
+        new Promise((resolve, reject)=>{
+            this.isShowProgress = true;
+            new requestEngine().request(urls.createVotProject,that.voteProject,
+              successValue=>{
+                resolve(successValue);
+              }, failValue=>{
+                reject(failValue);
+              }, completeValue=>{
 
-      let that = this;
-      new Promise((resolve, reject)=>{
-        this.isShowProgress = true;
-        new requestEngine().request(urls.createVotProject,that.voteProject,
-          successValue=>{
-            resolve(successValue);
-          }, failValue=>{
-            reject(failValue);
-          }, completeValue=>{
+              })
+        }).then(value=>{
+          this.isShowProgress = false;
+          router.go(-1);
+        }).catch(err=>{
+          this.isWarning = true;
+          this.noteText = '提交失败，接口请求异常';
+          this.isShowProgress = false;
+        });
+      }
 
-          })
-      }).then(value=>{
-        this.isShowProgress = false;
-        router.go(-1);
-        console.log(value);
-      }).catch(err=>{
-        this.isShowProgress = false;
-      });
     }
   }
 }
@@ -297,8 +356,9 @@ export default {
       margin-left: 210px;
       background-color: #017bc8;
       margin-top: 30px;
-      cursor: pointer;
+      cursor:pointer;
     }
+
     .warning_text{
       margin-left: 50px;
       font-size: 16px;

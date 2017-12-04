@@ -24,6 +24,7 @@ export default {
   computed: {
     currentRoute: function () {
       let routers = router.history.current.fullPath.substring(1).split('/')
+
       let routerName = []
       for (let rou of routers) {
         switch (rou) {
@@ -31,7 +32,14 @@ export default {
             routerName.push('主页')
             break
           case 'createVote':
-            routerName.push('创建新项目')
+            let isFrom = router.history.current.meta.isFrom;
+            console.log('kdkdkkdkd--->',router);
+            if(isFrom == 'createVote') {
+              routerName.push('创建新项目')
+            } else if(isFrom == 'modifyVote') {
+              routerName.push('修改项目')
+            }
+
             break
           case 'voteDetail':
             routerName.push('详情')

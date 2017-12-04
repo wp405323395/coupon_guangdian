@@ -50,6 +50,7 @@ export default {
     height: 70px;
     background-color: white;
     text-align: center;
+    box-shadow: 0px 3px 10px #d4d4d4;
     .pointer{
       cursor: pointer;
     }
@@ -60,6 +61,7 @@ export default {
       align-items: center;
       justify-content: space-between;
       height: 70px;
+
       .logo_img{
         width: 455px;
         height:40px;
