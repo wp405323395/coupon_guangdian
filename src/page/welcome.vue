@@ -20,7 +20,7 @@ export default {
         let jsonDeco = decodeURIComponent(jsonEncode);
         params = JSON.parse(jsonDeco);
     }
-    alert('welcome文件->'+window.location.href);
+    //alert('welcome文件->'+window.location.href);
     let hfff = window.location.href;
     /**
     welcome,routepath 当链接中包含这两个字段时候是多页面之间跳转。

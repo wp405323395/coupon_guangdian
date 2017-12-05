@@ -196,17 +196,25 @@ export default {
     },
     mounted: function() {
         document.title = this.$route.meta.title;
-        let cashTvId = sessionStorage.getItem('gameIndex_tvId');
-        if (cashTvId) {
-            this.tvId = cashTvId;
+        // let cashTvId = sessionStorage.getItem('gameIndex_tvId');
+        // if (cashTvId) {
+        //     this.tvId = cashTvId;
+        // } else {
+        //     this.tvId = this.$route.params.tvId;
+        //     sessionStorage.setItem('gameIndex_tvId', this.tvId);
+        // }
+        // if (process.env.NODE_ENV === 'development') {
+        //     this.tvId = 1;
+        // }
+        this.tvId = this.$route.params.tvId;
+        if(this.tvId) {
+          sessionStorage.setItem('gameIndex_tvId', this.tvId);
         } else {
-            this.tvId = this.$route.params.tvId;
-            sessionStorage.setItem('gameIndex_tvId', this.tvId);
+          this.tvId = sessionStorage.getItem('gameIndex_tvId');
         }
         if (process.env.NODE_ENV === 'development') {
             this.tvId = 1;
         }
-
 
         let that = this;
         new RequestEngine().request(urls.listFansLevel, {
