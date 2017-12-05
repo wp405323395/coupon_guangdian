@@ -8,6 +8,7 @@ window.onload = function() {
     }
 
     let hrefff = window.location.href;
+    alert('过来的链接->' + hrefff);
     /**
     sharByWx 当链接中有这个字段时，需要向微信交换code
     */
