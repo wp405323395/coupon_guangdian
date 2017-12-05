@@ -1,6 +1,6 @@
 var host = "www.htrnpay.cn"
-var host = '192.168.1.151:8015';
-var isHttps = false;
+  //var host = '192.168.1.151:8015';
+var isHttps = true;
 var isDebug = true;
 var schema = isHttps ? 'https' : 'http';
 var config = {
