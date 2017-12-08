@@ -36,7 +36,7 @@ export default {
 
           })
       }).then(value=>{
-        router.replace({ name: 'App' })
+        router.replace({ name: 'login' })
       }).catch(err=>{})
     }
   }
