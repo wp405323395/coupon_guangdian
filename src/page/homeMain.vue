@@ -2,7 +2,7 @@
 <div class="content">
   <head-top class="header_top">
   </head-top>
-  <navigation-bar class="navgation"></navigation-bar>
+
   <div class="content2">
     <transition name="router-fade" mode="out-in">
       <keep-alive>
@@ -19,26 +19,19 @@
 </template>
 <script>
   import headTop from '../components/header'
-  import navigationBar from '../components/navigationBar'
-
   export default {
     data () {
       return {
       }
     },
     components: {
-      headTop,
-      navigationBar,
+      headTop
 
     },
   }
 </script>
 <style lang="scss"  scoped>
-.navgation{
-  width: 916px;
-  margin: auto;
-  margin-top: 100px;
-}
+
 @import '../style/common';
 .router-fade-enter-active, .router-fade-leave-active {
   transition: opacity .1s;

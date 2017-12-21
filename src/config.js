@@ -1,6 +1,6 @@
 var host = "www.htrnpay.cn"
-  //var host = '192.168.1.151:8015';
-var isHttps = true;
+var host = '192.168.1.191:8080';
+var isHttps = false;
 var isDebug = true;
 var schema = isHttps ? 'https' : 'http';
 var config = {
@@ -9,11 +9,11 @@ var config = {
   isDebug,
   srcUrl: `${schema}://${host}/`,
     // 登录地址，用于建立会话
-    loginUrl: `${schema}://${host}/wappweb/vot/vot-manager!doLogin`,
+    loginUrl: `${schema}://${host}/msweb/login/login!login`,
     listProject: `${schema}://${host}/wappweb/vot/vot-manager!listProject`,
     deleteProject:
     `${schema}://${host}/wappweb/vot/vot-manager!deleteProject`,
-    doLogout: `${schema}://${host}/wappweb/vot/vot-manager!doLogout`,
+    doLogout: `${schema}://${host}/msweb/login/login!loginout`,
     createVotProject:
     `${schema}://${host}/wappweb/vot/vot-manager!createVotProject`,
     listCandidate:

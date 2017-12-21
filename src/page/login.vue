@@ -1,11 +1,7 @@
 <template>
   <div class="content">
-    <progress-bar v-if="isShowProgress"></progress-bar>
-    <img class="logo" src="../../static/img/guangdian_logo.png" alt="">
 
     <div class="login">
-       <h1>绩效考核后台管理系统</h1>
-       <div class="line"></div>
        <div class="account input_style">
          <input class="input_st" type="text" name="" placeholder="账号" v-model="account">
        </div>
@@ -19,7 +15,6 @@
        <button @click="login" class="login_btn" type="button" name="button">登陆</button>
 
     </div>
-    <img src="../../static/img/logo_vote_web.png" class="logo_bottom">
   </div>
 
 </template>
@@ -37,7 +32,6 @@ export default {
     return {
       account: storage.account,
       password: storage.password,
-      isShowProgress:false,
       password_err:false
     }
   },
@@ -52,7 +46,6 @@ export default {
       this.password_err = false;
     },
     login () {
-      this.isShowProgress = true;
       var storage = window.localStorage;
       storage.account = this.account;
       storage.password = this.password;
@@ -65,13 +58,11 @@ export default {
           }, failValue=>{
             reject(failValue);
           }, completeValue=>{
-
           })
       }).then(value => {
-        this.isShowProgress = false;
         router.replace({ path: 'main' })
       }).catch(err => {
-        this.isShowProgress = false;
+
         this.password_err = true;
       })
 
@@ -83,46 +74,22 @@ export default {
 <style lang="scss"  scoped>
   @import "../style/mystyle.scss";
   .content{
-    background-image: url('../../static/img/login_background.png');
+    background-image: url('../../static/img/login_background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     height: 768px;
-    .logo_bottom{
-      float: right;
-      margin-top: 150px;
-      margin-right: 30px;
-    }
   }
 
-  .logo{
-    margin-top: 130px;
-    transform: translate(-87px);
-    margin-bottom: 20px;
-  }
   .login{
-    background-color: #f2f0f1;
-    width: 400px;
+    width: 1281px;
     margin: auto;
-    height: 370px;
+    height: 637px;
     overflow: hidden;
     border-radius: 10px;
-    opacity: 0.9;
-
-    h1{
-      font-size: 25px;
-      margin-top: 20px;
-      margin-bottom: 20px;
-      display: block;
-      box-sizing: border-box;
-      letter-spacing: 5px;
-    }
-    .line{
-      height: 1px;
-      background-color: black;
-      width: 100%;
-      margin-bottom: 45px;
-    }
+    margin-top: 110px;
+    background-image: url('../../static/img/login_background.png');
+    padding-top: 190px;
     .input_style{
       height: 50px;
       border: 1px solid #d4d4d4;
@@ -136,7 +103,7 @@ export default {
 
     }
     .notice_err_wrap{
-      height: 30px;
+      height: 1px;
       width: 100%;
       .notice_err{
         color: red;
@@ -144,7 +111,7 @@ export default {
         display: inline-block;
         margin-top: 10px;
         float: right;
-        margin-right: 10px;
+        margin-right: 470px;
       }
       .notice_err::after{
         clear: both;
@@ -188,7 +155,7 @@ export default {
       font-size: 18px;
       border-radius: 5px;
       margin: auto;
-      margin-top: 20px;
+      margin-top: 40px;
 
     }
     .login_btn:hover{

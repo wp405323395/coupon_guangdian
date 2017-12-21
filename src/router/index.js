@@ -6,6 +6,7 @@ import main from '@/page/homeMain'
 import createVote from '@/page/createVote'
 import voteList from '@/page/voteList'
 import voteDetail from '@/page/voteDetail'
+import model from '@/page/model'
   // import Hello from '@/components/Hello'
 
 Vue.use(Router)
@@ -27,12 +28,12 @@ export default new Router({
       component: main,
       children: [{
         path: '/',
-        component: voteList,
-        name: 'homeMain'
+        component: model,
+        name: 'model'
       }, {
-        path: '/main/createVote',
-        component: createVote,
-        name: 'createVote',
+        path: '/main/model',
+        component: model,
+        name: 'model',
         meta: {
           isFrom: 'createVote'
         }
