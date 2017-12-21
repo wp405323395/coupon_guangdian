@@ -48,7 +48,8 @@ export default {
   .myHeader{
     width: 100%;
     height: 70px;
-    background-color: white;
+    background-image: url('../../static/svg/header_bar_background.svg');
+    background-size: cover;
     text-align: center;
     box-shadow: 0px 3px 10px #d4d4d4;
     .pointer{
