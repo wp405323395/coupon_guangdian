@@ -3,9 +3,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import login from '@/page/login'
 import main from '@/page/homeMain'
-import voteDetail from '@/page/voteDetail'
 import model from '@/page/model'
 import changePassword from '@/page/changePassword'
+import homeMainQr from '@/page/homeMainQr'
   // import Hello from '@/components/Hello'
 
 Vue.use(Router)
@@ -37,10 +37,10 @@ export default new Router({
         path: '/main/changePassword',
         component: changePassword,
         name: 'changePassword'
-      }, {
-        path: '/main/voteDetail',
-        component: voteDetail,
-        name: 'voteDetail'
+      },{
+        path: '/main/homeMainQr',
+        component: homeMainQr,
+        name: 'homeMainQr'
       }]
     }]
   }]

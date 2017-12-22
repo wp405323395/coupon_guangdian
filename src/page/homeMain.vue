@@ -40,7 +40,7 @@
   opacity: 0;
 }
 .content2{
-  width: 916px;
+  width: 1000px;
   background-color: white;
   margin: auto;
 }
