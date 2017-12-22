@@ -11,6 +11,8 @@ var config = {
     // 登录地址，用于建立会话
     loginUrl: `${schema}://${host}/msweb/login/login!login`,
     doLogout: `${schema}://${host}/msweb/login/login!loginout`,
+    queMenuList: `${schema}://${host}/msweb/login/login!queMenuList`,
+    queQruleList: `${schema}://${host}/msweb/msqr/ms-qrcode!queQruleList`,
 };
 
 

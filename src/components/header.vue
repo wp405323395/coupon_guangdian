@@ -61,12 +61,11 @@ export default {
     background-image: url('../../static/svg/header_bar_background.svg');
     background-size: cover;
     text-align: center;
-    box-shadow: 0px 3px 10px #d4d4d4;
     .pointer{
       cursor: pointer;
     }
     .headContent{
-      width: 916px;
+      width: 1000px;
       display: flex;
       margin: auto;
       align-items: center;
@@ -88,6 +87,7 @@ export default {
           .modify_password{
             height: 0px;
             overflow: visible;
+            z-index: 10000;
             span{
               display: block;
               background: white;
@@ -96,6 +96,7 @@ export default {
               visibility: hidden;
               color: #333333;
               box-shadow: 2px 5px 10px #3e4fb5;
+
             }
             span:hover{
               visibility: visible;

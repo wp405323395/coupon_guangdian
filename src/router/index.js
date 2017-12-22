@@ -6,6 +6,7 @@ import main from '@/page/homeMain'
 import model from '@/page/model'
 import changePassword from '@/page/changePassword'
 import homeMainQr from '@/page/homeMainQr'
+import qrRulerManager from '@/page/qrRulerManager'
   // import Hello from '@/components/Hello'
 
 Vue.use(Router)
@@ -37,10 +38,18 @@ export default new Router({
         path: '/main/changePassword',
         component: changePassword,
         name: 'changePassword'
-      },{
+      }, {
         path: '/main/homeMainQr',
         component: homeMainQr,
-        name: 'homeMainQr'
+        name: 'homeMainQr',
+        children: [{
+          path: '',
+          component: qrRulerManager
+        }, {
+          name: 'qrRulerManager',
+          path: '/main/qrRulerManager',
+          component: qrRulerManager
+        }]
       }]
     }]
   }]
