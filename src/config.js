@@ -1,5 +1,5 @@
 var host = "www.htrnpay.cn"
-var host = '192.168.1.191:8080';
+var host = '192.168.1.153:8080';
 var isHttps = false;
 var isDebug = true;
 var schema = isHttps ? 'https' : 'http';

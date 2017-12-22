@@ -3,9 +3,19 @@
     <div class="headContent">
       <img class="logo_img" src="../../static/img/head_logo.png" alt="">
       <div class="logout">
-        <span class="head_text">用户 <span>{{account}}</span> </span>
+        <div class="head_text hove_modify_password">
+          <span class="acount_style">用户 {{account}}</span>
+          <img src="../../static/img/cursor_down.png" alt="">
+          <div class="modify_password">
+            <span>
+              <router-link :to="{ name: 'changePassword', params: {}}">
+                修改密码
+              </router-link>
+            </span>
+          </div>
+        </div>
         <span class="head_text space">|</span>
-        <span @click="logoutClick" class="head_text pointer">退出</span>
+        <span @click="logoutClick" class="head_text pointer">退出登录</span>
       </div>
     </div>
   </header>
@@ -47,7 +57,7 @@ export default {
   @import "../style/mixin";
   .myHeader{
     width: 100%;
-    height: 70px;
+    height: 50px;
     background-image: url('../../static/svg/header_bar_background.svg');
     background-size: cover;
     text-align: center;
@@ -61,22 +71,48 @@ export default {
       margin: auto;
       align-items: center;
       justify-content: space-between;
-      height: 70px;
+      height: 50px;
 
       .logo_img{
-        width: 455px;
-        height:40px;
+        width: 241px;
+        height:25px;
       }
       .logout{
         display: flex;
         .head_text{
-          font-size: 16px;
-          color: #999999;
+          font-size: 14px;
+          color: white;
+          .acount_style{
+            color: white;
+          }
+          .modify_password{
+            height: 0px;
+            overflow: visible;
+            span{
+              display: block;
+              background: white;
+              padding: 5px 20px;
+              font-size: 14px;
+              visibility: hidden;
+              color: #333333;
+              box-shadow: 2px 5px 10px #3e4fb5;
+            }
+            span:hover{
+              visibility: visible;
+              cursor: pointer;
+            }
+          }
         }
+        .hove_modify_password:hover {
+          span{
+            visibility: visible;
+          }
+        }
+
         .space{
-          margin-left: 6px;
-          margin-right: 6px;
-          color: #d6dee2;
+          margin-left: 16px;
+          margin-right: 10px;
+          color: #8a96de;
         }
       }
     }

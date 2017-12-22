@@ -1,13 +1,28 @@
 <template lang="html">
     <div class="content">
         <section>
-          <span>二维码规则</span>
-          <span>话题管理</span>
-          <span>新闻管理</span>
-          <span>游戏管理</span>
+          <div class="model_itmes">
+            <i class="iconfont qr_color">&#xe616;</i>
+            <span>二维码规则</span>
+          </div>
+          <div class="model_itmes">
+            <i class="iconfont qr_color">&#xe613;</i>
+            <span>话题管理</span>
+
+          </div>
+          <div class="model_itmes">
+            <i class="iconfont qr_color">&#xe614;</i>
+            <span>新闻管理</span>
+
+          </div>
+          <div class="model_itmes">
+            <i class="iconfont qr_color">&#xe615;</i>
+            <span>游戏管理</span>
+
+          </div>
 
         </section>
-        <i class="iconfont qr_color">&#xe613;</i>
+
     </div>
 </template>
 
@@ -39,21 +54,39 @@ export default {
   section {
     display: flex;
     flex-direction: row;
-    span{
+    .model_itmes{
       display: block;
       width: 180px;
       height: 170px;
       margin: 30px;
       background-image: url('../../static/img/manager_model_unfocus.png');
       background-size: 180px 180px;
+      background-position: -5px 0px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 35px;
+      span{
+        display: block;
+        margin-top: 10px;
+        font-size: 16px;
+        color: black;
+      }
+      .qr_color {
+        font-size: 40px;
+      }
     }
-    span:hover {
+    .model_itmes:hover {
       background-image: url('../../static/img/manager_model_focus.png');
+      cursor: pointer;
+      span{
+        color: white;
+      }
+      .qr_color {
+        color: white;
+      }
     }
   }
-  .qr_color:hover {
-    font-size: 50px;
-    color: yellow;
-  }
+
 }
 </style>

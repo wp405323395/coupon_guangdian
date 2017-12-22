@@ -7,6 +7,7 @@ import createVote from '@/page/createVote'
 import voteList from '@/page/voteList'
 import voteDetail from '@/page/voteDetail'
 import model from '@/page/model'
+import changePassword from '@/page/changePassword'
   // import Hello from '@/components/Hello'
 
 Vue.use(Router)
@@ -33,10 +34,11 @@ export default new Router({
       }, {
         path: '/main/model',
         component: model,
-        name: 'model',
-        meta: {
-          isFrom: 'createVote'
-        }
+        name: 'model'
+      }, {
+        path: '/main/changePassword',
+        component: changePassword,
+        name: 'changePassword'
       }, {
         path: '/main/voteDetail',
         component: voteDetail,
