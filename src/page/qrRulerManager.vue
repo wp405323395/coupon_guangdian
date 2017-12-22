@@ -35,7 +35,7 @@
         </div>
         <div v-else>
           <span>{{qrRuler.rulename}}</span>
-          <span>{{qrRuler.etime.split('T')[0]}}--{{qrRuler.stime.split('T')[0]}}</span>
+          <span>{{qrRuler.etime.split('T')[0]}}--{{qrRuler.stime.split('T')[0]}}<br>周{{qrRuler.qrday.replace(new RegExp(",","gm") , '、周')}}</span>
           <span>{{qrRuler.city}}</span>
           <span>{{qrRuler.channelname}}</span>
           <span>{{qrRuler.qrtype}}</span>
@@ -132,12 +132,15 @@ export default {
           width: 100px;
           color: #666666;
           text-align: center;
-          height: 50px;
-          line-height: 50px;
+          overflow: visible;
+          display: inline-block;
+          padding-top: 10px;
+          padding-bottom: 10px;
         }
         span:nth-child(2){
           width: 180px;
         }
+
       }
       .lable_s{
         span{
