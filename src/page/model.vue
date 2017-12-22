@@ -29,7 +29,7 @@
             margin: 30px;
             background-image: url('../../static/img/manager_model_unfocus.png');
             background-size: 180px 180px;
-            background-position: -5px 0px;
+            background-position: -1px 0px;
             display: flex;
             flex-direction: column;
             align-items: center;
