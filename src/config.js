@@ -10,22 +10,7 @@ var config = {
   srcUrl: `${schema}://${host}/`,
     // 登录地址，用于建立会话
     loginUrl: `${schema}://${host}/msweb/login/login!login`,
-    listProject: `${schema}://${host}/wappweb/vot/vot-manager!listProject`,
-    deleteProject:
-    `${schema}://${host}/wappweb/vot/vot-manager!deleteProject`,
     doLogout: `${schema}://${host}/msweb/login/login!loginout`,
-    createVotProject:
-    `${schema}://${host}/wappweb/vot/vot-manager!createVotProject`,
-    listCandidate:
-    `${schema}://${host}/wappweb/vot/vot-manager!listCandidate`,
-    queryDetailByPidAndCid:
-    `${schema}://${host}/wappweb/vot/vot-manager!queryDetailByPidAndCid`,
-    createVotQRcode:
-    `${schema}://${host}/wappweb/vot/vot-manager!createVotQRcode`,
-    exportVotDetail:
-    `${schema}://${host}/wappweb/vot/vot-manager!exportVotDetail`,
-    queByProjectId:
-    `${schema}://${host}/wappweb/vot/vot-manager!queByProjectId`,
 };
 
 
