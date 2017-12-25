@@ -61,9 +61,10 @@
           </div>
         </div>
       </div>
-      <div class="contents">
 
-      </div>
+    </section>
+    <section class="page_footer">
+      
     </section>
   </section>
 </template>
@@ -143,6 +144,7 @@ export default {
     margin-left: 20px;
     margin-right: 20px;
     border: 1px solid #d4d4d4;
+
     div:nth-child(even){
       background-color: white;
     }
@@ -224,5 +226,10 @@ export default {
       }
 
     }
+  }
+  .page_footer{
+    width: 100%;
+
+    background-color: yellow;
   }
 </style>
