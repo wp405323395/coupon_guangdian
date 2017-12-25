@@ -25,22 +25,29 @@
     <section class="qr_manager_list_panel">
       <div v-for="(qrRuler, index) of qrRulers" class="table_header">
         <div  class="lable_s" v-if="index == 0">
-          <span>规则名称</span>
-          <span>规则有效日期</span>
-          <span>地区</span>
-          <span>频道</span>
-          <span>显示类型</span>
-          <span>状态</span>
-          <span>操作</span>
+          <div><span>规则名称</span></div>
+          <div><span>规则有效日期</span></div>
+          <div><span>地区</span></div>
+          <div><span>频道</span></div>
+          <div><span>显示类型</span></div>
+          <div><span>状态</span></div>
+          <div><span>操作</span></div>
         </div>
         <div v-else>
-          <span>{{qrRuler.rulename}}</span>
-          <span>{{qrRuler.etime.split('T')[0]}}--{{qrRuler.stime.split('T')[0]}}<br>周{{qrRuler.qrday.replace(new RegExp(",","gm") , '、周')}}</span>
-          <span>{{qrRuler.city}}</span>
-          <span>{{qrRuler.channelname}}</span>
-          <span>{{qrRuler.qrtype}}</span>
-          <span>{{qrRuler.status}}</span>
-          <span>操作</span>
+          <div><span>{{qrRuler.rulename}}</span></div>
+          <div class="useful_day">
+            <span>{{qrRuler.etime.split('T')[0]}}--{{qrRuler.stime.split('T')[0]}}</span>
+            <span class="week">周{{qrRuler.qrday.replace(new RegExp(",","gm") , '、周')}}</span>
+          </div>
+          <div><span>{{qrRuler.city}}</span></div>
+          <div><span>{{qrRuler.channelname}}</span></div>
+          <div><span>{{qrRuler.qrtype}}</span></div>
+          <div><span>{{qrRuler.status}}</span></div>
+          <div class="opration">
+            <span>详情</span>
+            <span>修改</span>
+            <span>删除</span>
+          </div>
         </div>
       </div>
       <div class="contents">
@@ -127,25 +134,47 @@ export default {
         display: flex;
         flex-direction: row;
         justify-content:space-around;
-        span{
+        div{
           font-size: 14px;
           width: 100px;
-          color: #666666;
-          text-align: center;
           overflow: visible;
-          display: inline-block;
           padding-top: 10px;
           padding-bottom: 10px;
+          background-color: transparent;
+          span{
+            color: #666666;
+            display: block;
+            align-self: center;
+          }
         }
-        span:nth-child(2){
+        .useful_day{
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          .week{
+            font-size: 10px;
+          }
+        }
+        .opration{
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+        }
+        div:nth-child(2){
+          width: 180px;
+        }
+        div:last-child{
           width: 180px;
         }
 
       }
       .lable_s{
-        span{
-          font-weight: 600;
-          color: #333333;
+        div{
+          span{
+            font-weight: 600;
+            color: #333333;
+          }
+
         }
       }
 
