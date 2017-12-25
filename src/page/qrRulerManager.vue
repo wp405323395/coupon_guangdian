@@ -37,16 +37,27 @@
           <div><span>{{qrRuler.rulename}}</span></div>
           <div class="useful_day">
             <span>{{qrRuler.etime.split('T')[0]}}--{{qrRuler.stime.split('T')[0]}}</span>
-            <span class="week">周{{qrRuler.qrday.replace(new RegExp(",","gm") , '、周')}}</span>
+            <span v-if="qrRuler.qrday == '1,2,3,4,5,6,7'">全 天</span>
+            <span v-else class="week">周{{qrRuler.qrday.replace(new RegExp(",","gm") , '、周')}}</span>
           </div>
           <div><span>{{qrRuler.city}}</span></div>
-          <div><span>{{qrRuler.channelname}}</span></div>
+          <div>
+            <span v-if="qrRuler.channelname == '*'">所有频道</span>
+            <span v-else>{{qrRuler.channelname}}</span>
+          </div>
           <div><span>{{qrRuler.qrtype}}</span></div>
-          <div><span>{{qrRuler.status}}</span></div>
+          <div class="opration_status">
+            <span :class="{'waiteCheck':qrRuler.status == '待审核',
+                              'writting':qrRuler.status == '编辑中',
+                              'reject':qrRuler.status == '审核驳回',
+                              'pass':qrRuler.status == '已审核',
+                              'unline':qrRuler.status == '已下线',
+                              'publish':qrRuler.status == '已发布'}">{{qrRuler.status}}</span>
+          </div>
           <div class="opration">
-            <span>详情</span>
-            <span>修改</span>
-            <span>删除</span>
+            <span :class="{'can_opration':true}">详情</span>
+            <span :class="{'can_opration':(qrRuler.status == '编辑中'||qrRuler.status == '审核驳回'||qrRuler.status == '已下线' )}">修改</span>
+            <span :class="{'can_opration':(qrRuler.status == '编辑中'||qrRuler.status == '审核驳回'||qrRuler.status == '已下线' )}">删除</span>
           </div>
         </div>
       </div>
@@ -64,6 +75,9 @@ import urls from '../config.js'
 export default {
   data(){
     return {
+      isCanShowDetail:true,
+      isCanModify:false,
+      isCanDelete:false,
       qrRulers:[]
     }
   },
@@ -76,6 +90,9 @@ export default {
 
       }, completeValue=>{
       })
+  },
+  methods:{
+
   }
 
 }
@@ -147,6 +164,27 @@ export default {
             align-self: center;
           }
         }
+        .opration_status{
+          .waiteCheck{
+            color:#e86e2c;
+          },
+          .writting{
+            color:#000000;
+          },
+          .reject{
+            color:#d93939;
+          }
+          .pass{
+            color:#51b333;
+          }
+          .unline{
+
+          }
+          .publish{
+
+          }
+
+        }
         .useful_day{
           display: flex;
           flex-direction: column;
@@ -159,6 +197,13 @@ export default {
           display: flex;
           flex-direction: row;
           align-items: center;
+          span{
+            text-decoration: underline;
+          }
+          .can_opration{
+            color: blue;
+            cursor: pointer;
+          }
         }
         div:nth-child(2){
           width: 180px;
