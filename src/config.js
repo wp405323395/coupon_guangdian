@@ -13,6 +13,7 @@ var config = {
     doLogout: `${schema}://${host}/msweb/login/login!loginout`,
     queMenuList: `${schema}://${host}/msweb/login/login!queMenuList`,
     queQruleList: `${schema}://${host}/msweb/msqr/ms-qrcode!queQruleList`,
+    queData: `${schema}://${host}/msweb/login/login!queData`,
 };
 
 

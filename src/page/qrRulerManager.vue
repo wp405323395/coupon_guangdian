@@ -12,14 +12,16 @@
         </div>
         <div class="">
           <label for="">规则有效日期</label>
-          <input type="text" name="" value="">
+          <input type="date" name="" v-model="date">
         </div>
         <div class="">
           <label for="">规则状态</label>
-          <input type="text" name="" value="">
+          <select v-model="ruleSelected">
+            <option v-for="item in ruleSelectes" v-bind:value="item.mcode">{{item.mname}}</option>
+          </select>
         </div>
       </section>
-      <button type="button" name="button">查询</button>
+      <button type="button" name="button" @click="search()">查询</button>
     </section>
 
     <section class="qr_manager_list_panel">
@@ -36,7 +38,7 @@
         <div v-else>
           <div><span>{{qrRuler.rulename}}</span></div>
           <div class="useful_day">
-            <span>{{qrRuler.etime.split('T')[0]}}--{{qrRuler.stime.split('T')[0]}}</span>
+            <span>{{qrRuler.stime.split('T')[0]}}--{{qrRuler.etime.split('T')[0]}}</span>
             <span v-if="qrRuler.qrday == '1,2,3,4,5,6,7'">全 天</span>
             <span v-else class="week">周{{qrRuler.qrday.replace(new RegExp(",","gm") , '、周')}}</span>
           </div>
@@ -64,12 +66,13 @@
 
     </section>
     <section class="page_footer">
-      
+      <pagination :display="display" :total="total" :current="current" @setCurrent="setCurrent"></pagination>
     </section>
   </section>
 </template>
 
 <script>
+import pagination from '../components/pagination'
 import requestEngine from '../netApi/requestEngine'
 import router from '../router'
 import urls from '../config.js'
@@ -79,21 +82,48 @@ export default {
       isCanShowDetail:true,
       isCanModify:false,
       isCanDelete:false,
-      qrRulers:[]
+      ruleSelectes:[],
+      ruleSelected:'',
+      qrRulers:[],
+      total: 0,
+      display: 10,
+      current: 1,
+      date:''
     }
   },
+  components: {
+    pagination
+  },
   mounted:function(){
-    new requestEngine().request(urls.queQruleList,{channelName:'',date:'',status:'',pageSize:10,pageNo:1},
+    this.setCurrent(1);
+    new requestEngine().request(urls.queData,{gcode:'QR_RULE_STATUS'},
       successValue=>{
-        this.qrRulers = successValue;
-        this.qrRulers.unshift({});
+        if(successValue) {
+          successValue.unshift({mcode:'',mname:'全部'});
+        }
+        this.ruleSelectes = successValue;
+
       }, failValue=>{
 
       }, completeValue=>{
       })
   },
   methods:{
+    search(){
+      this.setCurrent(1);
+    },
+    setCurrent (idx) {
+      this.current = idx;
+      new requestEngine().request(urls.queQruleList,{channelName:'',date:this.date,status:this.ruleSelected,pageSize:10,pageNo:idx},
+        successValue=>{
+          this.qrRulers = successValue.result;
+          this.qrRulers.unshift({});
+          this.total = successValue.totalCount;
+        }, failValue=>{
 
+        }, completeValue=>{
+        })
+    },
   }
 
 }
@@ -121,10 +151,30 @@ export default {
     padding-top: 30px;
     text-align:center;
     border:1px solid #d4d4d4;
+    button{
+      cursor: pointer;
+    }
+    button:active{
+      transform: translateY(4px);
+    }
     .input_section{
       display: flex;
       flex-direction: row;
       justify-content: space-between;
+      div{
+        label{
+          font-size: 16px;
+        }
+        input {
+          height: 40px;
+          font-weight: 600;
+          padding-left: 10px;
+          line-height: 40px;
+          border: 1px solid #d4d4d4;
+          border-radius: 5px;
+          margin-left: 10px;
+        }
+      }
     }
     button{
       margin-top: 30px;
@@ -221,7 +271,6 @@ export default {
             font-weight: 600;
             color: #333333;
           }
-
         }
       }
 
@@ -229,7 +278,6 @@ export default {
   }
   .page_footer{
     width: 100%;
-
-    background-color: yellow;
+    padding-right: 30px;
   }
 </style>
