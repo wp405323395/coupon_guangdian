@@ -27,6 +27,7 @@
     <section class="qr_manager_list_panel">
       <div v-for="(qrRuler, index) of qrRulers" class="table_header">
         <div  class="lable_s" v-if="index == 0">
+          <div style="width:80px;"><span>选择规则</span></div>
           <div><span>规则名称</span></div>
           <div><span>规则有效日期</span></div>
           <div><span>地区</span></div>
@@ -36,6 +37,7 @@
           <div><span>操作</span></div>
         </div>
         <div v-else>
+          <div style="width:80px;"><input type="checkbox" name="" value=""> </div>
           <div><span>{{qrRuler.rulename}}</span></div>
           <div class="useful_day">
             <span>{{qrRuler.stime.split('T')[0]}}--{{qrRuler.etime.split('T')[0]}}</span>
@@ -66,6 +68,12 @@
 
     </section>
     <section class="page_footer">
+      <div class="check_status">
+        <input id="checkall" type="checkbox" name="" value="">
+        <label for="checkall">全选</label>
+        <span class="pass">通过</span>
+        <span class="reject">驳回</span>
+      </div>
       <pagination :display="display" :total="total" :current="current" @setCurrent="setCurrent"></pagination>
     </section>
   </section>
@@ -215,6 +223,9 @@ export default {
             display: block;
             align-self: center;
           }
+          input{
+            align-self: center;
+          }
         }
         .opration_status{
           .waiteCheck{
@@ -277,7 +288,29 @@ export default {
     }
   }
   .page_footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     width: 100%;
     padding-right: 30px;
+    .check_status{
+      padding-left: 55px;
+      transform: translateY(5px);
+      label{
+        font-size: 16px;
+      }
+      span{
+        font-size: 16px;
+        color: #666666;
+        cursor: pointer;
+        text-decoration: underline;
+      }
+      .pass{
+        color: #4a5cc8;
+      }
+      .reject{
+        color: #d93939;
+      }
+    }
   }
 </style>
