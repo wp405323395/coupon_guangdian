@@ -6,7 +6,7 @@
       </div>
     </section>
     <section class="submenue" @click="subMenusClick()">
-        <span v-for="(subMenus, index) of currentSubMenus" :id="index" :class="{ 'submenuActive' : index == currentSubMenusIndex}">{{subMenus.name}}</span>
+        <span v-for="(subMenus, index) of currentSubMenus" :id="subMenus.linkurl" :class="{ 'submenuActive' : index == currentSubMenusIndex}">{{subMenus.name}}</span>
     </section>
   </section>
 
@@ -32,6 +32,7 @@ export default {
     },
     subMenusClick(){
       this.currentSubMenusIndex = event.target.id;
+      this.$store.commit('subMenusDir',this.currentSubMenusIndex)
     }
   },
   mounted : function() {

@@ -27,7 +27,7 @@
     <section class="qr_manager_list_panel">
       <div v-for="(qrRuler, index) of qrRulers" class="table_header">
         <div  class="lable_s" v-if="index == 0">
-          <div style="width:80px;"><span>选择规则</span></div>
+          <div v-if="$store.state.subMenusDir=='/rulerReset'||$store.state.subMenusDir=='/rulerCheck'||$store.state.subMenusDir=='/rulerCheck'||$store.state.subMenusDir=='/rulerPublish'" style="width:80px;"><span>选择规则</span></div>
           <div><span>规则名称</span></div>
           <div><span>规则有效日期</span></div>
           <div><span>地区</span></div>
@@ -37,7 +37,7 @@
           <div><span>操作</span></div>
         </div>
         <div v-else>
-          <div style="width:80px;"><input type="checkbox" name="" value=""> </div>
+          <div v-if="$store.state.subMenusDir=='/rulerReset'||$store.state.subMenusDir=='/rulerCheck'||$store.state.subMenusDir=='/rulerCheck'||$store.state.subMenusDir=='/rulerPublish'" style="width:80px;"><input type="checkbox" name="" value=""> </div>
           <div><span>{{qrRuler.rulename}}</span></div>
           <div class="useful_day">
             <span>{{qrRuler.stime.split('T')[0]}}--{{qrRuler.etime.split('T')[0]}}</span>
@@ -58,21 +58,48 @@
                               'unline':qrRuler.status == '已下线',
                               'publish':qrRuler.status == '已发布'}">{{qrRuler.status}}</span>
           </div>
-          <div class="opration">
+          <div class="opration" v-if="$store.state.subMenusDir=='/rulerManager'">
             <span :class="{'can_opration':true}">详情</span>
             <span :class="{'can_opration':(qrRuler.status == '编辑中'||qrRuler.status == '审核驳回'||qrRuler.status == '已下线' )}">修改</span>
             <span :class="{'can_opration':(qrRuler.status == '编辑中'||qrRuler.status == '审核驳回'||qrRuler.status == '已下线' )}">删除</span>
           </div>
+          <div class="opration" v-else-if="$store.state.subMenusDir=='/rulerCheck'">
+            <span :class="{'can_opration':true}">详情</span>
+            <span>通过</span>
+            <span>驳回</span>
+          </div>
+          <div class="opration" v-else-if="$store.state.subMenusDir=='/rulerPublish'">
+            <span :class="{'can_opration':true}">详情</span>
+            <span>发布</span>
+          </div>
+          <div class="opration" v-else-if="$store.state.subMenusDir=='/rulerReset'">
+            <span :class="{'can_opration':true}">详情</span>
+            <span>下线</span>
+          </div>
+
+
         </div>
       </div>
 
     </section>
     <section class="page_footer">
-      <div class="check_status">
+      <div class="check_status" v-if="$store.state.subMenusDir=='/rulerManager'"/>
+      <div class="check_status" v-else-if="$store.state.subMenusDir=='/rulerCheck'">
         <input id="checkall" type="checkbox" name="" value="">
         <label for="checkall">全选</label>
         <span class="pass">通过</span>
         <span class="reject">驳回</span>
+      </div>
+
+      <div class="check_status" v-else-if="$store.state.subMenusDir=='/rulerPublish'">
+        <input id="checkall" type="checkbox" name="" value="">
+        <label for="checkall">全选</label>
+        <span class="pass">发布</span>
+      </div>
+      <div class="check_status" v-else-if="$store.state.subMenusDir=='/rulerReset'">
+        <input id="checkall" type="checkbox" name="" value="">
+        <label for="checkall">全选</label>
+        <span class="pass">下线</span>
       </div>
       <pagination :display="display" :total="total" :current="current" @setCurrent="setCurrent"></pagination>
     </section>
