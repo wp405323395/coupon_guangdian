@@ -6,7 +6,7 @@
       </div>
     </section>
     <section class="submenue" @click="subMenusClick()">
-        <span v-for="(subMenus, index) of currentSubMenus" :id="subMenus.linkurl" :class="{ 'submenuActive' : index == currentSubMenusIndex}">{{subMenus.name}}</span>
+        <span v-for="(subMenus, index) of currentSubMenus" :id="subMenus.linkurl" :class="{ 'submenuActive' : subMenus.linkurl == currentSubMenusIndex}">{{subMenus.name}}</span>
     </section>
   </section>
 
