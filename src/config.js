@@ -14,6 +14,7 @@ var config = {
     queMenuList: `${schema}://${host}/msweb/login/login!queMenuList`,
     queQruleList: `${schema}://${host}/msweb/msqr/ms-qrcode!queQruleList`,
     queData: `${schema}://${host}/msweb/login/login!queData`,
+    editPassword: `${schema}://${host}/msweb/login/login!editPassword`,
 };
 
 
