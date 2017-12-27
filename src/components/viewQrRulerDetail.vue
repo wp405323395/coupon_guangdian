@@ -77,13 +77,13 @@
         <section>
           <div class="">
             <span>开始日期:</span>
-            <span>{{qrRulerDetail.stime.split('T')[0]}}</span>
+            <span>{{qrRulerDetail.stime?qrRulerDetail.stime.split('T')[0]:''}}</span>
             <span>截止日期:</span>
-            <span>{{qrRulerDetail.etime.split('T')[0]}}</span>
+            <span>{{qrRulerDetail.etime?qrRulerDetail.etime.split('T')[0]:''}}</span>
           </div>
           <div class="">
             <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            <span>周{{qrRulerDetail.qrday.replace(new RegExp(",","gm") , '、周')}}</span>
+            <span>周{{qrRulerDetail.qrday?qrRulerDetail.qrday.replace(new RegExp(",","gm") , '、周'):''}}</span>
           </div>
           <div class="">
             <span>推送规则:</span>
