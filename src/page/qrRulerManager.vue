@@ -27,7 +27,9 @@
     <section class="qr_manager_list_panel">
       <div v-for="(qrRuler, index) of qrRulers" class="table_header">
         <div  class="lable_s" v-if="index == 0">
-          <div v-if="$store.state.subMenusDir=='/rulerReset'||$store.state.subMenusDir=='/rulerCheck'||$store.state.subMenusDir=='/rulerCheck'||$store.state.subMenusDir=='/rulerPublish'" style="width:80px;"><span>选择规则</span></div>
+          <div v-if="$store.state.subMenusDir=='/rulerReset'||$store.state.subMenusDir=='/rulerCheck'||$store.state.subMenusDir=='/rulerCheck'||$store.state.subMenusDir=='/rulerPublish'" style="width:80px;">
+            <span>选择规则</span>
+          </div>
           <div><span>规则名称</span></div>
           <div><span>规则有效日期</span></div>
           <div><span>地区</span></div>
@@ -37,7 +39,9 @@
           <div><span>操作</span></div>
         </div>
         <div v-else>
-          <div v-if="$store.state.subMenusDir=='/rulerReset'||$store.state.subMenusDir=='/rulerCheck'||$store.state.subMenusDir=='/rulerCheck'||$store.state.subMenusDir=='/rulerPublish'" style="width:80px;"><input type="checkbox" name="" value=""> </div>
+          <div v-if="$store.state.subMenusDir=='/rulerReset'||$store.state.subMenusDir=='/rulerCheck'||$store.state.subMenusDir=='/rulerCheck'||$store.state.subMenusDir=='/rulerPublish'" style="width:80px;">
+            <input v-model="qrRuler.isSelect" type="checkbox" name="" value="">
+          </div>
           <div><span>{{qrRuler.rulename}}</span></div>
           <div class="useful_day">
             <span>{{qrRuler.stime.split('T')[0]}}--{{qrRuler.etime.split('T')[0]}}</span>
@@ -84,22 +88,20 @@
     </section>
     <section class="page_footer">
       <div class="check_status" v-if="$store.state.subMenusDir=='/rulerManager'"/>
-      <div class="check_status" v-else-if="$store.state.subMenusDir=='/rulerCheck'">
-        <input id="checkall" type="checkbox" name="" value="">
+      <div class="check_status" v-else>
+        <input @click="selectAllClick" v-model="selectAll" id="checkall" type="checkbox" name="" value="">
         <label for="checkall">全选</label>
-        <span class="pass">通过</span>
-        <span class="reject">驳回</span>
-      </div>
+        <div class="opration_section" v-if="$store.state.subMenusDir=='/rulerCheck'">
+          <span class="pass">通过</span>
+          <span class="reject">驳回</span>
+        </div>
+        <div class="opration_section" v-else-if="$store.state.subMenusDir=='/rulerPublish'">
+          <span class="pass">发布</span>
+        </div>
+        <div class="opration_section" v-else-if="$store.state.subMenusDir=='/rulerReset'">
+          <span class="pass">下线</span>
+        </div>
 
-      <div class="check_status" v-else-if="$store.state.subMenusDir=='/rulerPublish'">
-        <input id="checkall" type="checkbox" name="" value="">
-        <label for="checkall">全选</label>
-        <span class="pass">发布</span>
-      </div>
-      <div class="check_status" v-else-if="$store.state.subMenusDir=='/rulerReset'">
-        <input id="checkall" type="checkbox" name="" value="">
-        <label for="checkall">全选</label>
-        <span class="pass">下线</span>
       </div>
       <pagination :display="display" :total="total" :current="current" @setCurrent="setCurrent"></pagination>
     </section>
@@ -123,14 +125,37 @@ export default {
       total: 0,
       display: 10,
       current: 1,
-      date:''
+      date:'',
+      selectAll:false
     }
   },
   components: {
     pagination
   },
   mounted:function(){
-    this.setCurrent(1);
+    let that = this;
+    document.bus.$on('switchQrRulers',function(status){
+      that.selectAll = false;
+      that.qrRulers = [];
+      switch (status) {
+        case '/rulerManager':
+          that.setCurrent (that.current, '');
+          break;
+        case '/rulerCheck':
+          that.setCurrent (that.current, '1');
+          break;
+        case '/rulerPublish':
+          that.setCurrent (that.current, '2');
+          break;
+        case '/rulerReset':
+          that.setCurrent (that.current, '4');
+          break;
+
+        default:
+
+      }
+    });
+    that.setCurrent(1,this.ruleSelected);
     new requestEngine().request(urls.queData,{gcode:'QR_RULE_STATUS'},
       successValue=>{
         if(successValue) {
@@ -143,13 +168,15 @@ export default {
       }, completeValue=>{
       })
   },
+
   methods:{
     search(){
-      this.setCurrent(1);
+      this.setCurrent(1, this.ruleSelected);
     },
-    setCurrent (idx) {
+    setCurrent (idx, ruleSelected) {
+
       this.current = idx;
-      new requestEngine().request(urls.queQruleList,{channelName:'',date:this.date,status:this.ruleSelected,pageSize:10,pageNo:idx},
+      new requestEngine().request(urls.queQruleList,{channelName:'',date:this.date,status:ruleSelected,pageSize:10,pageNo:idx},
         successValue=>{
           this.qrRulers = successValue.result;
           this.qrRulers.unshift({});
@@ -159,6 +186,11 @@ export default {
         }, completeValue=>{
         })
     },
+    selectAllClick () {
+      for (var i = 0; i < this.qrRulers.length; i++) {
+        this.qrRulers[i].isSelect = this.selectAll;
+      }
+    }
   }
 
 }
@@ -320,11 +352,25 @@ export default {
     justify-content: space-between;
     width: 100%;
     padding-right: 30px;
+    padding-bottom: 30px;
     .check_status{
       padding-left: 55px;
       transform: translateY(5px);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      .opration_section{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        span{
+          margin-right: 10px;
+        }
+      }
       label{
         font-size: 16px;
+        margin-left: 10px;
+        margin-right: 10px;
       }
       span{
         font-size: 16px;

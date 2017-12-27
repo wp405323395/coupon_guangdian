@@ -31,8 +31,12 @@ export default {
       this.currentSubMenus = this.menus[this.currentMenu].subList;
     },
     subMenusClick(){
+      if(event.target.id == null || event.target.id=='') {
+        return;
+      }
       this.currentSubMenusIndex = event.target.id;
-      this.$store.commit('subMenusDir',this.currentSubMenusIndex)
+      this.$store.commit('subMenusDir',this.currentSubMenusIndex);
+      document.bus.$emit('switchQrRulers',this.currentSubMenusIndex);
     }
   },
   mounted : function() {
@@ -40,6 +44,8 @@ export default {
       successValue=>{
         this.menus = successValue;
         this.currentSubMenus = successValue[0].subList;
+        this.currentSubMenusIndex = this.currentSubMenus[0].linkurl
+        this.$store.commit('subMenusDir',this.currentSubMenusIndex);
       }, failValue=>{
 
       }, completeValue=>{
