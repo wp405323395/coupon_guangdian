@@ -1,8 +1,10 @@
 <template lang="html">
   <section>
     <section class="add_project">
-      <img src="../../static/img/add_project.png" alt="">
-      <span>新增规则</span>
+      <div @click="createNewQrRuler" class="add_project_content">
+        <img src="../../static/img/add_project.png" alt="">
+        <span>新增规则</span>
+      </div>
     </section>
     <section class="search_pannel">
       <section class="input_section">
@@ -23,88 +25,80 @@
       </section>
       <button type="button" name="button" @click="search()">查询</button>
     </section>
-
-    <section class="qr_manager_list_panel">
-      <div v-for="(qrRuler, index) of qrRulers" class="table_header">
-        <div  class="lable_s" v-if="index == 0">
-          <div v-if="$store.state.subMenusDir=='/rulerReset'||$store.state.subMenusDir=='/rulerCheck'||$store.state.subMenusDir=='/rulerCheck'||$store.state.subMenusDir=='/rulerPublish'" style="width:80px;">
-            <span>选择规则</span>
+    <section class="all_content_wrap">
+      <section class="qr_manager_list_panel">
+        <div v-for="(qrRuler, index) of qrRulers" class="table_header">
+          <div  class="lable_s" v-if="index == 0">
+            <div v-if="$store.state.subMenusDir=='/rulerReset'||$store.state.subMenusDir=='/rulerCheck'||$store.state.subMenusDir=='/rulerCheck'||$store.state.subMenusDir=='/rulerPublish'" style="width:80px;">
+              <span>选择规则</span>
+            </div>
+            <div><span>规则名称</span></div>
+            <div><span>规则有效日期</span></div>
+            <div><span>地区</span></div>
+            <div><span>频道</span></div>
+            <div><span>显示类型</span></div>
+            <div><span>状态</span></div>
+            <div><span>操作</span></div>
           </div>
-          <div><span>规则名称</span></div>
-          <div><span>规则有效日期</span></div>
-          <div><span>地区</span></div>
-          <div><span>频道</span></div>
-          <div><span>显示类型</span></div>
-          <div><span>状态</span></div>
-          <div><span>操作</span></div>
+          <div v-else>
+            <div v-if="$store.state.subMenusDir=='/rulerReset'||$store.state.subMenusDir=='/rulerCheck'||$store.state.subMenusDir=='/rulerCheck'||$store.state.subMenusDir=='/rulerPublish'" style="width:80px;">
+              <input v-model="qrRuler.isSelect" type="checkbox" name="" value="">
+            </div>
+            <div><span>{{qrRuler.rulename}}</span></div>
+            <div class="useful_day">
+              <span>{{qrRuler.stime.split('T')[0]}}--{{qrRuler.etime.split('T')[0]}}</span>
+              <span v-if="qrRuler.qrday == '1,2,3,4,5,6,7'">全 天</span>
+              <span v-else class="week">周{{qrRuler.qrday.replace(new RegExp(",","gm") , '、周')}}</span>
+            </div>
+            <div><span>{{qrRuler.city}}</span></div>
+            <div>
+              <span v-if="qrRuler.channelname == '*'">所有频道</span>
+              <span v-else>{{qrRuler.channelname}}</span>
+            </div>
+            <div><span>{{qrRuler.qrtype}}</span></div>
+            <div class="opration_status">
+              <span :class="{'waiteCheck':qrRuler.status == '待审核',
+                                'writting':qrRuler.status == '编辑中',
+                                'reject':qrRuler.status == '审核驳回',
+                                'pass':qrRuler.status == '已审核',
+                                'unline':qrRuler.status == '已下线',
+                                'publish':qrRuler.status == '已发布'}">{{qrRuler.status}}</span>
+            </div>
+            <div class="opration">
+              <span :class="{'can_opration':true}" @click="gotoQrRulerDetail">详情</span>
+                <span v-if="$store.state.subMenusDir=='/rulerManager'" :class="{'can_opration':(qrRuler.status == '编辑中'||qrRuler.status == '审核驳回'||qrRuler.status == '已下线' )}">修改</span>
+                <span v-if="$store.state.subMenusDir=='/rulerManager'" :class="{'can_opration':(qrRuler.status == '编辑中'||qrRuler.status == '审核驳回'||qrRuler.status == '已下线' )}">删除</span>
+                <span v-if="$store.state.subMenusDir=='/rulerCheck'">通过</span>
+                <span v-if="$store.state.subMenusDir=='/rulerCheck'">驳回</span>
+                <span v-if="$store.state.subMenusDir=='/rulerPublish'">发布</span>
+                <span v-if="$store.state.subMenusDir=='/rulerReset'">下线</span>
+            </div>
+
+          </div>
         </div>
-        <div v-else>
-          <div v-if="$store.state.subMenusDir=='/rulerReset'||$store.state.subMenusDir=='/rulerCheck'||$store.state.subMenusDir=='/rulerCheck'||$store.state.subMenusDir=='/rulerPublish'" style="width:80px;">
-            <input v-model="qrRuler.isSelect" type="checkbox" name="" value="">
+      </section>
+      <section class="page_footer">
+        <div class="check_status" v-if="$store.state.subMenusDir=='/rulerManager'"/>
+        <div class="check_status" v-else>
+          <input @click="selectAllClick" v-model="selectAll" id="checkall" type="checkbox" name="" value="">
+          <label for="checkall">全选</label>
+          <div class="opration_section" v-if="$store.state.subMenusDir=='/rulerCheck'">
+            <span class="pass">通过</span>
+            <span class="reject">驳回</span>
           </div>
-          <div><span>{{qrRuler.rulename}}</span></div>
-          <div class="useful_day">
-            <span>{{qrRuler.stime.split('T')[0]}}--{{qrRuler.etime.split('T')[0]}}</span>
-            <span v-if="qrRuler.qrday == '1,2,3,4,5,6,7'">全 天</span>
-            <span v-else class="week">周{{qrRuler.qrday.replace(new RegExp(",","gm") , '、周')}}</span>
+          <div class="opration_section" v-else-if="$store.state.subMenusDir=='/rulerPublish'">
+            <span class="pass">发布</span>
           </div>
-          <div><span>{{qrRuler.city}}</span></div>
-          <div>
-            <span v-if="qrRuler.channelname == '*'">所有频道</span>
-            <span v-else>{{qrRuler.channelname}}</span>
+          <div class="opration_section" v-else-if="$store.state.subMenusDir=='/rulerReset'">
+            <span class="pass">下线</span>
           </div>
-          <div><span>{{qrRuler.qrtype}}</span></div>
-          <div class="opration_status">
-            <span :class="{'waiteCheck':qrRuler.status == '待审核',
-                              'writting':qrRuler.status == '编辑中',
-                              'reject':qrRuler.status == '审核驳回',
-                              'pass':qrRuler.status == '已审核',
-                              'unline':qrRuler.status == '已下线',
-                              'publish':qrRuler.status == '已发布'}">{{qrRuler.status}}</span>
-          </div>
-          <div class="opration" v-if="$store.state.subMenusDir=='/rulerManager'">
-            <span :class="{'can_opration':true}">详情</span>
-            <span :class="{'can_opration':(qrRuler.status == '编辑中'||qrRuler.status == '审核驳回'||qrRuler.status == '已下线' )}">修改</span>
-            <span :class="{'can_opration':(qrRuler.status == '编辑中'||qrRuler.status == '审核驳回'||qrRuler.status == '已下线' )}">删除</span>
-          </div>
-          <div class="opration" v-else-if="$store.state.subMenusDir=='/rulerCheck'">
-            <span :class="{'can_opration':true}">详情</span>
-            <span>通过</span>
-            <span>驳回</span>
-          </div>
-          <div class="opration" v-else-if="$store.state.subMenusDir=='/rulerPublish'">
-            <span :class="{'can_opration':true}">详情</span>
-            <span>发布</span>
-          </div>
-          <div class="opration" v-else-if="$store.state.subMenusDir=='/rulerReset'">
-            <span :class="{'can_opration':true}">详情</span>
-            <span>下线</span>
-          </div>
-
 
         </div>
-      </div>
-
+        <pagination :display="display" :total="total" :current="current" @setCurrent="setCurrent"></pagination>
+      </section>
     </section>
-    <section class="page_footer">
-      <div class="check_status" v-if="$store.state.subMenusDir=='/rulerManager'"/>
-      <div class="check_status" v-else>
-        <input @click="selectAllClick" v-model="selectAll" id="checkall" type="checkbox" name="" value="">
-        <label for="checkall">全选</label>
-        <div class="opration_section" v-if="$store.state.subMenusDir=='/rulerCheck'">
-          <span class="pass">通过</span>
-          <span class="reject">驳回</span>
-        </div>
-        <div class="opration_section" v-else-if="$store.state.subMenusDir=='/rulerPublish'">
-          <span class="pass">发布</span>
-        </div>
-        <div class="opration_section" v-else-if="$store.state.subMenusDir=='/rulerReset'">
-          <span class="pass">下线</span>
-        </div>
-
-      </div>
-      <pagination :display="display" :total="total" :current="current" @setCurrent="setCurrent"></pagination>
-    </section>
+    <qr-ruler-manager @closePannel="closePannel" v-if="isShowViewQrRulerPannel" class="createQrRuler"></qr-ruler-manager>
+    <create-qr-ruler @closePannel="closePannel" v-if="isShowCreateQrRulerPannel" class="createQrRuler"></create-qr-ruler>
   </section>
 </template>
 
@@ -113,6 +107,8 @@ import pagination from '../components/pagination'
 import requestEngine from '../netApi/requestEngine'
 import router from '../router'
 import urls from '../config.js'
+import createQrRuler from '../components/createQrRuler'
+import qrRulerManager from '../components/viewQrRulerDetail'
 export default {
   data(){
     return {
@@ -127,11 +123,24 @@ export default {
       current: 1,
       date:'',
       selectAll:false,
-      unAbleRulerSearch:false
+      unAbleRulerSearch:false,
+      isShowCreateQrRulerPannel:false,
+      isShowViewQrRulerPannel:false
     }
   },
   components: {
-    pagination
+    pagination,
+    createQrRuler,
+    qrRulerManager
+  },
+  watch:{
+    isShowCreateQrRulerPannel(curVal, oldVal) {
+      if(curVal) {
+        window.document.body.style.overflow="hidden";
+      } else {
+        window.document.body.style.overflow="scroll";
+      }
+    }
   },
   mounted:function(){
     let that = this;
@@ -179,6 +188,13 @@ export default {
   },
 
   methods:{
+    gotoQrRulerDetail(){
+      this.isShowViewQrRulerPannel = true;
+    },
+    closePannel(){
+      this.isShowViewQrRulerPannel = false;
+      this.isShowCreateQrRulerPannel = false;
+    },
     search(){
       this.setCurrent(1, this.ruleSelected);
     },
@@ -199,6 +215,9 @@ export default {
       for (var i = 0; i < this.qrRulers.length; i++) {
         this.qrRulers[i].isSelect = this.selectAll;
       }
+    },
+    createNewQrRuler(){
+      this.isShowCreateQrRulerPannel = true;
     }
   }
 
@@ -206,19 +225,37 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .add_project{
-    display: flex;
-    flex-direction: row;
-    justify-content:flex-end;
-    padding-right: 30px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    span{
-      font-size: 16px;
-      display: inline-block;
-      margin-left: 10px;
-    }
+  .createQrRuler{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(20,23,42,.5);
   }
+  .add_project{
+    position: relative;
+    height: 45px;
+    .add_project_content{
+      display: inline-block;
+      padding-right: 30px;
+      padding-top: 15px;
+
+      cursor: pointer;
+      position: absolute;
+      right: 0;
+      display: flex;
+      flex-direction:row;
+      align-items: center;
+      span{
+        font-size: 16px;
+        display: inline-block;
+        margin-left: 10px;
+      }
+    }
+
+  }
+
   .search_pannel{
     background-color: #eef1f8;
     margin: 14px 20px;
@@ -263,8 +300,11 @@ export default {
       margin-bottom: 30px;
     }
   }
-
-  .qr_manager_list_panel{
+  .all_content_wrap_underfocus{
+    overflow: hidden
+  }
+  .all_content_wrap{
+    .qr_manager_list_panel{
     margin-top: 10px;
     background-color:  #eef1f8;
     margin-left: 20px;
@@ -355,6 +395,8 @@ export default {
 
     }
   }
+  }
+
   .page_footer{
     display: flex;
     flex-direction: row;
