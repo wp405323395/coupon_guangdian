@@ -16,7 +16,7 @@
         </div>
         <div class="">
           <label for="">规则状态</label>
-          <select v-model="ruleSelected">
+          <select :disabled="unAbleRulerSearch" v-model="ruleSelected">
             <option v-for="item in ruleSelectes" v-bind:value="item.mcode">{{item.mname}}</option>
           </select>
         </div>
@@ -126,7 +126,8 @@ export default {
       display: 10,
       current: 1,
       date:'',
-      selectAll:false
+      selectAll:false,
+      unAbleRulerSearch:false
     }
   },
   components: {
@@ -139,15 +140,23 @@ export default {
       that.qrRulers = [];
       switch (status) {
         case '/rulerManager':
+          that.unAbleRulerSearch = false;
+          that.ruleSelected = '';
           that.setCurrent (that.current, '');
           break;
         case '/rulerCheck':
+          that.unAbleRulerSearch = true;
+          that.ruleSelected = '1';
           that.setCurrent (that.current, '1');
           break;
         case '/rulerPublish':
+          that.ruleSelected = '2';
+          that.unAbleRulerSearch = true;
           that.setCurrent (that.current, '2');
           break;
         case '/rulerReset':
+          that.ruleSelected = '4';
+          that.unAbleRulerSearch = true;
           that.setCurrent (that.current, '4');
           break;
 
