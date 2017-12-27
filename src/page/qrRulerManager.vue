@@ -65,7 +65,7 @@
                                 'publish':qrRuler.status == '已发布'}">{{qrRuler.status}}</span>
             </div>
             <div class="opration">
-              <span :class="{'can_opration':true}" @click="gotoQrRulerDetail">详情</span>
+              <span :class="{'can_opration':true}" @click="gotoQrRulerDetail(qrRuler.id)">详情</span>
                 <span v-if="$store.state.subMenusDir=='/rulerManager'" :class="{'can_opration':(qrRuler.status == '编辑中'||qrRuler.status == '审核驳回'||qrRuler.status == '已下线' )}">修改</span>
                 <span v-if="$store.state.subMenusDir=='/rulerManager'" :class="{'can_opration':(qrRuler.status == '编辑中'||qrRuler.status == '审核驳回'||qrRuler.status == '已下线' )}">删除</span>
                 <span v-if="$store.state.subMenusDir=='/rulerCheck'">通过</span>
@@ -97,7 +97,7 @@
         <pagination :display="display" :total="total" :current="current" @setCurrent="setCurrent"></pagination>
       </section>
     </section>
-    <qr-ruler-manager @closePannel="closePannel" v-if="isShowViewQrRulerPannel" class="createQrRuler"></qr-ruler-manager>
+    <qr-ruler-manager :rulerId="clickedQrRulerId" @closePannel="closePannel" v-if="isShowViewQrRulerPannel" class="createQrRuler"></qr-ruler-manager>
     <create-qr-ruler @closePannel="closePannel" v-if="isShowCreateQrRulerPannel" class="createQrRuler"></create-qr-ruler>
   </section>
 </template>
@@ -125,7 +125,8 @@ export default {
       selectAll:false,
       unAbleRulerSearch:false,
       isShowCreateQrRulerPannel:false,
-      isShowViewQrRulerPannel:false
+      isShowViewQrRulerPannel:false,
+      clickedQrRulerId:''
     }
   },
   components: {
@@ -135,6 +136,13 @@ export default {
   },
   watch:{
     isShowCreateQrRulerPannel(curVal, oldVal) {
+      if(curVal) {
+        window.document.body.style.overflow="hidden";
+      } else {
+        window.document.body.style.overflow="scroll";
+      }
+    },
+    isShowViewQrRulerPannel(curVal, oldVal){
       if(curVal) {
         window.document.body.style.overflow="hidden";
       } else {
@@ -188,7 +196,8 @@ export default {
   },
 
   methods:{
-    gotoQrRulerDetail(){
+    gotoQrRulerDetail(id){
+      this.clickedQrRulerId = id;
       this.isShowViewQrRulerPannel = true;
     },
     closePannel(){

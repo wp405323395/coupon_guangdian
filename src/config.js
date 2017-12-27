@@ -15,6 +15,7 @@ var config = {
     queQruleList: `${schema}://${host}/msweb/msqr/ms-qrcode!queQruleList`,
     queData: `${schema}://${host}/msweb/login/login!queData`,
     editPassword: `${schema}://${host}/msweb/login/login!editPassword`,
+    queQRcodeRuleDetail: `${schema}://${host}/msweb/msqr/ms-qrcode!queQRcodeRuleDetail`,
 };
 
 
