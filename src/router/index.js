@@ -54,7 +54,7 @@ export default new Router({
         component: index,
         name: 'index',
         meta: {
-          title: '往期回顾',
+          title: '热门话题',
           keepAlive: true
         }
       }, {
