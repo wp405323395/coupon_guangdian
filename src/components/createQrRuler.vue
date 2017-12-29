@@ -183,6 +183,12 @@
           <div class="item_wrap">
             <span class="red_start"></span>
             <label for="">限制类型:</label>
+            <select name="selected">
+              <option value="a">智能卡号</option>
+              <option value="b">智能卡号</option>
+              <option value="c">智能卡号</option>
+            </select>
+            <input type="text" id="" name="" class="min_length_input" value="^(8270104048478701)$">
           </div>
         </section>
       </section>
@@ -306,6 +312,9 @@ export default {
           }
           .long_input{
             width: 400px;
+          }
+          .min_length_input{
+            width: 250px;
           }
           .number_input{
             width: 100px;
