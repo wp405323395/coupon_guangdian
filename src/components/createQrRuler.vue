@@ -332,9 +332,9 @@
                         <span id="2">否</span>
                         <div class="checked_pannel" v-if="qrRulerDetail.countdown != undefined&&qrRulerDetail.countdown.indexOf('false')>=0"><img src="../../static/img/week_checked.png" alt=""></div>
                     </div>
-                    <span v-if="qrRulerDetail.countdown.indexOf('true')>=0" class="red_start">*</span>
-                    <label v-if="qrRulerDetail.countdown.indexOf('true')>=0" for="downTime">倒计时时间:</label>
-                    <select v-if="qrRulerDetail.countdown.indexOf('true')>=0" name="selected">
+                    <span v-if="qrRulerDetail.countdown != undefined&&qrRulerDetail.countdown.indexOf('true')>=0" class="red_start">*</span>
+                    <label v-if="qrRulerDetail.countdown != undefined&&qrRulerDetail.countdown.indexOf('true')>=0" for="downTime">倒计时时间:</label>
+                    <select v-if="qrRulerDetail.countdown != undefined&&qrRulerDetail.countdown.indexOf('true')>=0" name="selected">
                         <option value="a">60秒</option>
                         <option value="b">160秒</option>
                         <option value="c">180秒</option>
@@ -390,7 +390,40 @@ import urls from '../config.js'
 export default {
     data() {
             return {
-                qrRulerDetail: {}
+                qrRulerDetail: {
+                    "aftertime": 60,
+                    "auditmemo": null,
+                    "backhp": 70,
+                    "backsize": 580,
+                    "backurl": "",
+                    "backwp": 350,
+                    "channelname": "",
+                    "city": "武汉",
+                    "countdown": "true",
+                    "etime": "2018-12-07T00:00:00",
+                    "id": 142,
+                    "limttype": "CARD",
+                    "limtvalue": "^(8270104048478701)$",
+                    "memo": "",
+                    "operid": 1,
+                    "optime": "2017-12-20T00:00:00",
+                    "poll": "true",
+                    "pollinterval": 60,
+                    "pollparam": null,
+                    "priority": 1000,
+                    "pushtime": null,
+                    "qrday": "1",
+                    "qrhp": 240,
+                    "qrsize": 220,
+                    "qrtype": "付费包订购",
+                    "qrurl": "",
+                    "qrwp": 398,
+                    "rulename": "",
+                    "status": "1",
+                    "stime": "2017-12-07T00:00:00",
+                    "touchtype": "换台",
+                    "workhours": 5
+                }
             }
         },
         mounted: function() {
@@ -411,46 +444,46 @@ export default {
             closePannel() {
                     this.$emit('closePannel', [])
                 },
-            chooseWeek(target) {
-                if (target.target.id) {
-                  console.log(target.target.id);
-                    if (this.qrRulerDetail.qrday.indexOf(target.target.id) >= 0) {
-                        this.qrRulerDetail.qrday= this.qrRulerDetail.qrday.replace(target.target.id, '');
-                    } else {
-                        this.qrRulerDetail.qrday = this.qrRulerDetail.qrday.concat(target.target.id);
+                chooseWeek(target) {
+                    if (target.target.id) {
+                        console.log(target.target.id);
+                        if (this.qrRulerDetail.qrday.indexOf(target.target.id) >= 0) {
+                            this.qrRulerDetail.qrday = this.qrRulerDetail.qrday.replace(target.target.id, '');
+                        } else {
+                            this.qrRulerDetail.qrday = this.qrRulerDetail.qrday.concat(target.target.id);
+                        }
+                        console.log(this.qrRulerDetail.qrday);
                     }
-                    console.log(this.qrRulerDetail.qrday);
-                }
 
-            },
-            choosePushRuler(target){
-              if(target.target.id) {
-                if(this.qrRulerDetail.touchtype.indexOf('换台')>=0) {
-                  this.qrRulerDetail.touchtype = '时间';
-                } else {
-                  this.qrRulerDetail.touchtype = '换台';
-                }
-              }
-            },
-            chooseDownTime(target){
-              if(target.target.id) {
-                if(this.qrRulerDetail.countdown.indexOf('true')>=0) {
-                  this.qrRulerDetail.countdown = 'false';
-                } else {
-                  this.qrRulerDetail.countdown = 'true';
-                }
-              }
-            },
-            chooseLooper(target){
+                },
+                choosePushRuler(target) {
+                    if (target.target.id) {
+                        if (this.qrRulerDetail.touchtype.indexOf('换台') >= 0) {
+                            this.qrRulerDetail.touchtype = '时间';
+                        } else {
+                            this.qrRulerDetail.touchtype = '换台';
+                        }
+                    }
+                },
+                chooseDownTime(target) {
+                    if (target.target.id) {
+                        if (this.qrRulerDetail.countdown.indexOf('true') >= 0) {
+                            this.qrRulerDetail.countdown = 'false';
+                        } else {
+                            this.qrRulerDetail.countdown = 'true';
+                        }
+                    }
+                },
+                chooseLooper(target) {
 
-              if(target.target.id) {
-                if(this.qrRulerDetail.poll.indexOf('true')>=0) {
-                  this.qrRulerDetail.poll = 'false';
-                } else {
-                  this.qrRulerDetail.poll = 'true';
+                    if (target.target.id) {
+                        if (this.qrRulerDetail.poll.indexOf('true') >= 0) {
+                            this.qrRulerDetail.poll = 'false';
+                        } else {
+                            this.qrRulerDetail.poll = 'true';
+                        }
+                    }
                 }
-              }
-            }
         }
 }
 
