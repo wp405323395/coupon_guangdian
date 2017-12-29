@@ -9,7 +9,7 @@
           <div class="item_wrap">
             <span class="red_start">*</span>
             <label for="rulerName">规则名称:</label>
-            <input type="text" id="rulerName" name="" value="">
+            <input type="text" id="rulerName" name="" v-model="qrRulerDetail.rulename">
           </div>
           <div class="item_wrap">
             <span class="red_start">*</span>
@@ -42,30 +42,30 @@
           <div class="item_wrap">
             <span class="red_start">*</span>
             <label for="qrlink">二维码链接:</label>
-            <input class="long_input" placeholder="输入相关链接" type="text" id="qrlink" name="" value="">
+            <input class="long_input" placeholder="输入相关链接" type="text" id="qrlink" name="" v-model="qrRulerDetail.qrurl">
           </div>
           <div class="item_wrap">
             <span class="red_start">*</span>
             <label for="qrSize">二维码尺寸:</label>
-            <input class="number_input" type="Number" id="qrSize" name="" value=""><span class="company">(px)</span>
+            <input class="number_input" type="Number" id="qrSize" name="" v-model="qrRulerDetail.qrsize"><span class="company">(px)</span>
           </div>
           <div class="item_wrap">
             <span class="red_start"></span>
             <label for="backgroundQrLink">背景链接:</label>
-            <input class="long_input" type="text" id="backgroundQrLink" placeholder="输入相关链接" name="" value="">
+            <input class="long_input" type="text" id="backgroundQrLink" placeholder="输入相关链接" name="" v-model="qrRulerDetail.backurl">
           </div>
           <div class="item_wrap">
             <span class="red_start">*</span>
             <label for="backgroundSize">背景尺寸:</label>
-            <input class="number_input" type="Number" id="backgroundSize" name="" value=""><span class="company">(px)</span>
+            <input class="number_input" type="Number" id="backgroundSize" name="" v-model="qrRulerDetail.backsize"><span class="company">(px)</span>
           </div>
         </section>
 
-        <section>
+         <section>
           <div class="item_wrap">
             <span class="red_start">*</span>
             <label for="showZindex">显示优先级:</label>
-            <input type="Number" id="showZindex" name="" value="">
+            <input type="Number" id="showZindex" name="" v-model="qrRulerDetail.priority">
           </div>
           <div class="item_wrap">
             <span class="red_start">*</span>
@@ -73,20 +73,20 @@
             <div class="locationPannel">
               <span>二维码坐标</span>
               <label for="qrXlocation">x:</label>
-              <input type="Number" id="qrXlocation" name="" value="">
+              <input type="Number" id="qrXlocation" name="" v-model="qrRulerDetail.qrwp">
               <label for="qrYlocation">y:</label>
-              <input type="Number" id="qrYlocation" name="" value="">
+              <input type="Number" id="qrYlocation" name="" v-model="qrRulerDetail.qrhp">
               <span>背景坐标</span>
               <label for="backgroundXlocation">x:</label>
-              <input type="Number" id="backgroundXlocation" name="" value="">
+              <input type="Number" id="backgroundXlocation" name="" v-model="qrRulerDetail.backwp">
               <label for="backgroundYlocation">y:</label>
-              <input type="Number" id="backgroundYlocation" name="" value="">
+              <input type="Number" id="backgroundYlocation" name="" v-model="qrRulerDetail.backhp">
             </div>
           </div>
           <div class="item_wrap align_top">
             <span class="red_start"></span>
             <label for="beizhu">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注:</label>
-            <textarea maxlength="200" class="beizhu" placeholder="写点什么吧"  id="beizhu" name="" value=""/>
+            <textarea maxlength="200" class="beizhu" placeholder="写点什么吧"  id="beizhu" name="" v-model="qrRulerDetail.memo"/>
 
           </div>
         </section>
@@ -96,20 +96,20 @@
           <div class="item_wrap">
             <span class="red_start">*</span>
             <label for="startTime">开始日期:</label>
-            <input type="date" id="startTime" name="" value="">
+            <input type="date" id="startTime" name="" v-model="qrRulerDetail.stime&&qrRulerDetail.stime.split('T')[0]">
             <span class="red_start">*</span>
             <label for="endTime">截止日期:</label>
-            <input type="date" id="endTime" name="" value="">
+            <input type="date" id="endTime" name="" v-model="qrRulerDetail.stime&&qrRulerDetail.etime.split('T')[0]">
           </div>
           <div class="item_wrap">
             <div class="week">
-              <span>周一</span><div class="checked_pannel"><img src="../../static/img/week_checked.png" alt=""></div>
-              <span>周二</span><div class="checked_pannel"><img src="../../static/img/week_checked.png" alt=""></div>
-              <span>周三</span><div class="checked_pannel"><img src="../../static/img/week_checked.png" alt=""></div>
-              <span>周四</span><div class="checked_pannel"><img v-if="false" src="../../static/img/week_checked.png" alt=""></div>
-              <span>周五</span><div class="checked_pannel"><img src="../../static/img/week_checked.png" alt=""></div>
-              <span>周六</span><div class="checked_pannel"><img src="../../static/img/week_checked.png" alt=""></div>
-              <span>周天</span><div class="checked_pannel"><img src="../../static/img/week_checked.png" alt=""></div>
+              <span>周一</span><div class="checked_pannel" v-if="qrRulerDetail.qrday != undefined&& qrRulerDetail.qrday.indexOf('1')>=0"><img src="../../static/img/week_checked.png" alt=""></div>
+              <span>周二</span><div class="checked_pannel" v-if="qrRulerDetail.qrday != undefined&& qrRulerDetail.qrday.indexOf('2')>=0"><img src="../../static/img/week_checked.png" alt=""></div>
+              <span>周三</span><div class="checked_pannel" v-if="qrRulerDetail.qrday != undefined&& qrRulerDetail.qrday.indexOf('3')>=0"><img src="../../static/img/week_checked.png" alt=""></div>
+              <span>周四</span><div class="checked_pannel" v-if="qrRulerDetail.qrday != undefined&& qrRulerDetail.qrday.indexOf('4')>=0"><img src="../../static/img/week_checked.png" alt=""></div>
+              <span>周五</span><div class="checked_pannel" v-if="qrRulerDetail.qrday != undefined&& qrRulerDetail.qrday.indexOf('5')>=0"><img src="../../static/img/week_checked.png" alt=""></div>
+              <span>周六</span><div class="checked_pannel" v-if="qrRulerDetail.qrday != undefined&& qrRulerDetail.qrday.indexOf('6')>=0"><img src="../../static/img/week_checked.png" alt=""></div>
+              <span>周天</span><div class="checked_pannel" v-if="qrRulerDetail.qrday != undefined&& qrRulerDetail.qrday.indexOf('7')>=0"><img src="../../static/img/week_checked.png" alt=""></div>
             </div>
           </div>
           <div class="item_wrap">
@@ -117,12 +117,12 @@
             <span class="red_start">*</span>
             <label for="">推送规则:</label>
             <div class="week" style="display:inline-block; margin-left:0px;">
-              <span>换台推送</span><div class="checked_pannel"><img src="../../static/img/week_checked.png" alt=""></div>
-              <span>推送时间</span><div class="checked_pannel"><img src="../../static/img/week_checked.png" alt=""></div>
+              <span>换台推送</span><div v-if="qrRulerDetail.touchtype != undefined&& qrRulerDetail.touchtype.indexOf('换台')>=0" class="checked_pannel"><img src="../../static/img/week_checked.png" alt=""></div>
+              <span>推送时间</span><div v-if="qrRulerDetail.touchtype != undefined&& qrRulerDetail.touchtype.indexOf('时间')>=0" class="checked_pannel"><img src="../../static/img/week_checked.png" alt=""></div>
             </div>
           </div>
         </section>
-        <section class="dark_background">
+        <section class="dark_background" v-if="qrRulerDetail.qrday != undefined&& qrRulerDetail.qrday.indexOf('时间')>=0">
           <div class="item_wrap">
             <span class="red_start">*</span>
             <label for="pushTime">推送时间:</label>
@@ -150,8 +150,8 @@
             <span class="red_start">*</span>
             <label for="isdownTime">是否倒计时:</label>
             <div class="week" style="display:inline-block; margin-left:0px;">
-              <span>是</span><div class="checked_pannel"><img src="../../static/img/week_checked.png" alt=""></div>
-              <span>否</span><div class="checked_pannel"><img src="../../static/img/week_checked.png" alt=""></div>
+              <span>是</span><div class="checked_pannel" v-if="qrRulerDetail.countdown != undefined&&qrRulerDetail.countdown.indexOf('true')>=0"><img src="../../static/img/week_checked.png" alt=""></div>
+              <span>否</span><div class="checked_pannel" v-if="qrRulerDetail.countdown != undefined&&qrRulerDetail.countdown.indexOf('false')>=0"><img src="../../static/img/week_checked.png" alt=""></div>
             </div>
             <span class="red_start">*</span>
             <label for="downTime">倒计时时间:</label>
@@ -165,13 +165,13 @@
             <span class="red_start">*</span>
             <label for="isLooper">是否轮询:</label>
             <div class="week" style="display:inline-block; margin-left:0px;">
-              <span>是</span><div class="checked_pannel"><img src="../../static/img/week_checked.png" alt=""></div>
-              <span>否</span><div class="checked_pannel"><img src="../../static/img/week_checked.png" alt=""></div>
+              <span>是</span><div v-if="qrRulerDetail.poll != undefined&& qrRulerDetail.poll.indexOf('true')>=0" class="checked_pannel"><img src="../../static/img/week_checked.png" alt=""></div>
+              <span>否</span><div v-if="qrRulerDetail.poll != undefined&& qrRulerDetail.poll.indexOf('false')>=0" class="checked_pannel"><img src="../../static/img/week_checked.png" alt=""></div>
             </div>
           </div>
         </section>
         <section  class="dark_background">
-          <div class="item_wrap">
+          <div class="item_wrap" v-if="qrRulerDetail.poll != undefined&& qrRulerDetail.poll.indexOf('true')>=0">
             <span class="red_start">*</span>
             <label for="looperTime">轮询间隔:</label>
             <select name="selected">
@@ -201,7 +201,28 @@
 </template>
 
 <script>
+import requestEngine from '../netApi/requestEngine'
+import router from '../router'
+import urls from '../config.js'
 export default {
+  data(){
+    return {
+        qrRulerDetail:{}
+    }
+  },
+  mounted:function(){
+    if(this.rulerId == '') {
+      return;
+    }
+    new requestEngine().request(urls.queQRcodeRuleDetail,{ruleid:this.rulerId},
+      successValue=>{
+        this.qrRulerDetail = successValue;
+      }, failValue=>{
+
+      }, completeValue=>{
+      })
+  },
+  props: ['rulerId'],
   methods:{
     closePannel(){
       this.$emit('closePannel', [])
@@ -233,7 +254,7 @@ export default {
     }
   }
   .pannel_content{
-    margin-top: 160px;
+    margin-top: 80px;
     width: 650px;
     height: 75%;
     background-color: white;

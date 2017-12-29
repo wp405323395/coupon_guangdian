@@ -66,7 +66,7 @@
             </div>
             <div class="opration">
               <span :class="{'can_opration':true}" @click="gotoQrRulerDetail(qrRuler.id)">详情</span>
-                <span v-if="$store.state.subMenusDir=='/rulerManager'" :class="{'can_opration':(qrRuler.status == '编辑中'||qrRuler.status == '审核驳回'||qrRuler.status == '已下线' )}">修改</span>
+                <span @click="gotoModify(qrRuler)" v-if="$store.state.subMenusDir=='/rulerManager'" :class="{'can_opration':(qrRuler.status == '编辑中'||qrRuler.status == '审核驳回'||qrRuler.status == '已下线' )}">修改</span>
                 <span v-if="$store.state.subMenusDir=='/rulerManager'" :class="{'can_opration':(qrRuler.status == '编辑中'||qrRuler.status == '审核驳回'||qrRuler.status == '已下线' )}">删除</span>
                 <span v-if="$store.state.subMenusDir=='/rulerCheck'">通过</span>
                 <span v-if="$store.state.subMenusDir=='/rulerCheck'">驳回</span>
@@ -98,7 +98,7 @@
       </section>
     </section>
     <qr-ruler-manager :rulerId="clickedQrRulerId" @closePannel="closePannel" v-if="isShowViewQrRulerPannel" class="createQrRuler"></qr-ruler-manager>
-    <create-qr-ruler @closePannel="closePannel" v-if="isShowCreateQrRulerPannel" class="createQrRuler"></create-qr-ruler>
+    <create-qr-ruler :rulerId="clickedQrRulerId" @closePannel="closePannel" v-if="isShowCreateQrRulerPannel" class="createQrRuler"></create-qr-ruler>
   </section>
 </template>
 
@@ -196,6 +196,11 @@ export default {
   },
 
   methods:{
+    gotoModify(qrRuler){
+      this.clickedQrRulerId = qrRuler.id;
+      this.isShowCreateQrRulerPannel = true;
+
+    },
     gotoQrRulerDetail(id){
       this.clickedQrRulerId = id;
       this.isShowViewQrRulerPannel = true;
@@ -226,6 +231,7 @@ export default {
       }
     },
     createNewQrRuler(){
+      this.clickedQrRulerId = '';
       this.isShowCreateQrRulerPannel = true;
     }
   }
