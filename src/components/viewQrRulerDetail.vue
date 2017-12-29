@@ -2,7 +2,7 @@
   <div class="content">
     <section class="pannel_content">
       <div class="close">
-        <span class="close_btn" @click="closePannel">关闭</span>
+        <img class="close_btn" src="../../static/img/close.png"  @click="closePannel" />
       </div>
       <section class="create_content">
         <section>
@@ -155,7 +155,6 @@ export default {
   props: ['rulerId'],
   methods:{
     closePannel(){
-      console.log('fffffff',this.rulerId);
       this.$emit('closePannel', [])
     }
   }
