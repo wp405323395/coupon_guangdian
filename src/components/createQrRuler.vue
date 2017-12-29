@@ -14,15 +14,27 @@
           <div class="item_wrap">
             <span class="red_start">*</span>
             <label for="city">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区:</label>
-            <input type="text" id="city" name="" value="">
+            <select name="selected">
+              <option value="a">武汉</option>
+              <option value="b">B</option>
+              <option value="c">C</option>
+            </select>
             <span class="red_start channelpannel">*</span>
             <label for="channel">频&nbsp;&nbsp;&nbsp;&nbsp;道:</label>
-            <input type="text" id="channel" name="" value="">
+            <select name="selected">
+              <option value="a">中央电视台</option>
+              <option value="b">B</option>
+              <option value="c">C</option>
+            </select>
           </div>
           <div class="item_wrap">
             <span class="red_start">*</span>
             <label for="showType">显示类型:</label>
-            <input type="text" id="showType" name="" value="">
+            <select name="selected">
+              <option value="a">订购</option>
+              <option value="b">B</option>
+              <option value="c">C</option>
+            </select>
           </div>
         </section>
 
@@ -30,22 +42,22 @@
           <div class="item_wrap">
             <span class="red_start">*</span>
             <label for="qrlink">二维码链接:</label>
-            <input type="text" id="qrlink" name="" value="">
+            <input class="long_input" placeholder="输入相关链接" type="text" id="qrlink" name="" value="">
           </div>
           <div class="item_wrap">
             <span class="red_start">*</span>
             <label for="qrSize">二维码尺寸:</label>
-            <input type="text" id="qrSize" name="" value="">
+            <input class="number_input" type="Number" id="qrSize" name="" value=""><span class="company">(px)</span>
           </div>
           <div class="item_wrap">
             <span class="red_start"></span>
             <label for="backgroundQrLink">背景链接:</label>
-            <input type="text" id="backgroundQrLink" placeholder="输入相关链接" name="" value="">
+            <input class="long_input" type="text" id="backgroundQrLink" placeholder="输入相关链接" name="" value="">
           </div>
           <div class="item_wrap">
             <span class="red_start">*</span>
             <label for="backgroundSize">背景尺寸:</label>
-            <input type="text" id="backgroundSize" name="" value="">
+            <input class="number_input" type="Number" id="backgroundSize" name="" value=""><span class="company">(px)</span>
           </div>
         </section>
 
@@ -53,7 +65,7 @@
           <div class="item_wrap">
             <span class="red_start">*</span>
             <label for="showZindex">显示优先级:</label>
-            <input type="text" id="showZindex" name="" value="">
+            <input type="Number" id="showZindex" name="" value="">
           </div>
           <div class="item_wrap">
             <span class="red_start">*</span>
@@ -114,14 +126,22 @@
           <div class="item_wrap">
             <span class="red_start">*</span>
             <label for="pushTime">推送时间:</label>
-            <input type="date" id="pushTime" name="" value="">
+            <select name="selected">
+              <option value="a">16::00</option>
+              <option value="b">14::00</option>
+              <option value="c">12::00</option>
+            </select>
           </div>
         </section>
         <section>
           <div class="item_wrap">
             <span class="red_start">*</span>
             <label for="showTime">显示时长:</label>
-            <input type="text" id="showTime" name="" value="">
+            <select name="selected">
+              <option value="a">180秒</option>
+              <option value="b">160秒</option>
+              <option value="c">180秒</option>
+            </select>
           </div>
         </section>
         <div class="space_line"/>
@@ -135,7 +155,11 @@
             </div>
             <span class="red_start">*</span>
             <label for="downTime">倒计时时间:</label>
-            <input type="text" id="downTime" name="" value="">
+            <select name="selected">
+              <option value="a">60秒</option>
+              <option value="b">160秒</option>
+              <option value="c">180秒</option>
+            </select>
           </div>
           <div class="item_wrap">
             <span class="red_start">*</span>
@@ -150,7 +174,11 @@
           <div class="item_wrap">
             <span class="red_start">*</span>
             <label for="looperTime">轮询间隔:</label>
-            <input type="text" id="looperTime" name="" value="">
+            <select name="selected">
+              <option value="a">60秒</option>
+              <option value="b">160秒</option>
+              <option value="c">180秒</option>
+            </select>
           </div>
           <div class="item_wrap">
             <span class="red_start"></span>
@@ -158,7 +186,10 @@
           </div>
         </section>
       </section>
-
+    </section>
+    <section class="btn_wrap">
+      <button type="button" name="button">保存</button>
+      <button class="submit" type="button" name="button">提交审核</button>
     </section>
   </div>
 </template>
@@ -176,13 +207,32 @@ export default {
 <style lang="scss" scoped>
 .content{
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .btn_wrap{
+    width: 650px;
+    display: flex;
+    flex-direction: row;
+    button{
+      cursor: pointer;
+      width: 100%;
+      height: 40px;
+      color: #333333;
+      font-size: 16px;
+      background-color: #d4d4d4;
+    }
+    .submit{
+      background-color: #313e90;
+      color: white;
+    }
+  }
   .pannel_content{
     margin-top: 160px;
     width: 650px;
     height: 75%;
     background-color: white;
     overflow:scroll;
+
     .close{
       cursor: pointer;
       position: fixed;
@@ -195,6 +245,7 @@ export default {
 
       }
     }
+
     .create_content{
       margin-top: 30px;
       .dark_background{
@@ -253,6 +304,19 @@ export default {
             display: inline-block;
             width: 10px;
           }
+          .long_input{
+            width: 400px;
+          }
+          .number_input{
+            width: 100px;
+          }
+          .company{
+            color:  #666666;
+            font-size: 14px;
+            margin-left: 10px;
+            display: inline-block;
+            transform: translateY(-10px);
+          }
           .week{
             margin-left: 122px;
             span{
@@ -277,7 +341,7 @@ export default {
               }
             }
           }
-          input{
+          input, select{
             border: 1px solid #d8dbe9;
             height: 35px;
             border-radius: 4px;
