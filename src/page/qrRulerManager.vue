@@ -33,7 +33,7 @@
               <span>选择规则</span>
             </div>
             <div><span>规则名称</span></div>
-            <div><span>规则有效日期</span></div>
+            <div class="useful_day"><span>规则有效日期</span></div>
             <div><span>地区</span></div>
             <div><span>频道</span></div>
             <div><span>显示类型</span></div>
@@ -375,6 +375,7 @@ export default {
           display: flex;
           flex-direction: column;
           align-items: center;
+          width: 180px;
           .week{
             font-size: 10px;
           }
@@ -391,9 +392,7 @@ export default {
             cursor: pointer;
           }
         }
-        div:nth-child(2){
-          width: 180px;
-        }
+
         div:last-child{
           width: 180px;
         }
