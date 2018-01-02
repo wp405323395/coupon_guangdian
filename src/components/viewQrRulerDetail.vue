@@ -22,7 +22,14 @@
           </div>
           <div class="">
             <span class="lable_name">显示类型:</span>
-            <span class="lable_value">{{qrRulerDetail.qrtype}}</span>
+            <span class="lable_value" v-if="qrRulerDetail.qrtype == 0 ">基本订购包</span>
+            <span class="lable_value" v-if="qrRulerDetail.qrtype == 1 ">基本包续费</span>
+            <span class="lable_value" v-if="qrRulerDetail.qrtype == 2 ">付费包订购</span>
+            <span class="lable_value" v-if="qrRulerDetail.qrtype == 3 ">付费包续费</span>
+            <span class="lable_value" v-if="qrRulerDetail.qrtype == 4 ">无智能卡号订购</span>
+            <span class="lable_value" v-if="qrRulerDetail.qrtype == 5 ">广告</span>
+            <span class="lable_value" v-if="qrRulerDetail.qrtype == 6 ">其他</span>
+
           </div>
         </section>
 
@@ -184,7 +191,7 @@ export default {
       }
     }
     .create_content{
-      margin-top: 30px;
+      margin-top: 40px;
       font-size: 16px;
       .dard_section{
         background-color:#edf0f7;

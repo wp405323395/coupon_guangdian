@@ -62,6 +62,9 @@
                 .item_wrap {
                     margin-bottom: 20px;
                     margin-left: 20px;
+                    .short_input{
+                      width: 80px;
+                    }
                     label {
                         font-size: 16px;
                         color: #666666;
@@ -198,10 +201,15 @@
                 <div class="item_wrap">
                     <span class="red_start">*</span>
                     <label for="showType">显示类型:</label>
-                    <select name="selected">
-                        <option value="a">订购</option>
-                        <option value="b">B</option>
-                        <option value="c">C</option>
+                    <select name="selected" v-model="qrRulerDetail.qrtype">
+                        <option value="0">基本订购包</option>
+                        <option value="1">基本包续费</option>
+                        <option value="2">付费包订购</option>
+                        <option value="3">付费包续费</option>
+                        <option value="4">无智能卡号订购</option>
+                        <option value="5">广告</option>
+                        <option value="6">其他</option>
+
                     </select>
                 </div>
             </section>
@@ -264,10 +272,12 @@
                 <div class="item_wrap">
                     <span class="red_start">*</span>
                     <label for="startTime">开始日期:</label>
-                    <input type="date" id="startTime" name="" v-model="qrRulerDetail.stime&&qrRulerDetail.stime.split('T')[0]">
+                    <input type="date" id="startTime" name="" v-if="qrRulerDetail.stime&&qrRulerDetail.stime.indexOf('T')>=0" v-model="qrRulerDetail.stime.split('T')[0]">
+                    <input type="date" id="startTime" name="" v-else v-model="qrRulerDetail.stime">
                     <span class="red_start">*</span>
                     <label for="endTime">截止日期:</label>
-                    <input type="date" id="endTime" name="" v-model="qrRulerDetail.stime&&qrRulerDetail.etime.split('T')[0]">
+                    <input type="date" id="endTime" name="" v-if="qrRulerDetail.etime&&qrRulerDetail.etime.indexOf('T')>=0" v-model="qrRulerDetail.etime.split('T')[0]">
+                    <input type="date" id="endTime" name="" v-else v-model="qrRulerDetail.etime">
                 </div>
                 <div class="item_wrap">
                     <div class="week" @click="chooseWeek">
@@ -303,22 +313,14 @@
                 <div class="item_wrap">
                     <span class="red_start">*</span>
                     <label for="pushTime">推送时间:</label>
-                    <select name="selected">
-                        <option value="a">16::00</option>
-                        <option value="b">14::00</option>
-                        <option value="c">12::00</option>
-                    </select>
+                    <input type="time" name="" value="">
                 </div>
             </section>
             <section>
                 <div class="item_wrap">
                     <span class="red_start">*</span>
                     <label for="showTime">显示时长:</label>
-                    <select name="selected">
-                        <option value="a">180秒</option>
-                        <option value="b">160秒</option>
-                        <option value="c">180秒</option>
-                    </select>
+                    <input class="short_input" type="Number" name="" v-model="qrRulerDetail.workhours"> <span class="company">(秒/-1为一直显示)</span>
                 </div>
             </section>
             <div class="space_line" />
@@ -334,11 +336,9 @@
                     </div>
                     <span v-if="qrRulerDetail.countdown != undefined&&qrRulerDetail.countdown.indexOf('true')>=0" class="red_start">*</span>
                     <label v-if="qrRulerDetail.countdown != undefined&&qrRulerDetail.countdown.indexOf('true')>=0" for="downTime">倒计时时间:</label>
-                    <select v-if="qrRulerDetail.countdown != undefined&&qrRulerDetail.countdown.indexOf('true')>=0" name="selected">
-                        <option value="a">60秒</option>
-                        <option value="b">160秒</option>
-                        <option value="c">180秒</option>
-                    </select>
+
+                    <input class="short_input" v-if="qrRulerDetail.countdown != undefined&&qrRulerDetail.countdown.indexOf('true')>=0" type="Number" name="" v-model="qrRulerDetail.aftertime"> <span class="company">(秒)</span>
+
                 </div>
                 <div class="item_wrap">
                     <span class="red_start">*</span>
@@ -355,21 +355,15 @@
                 <div class="item_wrap" v-if="qrRulerDetail.poll != undefined&& qrRulerDetail.poll.indexOf('true')>=0">
                     <span class="red_start">*</span>
                     <label for="looperTime">轮询间隔:</label>
-                    <select name="selected">
-                        <option value="a">60秒</option>
-                        <option value="b">160秒</option>
-                        <option value="c">180秒</option>
-                    </select>
+                    <input class="short_input" type="Number" name="" v-model="qrRulerDetail.pollinterval"> <span class="company">(秒)</span>
                 </div>
                 <div class="item_wrap">
                     <span class="red_start"></span>
                     <label for="">限制类型:</label>
-                    <select name="selected">
-                        <option value="a">智能卡号</option>
-                        <option value="b">智能卡号</option>
-                        <option value="c">智能卡号</option>
+                    <select name="selected" v-model="qrRulerDetail.limttype">
+                        <option value="CARD">智能卡号</option>
                     </select>
-                    <input type="text" id="" name="" class="min_length_input" value="^(8270104048478701)$">
+                    <input type="text" id="" name="" class="min_length_input" v-model="qrRulerDetail.limtvalue" value="^(8270104048478701)$">
                 </div>
             </section>
         </section>
@@ -391,38 +385,38 @@ export default {
     data() {
             return {
                 qrRulerDetail: {
-                    "aftertime": 60,
+                    "aftertime": '',
                     "auditmemo": null,
-                    "backhp": 70,
-                    "backsize": 580,
-                    "backurl": "",
-                    "backwp": 350,
+                    "backhp": '',
+                    "backsize": '',
+                    "backurl": '',
+                    "backwp": '',
                     "channelname": "",
-                    "city": "武汉",
+                    "city": "",
                     "countdown": "true",
-                    "etime": "2018-12-07T00:00:00",
+                    "etime": "",
                     "id": 142,
                     "limttype": "CARD",
                     "limtvalue": "^(8270104048478701)$",
                     "memo": "",
                     "operid": 1,
-                    "optime": "2017-12-20T00:00:00",
+                    "optime": "",
                     "poll": "true",
-                    "pollinterval": 60,
+                    "pollinterval": '',
                     "pollparam": null,
-                    "priority": 1000,
+                    "priority": '',
                     "pushtime": null,
-                    "qrday": "1",
-                    "qrhp": 240,
-                    "qrsize": 220,
+                    "qrday": "",
+                    "qrhp": '',
+                    "qrsize": '',
                     "qrtype": "付费包订购",
                     "qrurl": "",
-                    "qrwp": 398,
+                    "qrwp": '',
                     "rulename": "",
                     "status": "1",
-                    "stime": "2017-12-07T00:00:00",
-                    "touchtype": "换台",
-                    "workhours": 5
+                    "stime": "",
+                    "touchtype": "时间",
+                    "workhours": ''
                 }
             }
         },
@@ -436,7 +430,6 @@ export default {
                 successValue => {
                     this.qrRulerDetail = successValue;
                 }, failValue => {
-
                 }, completeValue => {})
         },
         props: ['rulerId'],
