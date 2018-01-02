@@ -62,8 +62,8 @@
                 .item_wrap {
                     margin-bottom: 20px;
                     margin-left: 20px;
-                    .short_input{
-                      width: 80px;
+                    .short_input {
+                        width: 80px;
                     }
                     label {
                         font-size: 16px;
@@ -185,17 +185,14 @@
                 <div class="item_wrap">
                     <span class="red_start">*</span>
                     <label for="city">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区:</label>
-                    <select name="selected">
-                        <option value="a">武汉</option>
-                        <option value="b">B</option>
-                        <option value="c">C</option>
+                    <select name="selected" v-model="qrRulerDetail.city.split('~')[0]">
+                        <option v-for="city of citySelectes" :value="city.mcode">{{city.mname}}</option>
+
                     </select>
                     <span class="red_start channelpannel">*</span>
                     <label for="channel">频&nbsp;&nbsp;&nbsp;&nbsp;道:</label>
-                    <select name="selected">
-                        <option value="a">中央电视台</option>
-                        <option value="b">B</option>
-                        <option value="c">C</option>
+                    <select v-if="qrRulerDetail.channelname" name="selected" v-model="qrRulerDetail.channelname">
+                        <option v-for="channel of channelsSelectes" :value="channel.mcode">{{channel.mname}}</option>
                     </select>
                 </div>
                 <div class="item_wrap">
@@ -384,6 +381,8 @@ import urls from '../config.js'
 export default {
     data() {
             return {
+              citySelectes:[],
+                channelsSelectes: [],
                 qrRulerDetail: {
                     "aftertime": '',
                     "auditmemo": null,
@@ -391,7 +390,7 @@ export default {
                     "backsize": '',
                     "backurl": '',
                     "backwp": '',
-                    "channelname": "",
+                    "channelname": "*",
                     "city": "",
                     "countdown": "true",
                     "etime": "",
@@ -421,16 +420,35 @@ export default {
             }
         },
         mounted: function() {
-            if (this.rulerId == '') {
-                return;
-            }
-            new requestEngine().request(urls.queQRcodeRuleDetail, {
-                    ruleid: this.rulerId
+            new requestEngine().request(urls.queData, {
+                    gcode: 'TV_CHANNEL'
                 },
                 successValue => {
-                    this.qrRulerDetail = successValue;
+                    successValue.unshift({
+                        'mcode': '*',
+                        'mname': '所有频道'
+                    });
+                    this.channelsSelectes = successValue;
                 }, failValue => {
+
                 }, completeValue => {})
+                new requestEngine().request(urls.queData, {
+                        gcode: 'TV_MANAGER_CITY'
+                    },
+                    successValue => {
+                        this.citySelectes = successValue;
+                    }, failValue => {
+
+                    }, completeValue => {})
+            if (this.rulerId != '') {
+                new requestEngine().request(urls.queQRcodeRuleDetail, {
+                        ruleid: this.rulerId
+                    },
+                    successValue => {
+                        this.qrRulerDetail = successValue;
+                    }, failValue => {}, completeValue => {})
+            }
+
         },
         props: ['rulerId'],
         methods: {
