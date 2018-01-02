@@ -94,7 +94,8 @@
           </div>
           <div class="">
             <span class="lable_name">推送规则:</span>
-            <span class="lable_value">{{qrRulerDetail.touchtype}}</span>
+            <span v-if="qrRulerDetail.touchtype == '1'" class="lable_value">换台推送</span>
+            <span v-if="qrRulerDetail.touchtype == '2'" class="lable_value">时间推送</span>
           </div>
         </section>
         <section v-if="qrRulerDetail.touchtype != '换台'" style="background-color:#edf0f7">

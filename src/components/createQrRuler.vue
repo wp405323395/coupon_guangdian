@@ -300,17 +300,17 @@
                     <label for="">推送规则:</label>
                     <div class="week" style="display:inline-block; margin-left:0px;" @click="choosePushRuler">
                         <span id="1">换台推送</span>
-                        <div v-if="qrRulerDetail.touchtype != undefined&& qrRulerDetail.touchtype.indexOf('换台')>=0" class="checked_pannel"><img src="../../static/img/week_checked.png" alt=""></div>
+                        <div v-if="qrRulerDetail.touchtype != undefined&& qrRulerDetail.touchtype.indexOf('1')>=0" class="checked_pannel"><img src="../../static/img/week_checked.png" alt=""></div>
                         <span id="2">推送时间</span>
-                        <div v-if="qrRulerDetail.touchtype != undefined&& qrRulerDetail.touchtype.indexOf('时间')>=0" class="checked_pannel"><img src="../../static/img/week_checked.png" alt=""></div>
+                        <div v-if="qrRulerDetail.touchtype != undefined&& qrRulerDetail.touchtype.indexOf('2')>=0" class="checked_pannel"><img src="../../static/img/week_checked.png" alt=""></div>
                     </div>
                 </div>
             </section>
-            <section class="dark_background" v-if="qrRulerDetail.touchtype != undefined&& qrRulerDetail.touchtype.indexOf('时间')>=0">
+            <section class="dark_background" v-if="qrRulerDetail.touchtype != undefined&& qrRulerDetail.touchtype.indexOf('2')>=0">
                 <div class="item_wrap">
                     <span class="red_start">*</span>
                     <label for="pushTime">推送时间:</label>
-                    <input type="time" name="" value="">
+                    <input type="time" name="" v-model="qrRulerDetail.pushtime">
                 </div>
             </section>
             <section>
@@ -412,7 +412,7 @@ export default {
                     "rulename": null,
                     "status": "1",
                     "stime": null,
-                    "touchtype": "时间",
+                    "touchtype": "2",
                     "workhours": null
                 }
             }
@@ -452,11 +452,12 @@ export default {
         props: ['rulerId'],
         methods: {
           saveQrRuler(){
-            if(this.qrRulerDetail.touchtype == '换台') {
+            if(this.qrRulerDetail.touchtype == '1') {
               this.qrRulerDetail.touchtype = '1';
-            } else if(this.qrRulerDetail.touchtype == '时间') {
+            } else if(this.qrRulerDetail.touchtype == '2') {
               this.qrRulerDetail.touchtype = '2';
             }
+            console.log('fffffffffff-->',this.qrRulerDetail.touchtype);
             new requestEngine().request(urls.saveQRRule, this.qrRulerDetail,
                 successValue => {
                 }, failValue => {}, completeValue => {})
@@ -479,10 +480,10 @@ export default {
                 },
                 choosePushRuler(target) {
                     if (target.target.id) {
-                        if (this.qrRulerDetail.touchtype.indexOf('换台') >= 0) {
-                            this.qrRulerDetail.touchtype = '时间';
+                        if (this.qrRulerDetail.touchtype.indexOf('1') >= 0) {
+                            this.qrRulerDetail.touchtype = '2';
                         } else {
-                            this.qrRulerDetail.touchtype = '换台';
+                            this.qrRulerDetail.touchtype = '1';
                         }
                     }
                 },

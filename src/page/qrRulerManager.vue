@@ -72,8 +72,8 @@
             <div class="opration">
               <span :class="{'can_opration':true}" @click="gotoQrRulerDetail(qrRuler.id)">详情</span>
                 <span @click="gotoModify(qrRuler)" v-if="$store.state.subMenusDir=='/rulerManager'" :class="{'can_opration':(qrRuler.status == '编辑中'||qrRuler.status == '审核驳回'||qrRuler.status == '已下线' )}">修改</span>
-                <span v-if="$store.state.subMenusDir=='/rulerManager'" :class="{'can_opration':(qrRuler.status == '编辑中'||qrRuler.status == '审核驳回'||qrRuler.status == '已下线' )}">删除</span>
-                <span v-if="$store.state.subMenusDir=='/rulerCheck'">通过</span>
+                <span @click="deleteQrRuler(qrRuler,index)" v-if="$store.state.subMenusDir=='/rulerManager'" :class="{'can_opration':(qrRuler.status == '编辑中'||qrRuler.status == '审核驳回'||qrRuler.status == '已下线' )}">删除</span>
+                <span @click="passQrRuler(qrRuler,index)" v-if="$store.state.subMenusDir=='/rulerCheck'">通过</span>
                 <span v-if="$store.state.subMenusDir=='/rulerCheck'">驳回</span>
                 <span v-if="$store.state.subMenusDir=='/rulerPublish'">发布</span>
                 <span v-if="$store.state.subMenusDir=='/rulerReset'">下线</span>
@@ -215,7 +215,24 @@ export default {
     gotoModify(qrRuler){
       this.clickedQrRulerId = qrRuler.id;
       this.isShowCreateQrRulerPannel = true;
-
+    },
+    passQrRuler(qrRuler,index){
+      //状态,0:未提交审核, 1:待审核 2:审核不通过，3:审核通过 ，4:发布，5:删除, 6:重置
+      new requestEngine().request(urls.updateQRrulesStatus,{ruleids:qrRuler.id,status:'3'},
+        successValue=>{
+          this.qrRulers.splice(index,1);
+        }, failValue=>{
+        }, completeValue=>{
+        })
+    },
+    deleteQrRuler(qrRuler,index){
+      new requestEngine().request(urls.delQRcodeRule,{ruleid:qrRuler.id},
+        successValue=>{
+          console.log('成功啦');
+          this.qrRulers.splice(index,1);
+        }, failValue=>{
+        }, completeValue=>{
+        })
     },
     gotoQrRulerDetail(id){
       this.clickedQrRulerId = id;
