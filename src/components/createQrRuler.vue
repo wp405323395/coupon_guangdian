@@ -185,7 +185,7 @@
                 <div class="item_wrap">
                     <span class="red_start">*</span>
                     <label for="city">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区:</label>
-                    <select name="selected" v-model="qrRulerDetail.city.split('~')[0]">
+                    <select name="selected" v-model="qrRulerDetail.city">
                         <option v-for="city of citySelectes" :value="city.mcode">{{city.mname}}</option>
 
                     </select>
@@ -366,8 +366,8 @@
         </section>
     </section>
     <section class="btn_wrap">
-        <button type="button" name="button">保存</button>
-        <button class="submit" type="button" name="button">提交审核</button>
+        <button type="button" name="button" @click="saveQrRuler">保存</button>
+        <button class="submit" type="button" name="button" @click="submitCheck">提交审核</button>
     </section>
 </div>
 
@@ -384,38 +384,36 @@ export default {
               citySelectes:[],
                 channelsSelectes: [],
                 qrRulerDetail: {
-                    "aftertime": '',
+                    "aftertime": null,
                     "auditmemo": null,
-                    "backhp": '',
-                    "backsize": '',
-                    "backurl": '',
-                    "backwp": '',
+                    "backhp": null,
+                    "backsize": null,
+                    "backurl": null,
+                    "backwp": null,
                     "channelname": "*",
-                    "city": "",
+                    "city": null,
                     "countdown": "true",
-                    "etime": "",
-                    "id": 142,
+                    "etime": null,
                     "limttype": "CARD",
                     "limtvalue": "^(8270104048478701)$",
-                    "memo": "",
-                    "operid": 1,
-                    "optime": "",
+                    "memo": null,
+                    "optime": null,
                     "poll": "true",
-                    "pollinterval": '',
+                    "pollinterval": null,
                     "pollparam": null,
-                    "priority": '',
+                    "priority": null,
                     "pushtime": null,
-                    "qrday": "",
-                    "qrhp": '',
-                    "qrsize": '',
+                    "qrday": '',
+                    "qrhp": null,
+                    "qrsize": null,
                     "qrtype": "付费包订购",
-                    "qrurl": "",
+                    "qrurl": null,
                     "qrwp": '',
-                    "rulename": "",
+                    "rulename": null,
                     "status": "1",
-                    "stime": "",
+                    "stime": null,
                     "touchtype": "时间",
-                    "workhours": ''
+                    "workhours": null
                 }
             }
         },
@@ -445,25 +443,37 @@ export default {
                         ruleid: this.rulerId
                     },
                     successValue => {
-                        this.qrRulerDetail = successValue;
+                      successValue.city = successValue.city.split('~')[0];
+                      this.qrRulerDetail = successValue;
                     }, failValue => {}, completeValue => {})
             }
 
         },
         props: ['rulerId'],
         methods: {
+          saveQrRuler(){
+            if(this.qrRulerDetail.touchtype == '换台') {
+              this.qrRulerDetail.touchtype = '1';
+            } else if(this.qrRulerDetail.touchtype == '时间') {
+              this.qrRulerDetail.touchtype = '2';
+            }
+            new requestEngine().request(urls.saveQRRule, this.qrRulerDetail,
+                successValue => {
+                }, failValue => {}, completeValue => {})
+          },
+          submitCheck(){
+
+          },
             closePannel() {
                     this.$emit('closePannel', [])
                 },
                 chooseWeek(target) {
                     if (target.target.id) {
-                        console.log(target.target.id);
                         if (this.qrRulerDetail.qrday.indexOf(target.target.id) >= 0) {
                             this.qrRulerDetail.qrday = this.qrRulerDetail.qrday.replace(target.target.id, '');
                         } else {
                             this.qrRulerDetail.qrday = this.qrRulerDetail.qrday.concat(target.target.id);
                         }
-                        console.log(this.qrRulerDetail.qrday);
                     }
 
                 },

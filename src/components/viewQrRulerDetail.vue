@@ -16,7 +16,7 @@
           </div>
           <div class="">
             <span class="lable_name">地区:</span>
-            <span class="lable_value">{{qrRulerDetail.city.split('~')[1]}}</span>
+            <span class="lable_value">{{qrRulerDetail.city != null && qrRulerDetail.city.split('~')[1]}}</span>
             <span class="lable_name channelpanel">频道:</span>
             <span class="lable_value">{{(qrRulerDetail.channelname == '*')?'所有频道':qrRulerDetail.channelname}}</span>
           </div>

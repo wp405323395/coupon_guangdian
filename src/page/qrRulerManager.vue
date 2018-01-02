@@ -10,7 +10,12 @@
       <section class="input_section">
         <div class="">
           <label for="">频道</label>
-          <input type="text" name="" value="">
+          <select class="" v-model="channelSelect">
+            <option value="" selected>无频道条件</option>
+            <option value="*">所有频道</option>
+            <option v-for="channel of channelsSelectes" :value="channel.mcode">{{channel.mname}}</option>
+          </select>
+
         </div>
         <div class="">
           <label for="">规则有效日期</label>
@@ -118,10 +123,12 @@ export default {
       ruleSelectes:[],
       ruleSelected:'',
       qrRulers:[],
+      channelsSelectes:[],
       total: 0,
       display: 10,
       current: 1,
       date:'',
+      channelSelect:'',
       selectAll:false,
       unAbleRulerSearch:false,
       isShowCreateQrRulerPannel:false,
@@ -193,6 +200,15 @@ export default {
 
       }, completeValue=>{
       })
+      new requestEngine().request(urls.queData, {
+              gcode: 'TV_CHANNEL'
+          },
+          successValue => {
+
+              this.channelsSelectes = successValue;
+          }, failValue => {
+
+          }, completeValue => {})
   },
 
   methods:{
@@ -215,7 +231,7 @@ export default {
     setCurrent (idx, ruleSelected) {
 
       this.current = idx;
-      new requestEngine().request(urls.queQruleList,{channelName:'',date:this.date,status:ruleSelected,pageSize:10,pageNo:idx},
+      new requestEngine().request(urls.queQruleList,{channelName:this.channelSelect,date:this.date,status:ruleSelected,pageSize:10,pageNo:idx},
         successValue=>{
           this.qrRulers = successValue.result;
           this.qrRulers.unshift({});
@@ -293,7 +309,7 @@ export default {
         label{
           font-size: 16px;
         }
-        input {
+        input, select {
           height: 40px;
           font-weight: 600;
           padding-left: 10px;
