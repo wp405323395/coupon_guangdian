@@ -90,7 +90,16 @@
         div:nth-child(even) {
             background-color: white;
         }
-        .table_header {
+        .list-complete-enter, .list-complete-leave-to
+        /* .list-complete-leave-active for below version 2.1.8 */ {
+          opacity: 0;
+          transform: translateX(400px);
+        }
+        .list-complete-leave-active {
+            position: absolute;
+          }
+        .list-complete-item {
+          transition: all 2s;
             div {
                 display: flex;
                 flex-direction: row;
@@ -244,7 +253,8 @@
     </section>
     <section class="all_content_wrap">
         <section class="qr_manager_list_panel">
-            <div v-for="(qrRuler, index) of qrRulers" class="table_header">
+          <transition-group name="list-complete" tag="p">
+            <div v-for="(qrRuler, index) of qrRulers" :key="qrRuler.id" class="list-complete-item">
                 <div class="lable_s" v-if="index == 0">
                     <div v-if="$store.state.subMenusDir=='/rulerReset'||$store.state.subMenusDir=='/rulerCheck'||$store.state.subMenusDir=='/rulerCheck'||$store.state.subMenusDir=='/rulerPublish'" style="width:80px;">
                         <span>选择规则</span>
@@ -293,6 +303,7 @@
 
                 </div>
             </div>
+          </transition-group>
         </section>
         <section class="page_footer">
             <div class="check_status" v-if="$store.state.subMenusDir=='/rulerManager'" />
@@ -486,7 +497,7 @@ export default {
                         },
                         successValue => {
                             this.qrRulers = successValue.result;
-                            this.qrRulers.unshift({});
+                            this.qrRulers.unshift({id:0});
                             this.total = successValue.totalCount;
                         }, failValue => {
 

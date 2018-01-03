@@ -31,6 +31,7 @@ export default {
       this.currentSubMenus = this.menus[this.currentMenu].subList;
     },
     subMenusClick(){
+      console.log("subMenusClick**********");
       if(event.target.id == null || event.target.id=='') {
         return;
       }
