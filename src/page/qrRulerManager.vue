@@ -315,14 +315,14 @@
                 <input @click="selectAllClick" v-model="selectAll" id="checkall" type="checkbox" name="" value="">
                 <label for="checkall">全选</label>
                 <div class="opration_section" v-if="$store.state.subMenusDir=='/rulerCheck'">
-                    <span class="pass">通过</span>
-                    <span class="reject">驳回</span>
+                    <span @click="passAllQrRuler()" class="pass">通过</span>
+                    <span @click="rejectAllQrRuler()" class="reject">驳回</span>
                 </div>
                 <div class="opration_section" v-else-if="$store.state.subMenusDir=='/rulerPublish'">
-                    <span class="pass">发布</span>
+                    <span @click="publishAllQrRuler()" class="pass">发布</span>
                 </div>
                 <div class="opration_section" v-else-if="$store.state.subMenusDir=='/rulerReset'">
-                    <span class="pass">下线</span>
+                    <span @click="underAllQrRuler()" class="pass">下线</span>
                 </div>
 
             </div>
@@ -458,6 +458,32 @@ export default {
                             this.qrRulers.splice(index, 1);
                         }, failValue => {}, completeValue => {})
                 },
+                opraAllQrRuler(status) {
+                  let proQrRulers = [];
+                  let selectedQrRulerids = '';
+                  if(this.qrRulers.length == 0) {
+                    return;
+                  }
+                  for (var i = 0; i < this.qrRulers.length; i++) {
+                    if(i == 0 ) {
+                      proQrRulers.push({id:'0'});
+                      continue;
+                    }
+                    let ruler = this.qrRulers[i];
+                    if(ruler.isSelect) {
+                      selectedQrRulerids = selectedQrRulerids + ruler.id + ',';
+                    } else {
+                      proQrRulers.push(this.qrRulers[i]);
+                    }
+                  }
+                  new requestEngine().request(urls.updateQRrulesStatus, {
+                          ruleids: selectedQrRulerids,
+                          status: status
+                      },
+                      successValue => {
+                          this.qrRulers = proQrRulers;
+                      }, failValue => {}, completeValue => {})
+                },
                 passQrRuler(qrRuler, index) {
                     //状态,0:未提交审核, 1:待审核 2:审核通过，3:审核不通过 ，4:发布，5:下线, 6:删除
                     this.opraQrRuler(qrRuler, index, '2');
@@ -472,13 +498,21 @@ export default {
                     this.opraQrRuler(qrRuler, index, '5');
                 },
                 deleteQrRuler(qrRuler, index) {
-                    new requestEngine().request(urls.delQRcodeRule, {
-                            ruleid: qrRuler.id
-                        },
-                        successValue => {
-                            this.qrRulers.splice(index, 1);
-                        }, failValue => {}, completeValue => {})
+                    this.opraQrRuler(qrRuler, index, '6');
                 },
+                passAllQrRuler(){
+                  this.opraAllQrRuler('2');
+                },
+                rejectAllQrRuler(){
+                  this.opraAllQrRuler('3');
+                },
+                publishAllQrRuler(){
+                  this.opraAllQrRuler('4');
+                },
+                underAllQrRuler(){
+                  this.opraAllQrRuler('5');
+                },
+
                 gotoQrRulerDetail(id) {
                     this.clickedQrRulerId = id;
                     this.isShowViewQrRulerPannel = true;
@@ -508,9 +542,12 @@ export default {
                         }, completeValue => {})
                 },
                 selectAllClick() {
+                  if(this.qrRulers != null) {
                     for (var i = 0; i < this.qrRulers.length; i++) {
                         this.qrRulers[i].isSelect = this.selectAll;
                     }
+                  }
+
                 },
                 createNewQrRuler() {
                     this.clickedQrRulerId = '';
