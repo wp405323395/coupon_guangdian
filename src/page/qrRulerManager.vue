@@ -217,8 +217,8 @@ export default {
       this.isShowCreateQrRulerPannel = true;
     },
     passQrRuler(qrRuler,index){
-      //状态,0:未提交审核, 1:待审核 2:审核不通过，3:审核通过 ，4:发布，5:删除, 6:重置
-      new requestEngine().request(urls.updateQRrulesStatus,{ruleids:qrRuler.id,status:'3'},
+      //状态,0:未提交审核, 1:待审核 2:审核通过，3:审核不通过 ，4:发布，5:下线, 6:删除
+      new requestEngine().request(urls.updateQRrulesStatus,{ruleids:qrRuler.id,status:'2'},
         successValue=>{
           this.qrRulers.splice(index,1);
         }, failValue=>{
@@ -243,12 +243,11 @@ export default {
       this.isShowCreateQrRulerPannel = false;
     },
     search(){
-      this.setCurrent(1, this.ruleSelected);
+      this.setCurrent(1);
     },
-    setCurrent (idx, ruleSelected) {
-
+    setCurrent (idx) {
       this.current = idx;
-      new requestEngine().request(urls.queQruleList,{channelName:this.channelSelect,date:this.date,status:ruleSelected,pageSize:10,pageNo:idx},
+      new requestEngine().request(urls.queQruleList,{channelName:this.channelSelect,date:this.date,status:this.ruleSelected,pageSize:10,pageNo:idx},
         successValue=>{
           this.qrRulers = successValue.result;
           this.qrRulers.unshift({});
