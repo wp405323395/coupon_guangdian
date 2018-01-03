@@ -7,25 +7,29 @@
     width: 100%;
     height: 100%;
     background-color: rgba(20, 23, 42, .5);
+    z-index: 10000;
 }
 
 .add_project {
-    position: relative;
     height: 45px;
     .add_project_content {
         display: inline-block;
         padding-right: 30px;
         padding-top: 15px;
-        cursor: pointer;
-        position: absolute;
         right: 0;
         display: flex;
         flex-direction: row;
         align-items: center;
+        justify-content:flex-end;
+        width: 100%;
         span {
+          cursor: pointer;
             font-size: 16px;
             display: inline-block;
-            margin-left: 10px;
+            padding-left: 10px;
+        }
+        img{
+          cursor: pointer;
         }
     }
 }
@@ -222,9 +226,9 @@
 
 <section>
     <section class="add_project">
-        <div @click="createNewQrRuler" class="add_project_content">
-            <img src="../../static/img/add_project.png" alt="">
-            <span>新增规则</span>
+        <div class="add_project_content">
+            <img @click="createNewQrRuler" src="../../static/img/add_project.png" alt="">
+            <span @click="createNewQrRuler">新增规则</span>
         </div>
     </section>
     <section class="search_pannel">
