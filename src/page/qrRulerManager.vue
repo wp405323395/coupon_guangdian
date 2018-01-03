@@ -99,7 +99,7 @@
             position: absolute;
           }
         .list-complete-item {
-          transition: all 2s;
+          transition: all .5s;
             div {
                 display: flex;
                 flex-direction: row;
