@@ -381,7 +381,7 @@ import urls from '../config.js'
 export default {
     data() {
             return {
-              citySelectes:[],
+                citySelectes: [],
                 channelsSelectes: [],
                 qrRulerDetail: {
                     "aftertime": null,
@@ -430,52 +430,60 @@ export default {
                 }, failValue => {
 
                 }, completeValue => {})
-                new requestEngine().request(urls.queData, {
-                        gcode: 'TV_MANAGER_CITY'
-                    },
-                    successValue => {
-                        this.citySelectes = successValue;
-                    }, failValue => {
+            new requestEngine().request(urls.queData, {
+                    gcode: 'TV_MANAGER_CITY'
+                },
+                successValue => {
+                    this.citySelectes = successValue;
+                }, failValue => {
 
-                    }, completeValue => {})
+                }, completeValue => {})
             if (this.rulerId != '') {
                 new requestEngine().request(urls.queQRcodeRuleDetail, {
                         ruleid: this.rulerId
                     },
                     successValue => {
-                      successValue.city = successValue.city.split('~')[0];
-                      this.qrRulerDetail = successValue;
+                        successValue.city = successValue.city.split('~')[0];
+                        this.qrRulerDetail = successValue;
                     }, failValue => {}, completeValue => {})
             }
 
         },
         props: ['rulerId'],
         methods: {
-          saveQrRuler(){
-            if(this.qrRulerDetail.touchtype == '1') {
-              this.qrRulerDetail.touchtype = '1';
-            } else if(this.qrRulerDetail.touchtype == '2') {
-              this.qrRulerDetail.touchtype = '2';
-            }
-            console.log('fffffffffff-->',this.qrRulerDetail.touchtype);
-            new requestEngine().request(urls.saveQRRule, this.qrRulerDetail,
-                successValue => {
-                }, failValue => {}, completeValue => {})
-          },
-          submitCheck(){
+            saveQrRuler() {
+                    new requestEngine().request(urls.saveQRRule, this.qrRulerDetail,
+                        successValue => {}, failValue => {}, completeValue => {})
+                },
+                submitCheck() {
 
-          },
-            closePannel() {
+                },
+                closePannel() {
                     this.$emit('closePannel', [])
                 },
                 chooseWeek(target) {
                     if (target.target.id) {
                         if (this.qrRulerDetail.qrday.indexOf(target.target.id) >= 0) {
-                            this.qrRulerDetail.qrday = this.qrRulerDetail.qrday.replace(target.target.id, '');
+                            let position = this.qrRulerDetail.qrday.indexOf(target.target.id);
+                            if(this.qrRulerDetail.qrday.length == 1) {
+                              this.qrRulerDetail.qrday = this.qrRulerDetail.qrday.replace(target.target.id, '');
+                            } else if(position > 0) {
+                              this.qrRulerDetail.qrday = this.qrRulerDetail.qrday.replace(","+target.target.id, '');
+                            } else if(position == 0){
+
+                              this.qrRulerDetail.qrday = this.qrRulerDetail.qrday.replace((target.target.id+','), '');
+                            }
                         } else {
-                            this.qrRulerDetail.qrday = this.qrRulerDetail.qrday.concat(target.target.id);
+                            if(this.qrRulerDetail.qrday.length == 0) {
+                              this.qrRulerDetail.qrday = this.qrRulerDetail.qrday.concat(target.target.id);
+                            } else {
+                              this.qrRulerDetail.qrday = this.qrRulerDetail.qrday.concat(','+target.target.id);
+                            }
+
                         }
                     }
+                    let sortArray = this.qrRulerDetail.qrday.split(',');
+                    this.qrRulerDetail.qrday = sortArray.sort().join(',');
 
                 },
                 choosePushRuler(target) {

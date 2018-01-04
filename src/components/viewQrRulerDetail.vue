@@ -6,6 +6,13 @@
       </div>
       <section class="create_content">
         <section>
+          <div class="" v-if="qrRulerDetail.status == '3'">
+            <span class="lable_name">驳回原因:</span>
+            <span class="lable_value" style="color:red;">{{qrRulerDetail.auditmemo}}</span>
+          </div>
+        </section>
+        <div class="depart_line" v-if="qrRulerDetail.status == '3'"></div>
+        <section>
           <div class="">
             <span class="lable_name">规则ID:</span>
             <span class="lable_value">{{rulerId}}</span>
@@ -201,7 +208,7 @@ export default {
         margin-bottom: 10px;
       }
       .depart_line{
-         width:100%;height:1px;background-color:#807f82;margin-top:12px; margin-bottom:20px;
+         width:100%;height:1px;background-color:#d4d4d4;margin-top:12px; margin-bottom:20px;
       }
       section {
         padding-left: 20px;
