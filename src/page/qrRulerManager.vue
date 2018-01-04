@@ -20,6 +20,41 @@
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, .5);
+    .pass_pannel{
+      width: 400px;
+      height: 200px;
+      background-color: white;
+      position: relative;
+      .title{
+        font-size: 20px;
+        align-self: center;
+        width: 100%;
+        display: block;
+        text-align: center;
+        margin-top: 55px;
+      }
+      .btn_content{
+        position: absolute;
+        width: 100%;
+        bottom: 10px;
+        display: flex;
+        button{
+          cursor: pointer;
+          height: 40px;
+          width: 100%;
+          margin-left: 10px;
+          margin-right: 10px;
+          background-color: #eeeeee;
+          color: #999999;
+          font-size: 20px;
+        }
+        button:last-child{
+          margin-left: 0;
+          background-color: #4a5cc8;
+          color: white;
+        }
+      }
+    }
     .reject_pannel {
         width: 400px;
         height: 300px;
@@ -387,7 +422,7 @@
     <section class="reject_section" v-show="isShowRejectPannel">
         <div class="reject_pannel">
             <div class="delete_relative">
-                <img src="../../static/img/close.png" alt="">
+                <img @click="isShowRejectPannel = false;" src="../../static/img/close.png" alt="">
             </div>
             <textarea v-model="rejectText" name="name" rows="8" cols="80">
             </textarea>
@@ -395,6 +430,15 @@
                 <button @click="submitReject" type="button" name="button">提交</button>
             </div>
         </div>
+    </section>
+    <section class="reject_section" v-show="isShowPassPannel">
+      <div class="pass_pannel">
+          <span class="title">{{toastText}}</span></br>
+          <div class="btn_content">
+            <button @click="isShowPassPannel=false;" type="button" name="button">取消</button>
+            <button @click="sureButton" type="button" name="button">确认</button>
+          </div>
+      </div>
     </section>
 </section>
 
@@ -411,6 +455,8 @@ import qrRulerManager from '../components/viewQrRulerDetail'
 export default {
     data() {
             return {
+              toastText:'确认要删除已选中规则?',
+              isShowPassPannel:false,
                 rejectText: '',
                 isShowRejectPannel: false,
                 ruleSelectes: [],
@@ -511,6 +557,10 @@ export default {
         },
 
         methods: {
+          sureButton(){
+            this.isShowPassPannel = false;
+            this.opraQrRuler(this.optQrRuler.qrRuler, this.optQrRuler.index, this.optQrRuler.status);
+          },
             submitReject() {
                     this.isShowRejectPannel = false;
                     if (this.isBatch) {
@@ -583,25 +633,50 @@ export default {
                 },
                 passQrRuler(qrRuler, index) {
                     //状态,0:未提交审核, 1:待审核 2:审核通过，3:审核不通过 ，4:发布，5:下线, 6:删除
-                    this.opraQrRuler(qrRuler, index, '2');
-                },
-                rejectQrRuler(qrRuler, index) {
-                    this.isShowRejectPannel = true;
-                    this.qrRulerDeleteObj = {
-                        qrRuler: qrRuler,
-                        index: index,
-                        status: '3'
+                    this.isShowPassPannel = true;
+                    this.toastText = "确认审核通过已选中规则?"
+                    this.optQrRuler = {
+                      qrRuler:qrRuler,
+                      index:index,
+                      status:'2'
                     }
                 },
+                rejectQrRuler(qrRuler, index) {
+                  this.isShowPassPannel = true;
+                  this.toastText = "确认驳回已选中规则?"
+                  this.optQrRuler = {
+                    qrRuler:qrRuler,
+                    index:index,
+                    status:'3'
+                  }
+                },
                 publishQrRuler(qrRuler, index) {
-                    this.opraQrRuler(qrRuler, index, '4');
+                  this.isShowPassPannel = true;
+                  this.toastText = "确认发布已选中规则?"
+                  this.optQrRuler = {
+                    qrRuler:qrRuler,
+                    index:index,
+                    status:'4'
+                  }
                 },
                 underlineQrRuler(qrRuler, index) {
-                    this.opraQrRuler(qrRuler, index, '5');
+                  this.isShowPassPannel = true;
+                  this.toastText = "确认下线已选中规则?"
+                  this.optQrRuler = {
+                    qrRuler:qrRuler,
+                    index:index,
+                    status:'5'
+                  }
                 },
                 deleteQrRuler(qrRuler, index) {
                     if (this.isCanDelete(qrRuler)) {
-                        this.opraQrRuler(qrRuler, index, '6');
+                        this.isShowPassPannel = true;
+                        this.toastText = "确认删除已选中规则?"
+                        this.optQrRuler = {
+                          qrRuler:qrRuler,
+                          index:index,
+                          status:'6'
+                        }
                     }
                 },
                 passAllQrRuler() {
