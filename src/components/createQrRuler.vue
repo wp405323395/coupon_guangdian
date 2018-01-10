@@ -157,6 +157,9 @@
                         border: 1px solid #d8dbe9;
                         display: inline-block;
                     }
+                    .is-danger {
+                        border-color: red;
+                    }
                 }
                 .item_wrap:last-child {
                     margin-bottom: 0;
@@ -180,12 +183,12 @@
                 <div class="item_wrap">
                     <span class="red_start">*</span>
                     <label for="rulerName">规则名称:</label>
-                    <input type="text" id="rulerName" name="" v-model="qrRulerDetail.rulename">
+                    <input type="text" id="rulerName" name="rulerName" v-validate="'required'" :class="{'is-danger': errors.has('rulerName')}" v-model="qrRulerDetail.rulename">
                 </div>
                 <div class="item_wrap">
                     <span class="red_start">*</span>
                     <label for="city">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区:</label>
-                    <select name="selected" v-model="qrRulerDetail.city">
+                    <select name="directory_selected" v-model="qrRulerDetail.city" v-validate="'required'" :class="{'is-danger': errors.has('directory_selected')}">
                         <option v-for="city of citySelectes" :value="city.mcode">{{city.mname}}</option>
 
                     </select>
@@ -198,7 +201,7 @@
                 <div class="item_wrap">
                     <span class="red_start">*</span>
                     <label for="showType">显示类型:</label>
-                    <select name="selected" v-model="qrRulerDetail.qrtype">
+                    <select name="showType_selected" v-model="qrRulerDetail.qrtype" v-validate="'required'" :class="{'is-danger': errors.has('showType_selected')}">
                         <option value="0">基本订购包</option>
                         <option value="1">基本包续费</option>
                         <option value="2">付费包订购</option>
@@ -215,12 +218,12 @@
                 <div class="item_wrap">
                     <span class="red_start">*</span>
                     <label for="qrlink">二维码链接:</label>
-                    <input class="long_input" placeholder="输入相关链接" type="text" id="qrlink" name="" v-model="qrRulerDetail.qrurl">
+                    <input class="long_input" placeholder="输入相关链接" type="text" id="qrlink" name="qrlink" v-model="qrRulerDetail.qrurl" v-validate="'required'" :class="{'is-danger': errors.has('qrlink')}">
                 </div>
                 <div class="item_wrap">
                     <span class="red_start">*</span>
                     <label for="qrSize">二维码尺寸:</label>
-                    <input class="number_input" type="Number" id="qrSize" name="" v-model="qrRulerDetail.qrsize"><span class="company">(px)</span>
+                    <input class="number_input" type="Number" id="qrSize" name="qrSize" v-model="qrRulerDetail.qrsize" v-validate="'required'" :class="{'is-danger': errors.has('qrSize')}"><span class="company">(px)</span>
                 </div>
                 <div class="item_wrap">
                     <span class="red_start"></span>
@@ -230,7 +233,7 @@
                 <div class="item_wrap">
                     <span class="red_start">*</span>
                     <label for="backgroundSize">背景尺寸:</label>
-                    <input class="number_input" type="Number" id="backgroundSize" name="" v-model="qrRulerDetail.backsize"><span class="company">(px)</span>
+                    <input class="number_input" type="Number" id="backgroundSize" name="backgroundSize" v-model="qrRulerDetail.backsize" v-validate="'required'" :class="{'is-danger': errors.has('backgroundSize')}"><span class="company">(px)</span>
                 </div>
             </section>
 
@@ -238,7 +241,7 @@
                 <div class="item_wrap">
                     <span class="red_start">*</span>
                     <label for="showZindex">显示优先级:</label>
-                    <input type="Number" id="showZindex" name="" v-model="qrRulerDetail.priority">
+                    <input type="Number" id="showZindex" name="showZindex" v-model="qrRulerDetail.priority" v-validate="'required'" :class="{'is-danger': errors.has('showZindex')}">
                 </div>
                 <div class="item_wrap">
                     <span class="red_start">*</span>
@@ -246,14 +249,14 @@
                     <div class="locationPannel">
                         <span>二维码坐标</span>
                         <label for="qrXlocation">x:</label>
-                        <input type="Number" id="qrXlocation" name="" v-model="qrRulerDetail.qrwp">
+                        <input type="Number" id="qrXlocation" name="qrXlocation" v-model="qrRulerDetail.qrwp" v-validate="'required'" :class="{'is-danger': errors.has('qrXlocation')}">
                         <label for="qrYlocation">y:</label>
-                        <input type="Number" id="qrYlocation" name="" v-model="qrRulerDetail.qrhp">
+                        <input type="Number" id="qrYlocation" name="qrYlocation" v-model="qrRulerDetail.qrhp" v-validate="'required'" :class="{'is-danger': errors.has('qrYlocation')}">
                         <span>背景坐标</span>
                         <label for="backgroundXlocation">x:</label>
-                        <input type="Number" id="backgroundXlocation" name="" v-model="qrRulerDetail.backwp">
+                        <input type="Number" id="backgroundXlocation" name="backgroundXlocation" v-model="qrRulerDetail.backwp" v-validate="'required'" :class="{'is-danger': errors.has('backgroundXlocation')}">
                         <label for="backgroundYlocation">y:</label>
-                        <input type="Number" id="backgroundYlocation" name="" v-model="qrRulerDetail.backhp">
+                        <input type="Number" id="backgroundYlocation" name="backgroundYlocation" v-model="qrRulerDetail.backhp" v-validate="'required'" :class="{'is-danger': errors.has('backgroundYlocation')}">
                     </div>
                 </div>
                 <div class="item_wrap align_top">
@@ -270,11 +273,11 @@
                     <span class="red_start">*</span>
                     <label for="startTime">开始日期:</label>
                     <input type="date" id="startTime" name="" v-if="qrRulerDetail.stime&&qrRulerDetail.stime.indexOf('T')>=0" v-model="qrRulerDetail.stime.split('T')[0]">
-                    <input type="date" id="startTime" name="" v-else v-model="qrRulerDetail.stime">
+                    <input type="date" id="startTime" name="startTime" v-else v-model="qrRulerDetail.stime" v-validate="'required'" :class="{'is-danger': errors.has('startTime')}">
                     <span class="red_start">*</span>
                     <label for="endTime">截止日期:</label>
                     <input type="date" id="endTime" name="" v-if="qrRulerDetail.etime&&qrRulerDetail.etime.indexOf('T')>=0" v-model="qrRulerDetail.etime.split('T')[0]">
-                    <input type="date" id="endTime" name="" v-else v-model="qrRulerDetail.etime">
+                    <input type="date" id="endTime" name="endTime" v-else v-model="qrRulerDetail.etime" v-validate="'required'" :class="{'is-danger': errors.has('endTime')}">
                 </div>
                 <div class="item_wrap">
                     <div class="week" @click="chooseWeek">
@@ -310,14 +313,14 @@
                 <div class="item_wrap">
                     <span class="red_start">*</span>
                     <label for="pushTime">推送时间:</label>
-                    <input type="time" name="" v-model="qrRulerDetail.pushtime">
+                    <input type="time" id="pushTime" name="pushTime" v-model="qrRulerDetail.pushtime" v-validate="'required'" :class="{'is-danger': errors.has('pushTime')}">
                 </div>
             </section>
             <section>
                 <div class="item_wrap">
                     <span class="red_start">*</span>
                     <label for="showTime">显示时长:</label>
-                    <input class="short_input" type="Number" name="" v-model="qrRulerDetail.workhours"> <span class="company">(秒/-1为一直显示)</span>
+                    <input class="short_input" type="Number" id="showTime" name="showTime" v-model="qrRulerDetail.workhours" v-validate="'required'" :class="{'is-danger': errors.has('showTime')}"> <span class="company">(秒/-1为一直显示)</span>
                 </div>
             </section>
             <div class="space_line" />
@@ -334,7 +337,7 @@
                     <span v-if="qrRulerDetail.countdown != undefined&&qrRulerDetail.countdown.indexOf('true')>=0" class="red_start">*</span>
                     <label v-if="qrRulerDetail.countdown != undefined&&qrRulerDetail.countdown.indexOf('true')>=0" for="downTime">倒计时时间:</label>
 
-                    <input class="short_input" v-if="qrRulerDetail.countdown != undefined&&qrRulerDetail.countdown.indexOf('true')>=0" type="Number" name="" v-model="qrRulerDetail.aftertime"> <span class="company">(秒)</span>
+                    <input class="short_input" v-if="qrRulerDetail.countdown != undefined&&qrRulerDetail.countdown.indexOf('true')>=0" type="Number" id="downTime" name="downTime" v-model="qrRulerDetail.aftertime" v-validate="'required'" :class="{'is-danger': errors.has('downTime')}"> <span class="company">(秒)</span>
 
                 </div>
                 <div class="item_wrap">
@@ -352,7 +355,7 @@
                 <div class="item_wrap" v-if="qrRulerDetail.poll != undefined&& qrRulerDetail.poll.indexOf('true')>=0">
                     <span class="red_start">*</span>
                     <label for="looperTime">轮询间隔:</label>
-                    <input class="short_input" type="Number" name="" v-model="qrRulerDetail.pollinterval"> <span class="company">(秒)</span>
+                    <input class="short_input" type="Number" id="looperTime" name="looperTime" v-model="qrRulerDetail.pollinterval" v-validate="'required'" :class="{'is-danger': errors.has('looperTime')}"> <span class="company">(秒)</span>
                 </div>
                 <div class="item_wrap">
                     <span class="red_start"></span>
@@ -384,7 +387,7 @@ export default {
                 citySelectes: [],
                 channelsSelectes: [],
                 qrRulerDetail: {
-                    "aftertime": null,
+                    "aftertime": 30,
                     "auditmemo": null,
                     "backhp": null,
                     "backsize": null,
@@ -397,9 +400,8 @@ export default {
                     "limttype": "CARD",
                     "limtvalue": "^(8270104048478701)$",
                     "memo": null,
-                    "optime": null,
                     "poll": "true",
-                    "pollinterval": null,
+                    "pollinterval": 30,
                     "pollparam": null,
                     "priority": null,
                     "pushtime": null,
@@ -413,7 +415,7 @@ export default {
                     "status": "1",
                     "stime": null,
                     "touchtype": "2",
-                    "workhours": null
+                    "workhours": 30
                 }
             }
         },
@@ -451,12 +453,30 @@ export default {
         },
         props: ['rulerId'],
         methods: {
-            saveQrRuler() {
-                    new requestEngine().request(urls.saveQRRule, this.qrRulerDetail,
-                        successValue => {}, failValue => {}, completeValue => {})
+            insertDate() {
+                    let that = this;
+                    this.$validator.validateAll().then((result) => {
+                        if (result) {
+                            // eslint-disable-next-line
+                            new requestEngine().request(urls.saveQRRule, this.qrRulerDetail,
+                                successValue => {
+                                  that.$emit('closePannel', []);
+                                }, failValue => {
+                                  alert('failValue');
+                                }, completeValue => {});
+
+                            return;
+                        }
+
+                    });
+                },
+                saveQrRuler() {
+                    this.qrRulerDetail.status = '0';
+                    this.insertDate();
                 },
                 submitCheck() {
-
+                  this.qrRulerDetail.status = '1';
+                    this.insertDate();
                 },
                 closePannel() {
                     this.$emit('closePannel', [])
@@ -465,19 +485,19 @@ export default {
                     if (target.target.id) {
                         if (this.qrRulerDetail.qrday.indexOf(target.target.id) >= 0) {
                             let position = this.qrRulerDetail.qrday.indexOf(target.target.id);
-                            if(this.qrRulerDetail.qrday.length == 1) {
-                              this.qrRulerDetail.qrday = this.qrRulerDetail.qrday.replace(target.target.id, '');
-                            } else if(position > 0) {
-                              this.qrRulerDetail.qrday = this.qrRulerDetail.qrday.replace(","+target.target.id, '');
-                            } else if(position == 0){
+                            if (this.qrRulerDetail.qrday.length == 1) {
+                                this.qrRulerDetail.qrday = this.qrRulerDetail.qrday.replace(target.target.id, '');
+                            } else if (position > 0) {
+                                this.qrRulerDetail.qrday = this.qrRulerDetail.qrday.replace("," + target.target.id, '');
+                            } else if (position == 0) {
 
-                              this.qrRulerDetail.qrday = this.qrRulerDetail.qrday.replace((target.target.id+','), '');
+                                this.qrRulerDetail.qrday = this.qrRulerDetail.qrday.replace((target.target.id + ','), '');
                             }
                         } else {
-                            if(this.qrRulerDetail.qrday.length == 0) {
-                              this.qrRulerDetail.qrday = this.qrRulerDetail.qrday.concat(target.target.id);
+                            if (this.qrRulerDetail.qrday.length == 0) {
+                                this.qrRulerDetail.qrday = this.qrRulerDetail.qrday.concat(target.target.id);
                             } else {
-                              this.qrRulerDetail.qrday = this.qrRulerDetail.qrday.concat(','+target.target.id);
+                                this.qrRulerDetail.qrday = this.qrRulerDetail.qrday.concat(',' + target.target.id);
                             }
 
                         }
