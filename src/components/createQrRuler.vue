@@ -218,7 +218,7 @@
                 <div class="item_wrap">
                     <span class="red_start">*</span>
                     <label for="qrlink">二维码链接:</label>
-                    <input class="long_input" placeholder="输入相关链接" type="text" id="qrlink" name="qrlink" v-model="qrRulerDetail.qrurl" v-validate="'required'" :class="{'is-danger': errors.has('qrlink')}">
+                    <input class="long_input" placeholder="输入相关链接" type="text" id="qrlink" name="qrlink" v-model="qrRulerDetail.qrurl" v-validate="'required|url'" :class="{'is-danger': errors.has('qrlink')}">
                 </div>
                 <div class="item_wrap">
                     <span class="red_start">*</span>
@@ -228,7 +228,7 @@
                 <div class="item_wrap">
                     <span class="red_start"></span>
                     <label for="backgroundQrLink">背景链接:</label>
-                    <input class="long_input" type="text" id="backgroundQrLink" placeholder="输入相关链接" name="" v-model="qrRulerDetail.backurl">
+                    <input class="long_input" type="text" id="backgroundQrLink" placeholder="输入相关链接" name="backgroundQrLink" v-model="qrRulerDetail.backurl" v-validate="'url'" :class="{'is-danger': errors.has('backgroundQrLink')}">
                 </div>
                 <div class="item_wrap">
                     <span class="red_start">*</span>
