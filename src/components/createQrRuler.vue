@@ -408,7 +408,7 @@ export default {
                     "qrday": '',
                     "qrhp": null,
                     "qrsize": null,
-                    "qrtype": "付费包订购",
+                    "qrtype": "0",
                     "qrurl": null,
                     "qrwp": '',
                     "rulename": null,

@@ -729,9 +729,12 @@ export default {
                         },
                         successValue => {
                             this.qrRulers = successValue.result;
-                            this.qrRulers.unshift({
-                                id: 0
-                            });
+                            if(this.qrRulers) {
+                              this.qrRulers.unshift({
+                                  id: 0
+                              });
+                            }
+
                             this.total = successValue.totalCount;
                         }, failValue => {
 
