@@ -500,6 +500,7 @@ export default {
         },
         mounted: function() {
             let that = this;
+            that.setCurrent(1, this.ruleSelected);
             document.bus.$on('switchQrRulers', function(status) {
                 that.selectAll = false;
                 that.qrRulers = [];
@@ -529,34 +530,51 @@ export default {
 
                 }
             });
-            that.setCurrent(1, this.ruleSelected);
-            new requestEngine().request(urls.queData, {
-                    gcode: 'QR_RULE_STATUS'
-                },
-                successValue => {
-                    if (successValue) {
-                        successValue.unshift({
-                            mcode: '',
-                            mname: '全部'
-                        });
-                    }
-                    this.ruleSelectes = successValue;
 
-                }, failValue => {
+            this.loadQR_RULE_STATUS().then(value=>{
+              if (value) {
+                  value.unshift({
+                      mcode: '',
+                      mname: '全部'
+                  });
+              }
+              this.ruleSelectes = value;
+              return this.loadTV_CHANNEL();
+            }).catch(err=>{
 
-                }, completeValue => {})
-            new requestEngine().request(urls.queData, {
-                    gcode: 'TV_CHANNEL'
-                },
-                successValue => {
+            }).then(value=>{
+              return this.channelsSelectes = value;
+            }).catch(err=>{
 
-                    this.channelsSelectes = successValue;
-                }, failValue => {
+            });
 
-                }, completeValue => {})
         },
 
         methods: {
+          loadQR_RULE_STATUS() {
+            return new Promise((resolve,reject)=>{
+              new requestEngine().request(urls.queData, {
+                      gcode: 'QR_RULE_STATUS'
+                  },
+                  successValue => {
+                    resolve(successValue);
+                  }, failValue => {
+                    reject(failValue);
+                  }, completeValue => {})
+            })
+          },
+          loadTV_CHANNEL(){
+            return new Promise((resolve, reject)=>{
+              new requestEngine().request(urls.queData, {
+                      gcode: 'TV_CHANNEL'
+                  },
+                  successValue => {
+                    resolve(successValue);
+                  }, failValue => {
+                    reject(failValue);
+                  }, completeValue => {});
+            });
+          },
             sureButton() {
                     this.isShowPassPannel = false;
                     if(this.opAllType == '' || this.opAllType == undefined) {

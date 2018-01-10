@@ -405,7 +405,7 @@ export default {
                     "pollparam": null,
                     "priority": null,
                     "pushtime": null,
-                    "qrday": '',
+                    "qrday": '1',
                     "qrhp": null,
                     "qrsize": null,
                     "qrtype": "0",
@@ -420,39 +420,66 @@ export default {
             }
         },
         mounted: function() {
-            new requestEngine().request(urls.queData, {
-                    gcode: 'TV_CHANNEL'
-                },
-                successValue => {
-                    successValue.unshift({
-                        'mcode': '*',
-                        'mname': '所有频道'
-                    });
-                    this.channelsSelectes = successValue;
-                }, failValue => {
+            this.loadTV_CHANNEL().then(value=>{
+              value.unshift({
+                  'mcode': '*',
+                  'mname': '所有频道'
+              });
+              this.channelsSelectes = value;
+              return this.loadTV_MANAGER_CITY();
+            }).catch(err=>{}).then(value=>{
+              this.citySelectes = value;
+              return this.loadModify();
+            }).catch(err=>{}).then(value=>{
+              value.city = value.city.split('~')[0];
+              this.qrRulerDetail = value;
+            });
 
-                }, completeValue => {})
-            new requestEngine().request(urls.queData, {
-                    gcode: 'TV_MANAGER_CITY'
-                },
-                successValue => {
-                    this.citySelectes = successValue;
-                }, failValue => {
 
-                }, completeValue => {})
-            if (this.rulerId != '') {
-                new requestEngine().request(urls.queQRcodeRuleDetail, {
-                        ruleid: this.rulerId
-                    },
-                    successValue => {
-                        successValue.city = successValue.city.split('~')[0];
-                        this.qrRulerDetail = successValue;
-                    }, failValue => {}, completeValue => {})
-            }
 
         },
         props: ['rulerId'],
         methods: {
+          loadTV_CHANNEL(){
+            return new Promise((resolve,reject)=>{
+              new requestEngine().request(urls.queData, {
+                      gcode: 'TV_CHANNEL'
+                  },
+                  successValue => {
+                    resolve(successValue);
+                  }, failValue => {
+                    reject(failValue);
+                  }, completeValue => {})
+            });
+          },
+          loadTV_MANAGER_CITY(){
+            return new Promise((resolve,reject)=>{
+              new requestEngine().request(urls.queData, {
+                      gcode: 'TV_MANAGER_CITY'
+                  },
+                  successValue => {
+                    resolve(successValue);
+                  }, failValue => {
+                    reject(failValue);
+                  }, completeValue => {})
+            });
+
+          },
+          loadModify(){
+            return new Promise((resolve,reject)=>{
+              if (this.rulerId != '') {
+                  new requestEngine().request(urls.queQRcodeRuleDetail, {
+                          ruleid: this.rulerId
+                      },
+                      successValue => {
+                        resolve(successValue);
+                      }, failValue => {
+                        reject(failValue);
+                      }, completeValue => {})
+              }
+            });
+
+          },
             insertDate() {
                     let that = this;
                     this.$validator.validateAll().then((result) => {
