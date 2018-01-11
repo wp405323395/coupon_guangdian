@@ -70,11 +70,15 @@ export default {
       if (this.newpassword1 == this.newpassword2){
           new requestEngine().request(urls.editPassword,{oldPassword: oldmd5passWorld ,newPassword:newmd5passWorld },
             successValue=>{
+              setTimeout(()=>{
+                new requestEngine().request(urls.doLogout, {},
+                  successValue=>{
+                    router.replace({name:"login"})
+                  }, failValue=>{
+                  }, completeValue=>{
+                  })
+              },1000)
               that.success_success = true;
-              router.replace({
-                path: '/login',
-                params: {}
-              });
             }, failValue=>{
               that.errmsg = failValue;
               that.password_err2 = true;
@@ -175,7 +179,7 @@ export default {
     height: 100px;
     width: 380px;
     margin: auto;
-    margin-top: 80px;
+    margin-top: -250px;
     margin-right: 205px;
     opacity:0.6;
     border-radius: 4px;
