@@ -483,14 +483,14 @@ export default {
             qrRulerManager
         },
         watch: {
-          selectAll(curVal, oldVal){
-            if (this.qrRulers != null) {
-                for (var i = 0; i < this.qrRulers.length; i++) {
-                    this.qrRulers[i].isSelect = curVal;
-                }
-            }
-          },
-            isShowCreateQrRulerPannel(curVal, oldVal) {
+            selectAll(curVal, oldVal) {
+                    if (this.qrRulers != null) {
+                        for (var i = 0; i < this.qrRulers.length; i++) {
+                            this.qrRulers[i].isSelect = curVal;
+                        }
+                    }
+                },
+                isShowCreateQrRulerPannel(curVal, oldVal) {
                     if (curVal) {
                         window.document.body.style.overflow = "hidden";
                     } else {
@@ -538,57 +538,57 @@ export default {
                 }
             });
 
-            this.loadQR_RULE_STATUS().then(value=>{
-              if (value) {
-                  value.unshift({
-                      mcode: '',
-                      mname: '全部'
-                  });
-              }
-              this.ruleSelectes = value;
-              return this.loadTV_CHANNEL();
-            }).catch(err=>{
+            this.loadQR_RULE_STATUS().then(value => {
+                if (value) {
+                    value.unshift({
+                        mcode: '',
+                        mname: '全部'
+                    });
+                }
+                this.ruleSelectes = value;
+                return this.loadTV_CHANNEL();
+            }).catch(err => {
 
-            }).then(value=>{
-              return this.channelsSelectes = value;
-            }).catch(err=>{
+            }).then(value => {
+                return this.channelsSelectes = value;
+            }).catch(err => {
 
             });
 
         },
 
         methods: {
-          loadQR_RULE_STATUS() {
-            return new Promise((resolve,reject)=>{
-              new requestEngine().request(urls.queData, {
-                      gcode: 'QR_RULE_STATUS'
-                  },
-                  successValue => {
-                    resolve(successValue);
-                  }, failValue => {
-                    reject(failValue);
-                  }, completeValue => {})
-            })
-          },
-          loadTV_CHANNEL(){
-            return new Promise((resolve, reject)=>{
-              new requestEngine().request(urls.queData, {
-                      gcode: 'TV_CHANNEL'
-                  },
-                  successValue => {
-                    resolve(successValue);
-                  }, failValue => {
-                    reject(failValue);
-                  }, completeValue => {});
-            });
-          },
-            sureButton() {
+            loadQR_RULE_STATUS() {
+                    return new Promise((resolve, reject) => {
+                        new requestEngine().request(urls.queData, {
+                                gcode: 'QR_RULE_STATUS'
+                            },
+                            successValue => {
+                                resolve(successValue);
+                            }, failValue => {
+                                reject(failValue);
+                            }, completeValue => {})
+                    })
+                },
+                loadTV_CHANNEL() {
+                    return new Promise((resolve, reject) => {
+                        new requestEngine().request(urls.queData, {
+                                gcode: 'TV_CHANNEL'
+                            },
+                            successValue => {
+                                resolve(successValue);
+                            }, failValue => {
+                                reject(failValue);
+                            }, completeValue => {});
+                    });
+                },
+                sureButton() {
                     this.isShowPassPannel = false;
-                    if(this.opAllType == '' || this.opAllType == undefined) {
-                      this.opraQrRuler(this.optQrRuler.qrRuler, this.optQrRuler.index, this.optQrRuler.status);
+                    if (this.opAllType == '' || this.opAllType == undefined) {
+                        this.opraQrRuler(this.optQrRuler.qrRuler, this.optQrRuler.index, this.optQrRuler.status);
                     } else {
-                      this.opraAllQrRuler(this.opAllType);
-                      this.opAllType = "";
+                        this.opraAllQrRuler(this.opAllType);
+                        this.opAllType = "";
                     }
 
                 },
@@ -608,7 +608,7 @@ export default {
                     return (qrRuler.status == '编辑中' || qrRuler.status == '审核驳回' || qrRuler.status == '已下线');
                 },
                 gotoModify(qrRuler, index) {
-                  this.modifyIndex = index;
+                    this.modifyIndex = index;
                     if (this.isCanModify(qrRuler)) {
                         this.clickedQrRulerId = qrRuler.id;
                         this.isShowCreateQrRulerPannel = true;
@@ -631,8 +631,8 @@ export default {
                         }, failValue => {}, completeValue => {})
                 },
                 opraAllQrRuler(status) {
-                  this.isShowPassPannel = false;
-                  this.isShowRejectPannel = false;
+                    this.isShowPassPannel = false;
+                    this.isShowRejectPannel = false;
                     let proQrRulers = [];
                     let selectedQrRulerids = '';
                     for (var i = 0; i < this.qrRulers.length; i++) {
@@ -653,8 +653,8 @@ export default {
                     if (status == '3') {
                         rejectT = this.rejectText;
                     }
-                    if(selectedQrRulerids.length == 0) {
-                      return;
+                    if (selectedQrRulerids.length == 0) {
+                        return;
                     }
                     new requestEngine().request(urls.updateQRrulesStatus, {
                             ruleids: selectedQrRulerids,
@@ -713,9 +713,9 @@ export default {
                     }
                 },
                 passAllQrRuler() {
-                  this.opAllType = '2';
-                  this.isShowPassPannel = true;
-                  this.toastText = "确认审核通过已选中规则?"
+                    this.opAllType = '2';
+                    this.isShowPassPannel = true;
+                    this.toastText = "确认审核通过已选中规则?"
                 },
                 rejectAllQrRuler() {
                     this.isBatch = true;
@@ -728,9 +728,9 @@ export default {
 
                 },
                 underAllQrRuler() {
-                  this.opAllType = '5';
-                  this.isShowPassPannel = true;
-                  this.toastText = "确认下线已选中规则?"
+                    this.opAllType = '5';
+                    this.isShowPassPannel = true;
+                    this.toastText = "确认下线已选中规则?"
                 },
 
                 gotoQrRulerDetail(id) {
@@ -738,12 +738,9 @@ export default {
                     this.isShowViewQrRulerPannel = true;
                 },
                 closePannel(data) {
-                  if(data[0]) {
-                    if(this.qrRulers[this.modifyIndex].status != data[0].status) {
-                      // that.setCurrent(that.current);
-                      //this.qrRulers[this.modifyIndex] = data[0];
+                    if (data[0]) {
+                        this.setCurrent(this.current);
                     }
-                  }
                     this.isShowViewQrRulerPannel = false;
                     this.isShowCreateQrRulerPannel = false;
                 },
@@ -751,7 +748,7 @@ export default {
                     this.setCurrent(1);
                 },
                 setCurrent(idx) {
-                  console.log('idx--------------->',idx);
+                    console.log('idx--------------->', idx);
                     this.current = idx;
                     new requestEngine().request(urls.queQruleList, {
                             channelName: this.channelSelect,
@@ -762,10 +759,10 @@ export default {
                         },
                         successValue => {
                             this.qrRulers = successValue.result;
-                            if(this.qrRulers) {
-                              this.qrRulers.unshift({
-                                  id: 0
-                              });
+                            if (this.qrRulers) {
+                                this.qrRulers.unshift({
+                                    id: 0
+                                });
                             }
 
                             this.total = successValue.totalCount;

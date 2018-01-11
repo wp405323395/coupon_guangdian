@@ -391,7 +391,7 @@ export default {
                     "auditmemo": null,
                     "backhp": null,
                     "backsize": null,
-                    "backurl": null,
+                    "backurl": "",
                     "backwp": null,
                     "channelname": "*",
                     "city": null,
