@@ -400,7 +400,7 @@
         <section class="page_footer">
             <div class="check_status" v-if="$store.state.subMenusDir=='/rulerManager'" />
             <div class="check_status" v-else>
-                <input @click="selectAllClick" v-model="selectAll" id="checkall" type="checkbox" name="" value="">
+                <input v-model="selectAll" id="checkall" type="checkbox" name="" value="">
                 <label for="checkall">全选</label>
                 <div class="opration_section" v-if="$store.state.subMenusDir=='/rulerCheck'">
                     <span @click="passAllQrRuler()" class="pass">通过</span>
@@ -483,6 +483,13 @@ export default {
             qrRulerManager
         },
         watch: {
+          selectAll(curVal, oldVal){
+            if (this.qrRulers != null) {
+                for (var i = 0; i < this.qrRulers.length; i++) {
+                    this.qrRulers[i].isSelect = curVal;
+                }
+            }
+          },
             isShowCreateQrRulerPannel(curVal, oldVal) {
                     if (curVal) {
                         window.document.body.style.overflow = "hidden";
@@ -758,14 +765,7 @@ export default {
 
                         }, completeValue => {})
                 },
-                selectAllClick() {
-                    if (this.qrRulers != null) {
-                        for (var i = 0; i < this.qrRulers.length; i++) {
-                            this.qrRulers[i].isSelect = this.selectAll;
-                        }
-                    }
 
-                },
                 createNewQrRuler() {
                     this.clickedQrRulerId = '';
                     this.isShowCreateQrRulerPannel = true;
