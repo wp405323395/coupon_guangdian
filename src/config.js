@@ -1,5 +1,5 @@
 /* jshint esversion: 6 */
-var host = (process.env.NODE_ENV == "production" ? "www.maywide.com" : "localhost:8080")
+var host = (process.env.NODE_ENV == "production" ? "www.maywidehb.com" : "localhost:8080")
 var isHttps = (process.env.NODE_ENV == "production" ? true : false);
 var isDebug = process.env.NODE_ENV != "production";
 var schema = isHttps ? 'https' : 'http';
