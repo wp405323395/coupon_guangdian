@@ -1,5 +1,5 @@
 import Interceptor from './Interceptor.js'
-
+import router from '../../router';
 class RequestStatusInterceptor extends Interceptor {
   constructor() {
     super()
@@ -14,6 +14,10 @@ class RequestStatusInterceptor extends Interceptor {
     document.bus.$emit('showProgress', false);
   }
   onAutherErrorResponse(url, header, data) {
+    router.replace({
+      path: '/login',
+      params: {}
+    });
     document.bus.$emit('showProgress', false);
   }
   onFaildResponse(url, header, data) {

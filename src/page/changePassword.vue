@@ -62,25 +62,24 @@ export default {
       return md5(password);
     },
     changePassword () {
+      this.password_err = false;
+      this.password_err2 = false;
+      let that = this;
       let oldmd5passWorld = this.md5(this.oldpassword);
       let newmd5passWorld = this.md5(this.newpassword2);
       if (this.newpassword1 == this.newpassword2){
-        new Promise((resolve, reject) => {
-          // url, data, requestSuccess, requestFail, requestComplete
           new requestEngine().request(urls.editPassword,{oldPassword: oldmd5passWorld ,newPassword:newmd5passWorld },
             successValue=>{
-              resolve(successValue);
-              this.success_success = true;
+              that.success_success = true;
+              router.replace({
+                path: '/login',
+                params: {}
+              });
             }, failValue=>{
-              reject(failValue);
+              that.errmsg = failValue;
+              that.password_err2 = true;
             }, completeValue=>{
-            })
-        }).then(value => {
-          // router.replace({ name: 'login' })
-        }).catch(err => {
-          this.errmsg = err;
-          this.password_err2 = true;
-        })
+            });
       } else{
         this.password_err = true;
       }
