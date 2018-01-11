@@ -1,7 +1,7 @@
-var host = "www.htrnpay.cn"
-var host = 'localhost:8080';
-var isHttps = false;
-var isDebug = true;
+/* jshint esversion: 6 */
+var host = (process.env.NODE_ENV == "production" ? "www.maywide.com" : "localhost:8080")
+var isHttps = (process.env.NODE_ENV == "production" ? true : false);
+var isDebug = process.env.NODE_ENV != "production";
 var schema = isHttps ? 'https' : 'http';
 var config = {
   // 下面的地址配合云端 Server 工作
