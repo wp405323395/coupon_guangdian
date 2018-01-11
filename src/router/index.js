@@ -48,7 +48,7 @@ export default new Router({
           name: 'qrRulerManager'
         }, {
           name: 'qrRulerManager',
-          path: '/main/qrRulerManager',
+          path: '/main/homeMainQr/qrRulerManager',
           component: qrRulerManager
         }]
       }]

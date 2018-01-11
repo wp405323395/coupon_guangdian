@@ -96,16 +96,16 @@ export default {
         goinModel() {
             switch (event.target.id) {
                 case '0':
-                    this.$router.push({ name: 'homeMainQr', params: { }});
+                    this.$router.push({ path: '/main/homeMainQr', params: { }});
                     break;
                 case '0':
-                    this.$router.push({ name: 'homeMainQr', params: { }});
+                    this.$router.push({ path: '/main/homeMainQr', params: { }});
                     break;
                 case '0':
-                    this.$router.push({ name: 'homeMainQr', params: { }});
+                    this.$router.push({ path: '/main/homeMainQr', params: { }});
                     break;
                 case '0':
-                    this.$router.push({ name: 'homeMainQr', params: { }});
+                    this.$router.push({ path: '/main/homeMainQr', params: { }});
                     break;
                 default:
 
