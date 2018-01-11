@@ -482,6 +482,15 @@ export default {
           },
             insertDate() {
                     let that = this;
+                    if(this.qrRulerDetail.stime > this.qrRulerDetail.etime) {
+                      alert("起止时间有误！");
+                      return;
+                    }
+                    if(!this.qrRulerDetail.qrday) {
+                      alert('星期不能不填');
+                      return;
+                    }
+
                     this.$validator.validateAll().then((result) => {
                         if (result) {
                             // eslint-disable-next-line
@@ -489,7 +498,7 @@ export default {
                                 successValue => {
                                   that.$emit('closePannel', []);
                                 }, failValue => {
-                                  alert('failValue');
+                                  alert(failValue);
                                 }, completeValue => {});
 
                             return;
