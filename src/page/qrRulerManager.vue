@@ -385,7 +385,7 @@
                         </div>
                         <div class="opration">
                             <span :class="{'can_opration':true}" @click="gotoQrRulerDetail(qrRuler.id)">详情</span>
-                            <span @click="gotoModify(qrRuler)" v-if="$store.state.subMenusDir=='/rulerManager'" :class="{'can_opration':isCanModify(qrRuler)}">修改</span>
+                            <span @click="gotoModify(qrRuler,index)" v-if="$store.state.subMenusDir=='/rulerManager'" :class="{'can_opration':isCanModify(qrRuler)}">修改</span>
                             <span @click="deleteQrRuler(qrRuler,index)" v-if="$store.state.subMenusDir=='/rulerManager'" :class="{'can_opration':isCanDelete(qrRuler)}">删除</span>
                             <span @click="passQrRuler(qrRuler,index)" v-if="$store.state.subMenusDir=='/rulerCheck'" class="can_opration">通过</span>
                             <span @click="rejectQrRuler(qrRuler,index)" v-if="$store.state.subMenusDir=='/rulerCheck'" class="can_opration red-color">驳回</span>
@@ -507,7 +507,7 @@ export default {
         },
         mounted: function() {
             let that = this;
-            that.setCurrent(1, this.ruleSelected);
+            that.setCurrent(1);
             document.bus.$on('switchQrRulers', function(status) {
                 that.selectAll = false;
                 that.qrRulers = [];
@@ -515,22 +515,22 @@ export default {
                     case '/rulerManager':
                         that.unAbleRulerSearch = false;
                         that.ruleSelected = '';
-                        that.setCurrent(that.current, '');
+                        that.setCurrent(that.current);
                         break;
                     case '/rulerCheck':
                         that.unAbleRulerSearch = true;
                         that.ruleSelected = '1';
-                        that.setCurrent(that.current, '1');
+                        that.setCurrent(that.current);
                         break;
                     case '/rulerPublish':
                         that.ruleSelected = '2';
                         that.unAbleRulerSearch = true;
-                        that.setCurrent(that.current, '2');
+                        that.setCurrent(that.current);
                         break;
                     case '/rulerReset':
                         that.ruleSelected = '4';
                         that.unAbleRulerSearch = true;
-                        that.setCurrent(that.current, '4');
+                        that.setCurrent(that.current);
                         break;
 
                     default:
@@ -607,7 +607,8 @@ export default {
                 isCanDelete: function(qrRuler) {
                     return (qrRuler.status == '编辑中' || qrRuler.status == '审核驳回' || qrRuler.status == '已下线');
                 },
-                gotoModify(qrRuler) {
+                gotoModify(qrRuler, index) {
+                  this.modifyIndex = index;
                     if (this.isCanModify(qrRuler)) {
                         this.clickedQrRulerId = qrRuler.id;
                         this.isShowCreateQrRulerPannel = true;
@@ -736,7 +737,13 @@ export default {
                     this.clickedQrRulerId = id;
                     this.isShowViewQrRulerPannel = true;
                 },
-                closePannel() {
+                closePannel(data) {
+                  if(data[0]) {
+                    if(this.qrRulers[this.modifyIndex].status != data[0].status) {
+                      // that.setCurrent(that.current);
+                      //this.qrRulers[this.modifyIndex] = data[0];
+                    }
+                  }
                     this.isShowViewQrRulerPannel = false;
                     this.isShowCreateQrRulerPannel = false;
                 },
@@ -744,6 +751,7 @@ export default {
                     this.setCurrent(1);
                 },
                 setCurrent(idx) {
+                  console.log('idx--------------->',idx);
                     this.current = idx;
                     new requestEngine().request(urls.queQruleList, {
                             channelName: this.channelSelect,

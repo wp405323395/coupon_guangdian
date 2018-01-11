@@ -493,10 +493,11 @@ export default {
 
                     this.$validator.validateAll().then((result) => {
                         if (result) {
+                          let that = this;
                             // eslint-disable-next-line
-                            new requestEngine().request(urls.saveQRRule, this.qrRulerDetail,
+                            new requestEngine().request(urls.saveQRRule, that.qrRulerDetail,
                                 successValue => {
-                                  that.$emit('closePannel', []);
+                                  that.$emit('closePannel', [that.qrRulerDetail]);
                                 }, failValue => {
                                   alert(failValue);
                                 }, completeValue => {});
@@ -515,7 +516,7 @@ export default {
                     this.insertDate();
                 },
                 closePannel() {
-                    this.$emit('closePannel', [])
+                    this.$emit('closePannel', [this.qrRulerDetail])
                 },
                 chooseWeek(target) {
                     if (target.target.id) {
