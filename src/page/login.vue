@@ -9,7 +9,7 @@
          <input class="input_st" type="password"  @focus="passwordFocus" name="" placeholder="密码" v-model="password">
        </div>
        <section class="notice_err_wrap" v-if="password_err">
-          <span class="notice_err">您输入的账号或密码有误，请重新输入</span>
+          <span class="notice_err">{{err}}</span>
        </section>
 
        <button @click="login" class="login_btn" type="button" name="button">登陆</button>
@@ -22,9 +22,7 @@
 <script>
 import md5 from 'js-md5';
 import router from '../router'
-import requestEngine from '../netApi/requestEngine'
 import progressBar from '../components/progressBar'
-import urls from '../config.js'
 export default {
   name: 'login',
   data () {
@@ -50,21 +48,13 @@ export default {
       storage.account = this.account;
       storage.password = this.password;
       let md5passWorld = this.md5(this.password);
-      new Promise((resolve, reject) => {
-        // url, data, requestSuccess, requestFail, requestComplete
-        new requestEngine().request(urls.loginUrl,{loginName: this.account ,password:md5passWorld },
-          successValue=>{
-            resolve(successValue);
-          }, failValue=>{
-            reject(failValue);
-          }, completeValue=>{
-          })
-      }).then(value => {
+      getPromise(urls.loginUrl,{loginName: this.account ,password:md5passWorld })
+      .then(value=>{
         router.replace({ path: 'main' })
-      }).catch(err => {
-
+      }).catch(err=>{
         this.password_err = true;
-      })
+        this.err = err;
+      });
 
     }
   }

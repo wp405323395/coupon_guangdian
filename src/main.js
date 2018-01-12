@@ -7,7 +7,9 @@ import './config/rem';
 Vue.config.productionTip = false;
 import store from './store/store';
 import './validate/validate';
-
+import RequestEngine from './netApi/requestEngine'
+window.getPromise = (url, data) => new RequestEngine().getPromise(url, data);
+window.urls = require('./config');
 /* eslint-disable no-new */
 
 new Vue({
