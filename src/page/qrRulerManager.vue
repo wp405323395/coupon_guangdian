@@ -447,9 +447,7 @@
 <script>
 
 import pagination from '../components/pagination'
-import requestEngine from '../netApi/requestEngine'
 import router from '../router'
-import urls from '../config.js'
 import createQrRuler from '../components/createQrRuler'
 import qrRulerManager from '../components/viewQrRulerDetail'
 export default {
@@ -559,28 +557,10 @@ export default {
 
         methods: {
             loadQR_RULE_STATUS() {
-                    return new Promise((resolve, reject) => {
-                        new requestEngine().request(urls.queData, {
-                                gcode: 'QR_RULE_STATUS'
-                            },
-                            successValue => {
-                                resolve(successValue);
-                            }, failValue => {
-                                reject(failValue);
-                            }, completeValue => {})
-                    })
+                    return getPromise(urls.queData,{gcode: 'QR_RULE_STATUS'});
                 },
                 loadTV_CHANNEL() {
-                    return new Promise((resolve, reject) => {
-                        new requestEngine().request(urls.queData, {
-                                gcode: 'TV_CHANNEL'
-                            },
-                            successValue => {
-                                resolve(successValue);
-                            }, failValue => {
-                                reject(failValue);
-                            }, completeValue => {});
-                    });
+                  return getPromise(urls.queData,{gcode: 'TV_CHANNEL'});
                 },
                 sureButton() {
                     this.isShowPassPannel = false;
@@ -620,15 +600,13 @@ export default {
                     if (status == '3') {
                         rejectT = this.rejectText;
                     }
-
-                    new requestEngine().request(urls.updateQRrulesStatus, {
+                    getPromise(urls.updateQRrulesStatus,{
                             ruleids: qrRuler.id,
                             status: status,
                             rejectText: rejectT
-                        },
-                        successValue => {
-                            this.qrRulers.splice(index, 1);
-                        }, failValue => {}, completeValue => {})
+                        }).then(value=>{
+                      this.qrRulers.splice(index, 1);
+                    });
                 },
                 opraAllQrRuler(status) {
                     this.isShowPassPannel = false;
@@ -656,14 +634,13 @@ export default {
                     if (selectedQrRulerids.length == 0) {
                         return;
                     }
-                    new requestEngine().request(urls.updateQRrulesStatus, {
+                    getPromise(urls.updateQRrulesStatus,{
                             ruleids: selectedQrRulerids,
                             status: status,
                             rejectText: rejectT
-                        },
-                        successValue => {
-                            this.qrRulers = proQrRulers;
-                        }, failValue => {}, completeValue => {})
+                        }).then(value=>{
+                          this.qrRulers = proQrRulers;
+                        });
                 },
                 passQrRuler(qrRuler, index) {
                     //状态,0:未提交审核, 1:待审核 2:审核通过，3:审核不通过 ，4:发布，5:下线, 6:删除
@@ -748,27 +725,22 @@ export default {
                     this.setCurrent(1);
                 },
                 setCurrent(idx) {
-                    console.log('idx--------------->', idx);
                     this.current = idx;
-                    new requestEngine().request(urls.queQruleList, {
+                    getPromise(urls.queQruleList,{
                             channelName: this.channelSelect,
                             date: this.date,
                             status: this.ruleSelected,
                             pageSize: 10,
                             pageNo: idx
-                        },
-                        successValue => {
-                            this.qrRulers = successValue.result;
-                            if (this.qrRulers) {
-                                this.qrRulers.unshift({
-                                    id: 0
-                                });
-                            }
-
-                            this.total = successValue.totalCount;
-                        }, failValue => {
-
-                        }, completeValue => {})
+                        }).then(value=>{
+                          this.qrRulers = value.result;
+                          if (this.qrRulers) {
+                              this.qrRulers.unshift({
+                                  id: 0
+                              });
+                          }
+                          this.total = value.totalCount;
+                    });
                 },
 
                 createNewQrRuler() {

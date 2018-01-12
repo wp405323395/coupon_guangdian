@@ -441,43 +441,17 @@ export default {
         props: ['rulerId'],
         methods: {
           loadTV_CHANNEL(){
-            return new Promise((resolve,reject)=>{
-              new requestEngine().request(urls.queData, {
-                      gcode: 'TV_CHANNEL'
-                  },
-                  successValue => {
-                    resolve(successValue);
-                  }, failValue => {
-                    reject(failValue);
-                  }, completeValue => {})
-            });
+            return getPromise(urls.queData, {gcode: 'TV_CHANNEL'})
           },
           loadTV_MANAGER_CITY(){
-            return new Promise((resolve,reject)=>{
-              new requestEngine().request(urls.queData, {
-                      gcode: 'TV_MANAGER_CITY'
-                  },
-                  successValue => {
-                    resolve(successValue);
-                  }, failValue => {
-                    reject(failValue);
-                  }, completeValue => {})
-            });
-
+            return getPromise(urls.queData, {gcode: 'TV_MANAGER_CITY'})
           },
           loadModify(){
-            return new Promise((resolve,reject)=>{
-              if (this.rulerId != '') {
-                  new requestEngine().request(urls.queQRcodeRuleDetail, {
-                          ruleid: this.rulerId
-                      },
-                      successValue => {
-                        resolve(successValue);
-                      }, failValue => {
-                        reject(failValue);
-                      }, completeValue => {})
-              }
-            });
+            if (this.rulerId != '') {
+              return getPromise(urls.queQRcodeRuleDetail, {ruleid: this.rulerId});
+            } else {
+              return new Promise((resolve,reject)=>{});
+            }
 
           },
             insertDate() {
@@ -493,14 +467,13 @@ export default {
 
                     this.$validator.validateAll().then((result) => {
                         if (result) {
-                          let that = this;
+
                             // eslint-disable-next-line
-                            new requestEngine().request(urls.saveQRRule, that.qrRulerDetail,
-                                successValue => {
-                                  that.$emit('closePannel', [that.qrRulerDetail]);
-                                }, failValue => {
-                                  alert(failValue);
-                                }, completeValue => {});
+                            getPromise(urls.saveQRRule, this.qrRulerDetail).then(value=>{
+                              this.$emit('closePannel', [this.qrRulerDetail]);
+                            }).catch(err=>{
+                              alert(err);
+                            });
 
                             return;
                         }
