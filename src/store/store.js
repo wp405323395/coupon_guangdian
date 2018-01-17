@@ -2,16 +2,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 Vue.use(Vuex);
-const state = {
-  subMenusDir: ''
-}
-const mutations = {
-  subMenusDir(state, subMenusDir) {
-    state.subMenusDir = subMenusDir;
-  }
-}
-
+import ruteModule from './modules/ruteModule';
 export default new Vuex.Store({
-  state,
-  mutations
+  modules: {
+    ruteModule
+  }
 });

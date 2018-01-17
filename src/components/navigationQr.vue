@@ -16,7 +16,7 @@
 import requestEngine from '../netApi/requestEngine'
 import router from '../router'
 import urls from '../config.js'
-import { mapState,mapMutations } from 'vuex';
+import {mapMutations } from 'vuex';
 export default {
   data(){
     return{
