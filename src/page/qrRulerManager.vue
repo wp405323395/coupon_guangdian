@@ -515,33 +515,42 @@ export default {
         mounted: function() {
             let that = this;
             document.bus.$on('switchQrRulers', function(status) {
-                that.selectAll = false;
-                that.qrRulers = [];
                 switch (status) {
                     case '/rulerManager':
                         that.unAbleRulerSearch = false;
+                        if(that.ruleSelected == ''){
+                          return;
+                        }
                         that.ruleSelected = '';
-                        that.setCurrent(that.current);
                         break;
                     case '/rulerCheck':
                         that.unAbleRulerSearch = true;
+                        if(that.ruleSelected == '1'){
+                          return;
+                        }
                         that.ruleSelected = '1';
-                        that.setCurrent(that.current);
                         break;
                     case '/rulerPublish':
-                        that.ruleSelected = '2';
                         that.unAbleRulerSearch = true;
-                        that.setCurrent(that.current);
+                        if(that.ruleSelected == '2'){
+                          return;
+                        }
+                        that.ruleSelected = '2';
                         break;
                     case '/rulerReset':
-                        that.ruleSelected = '4';
                         that.unAbleRulerSearch = true;
-                        that.setCurrent(that.current);
+                        if(that.ruleSelected == '4'){
+                          return;
+                        }
+                        that.ruleSelected = '4';
                         break;
 
                     default:
-
                 }
+                that.selectAll = false;
+                that.qrRulers = [];
+                that.current = 1;
+                that.setCurrent(that.current);
             });
             this.loadFirstData().then(value=>{
               this.qrRulers = value.result;
