@@ -550,13 +550,12 @@ export default {
                                 }
                                 that.ruleSelected = '4';
                                 break;
-
-                            default: {
-                              that.ruleSelected = 'm';
-                              that.qrRulers = [];
-                              return ;
-                            }
-
+                            default:
+                                {
+                                    that.ruleSelected = 'm';
+                                    that.qrRulers = [];
+                                    return;
+                                }
                         }
                         that.selectAll = false;
                         that.qrRulers = [];
@@ -592,7 +591,6 @@ export default {
                     }).catch(err => {});
                 },
                 loadFirstData() {
-                    this.current = 1;
                     return getPromise(urls.queQruleList, {
                         channelName: this.channelSelect,
                         date: this.date,
