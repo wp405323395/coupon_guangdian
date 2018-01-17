@@ -62,7 +62,7 @@
 <template lang="html">
 
 <div class="content">
-    <section @click="goinModel()">
+    <section @click="goinModel">
         <div id="0" class="model_itmes">
             <i id="0" class="iconfont qr_color">&#xe616;</i>
             <span id="0">二维码规则</span>
@@ -93,7 +93,9 @@
 
 export default {
     methods: {
-        goinModel() {
+        goinModel(e) {
+
+          let event = e||window.event;
             switch (event.target.id) {
                 case '0':
                     this.$router.push({ path: '/main/homeMainQr', params: { }});

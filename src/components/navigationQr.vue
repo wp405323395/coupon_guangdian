@@ -1,12 +1,12 @@
 <template lang="html">
   <section class="content">
-    <section class="menus" @click="menusClick()">
+    <section class="menus" @click="menusClick">
       <div v-for="(menu, index) of menus" :id="index" :class="{ 'menuActive' : index == currentMenu}">
         <span :id="index">{{menu.name}}</span>
       </div>
     </section>
-    <section class="submenue" @click="subMenusClick()">
-        <span v-for="(subMenus, index) of currentSubMenus" :id="subMenus.linkurl" :class="{ 'submenuActive' : subMenus.linkurl == currentSubMenusIndex}">{{subMenus.name}}</span>
+    <section class="submenue" @click="subMenusClick">
+        <span v-for="(subMenus, index) of currentSubMenus" :id="subMenus.linkurl" :class="[{'submenuActive' : subMenus.linkurl == currentSubMenusIndex},'submenu-btn']">{{subMenus.name}}</span>
     </section>
   </section>
 
@@ -16,6 +16,7 @@
 import requestEngine from '../netApi/requestEngine'
 import router from '../router'
 import urls from '../config.js'
+import { mapState,mapMutations } from 'vuex';
 export default {
   data(){
     return{
@@ -26,17 +27,19 @@ export default {
     }
   },
   methods:{
-    menusClick(){
+    ...mapMutations([
+            'subMenusDir'
+    ]),
+    menusClick(event){
       this.currentMenu = event.target.id;
       this.currentSubMenus = this.menus[this.currentMenu].subList;
     },
-    subMenusClick(){
-      console.log("subMenusClick**********");
+    subMenusClick(event){
       if(event.target.id == null || event.target.id=='') {
         return;
       }
       this.currentSubMenusIndex = event.target.id;
-      this.$store.commit('subMenusDir',this.currentSubMenusIndex);
+      this.subMenusDir(this.currentSubMenusIndex);
       document.bus.$emit('switchQrRulers',this.currentSubMenusIndex);
     }
   },
@@ -45,8 +48,8 @@ export default {
       successValue=>{
         this.menus = successValue;
         this.currentSubMenus = successValue[0].subList;
-        this.currentSubMenusIndex = this.currentSubMenus[0].linkurl
-        this.$store.commit('subMenusDir',this.currentSubMenusIndex);
+        this.currentSubMenusIndex = this.currentSubMenus[0].linkurl;
+        this.subMenusDir(this.currentSubMenusIndex);
       }, failValue=>{
 
       }, completeValue=>{
@@ -84,6 +87,9 @@ export default {
       cursor: pointer;
     }
     .submenuActive {
+      color: white;
+    }
+    .submenu-btn:hover{
       color: white;
     }
   }

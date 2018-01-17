@@ -348,7 +348,7 @@
             <transition-group name="list-complete" tag="p">
                 <div v-for="(qrRuler, index) of qrRulers" :key="qrRuler.id" class="list-complete-item">
                     <div class="lable_s" v-if="index == 0">
-                        <div v-if="$store.state.subMenusDir=='/rulerReset'||$store.state.subMenusDir=='/rulerCheck'||$store.state.subMenusDir=='/rulerCheck'||$store.state.subMenusDir=='/rulerPublish'" style="width:80px;">
+                        <div v-if="subMenusDir=='/rulerReset'||subMenusDir=='/rulerCheck'||subMenusDir=='/rulerCheck'||subMenusDir=='/rulerPublish'" style="width:80px;">
                             <span>选择规则</span>
                         </div>
                         <div><span>规则名称</span></div>
@@ -360,7 +360,7 @@
                         <div><span>操作</span></div>
                     </div>
                     <div v-else>
-                        <div v-if="$store.state.subMenusDir=='/rulerReset'||$store.state.subMenusDir=='/rulerCheck'||$store.state.subMenusDir=='/rulerCheck'||$store.state.subMenusDir=='/rulerPublish'" style="width:80px;">
+                        <div v-if="subMenusDir=='/rulerReset'||subMenusDir=='/rulerCheck'||subMenusDir=='/rulerCheck'||subMenusDir=='/rulerPublish'" style="width:80px;">
                             <input v-model="qrRuler.isSelect" type="checkbox" name="" value="">
                         </div>
                         <div><span>{{qrRuler.rulename}}</span></div>
@@ -385,12 +385,12 @@
                         </div>
                         <div class="opration">
                             <span :class="{'can_opration':true}" @click="gotoQrRulerDetail(qrRuler.id)">详情</span>
-                            <span @click="gotoModify(qrRuler,index)" v-if="$store.state.subMenusDir=='/rulerManager'" :class="{'can_opration':isCanModify(qrRuler)}">修改</span>
-                            <span @click="deleteQrRuler(qrRuler,index)" v-if="$store.state.subMenusDir=='/rulerManager'" :class="{'can_opration':isCanDelete(qrRuler)}">删除</span>
-                            <span @click="passQrRuler(qrRuler,index)" v-if="$store.state.subMenusDir=='/rulerCheck'" class="can_opration">通过</span>
-                            <span @click="rejectQrRuler(qrRuler,index)" v-if="$store.state.subMenusDir=='/rulerCheck'" class="can_opration red-color">驳回</span>
-                            <span @click="publishQrRuler(qrRuler,index)" v-if="$store.state.subMenusDir=='/rulerPublish'" class="can_opration">发布</span>
-                            <span @click="underlineQrRuler(qrRuler,index)" v-if="$store.state.subMenusDir=='/rulerReset'" class="can_opration">下线</span>
+                            <span @click="gotoModify(qrRuler,index)" v-if="subMenusDir=='/rulerManager'" :class="{'can_opration':isCanModify(qrRuler)}">修改</span>
+                            <span @click="deleteQrRuler(qrRuler,index)" v-if="subMenusDir=='/rulerManager'" :class="{'can_opration':isCanDelete(qrRuler)}">删除</span>
+                            <span @click="passQrRuler(qrRuler,index)" v-if="subMenusDir=='/rulerCheck'" class="can_opration">通过</span>
+                            <span @click="rejectQrRuler(qrRuler,index)" v-if="subMenusDir=='/rulerCheck'" class="can_opration red-color">驳回</span>
+                            <span @click="publishQrRuler(qrRuler,index)" v-if="subMenusDir=='/rulerPublish'" class="can_opration">发布</span>
+                            <span @click="underlineQrRuler(qrRuler,index)" v-if="subMenusDir=='/rulerReset'" class="can_opration">下线</span>
                         </div>
 
                     </div>
@@ -398,18 +398,18 @@
             </transition-group>
         </section>
         <section class="page_footer">
-            <div class="check_status" v-if="$store.state.subMenusDir=='/rulerManager'" />
+            <div class="check_status" v-if="subMenusDir=='/rulerManager'" />
             <div class="check_status" v-else>
                 <input v-model="selectAll" id="checkall" type="checkbox" name="" value="">
                 <label for="checkall">全选</label>
-                <div class="opration_section" v-if="$store.state.subMenusDir=='/rulerCheck'">
+                <div class="opration_section" v-if="subMenusDir=='/rulerCheck'">
                     <span @click="passAllQrRuler()" class="pass">通过</span>
                     <span @click="rejectAllQrRuler()" class="reject">驳回</span>
                 </div>
-                <div class="opration_section" v-else-if="$store.state.subMenusDir=='/rulerPublish'">
+                <div class="opration_section" v-else-if="subMenusDir=='/rulerPublish'">
                     <span @click="publishAllQrRuler()" class="pass">发布</span>
                 </div>
-                <div class="opration_section" v-else-if="$store.state.subMenusDir=='/rulerReset'">
+                <div class="opration_section" v-else-if="subMenusDir=='/rulerReset'">
                     <span @click="underAllQrRuler()" class="pass">下线</span>
                 </div>
 
@@ -450,7 +450,10 @@ import pagination from '../components/pagination'
 import router from '../router'
 import createQrRuler from '../components/createQrRuler'
 import qrRulerManager from '../components/viewQrRulerDetail'
-import {mapState} from 'vuex';
+import {
+    mapState
+}
+from 'vuex';
 export default {
     data() {
             return {
@@ -475,7 +478,9 @@ export default {
 
             }
         },
-        computed:mapState(['subMenusDir']),
+        computed: {
+            ...mapState(['subMenusDir'])
+        },
         components: {
             pagination,
             createQrRuler,
@@ -504,9 +509,11 @@ export default {
                     }
                 }
         },
+        beforeDestroy(){
+          document.bus.$off('switchQrRulers');
+        },
         mounted: function() {
             let that = this;
-            that.setCurrent(1);
             document.bus.$on('switchQrRulers', function(status) {
                 that.selectAll = false;
                 that.qrRulers = [];
@@ -536,8 +543,17 @@ export default {
 
                 }
             });
-
-            this.loadQR_RULE_STATUS().then(value => {
+            this.loadFirstData().then(value=>{
+              this.qrRulers = value.result;
+              if (this.qrRulers) {
+                  this.qrRulers.unshift({
+                      id: 0
+                  });
+              }
+              this.total = value.totalCount;
+              return this.loadQR_RULE_STATUS();
+            }).catch(err=>{})
+            .then(value => {
                 if (value) {
                     value.unshift({
                         mcode: '',
@@ -557,11 +573,43 @@ export default {
         },
 
         methods: {
-            loadQR_RULE_STATUS() {
-                    return getPromise(urls.queData,{gcode: 'QR_RULE_STATUS'});
+            loadFirstData(){
+              this.current = 1;
+              return getPromise(urls.queQruleList, {
+                  channelName: this.channelSelect,
+                  date: this.date,
+                  status: this.ruleSelected,
+                  pageSize: 10,
+                  pageNo: 1
+              });
+            },
+            setCurrent(idx) {
+                    this.current = idx;
+                    getPromise(urls.queQruleList, {
+                        channelName: this.channelSelect,
+                        date: this.date,
+                        status: this.ruleSelected,
+                        pageSize: 10,
+                        pageNo: idx
+                    }).then(value => {
+                        this.qrRulers = value.result;
+                        if (this.qrRulers) {
+                            this.qrRulers.unshift({
+                                id: 0
+                            });
+                        }
+                        this.total = value.totalCount;
+                    }).catch(err => {});
+                },
+                loadQR_RULE_STATUS() {
+                    return getPromise(urls.queData, {
+                        gcode: 'QR_RULE_STATUS'
+                    });
                 },
                 loadTV_CHANNEL() {
-                  return getPromise(urls.queData,{gcode: 'TV_CHANNEL'});
+                    return getPromise(urls.queData, {
+                        gcode: 'TV_CHANNEL'
+                    });
                 },
                 sureButton() {
                     this.isShowPassPannel = false;
@@ -571,7 +619,6 @@ export default {
                         this.opraAllQrRuler(this.opAllType);
                         this.opAllType = "";
                     }
-
                 },
                 submitReject() {
                     this.isShowRejectPannel = false;
@@ -601,12 +648,12 @@ export default {
                     if (status == '3') {
                         rejectT = this.rejectText;
                     }
-                    getPromise(urls.updateQRrulesStatus,{
-                            ruleids: qrRuler.id,
-                            status: status,
-                            rejectText: rejectT
-                        }).then(value=>{
-                      this.qrRulers.splice(index, 1);
+                    getPromise(urls.updateQRrulesStatus, {
+                        ruleids: qrRuler.id,
+                        status: status,
+                        rejectText: rejectT
+                    }).then(value => {
+                        this.qrRulers.splice(index, 1);
                     });
                 },
                 opraAllQrRuler(status) {
@@ -635,13 +682,13 @@ export default {
                     if (selectedQrRulerids.length == 0) {
                         return;
                     }
-                    getPromise(urls.updateQRrulesStatus,{
-                            ruleids: selectedQrRulerids,
-                            status: status,
-                            rejectText: rejectT
-                        }).then(value=>{
-                          this.qrRulers = proQrRulers;
-                        });
+                    getPromise(urls.updateQRrulesStatus, {
+                        ruleids: selectedQrRulerids,
+                        status: status,
+                        rejectText: rejectT
+                    }).then(value => {
+                        this.qrRulers = proQrRulers;
+                    });
                 },
                 passQrRuler(qrRuler, index) {
                     //状态,0:未提交审核, 1:待审核 2:审核通过，3:审核不通过 ，4:发布，5:下线, 6:删除
@@ -725,25 +772,6 @@ export default {
                 search() {
                     this.setCurrent(1);
                 },
-                setCurrent(idx) {
-                    this.current = idx;
-                    getPromise(urls.queQruleList,{
-                            channelName: this.channelSelect,
-                            date: this.date,
-                            status: this.ruleSelected,
-                            pageSize: 10,
-                            pageNo: idx
-                        }).then(value=>{
-                          this.qrRulers = value.result;
-                          if (this.qrRulers) {
-                              this.qrRulers.unshift({
-                                  id: 0
-                              });
-                          }
-                          this.total = value.totalCount;
-                    });
-                },
-
                 createNewQrRuler() {
                     this.clickedQrRulerId = '';
                     this.isShowCreateQrRulerPannel = true;
