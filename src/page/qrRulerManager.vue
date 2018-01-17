@@ -450,6 +450,7 @@ import pagination from '../components/pagination'
 import router from '../router'
 import createQrRuler from '../components/createQrRuler'
 import qrRulerManager from '../components/viewQrRulerDetail'
+import {mapState} from 'vuex';
 export default {
     data() {
             return {
@@ -474,7 +475,7 @@ export default {
 
             }
         },
-
+        computed:mapState(['subMenusDir']),
         components: {
             pagination,
             createQrRuler,
