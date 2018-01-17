@@ -509,90 +509,99 @@ export default {
                     }
                 }
         },
-        beforeDestroy(){
-          document.bus.$off('switchQrRulers');
+        beforeDestroy() {
+            document.bus.$off('switchQrRulers');
         },
         mounted: function() {
-            let that = this;
-            document.bus.$on('switchQrRulers', function(status) {
-                switch (status) {
-                    case '/rulerManager':
-                        that.unAbleRulerSearch = false;
-                        if(that.ruleSelected == ''){
-                          return;
-                        }
-                        that.ruleSelected = '';
-                        break;
-                    case '/rulerCheck':
-                        that.unAbleRulerSearch = true;
-                        if(that.ruleSelected == '1'){
-                          return;
-                        }
-                        that.ruleSelected = '1';
-                        break;
-                    case '/rulerPublish':
-                        that.unAbleRulerSearch = true;
-                        if(that.ruleSelected == '2'){
-                          return;
-                        }
-                        that.ruleSelected = '2';
-                        break;
-                    case '/rulerReset':
-                        that.unAbleRulerSearch = true;
-                        if(that.ruleSelected == '4'){
-                          return;
-                        }
-                        that.ruleSelected = '4';
-                        break;
-
-                    default:
-                }
-                that.selectAll = false;
-                that.qrRulers = [];
-                that.current = 1;
-                that.setCurrent(that.current);
-            });
-            this.loadFirstData().then(value=>{
-              this.qrRulers = value.result;
-              if (this.qrRulers) {
-                  this.qrRulers.unshift({
-                      id: 0
-                  });
-              }
-              this.total = value.totalCount;
-              return this.loadQR_RULE_STATUS();
-            }).catch(err=>{})
-            .then(value => {
-                if (value) {
-                    value.unshift({
-                        mcode: '',
-                        mname: '全部'
-                    });
-                }
-                this.ruleSelectes = value;
-                return this.loadTV_CHANNEL();
-            }).catch(err => {
-
-            }).then(value => {
-                return this.channelsSelectes = value;
-            }).catch(err => {
-
-            });
-
+            this.registVueBus();
+            this.loadData();
         },
 
         methods: {
-            loadFirstData(){
-              this.current = 1;
-              return getPromise(urls.queQruleList, {
-                  channelName: this.channelSelect,
-                  date: this.date,
-                  status: this.ruleSelected,
-                  pageSize: 10,
-                  pageNo: 1
-              });
-            },
-            setCurrent(idx) {
+            registVueBus() {
+                    let that = this;
+                    document.bus.$on('switchQrRulers', function(status) {
+                        switch (status) {
+                            case '/rulerManager':
+                                that.unAbleRulerSearch = false;
+                                if (that.ruleSelected == '') {
+                                    return;
+                                }
+                                that.ruleSelected = '';
+                                break;
+                            case '/rulerCheck':
+                                that.unAbleRulerSearch = true;
+                                if (that.ruleSelected == '1') {
+                                    return;
+                                }
+                                that.ruleSelected = '1';
+                                break;
+                            case '/rulerPublish':
+                                that.unAbleRulerSearch = true;
+                                if (that.ruleSelected == '2') {
+                                    return;
+                                }
+                                that.ruleSelected = '2';
+                                break;
+                            case '/rulerReset':
+                                that.unAbleRulerSearch = true;
+                                if (that.ruleSelected == '4') {
+                                    return;
+                                }
+                                that.ruleSelected = '4';
+                                break;
+
+                            default: {
+                              that.ruleSelected = 'm';
+                              that.qrRulers = [];
+                              return ;
+                            }
+
+                        }
+                        that.selectAll = false;
+                        that.qrRulers = [];
+                        that.current = 1;
+                        that.setCurrent(that.current);
+                    });
+                },
+                loadData() {
+                    this.loadFirstData().then(value => {
+                        this.qrRulers = value.result;
+                        if (this.qrRulers) {
+                            this.qrRulers.unshift({
+                                id: 0
+                            });
+                        }
+                        this.total = value.totalCount;
+                        return getPromise(urls.queData, {
+                            gcode: 'QR_RULE_STATUS'
+                        });
+                    }).catch(err => {}).then(value => {
+                        if (value) {
+                            value.unshift({
+                                mcode: '',
+                                mname: '全部'
+                            });
+                        }
+                        this.ruleSelectes = value;
+                        return getPromise(urls.queData, {
+                            gcode: 'TV_CHANNEL'
+                        });
+                    }).catch(err => {}).then(value => {
+                        return this.channelsSelectes = value;
+                    }).catch(err => {});
+                },
+                loadFirstData() {
+                    this.current = 1;
+                    return getPromise(urls.queQruleList, {
+                        channelName: this.channelSelect,
+                        date: this.date,
+                        status: this.ruleSelected,
+                        pageSize: 10,
+                        pageNo: 1
+                    });
+                },
+                setCurrent(idx) {
                     this.current = idx;
                     getPromise(urls.queQruleList, {
                         channelName: this.channelSelect,
@@ -609,16 +618,6 @@ export default {
                         }
                         this.total = value.totalCount;
                     }).catch(err => {});
-                },
-                loadQR_RULE_STATUS() {
-                    return getPromise(urls.queData, {
-                        gcode: 'QR_RULE_STATUS'
-                    });
-                },
-                loadTV_CHANNEL() {
-                    return getPromise(urls.queData, {
-                        gcode: 'TV_CHANNEL'
-                    });
                 },
                 sureButton() {
                     this.isShowPassPannel = false;
@@ -650,7 +649,6 @@ export default {
                         this.clickedQrRulerId = qrRuler.id;
                         this.isShowCreateQrRulerPannel = true;
                     }
-
                 },
                 opraQrRuler(qrRuler, index, status) {
                     let rejectT = '';
