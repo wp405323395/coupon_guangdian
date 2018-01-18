@@ -479,7 +479,7 @@ export default {
             }
         },
         computed: {
-            ...mapState({'subMenusDir':state=>state.ruteModule.subMenusDir})
+            ...mapState({subMenusDir:state=>state.ruteModule.subMenusDir})
         },
         components: {
             pagination,
