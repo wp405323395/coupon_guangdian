@@ -1,15 +1,16 @@
-import App from '../App'
-import Vue from 'vue'
-import Router from 'vue-router'
-import login from '@/page/login'
-import main from '@/page/homeMain'
-import model from '@/page/model'
-import changePassword from '@/page/changePassword'
-import homeMainQr from '@/page/homeMainQr'
-import qrRulerManager from '@/page/qrRulerManager'
-  // import Hello from '@/components/Hello'
+/* jshint esversion: 6 */
+import App from '../App';
+import Vue from 'vue';
+import Router from 'vue-router';
+import login from '@/page/login';
+import main from '@/page/homeMain';
+import model from '@/page/model';
+const changePassword = resolve => require(['@/page/changePassword'], resolve);
+const homeMainQr = resolve => require(['@/page/homeMainQr'], resolve);
+const qrRulerManager = resolve => require(['@/page/qrRulerManager'], resolve);
+// import Hello from '@/components/Hello'
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   routes: [{
