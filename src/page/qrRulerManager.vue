@@ -148,6 +148,7 @@
                 border: 1px solid #d4d4d4;
                 border-radius: 5px;
                 margin-left: 10px;
+                font-size: 14px;
             }
         }
     }

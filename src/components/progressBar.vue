@@ -10,12 +10,7 @@ export default {
 </script>
 
 <style lang="css">
-@keyframes tipMove{
-   0%   { transform: scale(1) }
-   35%  { transform: scale(.8) }
-   70%  { transform: scale(1.1) }
-   100% { transform: scale(1) }
-}
+
 .progress{
   position: fixed;
   background:rgba(0, 0, 0, 0.5);
@@ -27,9 +22,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.pro_center{
-
+  width: 100%;
+  height: 100%;
 }
 
 </style>

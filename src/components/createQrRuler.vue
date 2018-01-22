@@ -147,6 +147,7 @@
                         height: 35px;
                         border-radius: 4px;
                         padding-left: 5px;
+                        font-size: 14px;
                     }
                     .beizhu {
                         width: 400px;
