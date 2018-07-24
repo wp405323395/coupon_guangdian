@@ -3,10 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.config.productionTip = false
-
-process.env.MOCK && require('./mock.js')
+process.env.MOCK && require('./mock')
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
