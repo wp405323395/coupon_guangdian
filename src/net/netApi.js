@@ -1,32 +1,19 @@
 
+import {apiMap} from './apiMap'
 var myAxios = require('./myAxios')
-const host = 'localhost'
-const schema = 'http'
-const port = 8081
-const contextPath = 'root'
-export const netApi = {
-  index: {
-    url: `${schema}://${host}:${port}/${contextPath}/news/index`,
-    method: 'post'
-  },
-  login: {
-    url: `${schema}://${host}:${port}/${contextPath}/login`,
-    method: 'post'
-  }
-}
 
 export const getIndex = async (data) => {
   return myAxios.myAxios({
-    method: netApi.index.method,
-    url: netApi.index.url,
+    method: apiMap.index.method,
+    url: apiMap.index.url,
     data
   })
 }
 export const login = async (data) => {
-  console.log('神奇', myAxios)
+  console.log('神奇', apiMap)
   return myAxios.myAxios({
-    method: netApi.login.method,
-    url: netApi.login.url,
+    method: apiMap.login.method,
+    url: apiMap.login.url,
     data
   })
 }

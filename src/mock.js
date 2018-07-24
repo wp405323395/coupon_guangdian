@@ -1,5 +1,5 @@
 // 引入mockjs
-import {netApi} from './net/netApi'
+import {apiMap} from './net/apiMap'
 const Mock = require('mockjs')
 Mock.setup({
   timeout: 3000
@@ -25,4 +25,4 @@ const produceNewsData = function () {
 }
 
 // Mock.mock( url, post/get , 返回的数据)；
-Mock.mock(netApi.login.url, netApi.login.method, produceNewsData)
+Mock.mock(apiMap.login.url, apiMap.login.method, produceNewsData)
