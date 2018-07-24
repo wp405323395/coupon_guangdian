@@ -4,8 +4,6 @@ axios.defaults.timeout = 5000
 
 var loadinginstace
 axios.interceptors.request.use(config => {
-  // element ui Loading方法
-  console.log('进入请求请求拦截器')
   loadinginstace = Loading.service({
     body: true,
     fullscreen: true,
@@ -22,9 +20,8 @@ axios.interceptors.request.use(config => {
   })
   return Promise.reject(error)
 })
-// http响应拦截器
-axios.interceptors.response.use(data => { // 响应成功关闭loading
-  console.log('进入response请求拦截器')
+
+axios.interceptors.response.use(data => {
   loadinginstace.close()
   return data
 }, error => {
