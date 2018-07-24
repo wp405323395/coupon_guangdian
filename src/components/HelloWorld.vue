@@ -1,24 +1,33 @@
 <template>
-  <div class="hello">
+  <div class='hello'>
     <h1>{{ msg }}</h1>
-
+    <router-link :to="{name:'demon'}">
+      <span>去demon模块</span>
+    </router-link>
   </div>
 </template>
 
 <script>
+import {login} from '../net/netApi.js'
 export default {
   name: 'HelloWorld',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  mounted () {
+    login().then(value => {
+      console.log(value)
+    })
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+<!-- Add 'scoped' attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
+h1,
+h2 {
   font-weight: normal;
 }
 ul {
