@@ -2,7 +2,7 @@
 import {apiMap} from './net/apiMap'
 const Mock = require('mockjs')
 Mock.setup({
-  timeout: 3000
+  timeout: 1000
 })
 // 获取 mock.Random 对象
 const Random = Mock.Random

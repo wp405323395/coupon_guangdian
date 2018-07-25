@@ -32,7 +32,9 @@ export default {
   },
   methods: {
     login () {
-      sessionStorage.setItem('token', {account: this.account, password: this.password})
+      if (this.account && this.password) {
+        sessionStorage.setItem('token', {account: this.account, password: this.password})
+      }
       this.$router.replace({path: '/HelloWorld'})
     }
   }
