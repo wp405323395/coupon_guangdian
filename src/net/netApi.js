@@ -1,9 +1,8 @@
 
 import {apiMap} from './apiMap'
-var myAxios = require('./myAxios')
-
+import main from '../main'
 export const getIndex = async (data, showLoading = true) => {
-  return myAxios.myAxios({
+  return main.$http({
     method: apiMap.index.method,
     url: apiMap.index.url,
     data,
@@ -11,7 +10,7 @@ export const getIndex = async (data, showLoading = true) => {
   })
 }
 export const login = async (data, showLoading = true) => {
-  return myAxios.myAxios({
+  return main.$http({
     method: apiMap.login.method,
     url: apiMap.login.url,
     data,
