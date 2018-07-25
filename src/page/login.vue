@@ -35,7 +35,13 @@ export default {
       if (this.formLabelAlign.account && this.formLabelAlign.password) {
         sessionStorage.setItem('token', {account: this.account, password: this.password})
       }
-      this.$router.replace({path: '/HelloWorld'})
+
+      let redirectUrl = this.$router.history.current.query.redirect
+      if (redirectUrl) {
+        this.$router.replace({path: redirectUrl})
+      } else {
+        this.$router.replace({path: '/HelloWorld'})
+      }
     }
   }
 }
