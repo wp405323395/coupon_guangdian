@@ -1,7 +1,6 @@
 <template>
   <div class='hello'>
     <h1>{{ msg }}</h1>
-    <h1 v-for="item of [1, 2, 3, 4, 5, 6, 7, 6, 5, 4, 3, 2, 1]" :key="item">23</h1>
     <router-link :to="{name:'demon'}">
       <span>去demon模块</span>
     </router-link>

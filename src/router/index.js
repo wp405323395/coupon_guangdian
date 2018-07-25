@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import demon from '@/components/demon'
-import login from '@/page/login'
+const HelloWorld = () => import('@/components/HelloWorld')
+const demon = () => import('@/components/demon')
+const login = () => import('@/page/login')
+
 Vue.use(Router)
 
 const router = new Router({
