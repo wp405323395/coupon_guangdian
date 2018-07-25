@@ -6,7 +6,7 @@
       <el-container>
         <el-header style="background-color: #0080ff;">Header</el-header>
         <el-main style="background-color: #80ff00;">Main6</el-main>
-    </el-container>
+      </el-container>
     </el-container>
 
   </section>
