@@ -1,7 +1,8 @@
-import login from './mockModule/login'
+import loginMock from './mockModule/login'
 
 const Mock = require('mockjs')
 Mock.setup({
   timeout: 1000
 })
-login(Mock)
+
+loginMock(Mock)
