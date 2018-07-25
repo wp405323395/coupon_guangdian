@@ -19,7 +19,9 @@ export default {
   },
   mounted () {
     login().then(value => {
-      console.log(value)
+      // console.log(value)
+    }).catch(err => {
+      console.log(err)
     })
   }
 }
