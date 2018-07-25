@@ -2,7 +2,7 @@ import axios from 'axios'
 import { Loading, Message } from 'element-ui'
 import router from '../router/index'
 axios.defaults.timeout = 5000 // 设置请求超时时间
-
+// >>>>>>>> 添加element-ui 的loading >>>>>>>>>>>>
 var loadinginstace
 axios.interceptors.request.use(config => {
   if (config.showLoading) {
@@ -41,7 +41,9 @@ axios.interceptors.response.use(data => {
   })
   return Promise.reject(error)
 })
+// <<<<<<<<<<<<<<< 添加element-ui 的loading <<<<<<<<<<<<<<<<<
 
+// >>>>>>>>>>>>>>>> 添加Auther 权限判断 >>>>>>>>>>>>>>>>>>>>>>
 // http request 请求拦截器，有token值则配置上token值
 axios.interceptors.request.use(
   config => {
@@ -73,5 +75,5 @@ axios.interceptors.response.use(
     }
     return Promise.reject(error)
   })
-
+// <<<<<<<<<<<<<<<< 添加Auther 权限判断 <<<<<<<<<<<<<<<
 export var myAxios = axios
