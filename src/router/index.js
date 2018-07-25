@@ -19,7 +19,8 @@ const router = new Router({
       name: 'HelloWorld',
       component: HelloWorld,
       meta: {
-        requireAuth: true
+        requireAuth: true,
+        keepAlive: true
       }
     }, {
       path: '/demon',

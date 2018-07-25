@@ -1,6 +1,7 @@
 <template>
   <div class='hello'>
     <h1>{{ msg }}</h1>
+    <h1 v-for="item of [1, 2, 3, 4, 5, 6, 7, 6, 5, 4, 3, 2, 1]" :key="item">23</h1>
     <router-link :to="{name:'demon'}">
       <span>去demon模块</span>
     </router-link>
@@ -8,21 +9,22 @@
 </template>
 
 <script>
-import {login} from '../net/netApi.js'
+import { login } from '../net/netApi.js'
 export default {
   name: 'HelloWorld',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
-
     }
   },
   mounted () {
-    login().then(value => {
-      // console.log(value)
-    }).catch(err => {
-      console.log(err)
-    })
+    login()
+      .then(value => {
+        // console.log(value)
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 }
 </script>
@@ -31,17 +33,17 @@ export default {
 <style scoped>
 h1,
 h2 {
-  font-weight: normal;
+    font-weight: normal;
 }
 ul {
-  list-style-type: none;
-  padding: 0;
+    list-style-type: none;
+    padding: 0;
 }
 li {
-  display: inline-block;
-  margin: 0 10px;
+    display: inline-block;
+    margin: 0 10px;
 }
 a {
-  color: #42b983;
+    color: #42b983;
 }
 </style>
