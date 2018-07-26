@@ -17,3 +17,19 @@ export const login = async (data, showLoading = true) => {
     showLoading
   })
 }
+export const getGirls = async (data, showLoading = true) => {
+  return main.$http({
+    method: apiMap.getGirls.method,
+    url: apiMap.getGirls.url,
+    data,
+    showLoading
+  })
+}
+export const justMsg = async (data, showLoading = true) => {
+  return main.$http({
+    method: apiMap.justMsg.method,
+    url: apiMap.justMsg.url,
+    data,
+    showLoading
+  })
+}

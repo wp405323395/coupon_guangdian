@@ -3,12 +3,14 @@
     <h1>{{ msg }}</h1>
     <router-link :to="{name:'demon'}">
       <span>去demon模块</span>
-    </router-link>
+    </router-link><br/>
+    <el-button @click="getGirlsSubmit" style='margin-top:50px;'>获取服务器数据</el-button>
   </div>
 </template>
 
 <script>
-import { login } from '../net/netApi.js'
+import { Button } from 'element-ui'
+import { justMsg } from '../net/netApi.js'
 export default {
   name: 'HelloWorld',
   data () {
@@ -16,14 +18,17 @@ export default {
       msg: 'Welcome to Your Vue.js App'
     }
   },
-  mounted () {
-    login()
-      .then(value => {
-        // console.log(value)
-      })
-      .catch(err => {
+  components: {
+    'el-button': Button
+  },
+  methods: {
+    getGirlsSubmit () {
+      justMsg().then(value => {
+        this.msg = value.data.data
+      }).catch(err => {
         console.log(err)
       })
+    }
   }
 }
 </script>

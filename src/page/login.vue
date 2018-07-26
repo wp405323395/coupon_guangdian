@@ -7,12 +7,13 @@
       <el-form-item label="密码">
         <el-input v-model="formLabelAlign.password"></el-input>
       </el-form-item>
-      <el-button @click="login" type="primary">登陆</el-button>
+      <el-button @click="loginSubmit" type="primary">登陆</el-button>
     </el-form>
   </div>
 </template>
 
 <script>
+import { login } from '../net/netApi.js'
 import {Button, Form, Input, FormItem} from 'element-ui'
 export default {
   data () {
@@ -31,7 +32,7 @@ export default {
     'el-button': Button
   },
   methods: {
-    login () {
+    loginSubmit () {
       if (this.formLabelAlign.account && this.formLabelAlign.password) {
         sessionStorage.setItem('token', {account: this.account, password: this.password})
       }
@@ -40,7 +41,13 @@ export default {
       if (redirectUrl) {
         this.$router.replace({path: redirectUrl})
       } else {
-        this.$router.replace({path: '/HelloWorld'})
+        login()
+          .then(value => {
+            this.$router.replace({path: '/HelloWorld'})
+          })
+          .catch(err => {
+            console.log(err)
+          })
       }
     }
   }

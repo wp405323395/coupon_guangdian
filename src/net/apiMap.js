@@ -1,7 +1,7 @@
 const host = 'localhost'
 const schema = 'http'
-const port = 8081
-const contextPath = 'root'
+const port = 8083
+const contextPath = 'school'
 export const apiMap = {
   index: {
     url: `${schema}://${host}:${port}/${contextPath}/news/index`,
@@ -10,5 +10,13 @@ export const apiMap = {
   login: {
     url: `${schema}://${host}:${port}/${contextPath}/login`,
     method: 'post'
+  },
+  getGirls: {
+    url: `${schema}://${host}:${port}/${contextPath}/girls`,
+    method: 'get'
+  },
+  justMsg: {
+    url: `${schema}://${host}:${port}/${contextPath}/getMsg`,
+    method: 'get'
   }
 }
