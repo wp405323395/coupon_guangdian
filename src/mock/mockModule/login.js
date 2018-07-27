@@ -1,16 +1,15 @@
-// 引入mockjs
 import {apiMap} from '../../net/apiMap'
 var AutherPart = (Mock) => {
   // mock一组数据
   const loginMock = function () {
-    let justMsg = {code: 0, msg: '成功', data: '登陆成功'}
-    return justMsg
+    let result = {code: 0, msg: '成功', data: '登陆成功'}
+    return result
   }
 
   // mock从服务器获取一个字符串
   const productMsg = function () {
-    let justMsg = {code: 0, msg: '成功', data: '这是来自mock：ffffffffffffff'}
-    return justMsg
+    let result = {code: 0, msg: '成功', data: '这是来自mock：ffffffffffffff'}
+    return result
   }
 
   // Mock.mock( url, post/get , 返回的数据)；

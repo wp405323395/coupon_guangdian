@@ -11,7 +11,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(VueAxios, myAxios(axios, router))
 
 Vue.config.productionTip = false
-process.env.MOCK && require('./mock/mock')
+// process.env.MOCK && require('./mock/mock')
 /* eslint-disable no-new */
 var vue = new Vue({
   el: '#app',

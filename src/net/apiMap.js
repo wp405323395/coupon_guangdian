@@ -18,5 +18,9 @@ export const apiMap = {
   justMsg: {
     url: `${schema}://${host}:${port}/${contextPath}/getMsg`,
     method: 'get'
+  },
+  addGirl: {
+    url: `${schema}://${host}:${port}/${contextPath}/addGirl`,
+    method: 'post'
   }
 }

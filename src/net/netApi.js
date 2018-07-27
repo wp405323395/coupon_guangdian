@@ -33,3 +33,12 @@ export const justMsg = async (data, showLoading = true) => {
     showLoading
   })
 }
+export const addGirl = async (data, showLoading = true) => {
+  return main.$http({
+    method: apiMap.addGirl.method,
+    url: apiMap.addGirl.url,
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    data,
+    showLoading
+  })
+}
