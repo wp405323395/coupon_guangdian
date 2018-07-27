@@ -1,4 +1,4 @@
-const contextPath = 'school'
+const contextPath = '/api/school'
 export const apiMap = {
   index: {
     url: `${contextPath}/news/index`,
