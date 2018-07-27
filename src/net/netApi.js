@@ -33,11 +33,20 @@ export const justMsg = async (data, showLoading = true) => {
     showLoading
   })
 }
+export const addGirlRestFul = async (data, showLoading = true) => {
+  return main.$http({
+    method: apiMap.addGirlRestFul.method,
+    url: apiMap.addGirlRestFul.url,
+    headers: {'Content-Type': 'application/json;charset=UTF-8'},
+    data,
+    showLoading
+  })
+}
+
 export const addGirl = async (data, showLoading = true) => {
   return main.$http({
     method: apiMap.addGirl.method,
     url: apiMap.addGirl.url,
-    headers: {'Content-Type': 'application/json;charset=UTF-8'},
     data,
     showLoading
   })

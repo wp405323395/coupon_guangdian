@@ -16,8 +16,12 @@ export const apiMap = {
     url: `${contextPath}/getMsg`,
     method: 'get'
   },
+  addGirlRestFul: {
+    url: `${contextPath}/addGirlRestFul/age/{age}/cupSize/{cupSize}`,
+    method: 'post'
+  },
   addGirl: {
-    url: `${contextPath}/addGirl/age/{age}/cupSize/{cupSize}`,
+    url: `${contextPath}/addGirl`,
     method: 'post'
   }
 }

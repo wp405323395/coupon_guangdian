@@ -10,9 +10,9 @@ export default (axios) => {
         for (pa in data) {
           url = url.replace(`{${pa}}`, data[pa])
         }
+        config.url = url
+        config.data = null
       }
-      config.url = url
-      config.data = null
       return config
     },
     err => {
