@@ -37,7 +37,7 @@ export const addGirl = async (data, showLoading = true) => {
   return main.$http({
     method: apiMap.addGirl.method,
     url: apiMap.addGirl.url,
-    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    headers: {'Content-Type': 'application/json;charset=UTF-8'},
     data,
     showLoading
   })

@@ -17,7 +17,7 @@ export const apiMap = {
     method: 'get'
   },
   addGirl: {
-    url: `${contextPath}/addGirl`,
+    url: `${contextPath}/addGirl/age/{age}/cupSize/{cupSize}`,
     method: 'post'
   }
 }

@@ -88,9 +88,7 @@ export default {
         })
     },
     insertGirlSubmit () {
-      console.log('即将保存的对象：', this.form)
       let girl = {age: this.form.age, cupSize: this.form.cupSize}
-      console.log(girl)
       addGirl(girl).then(value => {
         console.log(value)
       }).catch(err => {
