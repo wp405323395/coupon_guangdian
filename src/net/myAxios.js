@@ -2,6 +2,7 @@
 import autherInterceptor from './interceptors/autherInterceptor'
 import loadingInterceptor from './interceptors/loadingInterceptor'
 import restFulInteceptor from './interceptors/restFulInteceptor'
+import businessErrorInterceptor from './interceptors/businessErrorInterceptor'
 import { Loading, Message } from 'element-ui'
 const myAxios = (axios, router) => {
   axios.defaults.timeout = 5000 // 设置请求超时时间
@@ -9,6 +10,7 @@ const myAxios = (axios, router) => {
   autherInterceptor(axios, router)
   loadingInterceptor(axios, Loading, Message)
   restFulInteceptor(axios)
+  businessErrorInterceptor(axios, Message)
   return axios
 }
 export default myAxios

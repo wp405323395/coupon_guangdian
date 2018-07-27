@@ -90,9 +90,11 @@ export default {
     insertGirlSubmit () {
       let girl = {age: this.form.age, cupSize: this.form.cupSize}
       addGirl(girl).then(value => {
-        console.log(value)
+        if (value.data.code === -1) {
+          return Promise.reject(value)
+        }
       }).catch(err => {
-        console.log(err)
+        console.log('把偶哦了，', err)
       })
     }
   }
