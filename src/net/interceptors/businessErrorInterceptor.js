@@ -7,6 +7,7 @@ export default (axios, Message) => {
         Message.error({
           message: '请求失败了，也不知道什么原因'
         })
+        return Promise.reject(config)
       }
       return config
     },

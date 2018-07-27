@@ -94,7 +94,7 @@ export default {
           return Promise.reject(value)
         }
       }).catch(err => {
-        console.log('把偶哦了，', err)
+        console.log('addGirl接口请求出了问题', err)
       })
     }
   }
