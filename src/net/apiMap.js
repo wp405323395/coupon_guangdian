@@ -4,8 +4,12 @@ export const apiMap = {
     url: `${contextPath}/news/index`,
     method: 'post'
   },
+  regist: {
+    url: `/users/signup`,
+    method: 'post'
+  },
   login: {
-    url: `${contextPath}/login`,
+    url: `/login`,
     method: 'post'
   },
   getGirls: {

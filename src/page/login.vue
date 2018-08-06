@@ -9,11 +9,22 @@
       </el-form-item>
       <el-button @click="loginSubmit" type="primary">登陆</el-button>
     </el-form>
+    <div style="height:100px;"></div>
+        <el-form label-position="right" label-width="80px" :model="formLabelAlign">
+      <el-form-item label="账号">
+        <el-input v-model="formLabelAlign.account"></el-input>
+      </el-form-item>
+      <el-form-item label="密码">
+        <el-input v-model="formLabelAlign.password"></el-input>
+      </el-form-item>
+      <el-button @click="registSubmit" type="primary">注册</el-button>
+    </el-form>
+
   </div>
 </template>
 
 <script>
-import { login } from '../net/netApi.js'
+import { login, regist } from '../net/netApi.js'
 import {Button, Form, Input, FormItem} from 'element-ui'
 export default {
   data () {
@@ -32,6 +43,13 @@ export default {
     'el-button': Button
   },
   methods: {
+    registSubmit () {
+      regist({username: this.formLabelAlign.account, password: this.formLabelAlign.password}).then(value => {
+        console.log(value)
+      }).catch(err => {
+        console.log(err)
+      })
+    },
     loginSubmit () {
       if (this.formLabelAlign.account && this.formLabelAlign.password) {
         sessionStorage.setItem('token', {account: this.account, password: this.password})
@@ -41,9 +59,11 @@ export default {
       if (redirectUrl) {
         this.$router.replace({path: redirectUrl})
       } else {
-        login()
+        login({username: this.formLabelAlign.account, password: this.formLabelAlign.password})
           .then(value => {
+            localStorage.setItem('authorization-token', value.headers.authorization)
             this.$router.replace({path: '/HelloWorld'})
+            console.log('登陆成功后返回的数据', value)
           })
           .catch(err => {
             console.log(err)

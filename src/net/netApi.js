@@ -51,3 +51,12 @@ export const addGirl = async (data, showLoading = true) => {
     showLoading
   })
 }
+
+export const regist = async (data, showLoading = true) => {
+  return main.$http({
+    method: apiMap.regist.method,
+    url: apiMap.regist.url,
+    data,
+    showLoading
+  })
+}
