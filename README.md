@@ -22,8 +22,8 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 
 
-### 使用技术
-``` bash
-搭建vue-cli前端框架，ui使用element-ui 
-使用mock.js模拟服务端请求，
-```
+## 使用技术
+
+> 搭建vue-cli前端框架，ui使用element-ui 
+> 使用mock.js模拟服务端请求，
+
