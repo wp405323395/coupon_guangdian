@@ -57,7 +57,14 @@ export default {
 
       let redirectUrl = this.$router.history.current.query.redirect
       if (redirectUrl) {
-        this.$router.replace({path: redirectUrl})
+        login({username: this.formLabelAlign.account, password: this.formLabelAlign.password})
+          .then(value => {
+            localStorage.setItem('authorization-token', value.headers.authorization)
+            this.$router.replace({path: redirectUrl})
+          })
+          .catch(err => {
+            console.log(err)
+          })
       } else {
         login({username: this.formLabelAlign.account, password: this.formLabelAlign.password})
           .then(value => {
