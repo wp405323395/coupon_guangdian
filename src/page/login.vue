@@ -59,7 +59,7 @@ export default {
       if (redirectUrl) {
         login({username: this.formLabelAlign.account, password: this.formLabelAlign.password})
           .then(value => {
-            localStorage.setItem('authorization-token', value.headers.authorization)
+            localStorage.setItem('Authorization', value.headers.authorization)
             this.$router.replace({path: redirectUrl})
           })
           .catch(err => {
@@ -68,7 +68,7 @@ export default {
       } else {
         login({username: this.formLabelAlign.account, password: this.formLabelAlign.password})
           .then(value => {
-            localStorage.setItem('authorization-token', value.headers.authorization)
+            localStorage.setItem('Authorization', value.headers.authorization)
             this.$router.replace({path: '/HelloWorld'})
             console.log('登陆成功后返回的数据', value)
           })
