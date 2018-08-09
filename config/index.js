@@ -58,13 +58,13 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: 'vue-element-ui/',
 
     /**
      * Source Maps
      */
 
-    productionSourceMap: true,
+    productionSourceMap: false, //map文件一般都很大 取消生成map文件，找到config/index.js ，修改下面箭头指向为false，就行了。
     // https://webpack.js.org/configuration/devtool/#production
     devtool: '#source-map',
 
