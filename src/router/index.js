@@ -34,7 +34,7 @@ const router = new Router({
   ]
 })
 router.beforeEach((to, from, next) => {
-  let token = sessionStorage.getItem('Authorization')
+  let token = localStorage.getItem('Authorization')
   if (to.meta.requireAuth) {
     if (token) {
       next()
