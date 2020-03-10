@@ -18,8 +18,30 @@
         <span v-if="votEmployees[selected]">{{votEmployees[selected].name}}</span>
         <span v-if="votEmployees[selected]">{{votEmployees[selected].deptname}}</span>
       </div>
+      <div class="detail-wrap">
+        <div class="item-wrap">
+          <span>统计人：</span>
+          <span>xxx</span>
+        </div>
+        <div class="item-wrap">
+          <span>统计时间：</span>
+          <span>xxx</span>
+        </div>
+        <div class="item-wrap">
+          <span>投票人数：</span>
+          <span>xxx</span>
+        </div>
+        <div class="item-wrap">
+          <span>总得分：</span>
+          <span>xxx</span>
+        </div>
+      </div>
       <section v-for="detail in voteDetail.topicList" class="ques">
         <span class="title">{{detail.topicTitle}}</span>
+        <div class='scor-wrap'>
+          <span>得分：</span>
+          <span>32</span>
+        </div>
         <div class="answers">
           <div class="item"  v-for="option in detail.optionList" >
             <span class="range">{{option.optionText}}</span>
@@ -206,6 +228,7 @@ export default {
   padding:20px 40px;
   display: flex;
   justify-content: space-between;
+
   .person_select{
     font-size: 16px;
   }
@@ -245,10 +268,17 @@ export default {
   }
   .ques{
     margin-top: 10px;
-
+    .scor-wrap{
+      font-size: 15px;
+      margin-bottom: 10px;
+      margin-top: 5px;
+      span:last-of-type{
+        color:rgba(255, 0, 0, 0.753);
+        font-weight: bold;
+      }
+    }
     .title{
-      font-size: 24px;
-      margin-bottom: 30px;
+      font-size: 20px;
       display: inline-block;
     }
     .answers{
@@ -309,5 +339,19 @@ export default {
 
   }
 }
-
+.detail-wrap{
+  display: flex;
+  flex-direction: row;
+  background-color: rgb(226, 225, 225);
+  align-items: center;
+  height: 35px;
+  padding-left: 20px;
+  margin-top: 5px;
+  >div{
+    width: 200px;
+    color: white;
+    font-size: 15px;
+    
+  }
+}
 </style>

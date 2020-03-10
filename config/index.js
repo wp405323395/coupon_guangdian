@@ -23,11 +23,18 @@ module.exports = {
   },
   dev: {
     env: require('./dev.env'),
-    port: 80,
+    port: 8980,
     autoOpenBrowser: true,
     assetsSubDirectory: 'wangpanxxx',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '/proxydir': {
+        target: 'https://t.htrnpay.cn/', //源地址
+        pathRewrite: {
+          '^/proxydir': '/' //路径重写
+          }
+      }
+    },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README
     // (https://github.com/webpack/css-loader#sourcemaps)
