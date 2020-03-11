@@ -39,7 +39,7 @@
           <div v-for="(li, index2) in item.optionList" :id="index2">
             <input class="input_style " :placeholder="'选项'+(index2+1)" type="text" v-model="li.optionText">
             <div class="divice weight-input"  style="margin-top:4px;">
-              <span style="color:#999999">权重(0或正整数)：</span>
+              <span style="color:#999999">权重(0-1)：</span>
               <input min="0" max="1" step="0.1" v-model="li.weight" type="number"/>
             </div>
           </div>
