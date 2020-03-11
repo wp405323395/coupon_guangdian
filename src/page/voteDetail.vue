@@ -21,26 +21,26 @@
       <div class="detail-wrap">
         <div class="item-wrap">
           <span>统计人：</span>
-          <span>xxx</span>
+          <span>{{account}}</span>
         </div>
         <div class="item-wrap">
           <span>统计时间：</span>
-          <span>xxx</span>
+          <span>{{currentTime}}</span>
         </div>
         <div class="item-wrap">
           <span>投票人数：</span>
-          <span>xxx</span>
+          <span>{{voteDetail.votNum}}</span>
         </div>
-        <div class="item-wrap">
+        <div class="item-wrap" v-if="voteDetail.totalGrade">
           <span>总得分：</span>
-          <span>xxx</span>
+          <span>{{voteDetail.totalGrade}}</span>
         </div>
       </div>
       <section v-for="detail in voteDetail.topicList" class="ques">
         <span class="title">{{detail.topicTitle}}</span>
-        <div class='scor-wrap'>
+        <div class='scor-wrap' v-if="voteDetail.topicGrade">
           <span>得分：</span>
-          <span>32</span>
+          <span>{{voteDetail.topicGrade}}</span>
         </div>
         <div class="answers">
           <div class="item"  v-for="option in detail.optionList" >
@@ -69,6 +69,7 @@
 </template>
 
 <script>
+var moment = require('moment');
 import alertTip from '../components/alertTip'
 import requestEngine from '../netApi/requestEngine'
 import router from '../router'
@@ -78,7 +79,11 @@ import progressBar from '../components/progressBar'
 let id;
 export default {
   data () {
+    const account = localStorage.getItem('account')
+    const currentTime = moment().format("YYY-MM-DD HH:mm:ss");
     return {
+      currentTime,
+      account,
       isShowProgress: false,
       selected:0,
       title:'',
@@ -345,13 +350,14 @@ export default {
   background-color: rgb(226, 225, 225);
   align-items: center;
   height: 35px;
-  padding-left: 20px;
   margin-top: 5px;
+  padding-left: 20px;
   >div{
-    width: 200px;
+    margin-right: 50px;
+    display: inline-block;
     color: white;
-    font-size: 15px;
-    
+    font-size: 14px;
   }
+ 
 }
 </style>

@@ -1,5 +1,6 @@
 var host = "https://www.htrnpay.cn"
-host = "/proxydir"
+// host = "/proxydir"
+host = "https://t.htrnpay.cn"
   //var host = '192.168.1.151:8015';
 var isHttps = true;
 var isDebug = true;

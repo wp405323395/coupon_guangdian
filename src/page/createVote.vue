@@ -26,12 +26,12 @@
     <section class="" v-for="(item, index) in voteProject.topicList" >
       <div class="title">
         <label :for="index">投票内容:</label>
-        <input class="input_style" :id="index" placeholder="请输入考核内容" type="text" name="" v-model="item.topicTitle">
+        <input class="input_style" :id="index" placeholder="请输入考核内容" type="text" v-model="item.topicTitle">
         <i @click="deletetopicListItem(index)" class="delete_icon" v-if="index != 0"></i>
       </div>
       <div class="title" style="padding-top:0;">
         <label :for="index">得分:</label>
-        <input class="input_style" style="width:150px;" :id="index" placeholder="请输入得分" type="number" name="" v-model="item.score">
+        <input class="input_style" style="width:150px;" :id="index" placeholder="请输入得分" type="number" v-model="item.topicGrade">
       </div>
       <div class="title style2">
         <label for="title1">投票选项:</label>
@@ -39,8 +39,8 @@
           <div v-for="(li, index2) in item.optionList" :id="index2">
             <input class="input_style " :placeholder="'选项'+(index2+1)" type="text" v-model="li.optionText">
             <div class="divice weight-input"  style="margin-top:4px;">
-              <span>权重</span>
-              <input type="number"/>
+              <span style="color:#999999">权重(0或正整数)：</span>
+              <input min="0" max="1" step="0.1" v-model="li.weight" type="number"/>
             </div>
           </div>
           
@@ -101,6 +101,7 @@ export default {
         topicList: [
           {
             topicTitle: "",
+            topicGrade:'',
             optionList: [
               { optionText: "" },
               { optionText: "" },
@@ -233,24 +234,44 @@ export default {
           utils.textIsNull(candidate.deptname)
         ) {
           this.isWarning = true;
-          this.noteText = "未输入被考核人姓名或部门";
+          this.noteText = "未输入被投票人姓名或部门";
           return;
         }
       }
       for (let topic of this.voteProject.topicList) {
         if (utils.textIsNull(topic.topicTitle)) {
           this.isWarning = true;
-          this.noteText = "未输入考核内容";
+          this.noteText = "未输入投票内容";
           return;
         } else if (
-          utils.textIsNull(topic.optionList[0]) &&
-          utils.textIsNull(topic.optionList[1]) &&
-          utils.textIsNull(topic.optionList[2]) &&
-          utils.textIsNull(topic.optionList[3])
+          utils.textIsNull(topic.optionList[0].optionText) &&
+          utils.textIsNull(topic.optionList[1].optionText) &&
+          utils.textIsNull(topic.optionList[2].optionText) &&
+          utils.textIsNull(topic.optionList[3].optionText)
         ) {
           this.isWarning = true;
           this.noteText = "必须填写至少一个选项";
           return;
+        } else {
+          for(let item of topic.optionList) {
+            try{
+              if((!utils.textIsNull(item.weight))) {
+                console.log("输入的分数是--i:", item.weight)
+                const weight = parseFloat(item.weight)
+                console.log("输入的分数是i:", weight)
+                if(weight<0||weight>1) {
+                  throw new Error('错误');
+                }
+              }
+              
+            } catch(err) {
+              this.isWarning = true;
+              this.noteText = "请输入正确的权重";
+              return;
+            }
+          }
+          
+          
         }
       }
       if (this.id) {

@@ -83,7 +83,7 @@ export default {
 <style lang="scss"  scoped>
   @import "../style/mystyle.scss";
   .content{
-    background-image: url('../../static/img/login_background.png');
+    background-image: url('/vote/static/img/login_background.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
