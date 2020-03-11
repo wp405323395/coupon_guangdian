@@ -4,7 +4,7 @@
     <img class="logo" src="../../static/img/guangdian_logo.png" alt="">
 
     <div class="login">
-       <h1>绩效考核后台管理系统</h1>
+       <h1>投票后台管理系统</h1>
        <div class="line"></div>
        <div class="account input_style">
          <input class="input_st" type="text" name="" placeholder="账号" v-model="account">
@@ -13,7 +13,8 @@
          <input class="input_st" type="password"  @focus="passwordFocus" name="" placeholder="密码" v-model="password">
        </div>
        <section class="notice_err_wrap" v-if="password_err">
-          <span class="notice_err">您输入的账号或密码有误，请重新输入</span>
+          <span class="notice_err" v-if="errMsg">{{errMsg}}</span>
+          <span class="notice_err" v-else>您输入的账号或密码有误，请重新输入</span>
        </section>
 
        <button @click="login" class="login_btn" type="button" name="button">登陆</button>
@@ -35,6 +36,7 @@ export default {
   data () {
     let storage = window.localStorage;
     return {
+      errMsg:'',
       account: storage.account,
       password: storage.password,
       isShowProgress:false,
@@ -71,6 +73,8 @@ export default {
         this.isShowProgress = false;
         router.replace({ path: 'main' })
       }).catch(err => {
+        this.errMsg = err;
+        console.error('错误信息是i:', err)
         this.isShowProgress = false;
         this.password_err = true;
       })

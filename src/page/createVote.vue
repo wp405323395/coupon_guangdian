@@ -262,8 +262,9 @@ export default {
                 if(weight<0||weight>1) {
                   throw new Error('错误');
                 }
+              }else {
+                item.weight = 0
               }
-              
             } catch(err) {
               this.isWarning = true;
               this.noteText = "请输入正确的权重";

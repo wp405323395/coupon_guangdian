@@ -59,13 +59,13 @@ request (url, data, requestSuccess, requestFail, requestComplete, interceptors) 
           for (let interceptor of interceptors) {
             interceptor.onFaildResponse(url, header, responseData);
           }
-          requestFail(responseData.retMsg);
+          requestFail(responseData.msg);
           break;
         default :
           for (let interceptor of interceptors) {
             interceptor.onFaildResponse(url, header, responseData);
           }
-          requestFail(responseData.retMsg);
+          requestFail(responseData.msg);
       }
       if (requestComplete != undefined) {
         requestComplete(xmlhttp.responseText);
