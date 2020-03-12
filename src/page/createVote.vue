@@ -238,7 +238,18 @@ export default {
           return;
         }
       }
+      
       for (let topic of this.voteProject.topicList) {
+        if(utils.textIsNull(topic.topicGrade)) {
+          topic.topicGrade = 0
+        } else {
+          let g = parseFloat(topic.topicGrade)
+          if(g<0) {
+            this.isWarning = true;
+            this.noteText = "未输入正确的分数";
+            return;
+          }
+        }
         if (utils.textIsNull(topic.topicTitle)) {
           this.isWarning = true;
           this.noteText = "未输入投票内容";

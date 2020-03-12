@@ -23,13 +23,13 @@ module.exports = {
   },
   dev: {
     env: require('./dev.env'),
-    port: 8980,
+    port: 8280,
     autoOpenBrowser: true,
     assetsSubDirectory: 'wangpanxxx',
     assetsPublicPath: '/',
     proxyTable: {
       '/proxydir': {
-        target: 'https://t.htrnpay.cn/', //源地址
+        target: 'https://www.htrnpay.cn/', //源地址
         pathRewrite: {
           '^/proxydir': '/' //路径重写
           }

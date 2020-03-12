@@ -29,10 +29,12 @@ npm test
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 # coupon_guangdian
-
+https://www.htrnpay.cn/vote
 登录账号：
 test001
 密码：
 abc123
 
 npm run build && ssh root@212.64.111.203 rm -rf /usr/share/nginx/html/vote/* && scp -r ./dist/* root@212.64.111.203:/usr/share/nginx/html/vote/
+
+

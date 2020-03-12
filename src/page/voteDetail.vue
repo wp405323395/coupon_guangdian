@@ -33,14 +33,14 @@
         </div>
         <div class="item-wrap" v-if="voteDetail.totalGrade">
           <span>总得分：</span>
-          <span>{{voteDetail.totalGrade}}</span>
+          <span style="color:rgba(255, 0, 0, 0.753); font-weight: bold;">{{voteDetail.totalGrade}}</span>
         </div>
       </div>
       <section v-for="detail in voteDetail.topicList" class="ques">
         <span class="title">{{detail.topicTitle}}</span>
-        <div class='scor-wrap' v-if="voteDetail.topicGrade">
+        <div class='scor-wrap' v-if="detail.topicGrade">
           <span>得分：</span>
-          <span>{{voteDetail.topicGrade}}</span>
+          <span>{{detail.topicGrade}}</span>
         </div>
         <div class="answers">
           <div class="item"  v-for="option in detail.optionList" >
@@ -80,7 +80,7 @@ let id;
 export default {
   data () {
     const account = localStorage.getItem('account')
-    const currentTime = moment().format("YYY-MM-DD HH:mm:ss");
+    const currentTime = moment().format("YYYY-MM-DD HH:mm:ss");
     return {
       currentTime,
       account,

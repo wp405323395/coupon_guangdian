@@ -37,14 +37,26 @@ function formatLocation (longitude, latitude) {
 }
 
 function textIsNotNull (str) {
+  if(typeof str == 'number') {
+    return true
+  }
   if (str === null || str === undefined || str === '' || str === 'undefined') {
+    return false
+  }
+  if(str.match(/^[ ]*$/)) {
     return false
   }
   return true
 }
 
 function textIsNull (str) {
+  if(typeof str == 'number') {
+    return false
+  }
   if (str === null || str === undefined || str === '' || str === 'undefined') {
+    return true
+  }
+  if(str.match(/^[ ]*$/)) {
     return true
   }
   return false

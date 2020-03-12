@@ -1,8 +1,6 @@
 var host = "https://www.htrnpay.cn"
 // host = "/proxydir"
-host = "https://t.htrnpay.cn"
-  //var host = '192.168.1.151:8015';
-var isHttps = true;
+// host = "https://t.htrnpay.cn"
 var isDebug = true;
 var config = {
   // 下面的地址配合云端 Server 工作
